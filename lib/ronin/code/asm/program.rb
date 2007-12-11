@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/code/asm/labelblock'
+require 'ronin/code/asm/label_block'
 require 'ronin/code/asm/section'
 
 module Ronin
