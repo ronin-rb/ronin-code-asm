@@ -1,7 +1,7 @@
 #
 #--
-# Ronin ASM - A Ruby library that provides dynamic Assembly source code
-# generation.
+# Ronin ASM - a Ruby library for Ronin that provides dynamic Assembly (ASM)
+# generation of programs or shellcode.
 #
 # Copyright (c) 2007-2008 Hal Brodigan (postmodern.mod3 at gmail.com)
 #

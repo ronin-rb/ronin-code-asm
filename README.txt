@@ -5,8 +5,8 @@
 
 == DESCRIPTION:
 
-Ronin ASM is a Ruby library that provides dynamic Assembly source code
-generation.
+Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM)
+generation of programs or shellcode.
 
 Ronin is a Ruby platform designed for information security and data
 exploration tasks. Ronin allows for the rapid development and distribution
@@ -47,8 +47,8 @@ of Ronin.
 
 == LICENSE:
 
-Ronin - A Ruby platform designed for information security and data
-exploration tasks.
+Ronin ASM - a Ruby library for Ronin that provides dynamic Assembly (ASM)
+generation of programs or shellcode.
 
 Copyright (c) 2007-2008 Hal Brodigan (postmodern.mod3 at gmail.com)
 
