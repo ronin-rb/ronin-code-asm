@@ -32,6 +32,7 @@ module Ronin
 
       def initialize(name,target,&block)
         @name = name
+
         super(target,&block)
       end
 

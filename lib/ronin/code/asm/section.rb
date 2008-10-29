@@ -38,9 +38,7 @@ module Ronin
         end
 
         def ==(section)
-          return false unless @name==section.name
-
-          return super(section)
+          @name == section.name && super(section)
         end
 
       end

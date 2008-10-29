@@ -21,6 +21,8 @@
 #++
 #
 
+require 'ronin/code/asm/emittable'
+
 module Ronin
   module Code
     module ASM
@@ -36,7 +38,7 @@ module Ronin
       #
       class Deref
 
-        include Compiliable
+        include Emittable
 
         # Base
         attr_reader :base
@@ -47,25 +49,24 @@ module Ronin
         # Scale
         attr_reader :scale
 
-        def initialize(style,base,index=0,scale=1)
-          @style = style
+        def initialize(base,index=0,scale=1)
           @base = base
           @index = index
           @scale = scale
         end
 
         def ==(other)
-          return false unless @base==other.base
-          return false unless @index==other.index
-          return @scale==other.scale
+          (@base == other.base) &&
+            (@index==other.index) &&
+            (@scale==other.scale)
         end
 
         def +(disp)
-          self.new(@base,@index+disp,@scale)
+          self.class.new(@base,@index+disp,@scale)
         end
 
         def *(scale)
-          self.new(@base,@index,@scale+scale)
+          self.class.new(@base,@index,@scale+scale)
         end
 
         def compile

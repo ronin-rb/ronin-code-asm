@@ -21,7 +21,7 @@
 #++
 #
 
-require 'ronin/code/asm/compiliable'
+require 'ronin/code/asm/emittable'
 require 'ronin/code/asm/deref'
 
 module Ronin
@@ -29,14 +29,13 @@ module Ronin
     module ASM
       class Register
 
-        include Compiliable
+        include Emittable
 
         # The register index
         attr_reader :name
 
-        def initialize(style,name)
-          @style = style
-          @name = name.to_sym
+        def initialize(name)
+          @name = name
         end
 
         #
@@ -61,12 +60,8 @@ module Ronin
           Deref.new(self,index,scale)
         end
 
-        def compile
-          if syntax==:att
-            return "%#{@name}"
-          elsif syntax==:intel
-            return @name.to_s
-          end
+        def emit
+          emit_token("%#{@name}")
         end
 
       end

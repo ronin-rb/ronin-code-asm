@@ -29,16 +29,13 @@ module Ronin
       #
       class Immed
 
-        include Compiliable
-
         # Data
         attr_reader :data
 
         # Formating of the data
         attr_reader :format
 
-        def initialize(style,data,format=:hex)
-          @style = style
+        def initialize(data,format=:hex)
           @data = data
           @format = format
         end

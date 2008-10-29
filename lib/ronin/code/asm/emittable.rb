@@ -21,35 +21,15 @@
 #++
 #
 
-require 'ronin/code/asm/block'
+require 'ronin/code/emittable'
 
 module Ronin
   module Code
     module ASM
-      class Label < Block
+      module Emittable
+        include Code::Emittable
 
-        # The name of the label
-        attr_accessor :name
-
-        def initialize(name,style,&block)
-          @name = name.to_sym
-
-          super(style,&block)
-        end
-
-        def compile
-          [@name.to_s] + @elements.map { |elem| "\t#{elem}" }
-        end
-
-        def ==(label)
-          return false unless @name==label.name
-
-          return super(label)
-        end
-
-        def to_s
-          @name.to_s
-        end
+        protected
 
       end
     end

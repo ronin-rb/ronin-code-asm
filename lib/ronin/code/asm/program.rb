@@ -9,7 +9,7 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-#
+
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -21,31 +21,19 @@
 #++
 #
 
+require 'ronin/code/asm/dialect'
+
 module Ronin
   module Code
     module ASM
-      module Compiliable
-        # ASM Style
-        attr_reader :style
+      class Program
 
-        def syntax
-          @style.syntax
+        attr_reader :dialect
+
+        def initialize(options={},&block)
+          @dialect = Dialect.new(options,&block)
         end
 
-        def compile_integer(data,format)
-          @style.compile_integer(data,format)
-        end
-
-        def compile_string(str)
-          @style.compile_string(str)
-        end
-
-        def compile
-        end
-
-        def to_s
-          compile
-        end
       end
     end
   end

@@ -21,26 +21,12 @@
 #++
 #
 
-require 'ronin/code/asm/compiliable'
+require 'ronin/code/token'
 
 module Ronin
   module Code
     module ASM
-      class Comment
-
-        include Compiliable
-
-        # Contents of the comment
-        attr_reader :text
-
-        def initialize(style,text)
-          @style = style
-          @text = text
-        end
-
-        def compile
-          @text.split.map { |line| "# #{line}" }
-        end
+      class Token < Code::Token
 
       end
     end
