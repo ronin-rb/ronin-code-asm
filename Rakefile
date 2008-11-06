@@ -7,7 +7,7 @@ require './lib/ronin/asm/version.rb'
 
 Hoe.new('ronin-asm', Ronin::ASM::VERSION) do |p|
   p.rubyforge_name = 'ronin'
-  p.developer('Postmodern Modulus III','postmodern.mod3@gmail.com')
+  p.developer('Postmodern','postmodern.mod3@gmail.com')
   p.extra_deps = [['ronin' '>= 0.1.2']]
 end
 
