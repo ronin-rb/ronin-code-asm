@@ -1,7 +1,7 @@
 = Ronin ASM
 
 * http://ronin.rubyforge.org/asm/
-* https://github.com/postmodern/ronin-asm
+* http://github.com/postmodern/ronin-asm
 * irc.freenode.net ##ronin
 * Postmodern (postmodern.mod3 at gmail.com)
 
