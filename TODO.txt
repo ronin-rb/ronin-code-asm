@@ -2,19 +2,12 @@
 
 === Ronin ASM 0.1.0:
 
+* Look into integrating with Wilson, the x86 ruby assembler, available on
+  rubyforge as a RubyGem with documentation.
 * Refactor the ASM DSL:
   * It should behave like the other Ronin DSLs:
     * Provide a SymbolTable.
     * Provide access to the generated Abstract Syntax Tree (AST).
   * It should allow the remapping of used registers.
   * It should be able to output ATT syntax.
-
-=== Ronin ASM 0.1.1:
-
-* It should be able to work with Metasm and GAS.
-
-=== Ronn ASM 0.2.0:
-
-* Fork Metasm and clean up their code, so that it can be packaged as a
-  RubyGem and hosted on rubyforge.org.
 
