@@ -1,11 +1,11 @@
 # -*- ruby -*-
 
 require 'rubygems'
-require 'hoe'
+require 'hoe/signing'
 require './tasks/spec.rb'
 require './lib/ronin/asm/version.rb'
 
-Hoe.new('ronin-asm', Ronin::ASM::VERSION) do |p|
+Hoe.spec('ronin-asm') do |p|
   p.rubyforge_name = 'ronin'
   p.developer('Postmodern','postmodern.mod3@gmail.com')
   p.extra_deps = [['ronin' '>= 0.2.1']]
