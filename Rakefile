@@ -1,6 +1,7 @@
 # -*- ruby -*-
 
 require 'rubygems'
+require 'hoe'
 require 'hoe/signing'
 require './tasks/spec.rb'
 
