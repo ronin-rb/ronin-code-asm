@@ -29,7 +29,53 @@ module Ronin
       module Emittable
         include Code::Emittable
 
+        def initialize(style)
+          @style = style
+        end
+
         protected
+
+        def emit_hexidecimal(i)
+          if @program.syntax == :intel
+            hex = ("%xh" % i)
+
+            if hex[0..0] =~ /[a-f]/
+              hex = "0#{hex}"
+            end
+
+            return [hex]
+          end
+
+          return ["$0x%x" % i]
+        end
+
+        def emit_decimal(i)
+          if @style.syntax == :intel
+            return ["%d" % i]
+          end
+
+          return ["$%d" % i]
+        end
+
+        def emit_octal(i)
+          if @style.syntax == :intel
+            return ["0%o" % i]
+          end
+
+          return ["$0%o" % i]
+        end
+
+        def emit_binary(i)
+          if @style.syntax == :intel
+            return ["%bb" % i]
+          end
+
+          return ["$0b%b" % i]
+        end
+
+        def emit_string(text)
+          [text.to_s.dump]
+        end
 
       end
     end

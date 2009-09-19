@@ -37,44 +37,6 @@ module Ronin
           @syntax = syntax
         end
 
-        def compile_integer(data,format=:hex)
-          case format
-          when :hex, :hexidecimal
-            if @style==:att
-              return format("$0x%x",data)
-            elsif @style==:intel
-              hex = format("%xh",data)
-              if hex[0..0] =~ /[a-f]/
-                hex = "0#{hex}"
-              end
-
-              return hex
-            end
-          when :dec, :decimal
-            if @style==:att
-              return format("$%d",data)
-            elsif @style==:intel
-              return format("%d",data)
-            end
-          when :oct, :octal
-            if @style==:att
-              return format("$0%o",data)
-            elsif @style==:intel
-              return format("0%o",data)
-            end
-          when :bin, :binary
-            if @style==:att
-              return format("$0b%b",data)
-            elsif @style==:intel
-              return format("%bb",data)
-            end
-          end
-        end
-
-        def compile_string(str)
-          str.to_s.dump
-        end
-
       end
     end
   end
