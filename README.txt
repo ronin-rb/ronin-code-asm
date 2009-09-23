@@ -39,7 +39,7 @@ install or update Overlays.
 
 == REQUIREMENTS:
 
-* Ronin >= 0.2.1
+* {ronin}[http://ronin.rubyforge.org/] >= 0.3.0
 
 == INSTALL:
 
