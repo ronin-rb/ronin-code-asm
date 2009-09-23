@@ -27,5 +27,6 @@ lib/ronin/code/asm/style.rb
 lib/ronin/code/asm/type.rb
 lib/ronin/asm/version.rb
 tasks/spec.rb
+tasks/yard.rb
 spec/spec_helper.rb
 spec/asm_spec.rb
