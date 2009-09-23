@@ -9,7 +9,7 @@ Hoe.spec('ronin-asm') do
   self.rubyforge_name = 'ronin'
   self.developer('Postmodern','postmodern.mod3@gmail.com')
   self.extra_deps = [
-    ['ronin', '>= 0.2.1']
+    ['ronin', '>= 0.3.0']
   ]
 
   self.extra_dev_deps = [
