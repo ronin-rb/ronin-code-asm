@@ -13,6 +13,7 @@ Hoe.spec('ronin-asm') do
   ]
 
   self.extra_dev_deps = [
+    ['yard', '>=0.2.3.5'],
     ['rspec', '>=1.1.12']
   ]
 end
