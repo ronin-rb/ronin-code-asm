@@ -2,8 +2,9 @@
 
 * http://ronin.rubyforge.org/asm/
 * http://github.com/postmodern/ronin-asm
+* http://github.com/postmodern/ronin-asm/issues
+* http://groups.google.com/group/ronin-ruby
 * irc.freenode.net ##ronin
-* Postmodern (postmodern.mod3 at gmail.com)
 
 == DESCRIPTION:
 
