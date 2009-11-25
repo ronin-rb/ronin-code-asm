@@ -14,8 +14,8 @@ Hoe.spec('ronin-asm') do
   ]
 
   self.extra_dev_deps = [
-    ['yard', '>=0.2.3.5'],
-    ['rspec', '>=1.2.8']
+    ['rspec', '>=1.2.8'],
+    ['yard', '>=0.4.0']
   ]
 
   self.spec_extras = {:has_rdoc => 'yard'}
