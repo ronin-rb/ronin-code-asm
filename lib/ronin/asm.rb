@@ -21,13 +21,4 @@
 #++
 #
 
-require 'ronin/code/asm/exceptions'
-require 'ronin/code/asm/type'
-require 'ronin/code/asm/immed'
-require 'ronin/code/asm/reg'
-require 'ronin/code/asm/instruction'
-require 'ronin/code/asm/label'
-require 'ronin/code/asm/block'
-require 'ronin/code/asm/func'
-require 'ronin/code/asm/archtarget'
-require 'ronin/code/asm/platformtarget'
+require 'ronin/asm/version'
