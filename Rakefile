@@ -13,12 +13,11 @@ Hoe.spec('ronin-asm') do
   self.history_file = 'History.rdoc'
 
   self.extra_deps = [
-    ['ronin', '>= 0.3.0']
+    ['ronin', '>= 0.4.0']
   ]
 
   self.extra_dev_deps = [
     ['rspec', '>=1.2.8'],
-    ['yard', '>=0.5.2']
   ]
 
   self.spec_extras = {:has_rdoc => 'yard'}
