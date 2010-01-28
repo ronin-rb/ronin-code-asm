@@ -13,6 +13,7 @@ Hoe.spec('ronin-asm') do
 
   self.yard_title = 'Ronin ASM Documentation'
   self.yard_options += ['--protected']
+  self.remote_yard_dir = 'docs/ronin-asm'
 
   self.extra_deps = [
     ['ronin', '>= 0.4.0'],
