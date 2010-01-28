@@ -1,5 +1,5 @@
 require 'rubygems'
-gem 'rspec', '>=1.2.8'
+gem 'rspec', '>=1.3.0'
 require 'spec'
 
 include Ronin
