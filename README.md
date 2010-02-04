@@ -1,4 +1,4 @@
-= Ronin ASM
+# Ronin ASM
 
 * http://ronin.rubyforge.org/asm/
 * http://github.com/postmodern/ronin-asm
@@ -6,7 +6,7 @@
 * http://groups.google.com/group/ronin-ruby
 * irc.freenode.net #ronin
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM)
 generation of programs or shellcode.
@@ -15,39 +15,39 @@ Ronin is a Ruby platform for exploit development and security research.
 Ronin allows for the rapid development and distribution of code, exploits
 or payloads over many common Source-Code-Management (SCM) systems.
 
-=== Ruby
+### Ruby
 
 Ronin's Ruby environment allows security researchers to leverage Ruby with
 ease. The Ruby environment contains a multitude of convenience methods
 for working with data in Ruby, a Ruby Object Database, a customized Ruby
 Console and an extendable command-line interface.
 
-=== Extend
+### Extend
 
 Ronin's more specialized features are provided by additional Ronin
 libraries, which users can choose to install. These libraries can allow
 one to write and run Exploits and Payloads, scan for PHP vulnerabilities,
 perform Google Dorks  or run 3rd party scanners.
 
-=== Publish
+### Publish
 
 Ronin allows users to publish and share code, exploits, payloads or other
 data via Overlays. Overlays are directories of code and data that can be
 hosted on any SVN, Hg, Git or Rsync server. Ronin makes it easy to create,
 install or update Overlays.
 
-== FEATURES:
+## FEATURES:
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
-* {ronin}[http://ronin.rubyforge.org/] >= 0.4.0
-* {ruby-yasm}[http://ruby-yasm.rubyforge.org/] >= 0.1.0
+* [ronin](http://ronin.rubyforge.org/) >= 0.4.0
+* [ruby-yasm](http://ruby-yasm.rubyforge.org/) >= 0.1.0
 
-== INSTALL:
+## INSTALL:
 
-  $ sudo gem install ronin-asm
+    $ sudo gem install ronin-asm
 
-== LICENSE:
+## LICENSE:
 
 Ronin ASM - A Ruby library for Ronin that provides dynamic Assembly (ASM)
 generation of programs or shellcode.
