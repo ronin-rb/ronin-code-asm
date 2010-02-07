@@ -21,6 +21,7 @@
 
 module Ronin
   module ASM
+    # ronin-asm version
     VERSION = '0.1.0'
   end
 end
