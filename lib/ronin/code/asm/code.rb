@@ -55,6 +55,13 @@ module Ronin
     # @param [Hash{Symbol => Object}] options
     #   Additional assembly options.
     #
+    # @yield [yasm]
+    #   If a block is given, it will be passed a task object used to
+    #   specify options for yasm. 
+    #
+    # @yieldparam [YASM::Task] yasm
+    #   The yasm task.
+    #
     # @return [String]
     #   The assembled inline code.
     #
