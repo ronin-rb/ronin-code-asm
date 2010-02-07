@@ -4,6 +4,7 @@ Manifest.txt
 README.md
 Rakefile
 lib/ronin/code/asm.rb
+lib/ronin/code/asm/config.rb
 lib/ronin/code/asm/code.rb
 lib/ronin/asm/version.rb
 spec/spec_helper.rb

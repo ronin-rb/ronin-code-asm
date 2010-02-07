@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/code/asm/config'
+
 require 'yasm/program'
 require 'tempfile'
 
@@ -58,6 +60,10 @@ module Ronin
     # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
     #
     def Code.asm(options={},&block)
+      options = {
+        :parser => ASM::Config::DEFAULT_PARSER
+      }.merge(options)
+
       YASM::Program.assemble(options,&block)
     end
 
@@ -102,7 +108,7 @@ module Ronin
           :output => temp_file.path
         )
 
-        YASM::Program.assemble(options,&block)
+        Code.asm(options,&block)
         return temp_file.read
       end
     end
