@@ -17,7 +17,7 @@ Hoe.spec('ronin-asm') do
 
   self.extra_deps = [
     ['ronin', '>= 0.4.0'],
-    ['ruby-yasm', '>=0.1.0']
+    ['ruby-yasm', '>=0.1.1']
   ]
 
   self.extra_dev_deps = [

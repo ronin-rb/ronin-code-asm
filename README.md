@@ -41,7 +41,7 @@ install or update Overlays.
 ## REQUIREMENTS:
 
 * [ronin](http://ronin.rubyforge.org/) >= 0.4.0
-* [ruby-yasm](http://ruby-yasm.rubyforge.org/) >= 0.1.0
+* [ruby-yasm](http://ruby-yasm.rubyforge.org/) >= 0.1.1
 
 ## INSTALL:
 
