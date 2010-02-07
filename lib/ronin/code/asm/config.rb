@@ -31,6 +31,9 @@ module Ronin
 
         # The default `yasm` parser to use
         DEFAULT_PARSER = :nasm
+
+        # The default preprocessor to use with `yasm`
+        DEFAULT_PREPROCESSOR = :nasm
       end
     end
   end

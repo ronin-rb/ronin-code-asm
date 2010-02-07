@@ -61,6 +61,7 @@ module Ronin
     #
     def Code.asm(options={},&block)
       options = {
+        :preprocessor => ASM::Config::DEFAULT_PREPROCESSOR,
         :parser => ASM::Config::DEFAULT_PARSER
       }.merge(options)
 
