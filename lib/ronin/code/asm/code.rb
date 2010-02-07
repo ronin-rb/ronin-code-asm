@@ -40,6 +40,18 @@ module Ronin
     # @return [Boolean]
     #   Specifies whether the command exited normally. 
     #
+    # @example
+    #   Code.asm(:parser => :gas, :output => 'code.o', :file => 'code.S')
+    #
+    # @example
+    #   Code.asm do |yasm|
+    #     yasm.target! :x86
+    #
+    #     yasm.syntax = :gas
+    #     yasm.file = 'code.S'
+    #     yasm.output = 'code.o'
+    #   end
+    #
     # @since 0.1.0
     #
     # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
@@ -64,6 +76,19 @@ module Ronin
     #
     # @return [String]
     #   The assembled inline code.
+    #
+    # @example
+    #   Code.asm_inline(:parser => :gas, :file => 'code.S')
+    #   # => "..."
+    #
+    # @example
+    #   Code.asm_inline do |yasm|
+    #     yasm.target! :x86
+    #
+    #     yasm.syntax = :gas
+    #     yasm.file = 'code.S'
+    #   end
+    #   # => "..."
     #
     # @since 0.1.0
     #
