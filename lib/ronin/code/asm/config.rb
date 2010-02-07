@@ -19,10 +19,16 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'static_paths'
+
 module Ronin
   module Code
     module ASM
       module Config
+        include StaticPaths
+
+        register_static_dir File.join(File.dirname(__FILE__),'..','..','..','..','static')
+
         # The default `yasm` parser to use
         DEFAULT_PARSER = :nasm
       end
