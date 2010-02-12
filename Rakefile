@@ -7,7 +7,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = 'ronin-asm'
     gem.version = Ronin::ASM::VERSION
-    gem.summary = %Q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
+    gem.summary = %Q{A Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
     gem.description = %Q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
     gem.email = 'postmodern.mod3@gmail.com'
     gem.homepage = 'http://github.com/ronin-ruby/ronin-asm'
