@@ -1,12 +1,12 @@
 # Ronin ASM
 
-* http://ronin.rubyforge.org/asm/
-* http://github.com/postmodern/ronin-asm
-* http://github.com/postmodern/ronin-asm/issues
-* http://groups.google.com/group/ronin-ruby
+* [ronin.rubyforge.org/asm](http://ronin.rubyforge.org/asm/)
+* [github.com/postmodern/ronin-asm](http://github.com/postmodern/ronin-asm)
+* [github.com/postmodern/ronin-asm/issues](http://github.com/postmodern/ronin-asm/issues)
+* [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
 * irc.freenode.net #ronin
 
-## DESCRIPTION:
+## Description
 
 Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM)
 generation of programs or shellcode.
@@ -36,18 +36,18 @@ data via Overlays. Overlays are directories of code and data that can be
 hosted on any SVN, Hg, Git or Rsync server. Ronin makes it easy to create,
 install or update Overlays.
 
-## FEATURES:
+## Features
 
-## REQUIREMENTS:
+## Requirements
 
 * [ronin](http://ronin.rubyforge.org/) >= 0.4.0
 * [ruby-yasm](http://ruby-yasm.rubyforge.org/) >= 0.1.1
 
-## INSTALL:
+## Install
 
     $ sudo gem install ronin-asm
 
-## LICENSE:
+## License
 
 Ronin ASM - A Ruby library for Ronin that provides dynamic Assembly (ASM)
 generation of programs or shellcode.
