@@ -42,7 +42,7 @@ module Ronin
           last_index = 0
 
           pass_fragment = lambda { |index|
-            fragment = @source[last_index..index]
+            fragment = @source[last_index...index]
 
             unless fragment.empty?
               block.call(Fragment.new(last_index,fragment))
@@ -56,7 +56,7 @@ module Ronin
             end
           end
 
-          pass_fragment.call(-1)
+          pass_fragment.call(@source.length)
           return self
         end
 
