@@ -5,8 +5,16 @@ require 'spec_helper'
 describe ASM::ROP::Parser do
   it "should parse the first fragment" do
     parser = ASM::ROP::Parser.new("abc\xc3123")
+    fragments = parser.to_a
 
-    parser.first.source.should == "abc"
+    fragments.first.source.should == "abc"
+  end
+
+  it "should parse the middle fragment" do
+    parser = ASM::ROP::Parser.new("abc\xc3123\xc3xyz")
+    fragments = parser.to_a
+
+    fragments[1].source.should == "123"
   end
 
   it "should parse the tailing fragment" do
