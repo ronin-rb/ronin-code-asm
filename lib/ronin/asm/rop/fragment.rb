@@ -47,13 +47,13 @@ module Ronin
 
         def each(&block)
           (@source.length - 1).downto(0) do |index|
-            gadget = gadget_at(index)
-
-            block.call(gadget) if gadget
+            if (gadget = self[index])
+              block.call(gadget)
+            end
           end
         end
 
-        def gadget_at(index)
+        def [](index)
           return nil if index >= @source.length
 
           partial = @source[index..-1]
