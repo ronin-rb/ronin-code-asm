@@ -59,7 +59,11 @@ module Ronin
           partial = @source[index..-1]
           gadget = Gadget.new(@offset + index)
 
-          ud = FFI::Udis86::UD.create(:pc => @offset + index)
+          ud = FFI::Udis86::UD.create(
+            :syntax => :intel,
+            :pc => @offset + index
+          )
+
           ud.input_buffer = partial
 
           ud.each do |ud|
