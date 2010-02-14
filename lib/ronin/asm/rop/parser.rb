@@ -52,7 +52,7 @@ module Ronin
           Enumerator.new(@source,:each_byte).each_with_index do |b,index|
             if RET_BYTES.include?(b)
               pass_fragment.call(index)
-              last_index = index
+              last_index = index + 1
             end
           end
 
