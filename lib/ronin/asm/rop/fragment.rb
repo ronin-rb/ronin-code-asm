@@ -82,6 +82,10 @@ module Ronin
           @source.to_s
         end
 
+        def to_a
+          Enumerator.new(self,:each).to_a
+        end
+
       end
     end
   end
