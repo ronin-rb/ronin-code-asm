@@ -60,6 +60,10 @@ module Ronin
           return self
         end
 
+        def to_a
+          Enumerator.new(self,:each).to_a
+        end
+
       end
     end
   end
