@@ -61,10 +61,9 @@ module Ronin
 
           ud = FFI::Udis86::UD.create(
             :syntax => :intel,
-            :pc => @offset + index
+            :pc => @offset + index,
+            :buffer => partial
           )
-
-          ud.input_buffer = partial
 
           ud.each do |ud|
             return nil if BLACKLIST.include?(ud.mnemonic)
