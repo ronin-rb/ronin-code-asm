@@ -46,6 +46,14 @@ module Ronin
           @dirty = Set[]
         end
 
+        def to_i
+          @offset.to_i
+        end
+
+        def to_s
+          @source.join($/)
+        end
+
       end
     end
   end
