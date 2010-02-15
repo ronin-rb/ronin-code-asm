@@ -42,7 +42,7 @@ module Ronin
           @offset = offset
           @source = []
 
-          @transfers = {}
+          @transfers = Hash.new { |hash,key| hash[key] ||= Set[] }
           @dirty = Set[]
         end
 
