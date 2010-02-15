@@ -68,6 +68,17 @@ module Ronin
           ud.each do |ud|
             return nil if BLACKLIST.include?(ud.mnemonic)
 
+            case ud.mnemonic
+            when :mov
+            when :xchg
+            when :jmp
+            when :test, :cmp, :sete, :setne, :setg, :setge, :setl, :setle
+            when :je, :jne, :jg, :jge, :jl, :jle
+            when :call
+            when :nop
+            else
+            end
+
             gadget.source << ud.to_asm
           end
 
