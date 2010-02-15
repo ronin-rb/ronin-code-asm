@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'set'
+
 module Ronin
   module ASM
     module ROP
@@ -30,9 +32,18 @@ module Ronin
         # ASM source code of the gadget
         attr_reader :source
 
+        # Register transfers that ocurr in the gadget
+        attr_reader :transfers
+
+        # Registers dirtied by the gadget
+        attr_reader :dirty
+
         def initialize(offset)
           @offset = offset
           @source = []
+
+          @transfers = {}
+          @dirty = Set[]
         end
 
       end
