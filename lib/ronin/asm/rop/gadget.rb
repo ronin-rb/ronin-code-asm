@@ -27,16 +27,12 @@ module Ronin
         # Offset of the gadget
         attr_reader :offset
 
-        # Instructions that make up the gadget
-        attr_reader :instructions
+        # ASM source code of the gadget
+        attr_reader :source
 
-        def initialize(offset,instructions=[])
+        def initialize(offset)
           @offset = offset
-          @instructions = instructions
-        end
-
-        def <<(insn)
-          @instructions << insn
+          @source = []
         end
 
       end

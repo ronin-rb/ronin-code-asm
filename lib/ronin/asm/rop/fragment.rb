@@ -68,7 +68,7 @@ module Ronin
           ud.each do |ud|
             return nil if BLACKLIST.include?(ud.mnemonic)
 
-            gadget << ud.to_asm
+            gadget.source << ud.to_asm
           end
 
           return gadget
