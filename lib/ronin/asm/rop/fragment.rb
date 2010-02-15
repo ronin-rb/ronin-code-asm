@@ -32,7 +32,7 @@ module Ronin
         include Enumerable
 
         # Blacklist of instructions not allowed within gadgets
-        INSN_BLACKLIST = Set['invalid', 'pop', 'push', 'ret', 'retf']
+        INSN_BLACKLIST = Set['invalid', 'push', 'ret', 'retf']
 
         # Offset of the fragment within the larger source
         attr_reader :offset
