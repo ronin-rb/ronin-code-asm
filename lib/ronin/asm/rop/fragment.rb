@@ -69,6 +69,10 @@ module Ronin
             return nil if BLACKLIST.include?(ud.mnemonic)
 
             case ud.mnemonic
+            when :push
+              gadget.stack_drift -= ud.operands[0].size
+            when :pop
+              gadget.stack_drift += ud.operands[0].size
             when :mov
             when :xchg
             when :jmp
