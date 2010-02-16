@@ -35,6 +35,12 @@ module Ronin
         # Register transfers that ocurr in the gadget
         attr_reader :transfers
 
+        # Registers and data that are pushed
+        attr_reader :pushes
+
+        # Registers and data that are popped
+        attr_reader :pops
+
         # Registers dirtied by the gadget
         attr_reader :dirty
 
@@ -44,6 +50,31 @@ module Ronin
 
           @transfers = Hash.new { |hash,key| hash[key] ||= Set[] }
           @dirty = Set[]
+
+          @pushes = []
+          @pops = []
+        end
+
+        def push!(reg)
+          @pushes << reg
+          return reg
+        end
+
+        def pop!(reg)
+          @pops << reg
+          return reg
+        end
+
+        #
+        # Calculates the stack drift for the gadget.
+        #
+        # @return [Integer]
+        #   The number of elements that are pushed or popped from the stack.
+        #   If the number is negative, than the stack will grow downward.
+        #   If the number is positive, than the stack will shrink upward.
+        #
+        def stack_drift
+          @pops.length - @pushes.length
         end
 
         def to_i
