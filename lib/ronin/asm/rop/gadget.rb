@@ -44,6 +44,9 @@ module Ronin
         # Registers dirtied by the gadget
         attr_reader :dirty
 
+        # The number of bytes the stack pointer will change by
+        attr_accessor :stack_drift
+
         def initialize(offset)
           @offset = offset
           @source = []
@@ -53,6 +56,8 @@ module Ronin
 
           @pushes = []
           @pops = []
+
+          @stack_drift = 0
         end
 
         def push!(reg)
@@ -63,18 +68,6 @@ module Ronin
         def pop!(reg)
           @pops << reg
           return reg
-        end
-
-        #
-        # Calculates the stack drift for the gadget.
-        #
-        # @return [Integer]
-        #   The number of elements that are pushed or popped from the stack.
-        #   If the number is negative, than the stack will grow downward.
-        #   If the number is positive, than the stack will shrink upward.
-        #
-        def stack_drift
-          @pops.length - @pushes.length
         end
 
         def to_i
