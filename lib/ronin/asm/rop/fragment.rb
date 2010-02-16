@@ -70,8 +70,16 @@ module Ronin
 
             case ud.mnemonic
             when :push
+              if ud.operands[0].is_reg?
+                gadget.push!(ud.operands[0].reg)
+              end
+
               gadget.stack_drift -= ud.operands[0].size
             when :pop
+              if ud.operands[0].is_reg?
+                gadget.pop!(ud.operands[0].reg)
+              end
+
               gadget.stack_drift += ud.operands[0].size
             when :mov
             when :xchg
