@@ -32,8 +32,8 @@ module Ronin
         # ASM source code of the gadget
         attr_reader :source
 
-        # Register transfers that ocurr in the gadget
-        attr_reader :transfers
+        # Register map of the gadget
+        attr_reader :reg_map
 
         # Registers and data that are pushed
         attr_reader :pushes
@@ -51,13 +51,17 @@ module Ronin
           @offset = offset
           @source = []
 
-          @transfers = Hash.new { |hash,key| hash[key] ||= Set[] }
+          @reg_map = Hash.new { |hash,key| hash[key] ||= Set[] }
           @dirty = Set[]
 
           @pushes = []
           @pops = []
 
           @stack_drift = 0
+        end
+
+        def regs
+          @reg_map.keys
         end
 
         def dirty!(reg)
