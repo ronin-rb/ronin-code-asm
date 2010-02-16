@@ -60,6 +60,11 @@ module Ronin
           @stack_drift = 0
         end
 
+        def dirty!(reg)
+          @dirty << reg
+          return reg
+        end
+
         def push!(reg)
           @pushes << reg
           return reg
