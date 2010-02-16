@@ -40,10 +40,9 @@ module Ronin
 
         def each(&block)
           last_index = 0
+          fragment = ''
 
-          pass_fragment = lambda { |index|
-            fragment = @source[last_index...index]
-
+          pass_fragment = lambda {
             unless fragment.empty?
               block.call(Fragment.new(last_index,fragment))
             end
@@ -51,12 +50,16 @@ module Ronin
 
           Enumerator.new(@source,:each_byte).each_with_index do |b,index|
             if RET_BYTES.include?(b)
-              pass_fragment.call(index)
+              pass_fragment.call()
+
               last_index = index + 1
+              fragment = ''
+            else
+              fragment << b.chr
             end
           end
 
-          pass_fragment.call(@source.length)
+          pass_fragment.call()
           return self
         end
 
