@@ -60,7 +60,7 @@ module Ronin
           @stack_drift = 0
         end
 
-        def map_reg(src,dest)
+        def map_reg!(src,dest)
           @reg_map[src] << dest
           return dest
         end
