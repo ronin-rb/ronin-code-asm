@@ -82,7 +82,37 @@ module Ronin
 
               gadget.stack_drift += ud.operands[0].size
             when :mov
+              if ud.operands[0].is_reg?
+                dest = ud.operands[0].reg
+
+                if ud.operands[1].is_reg?
+                  src = ud.operands[1].reg
+
+                  gadget.map_reg!(src,dest)
+                end
+
+                gadget.dirty!(dest)
+              end
             when :xchg
+              if ud.operands[0].is_reg?
+                dest = ud.operands[0].reg
+
+                gadget.dirty!(dest)
+              end
+
+              if ud.operands[1].is_reg?
+                src = ud.operands[1].reg
+
+                gadget.dirty!(src)
+              end
+
+              if (ud.operands[0].is_reg? && ud.operands[1].is_reg?)
+                dest = ud.operands[0].reg
+                src = ud.operands[1].reg
+
+                gadget.map_reg!(src,dest)
+                gadget.map_reg!(dest,src)
+              end
             when :jmp
             when :test, :cmp, :sete, :setne, :setg, :setge, :setl, :setle
             when :je, :jne, :jg, :jge, :jl, :jle
