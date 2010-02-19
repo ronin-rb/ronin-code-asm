@@ -28,16 +28,44 @@ module Ronin
 
         include Enumerable
 
+        # Bytes which represent return instructions.
         RET_BYTES = [0xc3, 0xcb]
 
+        # The binary source to parse
         attr_accessor :source
 
+        #
+        # Creates a new {Parser} object.
+        #
+        # @param [String] source
+        #   The binary source to parse.
+        #
+        # @yield [parser]
+        #   If a block is given, it will be passed the newly created parser.
+        #
+        # @yieldparam [Parser] parser
+        #   The newly created parser.
+        #
         def initialize(source='',&block)
           @source = source
 
           block.call(self) if block
         end
 
+        #
+        # Enumerates over every fragment found within the binary source.
+        #
+        # @yield [fragment]
+        #   The given block will be passed each new fragment found within
+        #   the binary source.
+        #
+        # @yieldparam [Fragment] fragment
+        #   A fragment bounded by one or more return instructions, found
+        #   within the binary source.
+        #
+        # @return [Parser]
+        #   The parser.
+        #
         def each(&block)
           last_index = 0
           fragment = ''
@@ -63,6 +91,13 @@ module Ronin
           return self
         end
 
+        #
+        # Converts the parser to an `Array`.
+        #
+        # @return [Array<Fragment>]
+        #   The fragments bounded by return instructions, found within
+        #   the binary source.
+        #
         def to_a
           Enumerator.new(self,:each).to_a
         end
