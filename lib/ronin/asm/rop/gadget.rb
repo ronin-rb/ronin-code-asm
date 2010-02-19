@@ -48,7 +48,7 @@ module Ronin
         attr_accessor :stack_drift
 
         #
-        # Creates a new Gadget object.
+        # Creates a new {Gadget} object.
         #
         # @param [Integer] offset
         #   The offset address the gadget exists at.

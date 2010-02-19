@@ -41,7 +41,7 @@ module Ronin
         attr_reader :source
 
         #
-        # Creates a new Fragment object.
+        # Creates a new {Fragment} object.
         #
         # @param [Integer] offset
         #   The offset address the fragment exists at.
