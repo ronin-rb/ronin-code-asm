@@ -37,22 +37,58 @@ module Ronin
         # Offset of the fragment within the larger source
         attr_reader :offset
 
-        # Source of the fragment
+        # Binary source of the fragment
         attr_reader :source
 
+        #
+        # Creates a new Fragment object.
+        #
+        # @param [Integer] offset
+        #   The offset address the fragment exists at.
+        #
+        # @param [String] source
+        #   The binary source of the fragment.
+        #
         def initialize(offset,source)
           @offset = offset
           @source = source
         end
 
+        #
+        # Enumerates over each valid gadget of the fragment.
+        #
+        # @yield [gadget]
+        #   The given block will be passed each valid gadget found within
+        #   the fragment.
+        #
+        # @yieldparam [Gadget] gadget
+        #   A valid gadget from the fragment.
+        #
+        # @return [Fragment]
+        #   The fragment.
+        #
         def each(&block)
           (@source.length - 1).downto(0) do |index|
             if (gadget = self[index])
               block.call(gadget)
             end
           end
+
+          return self
         end
 
+        #
+        # Attempts to create a valid gadget at the given index from within
+        # the fragment.
+        #
+        # @param [Integer] index
+        #   The index within the fragments binary source, to create the
+        #   gadget at.
+        #
+        # @return [Gadget, nil]
+        #   Returns the valid {Gadget} object at the given index, or `nil`
+        #   if the gadget was found to be invalid.
+        #
         def [](index)
           return nil if index >= @source.length
 
@@ -127,14 +163,32 @@ module Ronin
           return gadget
         end
 
+        #
+        # Converts the fragment to an `Integer`.
+        #
+        # @return [Integer]
+        #   The offset of the fragment.
+        #
         def to_i
           @offset.to_i
         end
 
+        #
+        # Converts the fragment to a `String`.
+        #
+        # @return [String]
+        #   The binary source of the fragment.
+        #
         def to_s
           @source.to_s
         end
 
+        #
+        # Converts the fragment to an `Array`.
+        #
+        # @return [Array<Gadget>]
+        #   The valid gadgets found within the fragment.
+        #
         def to_a
           Enumerator.new(self,:each).to_a
         end
