@@ -84,6 +84,10 @@ module Ronin
           return reg
         end
 
+        def volitile?
+          !(@dirty.empty? && @pushes.empty? && @pops.empty?)
+        end
+
         def to_i
           @offset.to_i
         end
