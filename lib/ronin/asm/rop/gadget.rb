@@ -29,7 +29,7 @@ module Ronin
         # Offset of the gadget
         attr_reader :offset
 
-        # ASM source code of the gadget
+        # Assembly source-code of the gadget
         attr_reader :source
 
         # Register map of the gadget
@@ -47,6 +47,12 @@ module Ronin
         # The number of bytes the stack pointer will change by
         attr_accessor :stack_drift
 
+        #
+        # Creates a new Gadget object.
+        #
+        # @param [Integer] offset
+        #   The offset address the gadget exists at.
+        #
         def initialize(offset)
           @offset = offset
           @source = []
@@ -60,38 +66,107 @@ module Ronin
           @stack_drift = 0
         end
 
+        #
+        # Defines a transfer of value from a source register to a
+        # destination register.
+        #
+        # @param [Symbol] src
+        #   The source register.
+        #
+        # @param [Symbol] dest
+        #   The destination register.
+        #
+        # @return [Symbol]
+        #   The destination register.
+        #
         def map_reg!(src,dest)
           @reg_map[src] << dest
           return dest
         end
 
+        #
+        # The registers used within the gadget.
+        #
+        # @return [Array<Symbol>]
+        #   The register names.
+        #
         def regs
           @reg_map.keys
         end
 
+        #
+        # Marks a register as dirty, meaning it's value has changed
+        # within the gadget.
+        #
+        # @param [Symbol] reg
+        #   The register to mark as dirty.
+        #
+        # @return [Symbol]
+        #   The marked register.
+        #
         def dirty!(reg)
           @dirty << reg
           return reg
         end
 
+        #
+        # Indicates that a register is pushed onto the stack,
+        # from within the gadget.
+        #
+        # @param [Symbol] reg
+        #   The register that will be pushed onto the stack.
+        #
+        # @return [Symbol]
+        #   The name of the pushed register.
+        #
         def push!(reg)
           @pushes << reg
           return reg
         end
 
+        #
+        # Indicates that a register is popped from the stack,
+        # from within the gadget.
+        #
+        # @param [Symbol] reg
+        #   The register that will be pushed onto the stack.
+        #
+        # @return [Symbol]
+        #   The name of the pushed register.
+        #
         def pop!(reg)
           @pops << reg
           return reg
         end
 
+        #
+        # Determines whether the gadget actually changes the state of
+        # the program.
+        #
+        # @return [Boolean]
+        #   Specifies whether the gadget changes the state of the program
+        #   it will be executed within.
+        #
         def volitile?
           !(@dirty.empty? && @pushes.empty? && @pops.empty?)
         end
 
+        #
+        # Converts the gadget to an `Integer`.
+        #
+        # @return [Integer]
+        #   The offset of the gadget.
+        #
         def to_i
           @offset.to_i
         end
 
+        #
+        # Converts the gadget to a `String`.
+        #
+        # @return [String]
+        #   The assembly source-code of the gadget.
+        #
         def to_s
           @source.join($/)
         end
