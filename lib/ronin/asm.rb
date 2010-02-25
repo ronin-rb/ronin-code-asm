@@ -21,4 +21,5 @@
 #++
 #
 
+require 'ronin/asm/asm'
 require 'ronin/asm/version'

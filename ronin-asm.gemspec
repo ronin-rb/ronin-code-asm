@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-02-11}
+  s.date = %q{2010-02-24}
   s.description = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.extra_rdoc_files = [
@@ -18,15 +18,19 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+    ".specopts",
+    ".yardopts",
     "COPYING.txt",
     "ChangeLog.md",
     "README.md",
     "Rakefile",
     "lib/ronin/asm.rb",
+    "lib/ronin/asm/asm.rb",
     "lib/ronin/asm/version.rb",
     "lib/ronin/code/asm.rb",
     "lib/ronin/code/asm/code.rb",
     "lib/ronin/code/asm/config.rb",
+    "ronin-asm.gemspec",
     "spec/asm_spec.rb",
     "spec/code/asm/code_spec.rb",
     "spec/code/asm/helpers/files.rb",
@@ -39,8 +43,8 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/ronin-ruby/ronin-asm}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
-  s.summary = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
+  s.rubygems_version = %q{1.3.6}
+  s.summary = %q{A Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.test_files = [
     "spec/spec_helper.rb",
     "spec/asm_spec.rb",
@@ -54,17 +58,20 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<ffi-udis86>, [">= 0.1.0"])
       s.add_runtime_dependency(%q<ruby-yasm>, [">= 0.1.0"])
       s.add_runtime_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_development_dependency(%q<yard>, [">= 0.5.3"])
     else
+      s.add_dependency(%q<ffi-udis86>, [">= 0.1.0"])
       s.add_dependency(%q<ruby-yasm>, [">= 0.1.0"])
       s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_dependency(%q<yard>, [">= 0.5.3"])
     end
   else
+    s.add_dependency(%q<ffi-udis86>, [">= 0.1.0"])
     s.add_dependency(%q<ruby-yasm>, [">= 0.1.0"])
     s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
