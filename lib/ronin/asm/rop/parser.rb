@@ -29,7 +29,68 @@ module Ronin
         include Enumerable
 
         # Bytes which represent return instructions.
-        RET_BYTES = [0xc3, 0xcb]
+        RET_BYTES = {
+          :x86 => [
+            [0xc3],             # ret
+            [0xcb],             # retf
+            [0xff, 0xe0],       # jmp (eax)
+            [0xff, 0xe3],       # jmp (ebx)
+            [0xff, 0xe1],       # jmp (ecx)
+            [0xff, 0xe2],       # jmp (edx)
+            [0xff, 0xe6],       # jmp (esi)
+            [0xff, 0xe7],       # jmp (edi)
+            [0xff, 0xe4],       # jmp (esp)
+            [0xff, 0xe5],       # jmp (ebp)
+            [0xff, 0x20],       # jmp [eax]
+            [0xff, 0x23],       # jmp [ebx]
+            [0xff, 0x21],       # jmp [ecx]
+            [0xff, 0x22],       # jmp [edx]
+            [0xff, 0x26],       # jmp [esi]
+            [0xff, 0x27],       # jmp [edi]
+            [0xff, 0x24, 0x24], # jmp [esp]
+            [0xff, 0x65, 0x00]  # jmp [ebp]
+          ],
+
+          :amd64 => [
+            [0xc3],                   # ret
+            [0x48, 0xcb],             # retf
+            [0xff, 0xe0],             # jmp (rax)
+            [0xff, 0xe3],             # jmp (rbx)
+            [0xff, 0xe1],             # jmp (rcx)
+            [0xff, 0xe2],             # jmp (rdx)
+            [0xff, 0xe6],             # jmp (rsi)
+            [0xff, 0xe7],             # jmp (rdi)
+            [0xff, 0xe4],             # jmp (rsp)
+            [0xff, 0xe5],             # jmp (rbp)
+            [0x41, 0xff, 0xe0],       # jmp (r8)
+            [0x41, 0xff, 0xe1],       # jmp (r9)
+            [0x41, 0xff, 0xe2],       # jmp (r10)
+            [0x41, 0xff, 0xe3],       # jmp (r11)
+            [0x41, 0xff, 0xe4],       # jmp (r12)
+            [0x41, 0xff, 0xe5],       # jmp (r13)
+            [0x41, 0xff, 0xe6],       # jmp (r14)
+            [0x41, 0xff, 0xe7],       # jmp (r15)
+            [0xff, 0x20],             # jmp [rax]
+            [0xff, 0x23],             # jmp [rbx]
+            [0xff, 0x21],             # jmp [rcx]
+            [0xff, 0x22],             # jmp [rdx]
+            [0xff, 0x26],             # jmp [rsi]
+            [0xff, 0x27],             # jmp [rdi]
+            [0xff, 0x24, 0x24],       # jmp [rsp]
+            [0xff, 0x65, 0x00],       # jmp [rbp]
+            [0x41, 0xff, 0x20],       # jmp [r8]
+            [0x41, 0xff, 0x21],       # jmp [r9]
+            [0x41, 0xff, 0x22],       # jmp [r10]
+            [0x41, 0xff, 0x23],       # jmp [r11]
+            [0x41, 0xff, 0x24, 0x24], # jmp [r12]
+            [0x41, 0xff, 0x65, 0x00], # jmp [r13]
+            [0x41, 0xff, 0x26],       # jmp [r14]
+            [0x41, 0xff, 0x27]        # jmp [r15]
+          ]
+        }
+
+        # The architecture to parse against
+        attr_reader :arch
 
         # The binary source to parse
         attr_accessor :source
@@ -37,8 +98,14 @@ module Ronin
         #
         # Creates a new {Parser} object.
         #
-        # @param [String] source
+        # @param [Hash] options
+        #   Additional options.
+        #
+        # @option options [String] :source
         #   The binary source to parse.
+        #
+        # @option options [Symbol] :arch (:x86)
+        #   The architecture to parse against.
         #
         # @yield [parser]
         #   If a block is given, it will be passed the newly created parser.
@@ -46,8 +113,24 @@ module Ronin
         # @yieldparam [Parser] parser
         #   The newly created parser.
         #
-        def initialize(source='',&block)
-          @source = source
+        def initialize(options={},&block)
+          @source = ''
+          @arch = :x86
+
+          if options[:source]
+            @source = options[:source]
+          end
+
+          if options[:arch]
+            @arch = options[:arch]
+          end
+
+          unless RET_BYTES.has_key?(@arch)
+            raise(StandardError,"unsupported ROP architecture #{@arch}",caller)
+          end
+
+          @ret_bytes = RET_BYTES[@arch]
+          @ret_look_ahead = @ret_bytes.map { |bytes| bytes.length }.max
 
           block.call(self) if block
         end
