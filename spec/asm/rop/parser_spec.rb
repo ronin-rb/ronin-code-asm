@@ -327,6 +327,12 @@ describe ASM::ROP::Parser do
     end
   end
 
+  it "should raise an exception when using an unsupported arch" do
+    lambda {
+      ASM::ROP::Parser.new(:arch => :raiders_of_the_lost_arch)
+    }.should raise_error(StandardError)
+  end
+
   it "should parse the first fragment" do
     parser = ASM::ROP::Parser.new(:source => "abc\xc3123")
     fragments = parser.to_a
