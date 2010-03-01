@@ -130,7 +130,6 @@ module Ronin
           end
 
           @ret_bytes = RET_BYTES[@arch]
-          @ret_look_ahead = @ret_bytes.map { |bytes| bytes.length }.max
 
           block.call(self) if block
         end
