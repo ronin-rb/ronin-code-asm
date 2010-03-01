@@ -153,24 +153,24 @@ module Ronin
           last_index = 0
           fragment = ''
 
-          pass_fragment = lambda {
-            unless fragment.empty?
-              block.call(Fragment.new(last_index,fragment))
-            end
-          }
-
           Enumerator.new(@source,:each_byte).each_with_index do |b,index|
-            if RET_BYTES.include?(b)
-              pass_fragment.call()
+            fragment << b.chr
 
-              last_index = index + 1
-              fragment = ''
-            else
-              fragment << b.chr
+            @ret_bytes.each do |bytes|
+              if fragment[-(bytes.length)..-1] == bytes
+                block.call(Fragment.new(last_index,fragment))
+
+                last_index = index + 1
+                fragment = ''
+                break
+              end
             end
           end
 
-          pass_fragment.call()
+          unless fragment.empty?
+            block.call(Fragment.new(last_index,fragment))
+          end
+
           return self
         end
 

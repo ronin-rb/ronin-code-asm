@@ -7,14 +7,14 @@ describe ASM::ROP::Parser do
     parser = ASM::ROP::Parser.new(:source => "abc\xc3123")
     fragments = parser.to_a
 
-    fragments.first.source.should == "abc"
+    fragments.first.source.should == "abc\xc3"
   end
 
   it "should parse the middle fragment" do
     parser = ASM::ROP::Parser.new(:source => "abc\xc3123\xc3xyz")
     fragments = parser.to_a
 
-    fragments[1].source.should == "123"
+    fragments[1].source.should == "123\xc3"
   end
 
   it "should parse the tailing fragment" do
@@ -39,10 +39,13 @@ describe ASM::ROP::Parser do
     fragments.first.source.should == 'abc123'
   end
 
-  it "should not parse empty fragments" do
+  it "should parse empty fragments" do
     parser = ASM::ROP::Parser.new(:source => "\xc3\xc3")
+    fragments = parser.to_a
 
-    parser.to_a.should be_empty
+    fragments.length.should == 2
+    fragments[0].source.should == "\xc3"
+    fragments[1].source.should == "\xc3"
   end
 
   it "should not parse empty Strings" do
