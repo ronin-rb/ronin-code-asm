@@ -18,25 +18,24 @@ describe ASM::ROP::Parser do
   end
 
   it "should parse the tailing fragment" do
-    parser = ASM::ROP::Parser.new(:source => "abc\xc3123")
-    fragments = parser.to_a
-
-    fragments.last.source.should == "123"
-  end
-
-  it "should parse the tailing fragment, if there is none" do
     parser = ASM::ROP::Parser.new(:source => "abc\xc3123\xc3")
     fragments = parser.to_a
 
-    fragments.last.source.should_not be_empty
+    fragments.last.source.should == "123\xc3"
   end
 
-  it "should parse the whole source as a fragment, if there are no rets" do
+  it "should not parse tailing fragments, if they do not end in rets" do
+    parser = ASM::ROP::Parser.new(:source => "abc\xc3123")
+    fragments = parser.to_a
+
+    fragments.last.source.should == "abc\xc3"
+  end
+
+  it "should not parse a whole fragment, if there are no rets" do
     parser = ASM::ROP::Parser.new(:source => "abc123")
     fragments = parser.to_a
 
-    fragments.length.should == 1
-    fragments.first.source.should == 'abc123'
+    fragments.should be_empty
   end
 
   it "should parse empty fragments" do

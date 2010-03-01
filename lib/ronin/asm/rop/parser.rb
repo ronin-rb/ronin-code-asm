@@ -167,10 +167,6 @@ module Ronin
             end
           end
 
-          unless fragment.empty?
-            block.call(Fragment.new(last_index,fragment))
-          end
-
           return self
         end
 
