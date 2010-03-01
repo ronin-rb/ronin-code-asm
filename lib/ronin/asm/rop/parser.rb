@@ -31,61 +31,61 @@ module Ronin
         # Bytes which represent return instructions.
         RET_BYTES = {
           :x86 => [
-            [0xc3],             # ret
-            [0xcb],             # retf
-            [0xff, 0xe0],       # jmp (eax)
-            [0xff, 0xe3],       # jmp (ebx)
-            [0xff, 0xe1],       # jmp (ecx)
-            [0xff, 0xe2],       # jmp (edx)
-            [0xff, 0xe6],       # jmp (esi)
-            [0xff, 0xe7],       # jmp (edi)
-            [0xff, 0xe4],       # jmp (esp)
-            [0xff, 0xe5],       # jmp (ebp)
-            [0xff, 0x20],       # jmp [eax]
-            [0xff, 0x23],       # jmp [ebx]
-            [0xff, 0x21],       # jmp [ecx]
-            [0xff, 0x22],       # jmp [edx]
-            [0xff, 0x26],       # jmp [esi]
-            [0xff, 0x27],       # jmp [edi]
-            [0xff, 0x24, 0x24], # jmp [esp]
-            [0xff, 0x65, 0x00]  # jmp [ebp]
+            "\xc3",           # ret
+            "\xcb",           # retf
+            "\xff\xe0",       # jmp (eax)
+            "\xff\xe3",       # jmp (ebx)
+            "\xff\xe1",       # jmp (ecx)
+            "\xff\xe2",       # jmp (edx)
+            "\xff\xe6",       # jmp (esi)
+            "\xff\xe7",       # jmp (edi)
+            "\xff\xe4",       # jmp (esp)
+            "\xff\xe5",       # jmp (ebp)
+            "\xff\x20",       # jmp [eax]
+            "\xff\x23",       # jmp [ebx]
+            "\xff\x21",       # jmp [ecx]
+            "\xff\x22",       # jmp [edx]
+            "\xff\x26",       # jmp [esi]
+            "\xff\x27",       # jmp [edi]
+            "\xff\x24\x24",   # jmp [esp]
+            "\xff\x65\x00"    # jmp [ebp]
           ],
 
           :amd64 => [
-            [0xc3],                   # ret
-            [0x48, 0xcb],             # retf
-            [0xff, 0xe0],             # jmp (rax)
-            [0xff, 0xe3],             # jmp (rbx)
-            [0xff, 0xe1],             # jmp (rcx)
-            [0xff, 0xe2],             # jmp (rdx)
-            [0xff, 0xe6],             # jmp (rsi)
-            [0xff, 0xe7],             # jmp (rdi)
-            [0xff, 0xe4],             # jmp (rsp)
-            [0xff, 0xe5],             # jmp (rbp)
-            [0x41, 0xff, 0xe0],       # jmp (r8)
-            [0x41, 0xff, 0xe1],       # jmp (r9)
-            [0x41, 0xff, 0xe2],       # jmp (r10)
-            [0x41, 0xff, 0xe3],       # jmp (r11)
-            [0x41, 0xff, 0xe4],       # jmp (r12)
-            [0x41, 0xff, 0xe5],       # jmp (r13)
-            [0x41, 0xff, 0xe6],       # jmp (r14)
-            [0x41, 0xff, 0xe7],       # jmp (r15)
-            [0xff, 0x20],             # jmp [rax]
-            [0xff, 0x23],             # jmp [rbx]
-            [0xff, 0x21],             # jmp [rcx]
-            [0xff, 0x22],             # jmp [rdx]
-            [0xff, 0x26],             # jmp [rsi]
-            [0xff, 0x27],             # jmp [rdi]
-            [0xff, 0x24, 0x24],       # jmp [rsp]
-            [0xff, 0x65, 0x00],       # jmp [rbp]
-            [0x41, 0xff, 0x20],       # jmp [r8]
-            [0x41, 0xff, 0x21],       # jmp [r9]
-            [0x41, 0xff, 0x22],       # jmp [r10]
-            [0x41, 0xff, 0x23],       # jmp [r11]
-            [0x41, 0xff, 0x24, 0x24], # jmp [r12]
-            [0x41, 0xff, 0x65, 0x00], # jmp [r13]
-            [0x41, 0xff, 0x26],       # jmp [r14]
-            [0x41, 0xff, 0x27]        # jmp [r15]
+            "\xc3",               # ret
+            "\x48\xcb",           # retf
+            "\xff\xe0",           # jmp (rax)
+            "\xff\xe3",           # jmp (rbx)
+            "\xff\xe1",           # jmp (rcx)
+            "\xff\xe2",           # jmp (rdx)
+            "\xff\xe6",           # jmp (rsi)
+            "\xff\xe7",           # jmp (rdi)
+            "\xff\xe4",           # jmp (rsp)
+            "\xff\xe5",           # jmp (rbp)
+            "\x41\xff\xe0",       # jmp (r8)
+            "\x41\xff\xe1",       # jmp (r9)
+            "\x41\xff\xe2",       # jmp (r10)
+            "\x41\xff\xe3",       # jmp (r11)
+            "\x41\xff\xe4",       # jmp (r12)
+            "\x41\xff\xe5",       # jmp (r13)
+            "\x41\xff\xe6",       # jmp (r14)
+            "\x41\xff\xe7",       # jmp (r15)
+            "\xff\x20",           # jmp [rax]
+            "\xff\x23",           # jmp [rbx]
+            "\xff\x21",           # jmp [rcx]
+            "\xff\x22",           # jmp [rdx]
+            "\xff\x26",           # jmp [rsi]
+            "\xff\x27",           # jmp [rdi]
+            "\xff\x24\x24",       # jmp [rsp]
+            "\xff\x65\x00",       # jmp [rbp]
+            "\x41\xff\x20",       # jmp [r8]
+            "\x41\xff\x21",       # jmp [r9]
+            "\x41\xff\x22",       # jmp [r10]
+            "\x41\xff\x23",       # jmp [r11]
+            "\x41\xff\x24\x24",   # jmp [r12]
+            "\x41\xff\x65\x00",   # jmp [r13]
+            "\x41\xff\x26",       # jmp [r14]
+            "\x41\xff\x27"        # jmp [r15]
           ]
         }
 
