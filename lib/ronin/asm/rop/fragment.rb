@@ -183,16 +183,6 @@ module Ronin
           @source.to_s
         end
 
-        #
-        # Converts the fragment to an `Array`.
-        #
-        # @return [Array<Gadget>]
-        #   The valid gadgets found within the fragment.
-        #
-        def to_a
-          Enumerator.new(self,:each).to_a
-        end
-
       end
     end
   end

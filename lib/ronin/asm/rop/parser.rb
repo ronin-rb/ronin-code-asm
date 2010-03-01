@@ -170,17 +170,6 @@ module Ronin
           return self
         end
 
-        #
-        # Converts the parser to an `Array`.
-        #
-        # @return [Array<Fragment>]
-        #   The fragments bounded by return instructions, found within
-        #   the binary source.
-        #
-        def to_a
-          Enumerator.new(self,:each).to_a
-        end
-
       end
     end
   end
