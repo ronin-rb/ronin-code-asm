@@ -31,8 +31,48 @@ module Ronin
 
         include Enumerable
 
-        # Blacklist of instructions not allowed within gadgets
-        INSN_BLACKLIST = Set[:invalid, :ret, :retf]
+        # Whitelist of instructions to allow within gadgets
+        INSN_WHITELIST = Set[
+          :mov,
+          :xchg,
+          :push,
+          :pop,
+          :add,
+          :inc,
+          :sub,
+          :dec,
+          :idiv,
+          :imul,
+          :and,
+          :or,
+          :xor,
+          :shal,
+          :shar,
+          :shl,
+          :shr,
+          :test,
+          :cmp,
+          :sete,
+          :setne,
+          :setg,
+          :setge,
+          :setl,
+          :setle,
+          :jmp,
+          :je,
+          :jne,
+          :jg,
+          :jge,
+          :jl,
+          :jle,
+          :call,
+          :enter,
+          :leave,
+          :ret,
+          :retf,
+          :int,
+          :nop
+        ]
 
         # Offset of the fragment within the larger source
         attr_reader :offset
@@ -102,7 +142,7 @@ module Ronin
           )
 
           ud.each do |ud|
-            return nil if BLACKLIST.include?(ud.mnemonic)
+            return nil unless INSN_WHITELIST.include?(ud.mnemonic)
 
             case ud.mnemonic
             when :push
