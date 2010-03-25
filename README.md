@@ -1,8 +1,8 @@
 # Ronin ASM
 
 * [ronin.rubyforge.org/asm](http://ronin.rubyforge.org/asm/)
-* [github.com/postmodern/ronin-asm](http://github.com/postmodern/ronin-asm)
-* [github.com/postmodern/ronin-asm/issues](http://github.com/postmodern/ronin-asm/issues)
+* [github.com/ronin-ruby/ronin-asm](http://github.com/ronin-ruby/ronin-asm)
+* [github.com/ronin-ruby/ronin-asm/issues](http://github.com/ronin-ruby/ronin-asm/issues)
 * [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
 * irc.freenode.net #ronin
 
