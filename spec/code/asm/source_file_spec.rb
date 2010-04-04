@@ -10,8 +10,8 @@ describe Code::ASM::SourceFile do
     it "should not be loaded if there is no top comment" do
       file = Code::ASM::SourceFile.new(assembly_file(:blank))
 
-      file.arch.should == nil
-      file.machine.should == nil
+      file.arch.should == Code::ASM::SourceFile::DEFAULT_ARCH
+      file.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
       file.os.should == nil
     end
 
@@ -86,6 +86,18 @@ describe Code::ASM::SourceFile do
       file.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROCESSOR
     end
 
+    it "should default the arch" do
+      file = Code::ASM::SourceFile.new(assembly_file(:blank))
+
+      file.arch.should == Code::ASM::SourceFile::DEFAULT_ARCH
+    end
+
+    it "should default the machine" do
+      file = Code::ASM::SourceFile.new(assembly_file(:blank))
+
+      file.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
+    end
+
     it "should infer the parser from the :syntax option" do
       file = Code::ASM::SourceFile.new(
         assembly_file(:blank),
@@ -100,15 +112,6 @@ describe Code::ASM::SourceFile do
       )
 
       file.parser.should == :nasm
-    end
-
-    it "should infer the arch from the :machine option" do
-      file = Code::ASM::SourceFile.new(
-        assembly_file(:blank),
-        :machine => :amd64
-      )
-
-      file.arch.should == :x86
     end
   end
 end

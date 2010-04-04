@@ -36,6 +36,12 @@ module Ronin
         # The default preprocessor to use with `yasm`
         DEFAULT_PREPROCESSOR = :nasm
 
+        # The default architecture to assemble for
+        DEFAULT_ARCH = :x86
+
+        # The default machine to assemble against
+        DEFAULT_MACHINE = :x86
+
         # The path to the assembly source-file
         attr_reader :path
 
@@ -95,8 +101,8 @@ module Ronin
           @parser = DEFAULT_PARSER
           @preproc = DEFAULT_PREPROCESSOR
 
-          @arch = nil
-          @machine = nil
+          @arch = DEFAULT_ARCH
+          @machine = DEFAULT_MACHINE
           @os = nil
 
           set_options = lambda { |options|
@@ -113,16 +119,9 @@ module Ronin
             end
 
             @preproc = options[:preproc].to_sym if options[:preproc]
-            @machine = options[:machine].to_sym if options[:machine]
 
             @arch = options[:arch].to_sym if options[:arch]
-
-            # infer the arch from the machine value, but only once
-            case @machine
-            when :x86, :amd64
-              @arch ||= :x86
-            end
-
+            @machine = options[:machine].to_sym if options[:machine]
             @os = options[:os].to_s if options[:os]
           }
 
