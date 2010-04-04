@@ -103,6 +103,7 @@ module Ronin
             if options[:parser]
               @parser = options[:parser].to_sym
             else
+              # infer the parser from the :syntax option
               case options[:syntax]
               when :intel
                 @parser = :nasm
@@ -117,6 +118,7 @@ module Ronin
             if options[:arch]
               @arch = options[:arch].to_sym
             else
+              # infer the arch from the machine value
               case @machine
               when :x86, :amd64
                 @arch = :x86
@@ -127,9 +129,11 @@ module Ronin
           }
 
           if (metadata = parse_metadata)
+            # set the options using the metadata first
             set_options.call(metadata)
           end
 
+          # set the options based on any additional user options
           set_options.call(options)
         end
 
