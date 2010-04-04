@@ -43,29 +43,23 @@ module Ronin
     #   Specifies whether the command exited normally. 
     #
     # @example
-    #   Code.asm(:parser => :gas, :output => 'code.o', :file => 'code.S')
+    #   Code.asm('code.s', :output => 'code.o')
     #
     # @example
-    #   Code.asm do |yasm|
-    #     yasm.target! :x86
-    #
-    #     yasm.syntax = :gas
-    #     yasm.file = 'code.S'
+    #   Code.asm('file.s') do |yasm|
     #     yasm.output = 'code.o'
     #   end
     #
     # @since 0.1.0
     #
+    # @see ASM::SourceFile
     # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
     # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
     #
-    def Code.asm(options={},&block)
-      options = {
-        :preprocessor => ASM::Config::DEFAULT_PREPROCESSOR,
-        :parser => ASM::Config::DEFAULT_PARSER
-      }.merge(options)
+    def Code.asm(path,options={},&block)
+      source_file = ASM::SourceFile.new(path)
 
-      YASM::Program.assemble(options,&block)
+      return source_file.assemble(options,&block)
     end
 
     #
@@ -85,33 +79,19 @@ module Ronin
     #   The assembled inline code.
     #
     # @example
-    #   Code.asm_inline(:parser => :gas, :file => 'code.S')
-    #   # => "..."
-    #
-    # @example
-    #   Code.asm_inline do |yasm|
-    #     yasm.target! :x86
-    #
-    #     yasm.syntax = :gas
-    #     yasm.file = 'code.S'
-    #   end
+    #   Code.asm_inline('code.s')
     #   # => "..."
     #
     # @since 0.1.0
     #
+    # @see ASM::SourceFile
     # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
     # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
     #
-    def Code.asm_inline(options={},&block)
-      Tempfile.open('ronin-asm') do |temp_file|
-        options = options.merge(
-          :output_format => :bin,
-          :output => temp_file.path
-        )
+    def Code.asm_inline(path,options={},&block)
+      source_file = ASM::SourceFile.new(path)
 
-        Code.asm(options,&block)
-        return temp_file.read
-      end
+      return source_file.assemble_inline(options,&block)
     end
   end
 end
