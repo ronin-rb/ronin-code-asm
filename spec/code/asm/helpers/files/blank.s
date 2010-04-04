@@ -1,2 +1,2 @@
 _start:
-	mov eax,1
+	movl	1,%eax

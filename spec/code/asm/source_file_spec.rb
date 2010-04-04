@@ -32,6 +32,14 @@ describe Code::ASM::SourceFile do
       file.os.should == 'Linux'
     end
 
+    it "should ignore comment-blocks lacking a YAML header" do
+      file = Code::ASM::SourceFile.new(assembly_file(:no_yaml_header))
+
+      file.arch.should == Code::ASM::SourceFile::DEFAULT_ARCH
+      file.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
+      file.os.should == nil
+    end
+
     it "should parse the YAML hash out of the first comment block" do
       file = Code::ASM::SourceFile.new(assembly_file(:simple))
 

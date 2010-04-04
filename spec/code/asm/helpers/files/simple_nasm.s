@@ -1,3 +1,4 @@
+; ---
 ; syntax: intel
 ; arch: x86
 ; machine: x86

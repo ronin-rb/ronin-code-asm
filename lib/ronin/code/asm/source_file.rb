@@ -175,15 +175,15 @@ module Ronin
         #   The metadata information.
         #
         def parse_metadata
-          comment_pattern = /(([;#]|\/\/)\s+)[:\w]/
+          yaml_pattern = /(([;#]|\/\/)\s+)---/
           data_pattern = nil
           data_lines = []
 
           File.open(@path) do |file|
             file.each_line do |line|
               unless data_pattern
-                if (comment = line.match(comment_pattern))
-                  data_pattern = /#{comment[1]}(.+)/
+                if (yaml_header = line.match(yaml_pattern))
+                  data_pattern = /#{yaml_header[1]}(.+)/
                 end
               end
 
@@ -197,7 +197,7 @@ module Ronin
             end
           end
 
-          metadata = YAML.load(data_lines.join($/))
+          metadata = YAML.load(data_lines.join("\n"))
 
           if metadata.kind_of?(Hash)
             normalized_hash = {}
