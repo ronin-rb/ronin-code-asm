@@ -28,12 +28,6 @@ module Ronin
         include StaticPaths
 
         register_static_dir File.join(File.dirname(__FILE__),'..','..','..','..','static')
-
-        # The default `yasm` parser to use
-        DEFAULT_PARSER = :nasm
-
-        # The default preprocessor to use with `yasm`
-        DEFAULT_PREPROCESSOR = :nasm
       end
     end
   end
