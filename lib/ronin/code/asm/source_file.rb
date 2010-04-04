@@ -189,7 +189,7 @@ module Ronin
 
               if data_pattern
                 if (data = line.match(data_pattern))
-                  data_lines << data[1].strip
+                  data_lines << data[1]
                 else
                   break
                 end
