@@ -1,4 +1,4 @@
-; parser: nasm
+; syntax: intel
 ; arch: x86
 ; machine: x86
 ; os: Linux

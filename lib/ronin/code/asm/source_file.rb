@@ -30,8 +30,8 @@ module Ronin
 
         include SourceCode
 
-        # The default `yasm` parser to use
-        DEFAULT_PARSER = :gas
+        # The default ASM syntax to use
+        DEFAULT_SYNTAX = :att
 
         # The default preprocessor to use with `yasm`
         DEFAULT_PREPROCESSOR = :nasm
@@ -46,8 +46,8 @@ module Ronin
         attr_reader :path
 
         # The parser used in the assembly source-file
-        # (`:gas`, `:nasm` or `:tasm`)
-        attr_reader :parser
+        # (`:att` or `:intel`)
+        attr_reader :syntax
 
         # The pre-processor to run on the assembly source-file
         # (`:nasm`, `:tasm`, `:raw` or `:cpp`)
@@ -74,13 +74,8 @@ module Ronin
         # @param [Hash] options
         #   The options for the new source-file.
         #
-        # @option options [Symbol] :syntax
+        # @option options [Symbol] :syntax (DEFAULT_SYNTAX)
         #   The assembly syntax to choose the parser for.
-        #   If `:att` is given, then `:gas` will be use for the parser.
-        #   If `:intel` is given, then `:nasm` will be used for the parser.
-        #
-        # @option options [Symbol] :parser (DEFAULT_PARSER)
-        #   The parser to use for the assembly source-file.
         #
         # @option options [Symbol] :preprocessor (DEFAULT_PREPROCESSOR)
         #   The pre-processor to run on the assembly source-file,
@@ -98,7 +93,7 @@ module Ronin
         def initialize(path,options={})
           @path = File.expand_path(path)
 
-          @parser = DEFAULT_PARSER
+          @syntax = DEFAULT_SYNTAX
           @preproc = DEFAULT_PREPROCESSOR
 
           @arch = DEFAULT_ARCH
@@ -106,18 +101,7 @@ module Ronin
           @os = nil
 
           set_options = lambda { |options|
-            if options[:parser]
-              @parser = options[:parser].to_sym
-            else
-              # infer the parser from the :syntax option
-              case options[:syntax]
-              when :intel
-                @parser = :nasm
-              when :att
-                @parser = :gas
-              end
-            end
-
+            @syntax = options[:syntax].to_sym if options[:syntax]
             @preproc = options[:preproc].to_sym if options[:preproc]
 
             @arch = options[:arch].to_sym if options[:arch]
@@ -162,9 +146,16 @@ module Ronin
         # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
         #
         def assemble(options={},&block)
+          parser = case @syntax
+                   when :att
+                     :gas
+                   when :intel
+                     :nasm
+                   end
+
           options = options.merge(
             :preprocessor => @preproc,
-            :parser => @parser,
+            :parser => parser,
             :file => @path
           )
 

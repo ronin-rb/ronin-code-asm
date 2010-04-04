@@ -26,7 +26,7 @@ describe Code::ASM::SourceFile do
     it "should parse NASM comments" do
       file = Code::ASM::SourceFile.new(assembly_file(:simple_nasm))
 
-      file.parser.should == :nasm
+      file.syntax.should == :intel
       file.arch.should == :x86
       file.machine.should == :x86
       file.os.should == 'Linux'
@@ -74,10 +74,10 @@ describe Code::ASM::SourceFile do
   end
 
   describe "initialize" do
-    it "should default the parser" do
+    it "should default the syntax" do
       file = Code::ASM::SourceFile.new(assembly_file(:blank))
 
-      file.parser.should == Code::ASM::SourceFile::DEFAULT_PARSER
+      file.syntax.should == Code::ASM::SourceFile::DEFAULT_SYNTAX
     end
 
     it "should default the preproc" do
@@ -96,22 +96,6 @@ describe Code::ASM::SourceFile do
       file = Code::ASM::SourceFile.new(assembly_file(:blank))
 
       file.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
-    end
-
-    it "should infer the parser from the :syntax option" do
-      file = Code::ASM::SourceFile.new(
-        assembly_file(:blank),
-        :syntax => :att
-      )
-
-      file.parser.should == :gas
-
-      file = Code::ASM::SourceFile.new(
-        assembly_file(:blank),
-        :syntax => :intel
-      )
-
-      file.parser.should == :nasm
     end
   end
 end
