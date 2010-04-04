@@ -72,4 +72,43 @@ describe Code::ASM::SourceFile do
       file.os.should == 'Linux'
     end
   end
+
+  describe "initialize" do
+    it "should default the parser" do
+      file = Code::ASM::SourceFile.new(assembly_file(:blank))
+
+      file.parser.should == Code::ASM::SourceFile::DEFAULT_PARSER
+    end
+
+    it "should default the preproc" do
+      file = Code::ASM::SourceFile.new(assembly_file(:blank))
+
+      file.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROCESSOR
+    end
+
+    it "should infer the parser from the :syntax option" do
+      file = Code::ASM::SourceFile.new(
+        assembly_file(:blank),
+        :syntax => :att
+      )
+
+      file.parser.should == :gas
+
+      file = Code::ASM::SourceFile.new(
+        assembly_file(:blank),
+        :syntax => :intel
+      )
+
+      file.parser.should == :nasm
+    end
+
+    it "should infer the arch from the :machine option" do
+      file = Code::ASM::SourceFile.new(
+        assembly_file(:blank),
+        :machine => :amd64
+      )
+
+      file.arch.should == :x86
+    end
+  end
 end
