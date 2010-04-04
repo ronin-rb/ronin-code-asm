@@ -45,7 +45,7 @@ module Ronin
 
         # The pre-processor to run on the assembly source-file
         # (`:nasm`, `:tasm`, `:raw` or `:cpp`)
-        attr_reader :preprocessor
+        attr_reader :preproc
 
         # The architecture to assemble against
         # (`:x86` or `:lc3b`)
