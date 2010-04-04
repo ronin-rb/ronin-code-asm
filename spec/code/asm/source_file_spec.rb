@@ -15,6 +15,23 @@ describe Code::ASM::SourceFile do
       file.os.should == nil
     end
 
+    it "should parse GAS comments" do
+      file = Code::ASM::SourceFile.new(assembly_file(:simple))
+
+      file.arch.should == :x86
+      file.machine.should == :x86
+      file.os.should == 'Linux'
+    end
+
+    it "should parse NASM comments" do
+      file = Code::ASM::SourceFile.new(assembly_file(:simple_nasm))
+
+      file.parser.should == :nasm
+      file.arch.should == :x86
+      file.machine.should == :x86
+      file.os.should == 'Linux'
+    end
+
     it "should parse the YAML hash out of the first comment block" do
       file = Code::ASM::SourceFile.new(assembly_file(:simple))
 
@@ -47,18 +64,9 @@ describe Code::ASM::SourceFile do
       file.os.should == 'Linux'
     end
 
-    it "should parse GAS comments" do
-      file = Code::ASM::SourceFile.new(assembly_file(:simple))
+    it "should accept both String and Symbol keys" do
+      file = Code::ASM::SourceFile.new(assembly_file(:symbol_keys))
 
-      file.arch.should == :x86
-      file.machine.should == :x86
-      file.os.should == 'Linux'
-    end
-
-    it "should parse NASM comments" do
-      file = Code::ASM::SourceFile.new(assembly_file(:simple_nasm))
-
-      file.parser.should == :nasm
       file.arch.should == :x86
       file.machine.should == :x86
       file.os.should == 'Linux'

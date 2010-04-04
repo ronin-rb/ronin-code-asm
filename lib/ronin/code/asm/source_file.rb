@@ -183,7 +183,7 @@ module Ronin
         #   The metadata information.
         #
         def parse_metadata
-          comment_pattern = /(([;#]|\/\/)\s+)\w+/
+          comment_pattern = /(([;#]|\/\/)\s+)[:\w]/
           data_pattern = nil
           data_lines = []
 
