@@ -112,9 +112,17 @@ module Ronin
             end
 
             @preproc = options[:preproc].to_sym if options[:preproc]
-
-            @arch = options[:arch].to_sym if options[:arch]
             @machine = options[:machine].to_sym if options[:machine]
+
+            if options[:arch]
+              @arch = options[:arch].to_sym
+            else
+              case @machine
+              when :x86, :amd64
+                @arch = :x86
+              end
+            end
+
             @os = options[:os].to_s if options[:os]
           }
 
