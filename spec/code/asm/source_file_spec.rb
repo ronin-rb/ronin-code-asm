@@ -40,8 +40,8 @@ describe Code::ASM::SourceFile do
       file.os.should == nil
     end
 
-    it "should parse the YAML hash out of the first comment block" do
-      file = Code::ASM::SourceFile.new(assembly_file(:simple))
+    it "should parse the first comment-block with a YAML header" do
+      file = Code::ASM::SourceFile.new(assembly_file(:multi_comment))
 
       file.arch.should == :x86
       file.machine.should == :x86
