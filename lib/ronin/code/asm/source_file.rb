@@ -105,7 +105,7 @@ module Ronin
             else
               case options[:syntax]
               when :intel
-                @parser = :intel
+                @parser = :nasm
               when :att
                 @parser = :gas
               end
