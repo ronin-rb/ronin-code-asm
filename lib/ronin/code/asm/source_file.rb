@@ -34,7 +34,7 @@ module Ronin
         DEFAULT_SYNTAX = :att
 
         # The default preprocessor to use with `yasm`
-        DEFAULT_PREPROCESSOR = :nasm
+        DEFAULT_PREPROC = :nasm
 
         # The default architecture to assemble for
         DEFAULT_ARCH = :x86
@@ -77,7 +77,7 @@ module Ronin
         # @option options [Symbol] :syntax (DEFAULT_SYNTAX)
         #   The assembly syntax to choose the parser for.
         #
-        # @option options [Symbol] :preprocessor (DEFAULT_PREPROCESSOR)
+        # @option options [Symbol] :preprocessor (DEFAULT_PREPROC)
         #   The pre-processor to run on the assembly source-file,
         #   before assembling it.
         #
@@ -94,7 +94,7 @@ module Ronin
           @path = File.expand_path(path)
 
           @syntax = DEFAULT_SYNTAX
-          @preproc = DEFAULT_PREPROCESSOR
+          @preproc = DEFAULT_PREPROC
 
           @arch = DEFAULT_ARCH
           @machine = DEFAULT_MACHINE

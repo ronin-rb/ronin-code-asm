@@ -83,7 +83,7 @@ describe Code::ASM::SourceFile do
     it "should default the preproc" do
       file = Code::ASM::SourceFile.new(assembly_file(:blank))
 
-      file.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROCESSOR
+      file.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROC
     end
 
     it "should default the arch" do
