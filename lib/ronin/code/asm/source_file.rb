@@ -115,14 +115,12 @@ module Ronin
             @preproc = options[:preproc].to_sym if options[:preproc]
             @machine = options[:machine].to_sym if options[:machine]
 
-            if options[:arch]
-              @arch = options[:arch].to_sym
-            else
-              # infer the arch from the machine value
-              case @machine
-              when :x86, :amd64
-                @arch = :x86
-              end
+            @arch = options[:arch].to_sym if options[:arch]
+
+            # infer the arch from the machine value, but only once
+            case @machine
+            when :x86, :amd64
+              @arch ||= :x86
             end
 
             @os = options[:os].to_s if options[:os]
