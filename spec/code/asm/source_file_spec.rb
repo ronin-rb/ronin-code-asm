@@ -8,7 +8,7 @@ describe Code::ASM::SourceFile do
 
   describe "parse_metadata" do
     it "should not be loaded if there is no top comment" do
-      file = Code::ASM::SourceFile.new(assembly_file(:no_comment))
+      file = Code::ASM::SourceFile.new(assembly_file(:blank))
 
       file.arch.should == nil
       file.machine.should == nil
