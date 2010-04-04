@@ -22,13 +22,11 @@
 require 'static_paths'
 
 module Ronin
-  module Code
-    module ASM
-      module Config
-        include StaticPaths
+  module ASM
+    module Config
+      include StaticPaths
 
-        register_static_dir File.join(File.dirname(__FILE__),'..','..','..','..','static')
-      end
+      register_static_dir File.join(File.dirname(__FILE__),'..','..','..','static')
     end
   end
 end

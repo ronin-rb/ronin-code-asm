@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-03-25}
+  s.date = %q{2010-04-03}
   s.description = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.extra_rdoc_files = [
@@ -26,18 +26,29 @@ Gem::Specification.new do |s|
     "Rakefile",
     "lib/ronin/asm.rb",
     "lib/ronin/asm/asm.rb",
+    "lib/ronin/asm/config.rb",
     "lib/ronin/asm/version.rb",
     "lib/ronin/code/asm.rb",
     "lib/ronin/code/asm/code.rb",
-    "lib/ronin/code/asm/config.rb",
+    "lib/ronin/code/asm/source_code.rb",
+    "lib/ronin/code/asm/source_file.rb",
+    "lib/ronin/gen/generators/asm/source_file.rb",
     "ronin-asm.gemspec",
     "spec/asm_spec.rb",
     "spec/code/asm/code_spec.rb",
     "spec/code/asm/helpers/files.rb",
+    "spec/code/asm/helpers/files/blank.s",
+    "spec/code/asm/helpers/files/empty_space.s",
     "spec/code/asm/helpers/files/macros.s",
+    "spec/code/asm/helpers/files/padding_comments.s",
     "spec/code/asm/helpers/files/simple.s",
+    "spec/code/asm/helpers/files/simple_nasm.s",
+    "spec/code/asm/helpers/files/symbol_keys.s",
+    "spec/code/asm/helpers/files/white_space.s",
+    "spec/code/asm/source_file_spec.rb",
     "spec/helpers/database.rb",
-    "spec/spec_helper.rb"
+    "spec/spec_helper.rb",
+    "static/ronin/gen/asm/source_file.s.erb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin-asm}
@@ -51,7 +62,8 @@ Gem::Specification.new do |s|
     "spec/asm_spec.rb",
     "spec/helpers/database.rb",
     "spec/code/asm/code_spec.rb",
-    "spec/code/asm/helpers/files.rb"
+    "spec/code/asm/helpers/files.rb",
+    "spec/code/asm/source_file_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -59,24 +71,30 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ffi-udis86>, [">= 0.1.0"])
-      s.add_runtime_dependency(%q<ruby-yasm>, [">= 0.1.0"])
-      s.add_runtime_dependency(%q<ronin-ext>, [">= 0.1.0"])
-      s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
-      s.add_development_dependency(%q<yard>, [">= 0.5.3"])
+      s.add_runtime_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
+      s.add_runtime_dependency(%q<ruby-yasm>, ["~> 0.1.0"])
+      s.add_runtime_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_runtime_dependency(%q<ronin-gen>, ["~> 0.3.0"])
+      s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 1.3.0"])
+      s.add_development_dependency(%q<yard>, ["~> 0.5.3"])
     else
-      s.add_dependency(%q<ffi-udis86>, [">= 0.1.0"])
-      s.add_dependency(%q<ruby-yasm>, [">= 0.1.0"])
-      s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
-      s.add_dependency(%q<rspec>, [">= 1.3.0"])
-      s.add_dependency(%q<yard>, [">= 0.5.3"])
+      s.add_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
+      s.add_dependency(%q<ruby-yasm>, ["~> 0.1.0"])
+      s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_dependency(%q<ronin-gen>, ["~> 0.3.0"])
+      s.add_dependency(%q<ronin>, ["~> 0.4.0"])
+      s.add_dependency(%q<rspec>, ["~> 1.3.0"])
+      s.add_dependency(%q<yard>, ["~> 0.5.3"])
     end
   else
-    s.add_dependency(%q<ffi-udis86>, [">= 0.1.0"])
-    s.add_dependency(%q<ruby-yasm>, [">= 0.1.0"])
-    s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
-    s.add_dependency(%q<rspec>, [">= 1.3.0"])
-    s.add_dependency(%q<yard>, [">= 0.5.3"])
+    s.add_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
+    s.add_dependency(%q<ruby-yasm>, ["~> 0.1.0"])
+    s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+    s.add_dependency(%q<ronin-gen>, ["~> 0.3.0"])
+    s.add_dependency(%q<ronin>, ["~> 0.4.0"])
+    s.add_dependency(%q<rspec>, ["~> 1.3.0"])
+    s.add_dependency(%q<yard>, ["~> 0.5.3"])
   end
 end
 
