@@ -202,6 +202,7 @@ module Ronin
           if metadata.kind_of?(Hash)
             normalized_hash = {}
 
+            # normalize the hash so all keys are Symbols
             metadata.each do |key,value|
               normalized_hash[key.to_sym] = value
             end
