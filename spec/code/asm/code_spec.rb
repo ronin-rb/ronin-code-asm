@@ -1,4 +1,4 @@
-require 'ronin/code/asm'
+require 'ronin/code/asm/code'
 
 require 'spec_helper'
 require 'code/asm/helpers/files'
