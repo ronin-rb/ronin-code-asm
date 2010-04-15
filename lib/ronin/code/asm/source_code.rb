@@ -54,7 +54,7 @@ module Ronin
         #     yasm.output = 'code.o'
         #   end
         #
-        # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
+        # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
         # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
         #
         def assemble(options={},&block)
@@ -90,7 +90,7 @@ module Ronin
         #   end
         #   # => "..."
         #
-        # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
+        # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
         # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
         #
         def assemble_inline(options={},&block)

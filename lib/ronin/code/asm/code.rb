@@ -50,7 +50,7 @@ module Ronin
     # @since 0.1.0
     #
     # @see ASM::SourceFile
-    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
+    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
     # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
     #
     def Code.asm(path,options={},&block)
@@ -82,7 +82,7 @@ module Ronin
     # @since 0.1.0
     #
     # @see ASM::SourceFile
-    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assmeble-class_method
+    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
     # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
     #
     def Code.asm_inline(path,options={},&block)
