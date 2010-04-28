@@ -1,8 +1,7 @@
+require 'spec_helper'
 require 'ronin/code/asm/code'
 
-require 'spec_helper'
 require 'code/asm/helpers/files'
-
 require 'tempfile'
 
 describe Code do

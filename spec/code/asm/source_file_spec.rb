@@ -1,6 +1,6 @@
+require 'spec_helper'
 require 'ronin/code/asm/source_file'
 
-require 'spec_helper'
 require 'code/asm/helpers/files'
 
 describe Code::ASM::SourceFile do
