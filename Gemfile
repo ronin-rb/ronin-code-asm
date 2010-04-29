@@ -7,7 +7,7 @@ group :runtime do
   gem 'data_paths',	'~> 0.2.1'
   gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
   gem 'ruby-yasm',	'~> 0.1.1', :require => 'yasm'
-  gem 'ronin-ext',	'~> 0.1.0', :git => "#{ronin_ruby}/ronin-ext.git"
+  gem 'ronin-support',	'~> 0.1.0', :git => "#{ronin_ruby}/ronin-support.git"
   gem 'ronin-gen',	'~> 0.3.0', :git => "#{ronin_ruby}/ronin-gen.git"
   gem 'ronin',		'~> 0.4.0', :git => "#{ronin_ruby}/ronin.git"
 end

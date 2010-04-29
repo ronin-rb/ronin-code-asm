@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-04-15}
+  s.date = %q{2010-04-29}
   s.description = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.extra_rdoc_files = [
@@ -56,17 +56,16 @@ Gem::Specification.new do |s|
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin-asm}
   s.licenses = ["GPL-2"]
-  s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.test_files = [
-    "spec/spec_helper.rb",
     "spec/asm_spec.rb",
     "spec/code/asm/code_spec.rb",
     "spec/code/asm/helpers/files.rb",
     "spec/code/asm/source_file_spec.rb",
-    "spec/helpers/database.rb"
+    "spec/helpers/database.rb",
+    "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -78,7 +77,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_runtime_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<ruby-yasm>, ["~> 0.1.1"])
-      s.add_runtime_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_runtime_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<ronin-gen>, ["~> 0.3.0"])
       s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
@@ -90,7 +89,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
       s.add_dependency(%q<ruby-yasm>, ["~> 0.1.1"])
-      s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_dependency(%q<ronin-gen>, ["~> 0.3.0"])
       s.add_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
@@ -103,7 +102,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
     s.add_dependency(%q<ffi-udis86>, ["~> 0.1.0"])
     s.add_dependency(%q<ruby-yasm>, ["~> 0.1.1"])
-    s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+    s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
     s.add_dependency(%q<ronin-gen>, ["~> 0.3.0"])
     s.add_dependency(%q<ronin>, ["~> 0.4.0"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
