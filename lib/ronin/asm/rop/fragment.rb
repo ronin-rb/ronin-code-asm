@@ -21,6 +21,7 @@
 
 require 'ronin/asm/rop/gadget'
 
+require 'enumerator'
 require 'set'
 require 'udis86'
 
@@ -104,10 +105,12 @@ module Ronin
         # @yieldparam [Gadget] gadget
         #   A valid gadget from the fragment.
         #
-        # @return [Fragment]
-        #   The fragment.
+        # @return [Enumerator]
+        #   If no block is given, an Enumerator object will be returned.
         #
         def each
+          return enum_for(:each) unless block_given?
+
           (@source.length - 1).downto(0) do |index|
             if (gadget = self[index])
               yield gadget

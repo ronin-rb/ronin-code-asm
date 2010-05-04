@@ -21,6 +21,8 @@
 
 require 'ronin/asm/rop/fragment'
 
+require 'enumerator'
+
 module Ronin
   module ASM
     module ROP
@@ -145,14 +147,16 @@ module Ronin
         #   A fragment bounded by one or more return instructions, found
         #   within the binary source.
         #
-        # @return [Parser]
-        #   The parser.
+        # @return [Enumerator]
+        #   If no block is given, an Enumerator object will be returned.
         #
         def each
+          return enum_for(:each) unless block_given?
+
           last_index = 0
           fragment = ''
 
-          Enumerator.new(@source,:each_byte).each_with_index do |b,index|
+          @source.enum_for(:each_byte).each_with_index do |b,index|
             fragment << b.chr
 
             @ret_bytes.each do |bytes|
