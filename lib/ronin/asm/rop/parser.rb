@@ -113,7 +113,7 @@ module Ronin
         # @yieldparam [Parser] parser
         #   The newly created parser.
         #
-        def initialize(options={},&block)
+        def initialize(options={})
           @source = ''
           @arch = :x86
 
@@ -131,7 +131,7 @@ module Ronin
 
           @ret_bytes = RET_BYTES[@arch]
 
-          block.call(self) if block
+          yield self if block_given?
         end
 
         #
@@ -148,7 +148,7 @@ module Ronin
         # @return [Parser]
         #   The parser.
         #
-        def each(&block)
+        def each
           last_index = 0
           fragment = ''
 
@@ -157,7 +157,7 @@ module Ronin
 
             @ret_bytes.each do |bytes|
               if fragment[-(bytes.length)..-1] == bytes
-                block.call(Fragment.new(last_index,fragment))
+                yield Fragment.new(last_index,fragment)
 
                 last_index = index + 1
                 fragment = ''

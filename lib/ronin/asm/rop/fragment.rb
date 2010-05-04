@@ -107,10 +107,10 @@ module Ronin
         # @return [Fragment]
         #   The fragment.
         #
-        def each(&block)
+        def each
           (@source.length - 1).downto(0) do |index|
             if (gadget = self[index])
-              block.call(gadget)
+              yield gadget
             end
           end
 
