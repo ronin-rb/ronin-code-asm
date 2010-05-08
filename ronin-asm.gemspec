@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-04-29}
+  s.date = %q{2010-05-08}
   s.description = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.extra_rdoc_files = [
@@ -82,7 +82,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_development_dependency(%q<yard>, ["~> 0.5.3"])
       s.add_development_dependency(%q<rspec>, ["~> 1.3.0"])
     else
       s.add_dependency(%q<bundler>, ["~> 0.9.19"])
@@ -94,7 +93,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_dependency(%q<yard>, ["~> 0.5.3"])
       s.add_dependency(%q<rspec>, ["~> 1.3.0"])
     end
   else
@@ -107,7 +105,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<ronin>, ["~> 0.4.0"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-    s.add_dependency(%q<yard>, ["~> 0.5.3"])
     s.add_dependency(%q<rspec>, ["~> 1.3.0"])
   end
 end
