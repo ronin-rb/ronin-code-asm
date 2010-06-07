@@ -1,6 +1,6 @@
 # Ronin ASM
 
-* [ronin.rubyforge.org/asm](http://ronin.rubyforge.org/asm/)
+* [ronin.rubyforge.org/docs/ronin-asm](http://ronin.rubyforge.org/docs/ronin-asm/)
 * [github.com/ronin-ruby/ronin-asm](http://github.com/ronin-ruby/ronin-asm)
 * [github.com/ronin-ruby/ronin-asm/issues](http://github.com/ronin-ruby/ronin-asm/issues)
 * [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
