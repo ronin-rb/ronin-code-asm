@@ -29,4 +29,4 @@ group(:doc) do
   gem 'yard',		'~> 0.5.3'
 end
 
-gem 'rspec',	'~> 1.3.0', :group => [:development, :test]
+gem 'rspec',	'~> 2.0.0.beta.16', :group => [:development, :test]
