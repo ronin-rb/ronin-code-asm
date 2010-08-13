@@ -82,28 +82,22 @@ describe Code::ASM::SourceFile do
   end
 
   describe "initialize" do
-    it "should default the syntax" do
-      file = Code::ASM::SourceFile.new(assembly_file(:blank))
+    subject { Code::ASM::SourceFile.new(assembly_file(:blank)) }
 
-      file.syntax.should == Code::ASM::SourceFile::DEFAULT_SYNTAX
+    it "should default the syntax" do
+      subject.syntax.should == Code::ASM::SourceFile::DEFAULT_SYNTAX
     end
 
     it "should default the preproc" do
-      file = Code::ASM::SourceFile.new(assembly_file(:blank))
-
-      file.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROC
+      subject.preproc.should == Code::ASM::SourceFile::DEFAULT_PREPROC
     end
 
     it "should default the arch" do
-      file = Code::ASM::SourceFile.new(assembly_file(:blank))
-
-      file.arch.should == Code::ASM::SourceFile::DEFAULT_ARCH
+      subject.arch.should == Code::ASM::SourceFile::DEFAULT_ARCH
     end
 
     it "should default the machine" do
-      file = Code::ASM::SourceFile.new(assembly_file(:blank))
-
-      file.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
+      subject.machine.should == Code::ASM::SourceFile::DEFAULT_MACHINE
     end
   end
 end
