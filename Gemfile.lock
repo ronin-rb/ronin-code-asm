@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/ronin-ruby/ronin-gen.git
-  revision: a601539
+  revision: 7474cc4
   specs:
     ronin-gen (0.3.0)
       data_paths (~> 0.2.1)
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/ronin-ruby/ronin-support.git
-  revision: d5f86fe
+  revision: 11ea346
   specs:
     ronin-support (0.1.0)
       chars (~> 0.1.2)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/ronin-ruby/ronin.git
-  revision: f934d8b
+  revision: f63298d
   specs:
     ronin (0.4.0)
       activesupport (~> 3.0.0.beta3)
@@ -46,11 +46,10 @@ GIT
 
 GIT
   remote: git://github.com/technicalpickles/jeweler.git
-  revision: b996854
+  revision: d3b29e1
   specs:
     jeweler (1.4.0)
-      bundler (>= 0.9.5)
-      gemcutter (>= 0.1.0)
+      bundler (>= 1.0.0.rc.5)
       git (>= 1.2.5)
       rake
 
@@ -58,7 +57,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     activesupport (3.0.0.rc)
-    addressable (2.1.2)
+    addressable (2.2.0)
     chars (0.1.2)
       yard (>= 0.2.3.5)
     contextify (0.1.6)
@@ -105,9 +104,8 @@ GEM
       rake (>= 0.8.7)
     ffi-udis86 (0.1.0)
       ffi (>= 0.6.2)
-    gemcutter (0.6.1)
     git (1.2.5)
-    json_pure (1.4.4)
+    json_pure (1.4.6)
     nokogiri (1.4.3.1)
     open_namespace (0.3.0)
     parameters (0.2.2)
@@ -128,7 +126,7 @@ GEM
       rprogram (~> 0.1.8)
     stringex (1.1.0)
     thor (0.13.8)
-    tzinfo (0.3.22)
+    tzinfo (0.3.23)
     uuidtools (2.1.1)
     yard (0.5.8)
 

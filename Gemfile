@@ -3,14 +3,12 @@ source 'https://rubygems.org'
 RONIN = 'git://github.com/ronin-ruby'
 SOPHSEC = 'git://github.com/sophsec'
 
-group(:runtime) do
-  gem 'data_paths',	'~> 0.2.1'
-  gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
-  gem 'ruby-yasm',	'~> 0.1.1', :require => 'yasm'
-  gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
-  gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
-  gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
-end
+gem 'data_paths',	'~> 0.2.1'
+gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
+gem 'ruby-yasm',	'~> 0.1.1', :require => 'yasm'
+gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
+gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
+gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 
 group(:development) do
   gem 'bundler',	'~> 1.0.0'
