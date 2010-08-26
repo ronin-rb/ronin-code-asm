@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-RONIN = 'git://github.com/ronin-ruby'
-SOPHSEC = 'git://github.com/sophsec'
+RONIN = 'http://github.com/ronin-ruby'
+SOPHSEC = 'http://github.com/sophsec'
 
 gem 'data_paths',	'~> 0.2.1'
 gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
@@ -13,7 +13,7 @@ gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 group(:development) do
   gem 'bundler',	'~> 1.0.0'
   gem 'rake',		'~> 0.8.7'
-  gem 'jeweler',	'~> 1.5.0', :git => 'git://github.com/technicalpickles/jeweler.git'
+  gem 'jeweler',	'~> 1.5.0', :git => 'http://github.com/technicalpickles/jeweler.git'
 end
 
 group(:doc) do

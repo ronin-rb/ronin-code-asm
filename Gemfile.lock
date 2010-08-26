@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/ronin-ruby/ronin-gen.git
-  revision: cfb2b4e
+  remote: http://github.com/ronin-ruby/ronin-gen.git
+  revision: 5145b87
   specs:
     ronin-gen (0.3.0)
       data_paths (~> 0.2.1)
@@ -10,16 +10,16 @@ GIT
       thor (~> 0.14.0)
 
 GIT
-  remote: git://github.com/ronin-ruby/ronin-support.git
-  revision: 3d9ca06
+  remote: http://github.com/ronin-ruby/ronin-support.git
+  revision: 037d416
   specs:
     ronin-support (0.1.0)
       chars (~> 0.1.2)
       data_paths (~> 0.2.1)
 
 GIT
-  remote: git://github.com/ronin-ruby/ronin.git
-  revision: 187d5b6
+  remote: http://github.com/ronin-ruby/ronin.git
+  revision: bd9af84
   specs:
     ronin (0.4.0)
       activesupport (~> 3.0.0.rc)
@@ -45,7 +45,7 @@ GIT
       tzinfo (~> 0.3.22)
 
 GIT
-  remote: git://github.com/technicalpickles/jeweler.git
+  remote: http://github.com/technicalpickles/jeweler.git
   revision: 62f2651
   specs:
     jeweler (1.5.0.pre)
