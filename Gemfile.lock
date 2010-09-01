@@ -123,7 +123,7 @@ GEM
     thor (0.14.0)
     tzinfo (0.3.23)
     uuidtools (2.1.1)
-    yard (0.5.8)
+    yard (0.6.0)
 
 PLATFORMS
   ruby
@@ -139,4 +139,4 @@ DEPENDENCIES
   ronin-support (~> 0.1.0)!
   rspec (~> 2.0.0.beta.20)
   ruby-yasm (~> 0.1.1)
-  yard (~> 0.5.3)
+  yard (~> 0.6.0)
