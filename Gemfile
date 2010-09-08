@@ -6,9 +6,12 @@ SOPHSEC = 'http://github.com/sophsec'
 gem 'data_paths',	'~> 0.2.1'
 gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
 gem 'ruby-yasm',	'~> 0.1.1', :require => 'yasm'
-gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
-gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
 gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
+gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
+
+group(:edge) do
+  gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
+end
 
 group(:development) do
   gem 'rake',		'~> 0.8.7'
