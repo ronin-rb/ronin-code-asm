@@ -40,8 +40,11 @@ install or update Overlays.
 
 ## Requirements
 
-* [ronin](http://ronin.rubyforge.org/) >= 0.4.0
-* [ruby-yasm](http://ruby-yasm.rubyforge.org/) >= 0.1.1
+* [data_paths](http://github.com/postmodern/data_paths) ~> 0.2.1
+* [ffi-udis86](http://github.com/sophsec/ffi-udis86) ~> 0.1.0
+* [ruby-yasm](http://github.com/sophsec/ruby-yasm/) ~> 0.1.1
+* [ronin](http://github.com/ronin-ruby/ronin) ~> 0.4.0
+* [ronin-gen](http://github.com/ronin-ruby/ronin-gen) ~> 0.3.0
 
 ## Install
 
