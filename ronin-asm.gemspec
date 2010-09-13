@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-09-07}
+  s.date = %q{2010-09-13}
   s.description = %q{Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.}
-  s.email = %q{postmodern.mod3@gmail.com}
+  s.email = %q{ronin-ruby@googlegroups.com}
   s.extra_rdoc_files = [
     "ChangeLog.md",
     "README.md"
