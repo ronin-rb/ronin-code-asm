@@ -4,7 +4,7 @@ RONIN = 'http://github.com/ronin-ruby'
 SOPHSEC = 'http://github.com/sophsec'
 
 gem 'data_paths',	'~> 0.2.1'
-gem 'ffi-udis86',	'~> 0.1.0', :require => 'udis86'
+gem 'ffi-udis86',	'~> 0.1.0', :git => "#{SOPHSEC}/ffi-udis86.git"
 gem 'ruby-yasm',	'~> 0.1.1', :require => 'yasm'
 gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"

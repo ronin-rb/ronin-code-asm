@@ -46,6 +46,13 @@ GIT
       tzinfo (~> 0.3.22)
       uri-query_params (~> 0.4.0)
 
+GIT
+  remote: http://github.com/sophsec/ffi-udis86.git
+  revision: d13837130a6b585bef4fc08fbe1dd3f25f8245fd
+  specs:
+    ffi-udis86 (0.1.0)
+      ffi (~> 0.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -95,8 +102,6 @@ GEM
     fastercsv (1.5.3)
     ffi (0.6.3)
       rake (>= 0.8.7)
-    ffi-udis86 (0.1.0)
-      ffi (>= 0.6.2)
     git (1.2.5)
     jeweler (1.5.0.pre3)
       bundler (~> 1.0.0)
@@ -133,7 +138,7 @@ PLATFORMS
 
 DEPENDENCIES
   data_paths (~> 0.2.1)
-  ffi-udis86 (~> 0.1.0)
+  ffi-udis86 (~> 0.1.0)!
   jeweler (~> 1.5.0.pre)
   rake (~> 0.8.7)
   rdiscount (~> 1.6.3)

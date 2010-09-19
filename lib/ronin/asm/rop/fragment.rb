@@ -23,7 +23,7 @@ require 'ronin/asm/rop/gadget'
 
 require 'enumerator'
 require 'set'
-require 'udis86'
+require 'ffi/udis86'
 
 module Ronin
   module ASM
