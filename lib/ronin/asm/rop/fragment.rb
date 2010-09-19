@@ -207,6 +207,16 @@ module Ronin
         end
 
         #
+        # The length of the binary source of the fragment.
+        #
+        # @return [Integer]
+        #   The length of the binary source.
+        #
+        def length
+          @source.length
+        end
+
+        #
         # Converts the fragment to an `Integer`.
         #
         # @return [Integer]
