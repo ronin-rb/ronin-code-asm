@@ -138,7 +138,7 @@ module Ronin
           partial = @source[index..-1]
           gadget = Gadget.new(@offset + index)
 
-          ud = FFI::Udis86::UD.create(
+          ud = FFI::UDis86::UD.create(
             :syntax => :intel,
             :pc => @offset + index,
             :buffer => partial
