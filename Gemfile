@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+DATA_MAPPER = 'http://github.com/datamapper'
+DM_VERSION = '~> 1.0.2'
+
 RONIN = 'http://github.com/ronin-ruby'
 SOPHSEC = 'http://github.com/sophsec'
 
@@ -10,6 +13,7 @@ gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
 
 group(:edge) do
+  gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
   gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
 end
 
