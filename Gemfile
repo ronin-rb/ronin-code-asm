@@ -10,6 +10,8 @@ gemspec
 # DataMapper dependencies
 gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
 
+gem 'ffi-udis86',	'~> 0.1.0', :git => 'http://github.com/sophsec/ffi-udis86.git', :branch => 'ore'
+
 # Ronin dependencies
 gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
 gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
