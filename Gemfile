@@ -14,7 +14,7 @@ gem 'ffi-udis86',	'~> 0.1.0', :git => 'http://github.com/sophsec/ffi-udis86.git'
 
 # Ronin dependencies
 gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
-gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
+gem 'ronin',		'~> 1.0.0', :git => "#{RONIN}/ronin.git"
 gem 'ronin-gen',	'~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
 
 group :development do

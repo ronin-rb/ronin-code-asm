@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: http://github.com/ronin-ruby/ronin-gen.git
-  revision: 72dcb3054b425729cbe5e5077c32c7b80cab9270
+  revision: 354fd9ece23dabd6efebc080bf188044c6edae10
   specs:
     ronin-gen (0.3.0)
       data_paths (~> 0.2.1)
@@ -17,19 +17,19 @@ GIT
 
 GIT
   remote: http://github.com/ronin-ruby/ronin-support.git
-  revision: d2b9993c1e2e1e891ddcf4aeaaecee03b458e078
+  revision: 6c89950e62383dbeffca9a2a5c698b1650d27503
   specs:
     ronin-support (0.1.0)
       chars (~> 0.2.0)
       combinatorics (~> 0.3.1)
       data_paths (~> 0.2.1)
-      uri-query_params (~> 0.4.0)
+      uri-query_params (~> 0.5.2)
 
 GIT
   remote: http://github.com/ronin-ruby/ronin.git
-  revision: d0bbd9a0843c0a7198720be6c06e33a48b7d7e14
+  revision: f1bf2907a2172741783c2063a3dcae2bc575b4af
   specs:
-    ronin (0.4.0)
+    ronin (1.0.0)
       activesupport (~> 3.0.0)
       contextify (~> 0.2.0)
       data_paths (~> 0.2.1)
@@ -44,13 +44,14 @@ GIT
       dm-timestamps (~> 1.0.2)
       dm-types (~> 1.0.2)
       dm-validations (~> 1.0.2)
+      i18n (~> 0.4.1)
       nokogiri (~> 1.4.1)
       open_namespace (~> 0.3.0)
       parameters (~> 0.2.3)
       pullr (~> 0.1.2)
       thor (~> 0.14.3)
       tzinfo (~> 0.3.22)
-      uri-query_params (~> 0.4.0)
+      uri-query_params (~> 0.5.2)
 
 GIT
   remote: http://github.com/sophsec/ffi-udis86.git
@@ -70,7 +71,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (3.0.1)
+    activesupport (3.0.3)
     addressable (2.2.2)
     chars (0.2.0)
     combinatorics (0.3.1)
@@ -118,8 +119,9 @@ GEM
     fastercsv (1.5.3)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    i18n (0.4.2)
     json_pure (1.4.6)
-    nokogiri (1.4.3.1)
+    nokogiri (1.4.4)
     open_namespace (0.3.0)
     ore-core (0.1.0)
     ore-tasks (0.2.0)
@@ -144,7 +146,7 @@ GEM
     stringex (1.1.0)
     thor (0.14.4)
     tzinfo (0.3.23)
-    uri-query_params (0.4.0)
+    uri-query_params (0.5.2)
     uuidtools (2.1.1)
     yard (0.6.1)
 
@@ -160,7 +162,7 @@ DEPENDENCIES
   ore-tasks (~> 0.2.0)
   rake (~> 0.8.7)
   rdiscount (~> 1.6.3)
-  ronin (~> 0.4.0)!
+  ronin (~> 1.0.0)!
   ronin-asm!
   ronin-gen (~> 0.3.0)!
   ronin-support (~> 0.1.0)!
