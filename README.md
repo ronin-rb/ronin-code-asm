@@ -1,8 +1,9 @@
 # Ronin ASM
 
-* [github.com/ronin-ruby/ronin-asm](http://github.com/ronin-ruby/ronin-asm)
-* [github.com/ronin-ruby/ronin-asm/issues](http://github.com/ronin-ruby/ronin-asm/issues)
-* [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
+* [Source](http://github.com/ronin-ruby/ronin-asm)
+* [Issues](http://github.com/ronin-ruby/ronin-asm/issues)
+* [Documentation](http://rubydoc.info/github/ronin-ruby/ronin-asm/frames)
+* [Mailing List](http://groups.google.com/group/ronin-ruby)
 * irc.freenode.net #ronin
 
 ## Description
