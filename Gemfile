@@ -7,10 +7,6 @@ SOPHSEC = 'http://github.com/sophsec'
 
 gemspec
 
-# DataMapper dependencies
-gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git',
-                                  :branch => 'runner'
-
 gem 'ffi-udis86',	'~> 0.1.0', :git => 'http://github.com/sophsec/ffi-udis86.git',
                               :branch => 'ore'
 
@@ -22,11 +18,12 @@ gem 'ronin-gen',      '~> 0.3.0', :git => "#{RONIN}/ronin-gen.git"
 group :development do
   gem 'rake',         '~> 0.8.7'
 
-  case RUBY_PLATFORM
-  when 'java'
-    gem 'maruku',     '~> 0.6.0'
-  else
-    gem 'rdiscount',	'~> 1.6.3'
+  platforms :jruby do
+    gem 'maruku',	    '~> 0.6.0'
+  end
+
+  platforms :ruby do
+    gem 'rdiscount',  '~> 1.6.3'
   end
 
   gem 'ore-core',     '~> 0.1.0'
