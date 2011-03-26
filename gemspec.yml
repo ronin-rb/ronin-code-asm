@@ -15,9 +15,9 @@ dependencies:
   ffi-udis86: ~> 0.1.0
   ruby-yasm: ~> 0.1.1
   # Ronin dependencies:
-  ronin-support: ~> 0.1.0.rc1
-  ronin: ~> 1.0.0.rc1
-  ronin-gen: ~> 1.0.0.rc1
+  ronin-support: ~> 0.1.0
+  ronin: ~> 1.0.0
+  ronin-gen: ~> 1.0.0
 
 development_dependencies:
   bundler: ~> 1.0.0
