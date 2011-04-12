@@ -41,7 +41,7 @@ install or update Overlays.
 ## Requirements
 
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.2.1
-* [ffi-udis86](http://github.com/sophsec/ffi-udis86) ~> 0.1.0
+* [ffi-udis86](http://github.com/sophsec/ffi-udis86) ~> 0.1
 * [ruby-yasm](http://github.com/sophsec/ruby-yasm/) ~> 0.2
 * [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.1.0
 * [ronin](http://github.com/ronin-ruby/ronin) ~> 1.0.0
