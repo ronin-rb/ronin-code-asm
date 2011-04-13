@@ -21,3 +21,6 @@
 
 require 'ronin/asm/asm'
 require 'ronin/asm/version'
+require 'ronin/config'
+
+Ronin::Config.load :asm
