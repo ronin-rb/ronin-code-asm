@@ -35,16 +35,18 @@ module Ronin
             nil => ''
           }
 
-          def self.emit_width(value)
-            case value
+          def self.operand_width(op)
+            case op
+            when Array
+              op.map { |v| operand_width(v) }.max
             when Register, Immediate
-              value.width
+              op.width
             when Integer
-              if (value >= (2 ** 32))
+              if (op >= (2 ** 32))
                 8
-              elsif (value >= (2 ** 16))
+              elsif (op >= (2 ** 16))
                 4
-              elsif (value >= (2 ** 8))
+              elsif (op >= (2 ** 8))
                 2
               else
                 1
@@ -82,7 +84,7 @@ module Ronin
             line = emit_keyword(ins.name)
             
             if ins.operands
-              width = ins.operands.map { |op| emit_width(op) }.max
+              width = ins.operands.map { |op| operand_width(op) }.max
 
               line << WIDTHS[width] << "\t" << emit_operands(ins.operands)
             end
