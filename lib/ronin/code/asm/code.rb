@@ -47,7 +47,7 @@ module Ronin
     #     mov  1, ebx
     #     mov  2, ecx
     #
-    #     label :_loop do
+    #     _loop do
     #       push  ecx
     #       imul  ebx, ecx
     #       pop   ebx
@@ -86,7 +86,7 @@ module Ronin
     #     mov  1, ebx
     #     mov  2, ecx
     #
-    #     label :_loop do
+    #     _loop do
     #       push  ecx
     #       imul  ebx, ecx
     #       pop   ebx
