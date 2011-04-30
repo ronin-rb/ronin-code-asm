@@ -218,10 +218,10 @@
 :pivot_root:              217
 :mincore:                 218
 :madvise:                 219
-:madvise1:                219:             #            delete            when        C          lib      stub     is                     removed
+:madvise1:                219 # delete when C lib stub is removed
 :getdents64:              220
 :fcntl64:                 221
-#                         223              is           unused
+# 223 is unused
 :gettid:                  224
 :readahead:               225
 :setxattr:                226
@@ -249,7 +249,7 @@
 :io_submit:               248
 :io_cancel:               249
 :fadvise64:               250
-#                         251              is           available         for         reuse      (was     briefly  sys_set_zone_reclaim)
+# 251 is available for reuse (was briefly sys_set_zone_reclaim)
 :exit_group:              252
 :lookup_dcookie:          253
 :epoll_create:            254
@@ -258,14 +258,14 @@
 :remap_file_pages:        257
 :set_tid_address:         258
 :timer_create:            259
-:timer_settime:           260              #            (timer_create+1)
-:timer_gettime:           261              #            (timer_create+2)
-:timer_getoverrun:        262              #            (timer_create+3)
-:timer_delete:            263              #            (timer_create+4)
-:clock_settime:           264              #            (timer_create+5)
-:clock_gettime:           265              #            (timer_create+6)
-:clock_getres:            266              #            (timer_create+7)
-:clock_nanosleep:         267              #            (timer_create+8)
+:timer_settime:           260 # (timer_create+1)
+:timer_gettime:           261 # (timer_create+2)
+:timer_getoverrun:        262 # (timer_create+3)
+:timer_delete:            263 # (timer_create+4)
+:clock_settime:           264 # (timer_create+5)
+:clock_gettime:           265 # (timer_create+6)
+:clock_getres:            266 # (timer_create+7)
+:clock_nanosleep:         267 # (timer_create+8)
 :statfs64:                268
 :fstatfs64:               269
 :tgkill:                  270
@@ -276,14 +276,14 @@
 :get_mempolicy:           275
 :set_mempolicy:           276
 :mq_open:                 277
-:mq_unlink:               278              #            (mq_open+1)
-:mq_timedsend:            279              #            (mq_open+2)
-:mq_timedreceive:         280              (mq_open+3)
-:mq_notify:               281              #            (mq_open+4)
-:mq_getsetattr:           282              #            (mq_open+5)
+:mq_unlink:               278 # (mq_open+1)
+:mq_timedsend:            279 # (mq_open+2)
+:mq_timedreceive:         280 # (mq_open+3)
+:mq_notify:               281 # (mq_open+4)
+:mq_getsetattr:           282 # (mq_open+5)
 :kexec_load:              283
 :waitid:                  284
-#                         sys_setaltroot:  285
+# sys_setaltroot:  285
 :add_key:                 286
 :request_key:             287
 :keyctl:                  288
