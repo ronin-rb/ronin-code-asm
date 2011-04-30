@@ -60,9 +60,9 @@ module Ronin
 
           def self.emit_integer(value)
             if value >= 0
-              "$0x%x" % value
+              "0x%x" % value
             else
-              "$%d" % value
+              "%d" % value
             end
           end
 
@@ -77,6 +77,15 @@ module Ronin
               emit(offset) + '(' + emit(base) + ')'
             else
               '(' + emit(base) + ')'
+            end
+          end
+
+          def self.emit_operand(op)
+            case op
+            when Integer
+              "$#{super(op)}"
+            else
+              super(op)
             end
           end
 
