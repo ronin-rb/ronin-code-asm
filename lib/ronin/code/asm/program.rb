@@ -187,6 +187,15 @@ module Ronin
         end
 
         #
+        # Generic method for clearing a register.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        def reg_clear(name)
+        end
+
+        #
         # Generic method for setting a register.
         #
         # @param [Register, Immediate, Integer] value

@@ -73,6 +73,7 @@ module Ronin
           def stack_push(op); instruction(:push,op); end
           def stack_pop(op); instruction(:pop,op); end
 
+          def reg_clear(name); instruction(:xor,reg(name),reg(name)); end
           def reg_set(value,name); instruction(:mov,value,reg(name)); end
           def reg_save(name); stack_push(reg(name)); end
           def reg_load(name); stack_pop(reg(name)); end
