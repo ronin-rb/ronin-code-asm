@@ -199,7 +199,9 @@ module Ronin
         #   Additional operands.
         #
         def method_missing(name,*arguments,&block)
-          unless block
+          if (block && arguments.empty?)
+            label(name,&block)
+          elsif block.nil?
             instruction(name,*arguments)
           else
             super(name,*arguments,&block)
