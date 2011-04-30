@@ -26,14 +26,6 @@ module Ronin
     module ASM
       class Immediate < Struct.new(:base, :offset, :scale)
 
-        def +(offset)
-          Immediate.new(self.base,self.offset + offset,self.scale)
-        end
-
-        def *(index)
-          Immediate.new(self.base,self.offset,self.scale + index)
-        end
-
         def width
           base.width if base.kind_of?(Register)
         end
