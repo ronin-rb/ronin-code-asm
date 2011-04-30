@@ -38,6 +38,9 @@ module Ronin
         # The targeted Operating System
         attr_reader :os
 
+        # The registers used by the program
+        attr_reader :registers
+
         # The instructions of the program
         attr_reader :instructions
 
