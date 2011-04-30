@@ -20,6 +20,7 @@
 #
 
 require 'ronin/code/asm/archs'
+require 'ronin/code/asm/os'
 require 'ronin/code/asm/register'
 require 'ronin/code/asm/instruction'
 require 'ronin/code/asm/syntax'
@@ -32,28 +33,32 @@ module Ronin
     module ASM
       class Program
 
-        # The targeted architecture
-        attr_reader :arch
-
-        # The targeted Operating System
-        attr_reader :os
-
-        # The registers used by the program
-        attr_reader :registers
-
-        # The instructions of the program
-        attr_reader :instructions
-
         # Supported Assembly Syntaxs
         SYNTAX = {
           :att => Syntax::ATT,
           :intel => Syntax::Intel
         }
 
+        # The Assembly Parsers
         PARSERS = {
           :att => :gas,
           :intel => :nasm
         }
+
+        # The targeted architecture
+        attr_reader :arch
+
+        # The targeted Operating System
+        attr_reader :os
+
+        # The registers available to the program
+        attr_reader :registers
+
+        # The registers used by the program
+        attr_reader :allocated_registers
+
+        # The instructions of the program
+        attr_reader :instructions
 
         #
         # Initializes a new Assembly Program.
@@ -62,7 +67,10 @@ module Ronin
         #   Additional options.
         #
         # @option options [String, Symbol] :arch (:x86)
-        #   The architecture of the Program.
+        #   The Architecture to target.
+        #
+        # @option options [String, Symbol] :os
+        #   The Operating System to target.
         #
         # @option options [Hash{Symbol => Object}] :variables
         #   Variables to set in the program.
@@ -81,12 +89,21 @@ module Ronin
         #
         def initialize(options={},&block)
           @arch = options.fetch(:arch,:x86).to_sym
-          @os = options[:os]
+
+          @registers = {}
+          @general_registers = []
+          @allocated_registers = []
+
+          @instructions = []
 
           extend Archs.require_const(@arch)
+          initialize_arch if respond_to?(:initialize_arch)
 
-          @register_table = {}
-          @instructions = []
+          if options.has_key?(:os)
+            @os = options[:os].to_s
+
+            extend OS.const_get(@os)
+          end
 
           if options[:variables]
             options[:varibles].each do |name,value|
@@ -106,8 +123,22 @@ module Ronin
         # @return [Register]
         #   The register.
         #
-        def register(name,width)
-          @register_table[name.to_sym] ||= Register.new(name.to_sym,width)
+        # @raise [ArgumentError]
+        #   The register could not be found.
+        #
+        def reg(name)
+          name = name.to_sym
+
+          unless @registers.has_key?(name)
+            raise(ArgumentError,"unknown register: #{name}")
+          end
+
+          unless @allocated_registers.include?(name)
+            # mark the register as being used, when it was first accessed
+            @allocated_registers << name
+          end
+
+          return @registers[name]
         end
 
         #
@@ -128,12 +159,80 @@ module Ronin
         #   The name of the label.
         #
         # @yield []
-        #   The given block will be evaluated after the label has been added.
+        #   The given block will be evaluated after the label has been
+        #   added.
         #
         def label(name)
           @instructions << name.to_sym
 
           yield if block_given?
+        end
+
+        #
+        # Generic method for pushing onto the stack.
+        #
+        # @param [Register, Integer] value
+        #   The value to push.
+        #
+        def stack_push(value)
+        end
+
+        #
+        # Generic method for popping off the stack.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        def stack_pop(name)
+        end
+
+        #
+        # Generic method for setting a register.
+        #
+        # @param [Register, Immediate, Integer] value
+        #   The new value for the register.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        def reg_set(value,name)
+        end
+
+        #
+        # Generic method for saving a register.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        def reg_save(name)
+        end
+
+        #
+        # Generic method for loading a register.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        def reg_load(name)
+        end
+
+        #
+        # Defines a critical region, where the General Purpose Regiseters
+        # should be saved and then reloaded.
+        #
+        # @param [Array<Symbol>] regs
+        #   The registers to save and reload.
+        #
+        # @yield []
+        #   The given block will be evaluated after the registers
+        #   have been saved.
+        #
+        def critical_region(regs=(@general_registers & @allocated_registers))
+          regs.each { |name| reg_save(name) }
+
+          yield if block_given?
+
+          regs.reverse_each { |name| reg_load(name) }
         end
 
         #
@@ -191,6 +290,22 @@ module Ronin
         end
 
         protected
+
+        #
+        # Defines a register.
+        #
+        # @param [Symbol] name
+        #   The name of the reigster.
+        #
+        # @param [Integer] width
+        #   The width of the register (in bytes).
+        #
+        def define_register(name,width,general=false)
+          name = name.to_sym
+
+          @registers[name] = Register.new(name,width)
+          @general_registers << name if general
+        end
 
         #
         # Allows adding unknown instructions to the program.

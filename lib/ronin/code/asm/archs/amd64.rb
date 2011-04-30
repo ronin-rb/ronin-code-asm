@@ -28,29 +28,61 @@ module Ronin
         module AMD64
           include X84
 
-          def rax; register(:rax, 8); end
-          def rbx; register(:rbx, 8); end
-          def rcx; register(:rcx, 8); end
-          def rdx; register(:rdx, 8); end
+          def rax; reg(:rax); end
+          def rbx; reg(:rbx); end
+          def rcx; reg(:rcx); end
+          def rdx; reg(:rdx); end
 
-          def rsb; register(:rsb, 8); end
-          def rsp; register(:rsp, 8); end
+          def rsb; reg(:rsb); end
+          def rsp; reg(:rsp); end
 
-          def rsi; register(:rsi, 8); end
-          def rdi; register(:rdi, 8); end
+          def rsi; reg(:rsi); end
+          def rdi; reg(:rdi); end
 
-          def r8;  register(:r8,  8); end
-          def r9;  register(:r9,  8); end
-          def r10; register(:r10, 8); end
-          def r11; register(:r11, 8); end
-          def r12; register(:r12, 8); end
-          def r13; register(:r13, 8); end
-          def r14; register(:r14, 8); end
-          def r15; register(:r15, 8); end
+          def r8;  reg(:r8); end
+          def r9;  reg(:r9); end
+          def r10; reg(:r10); end
+          def r11; reg(:r11); end
+          def r12; reg(:r12); end
+          def r13; reg(:r13); end
+          def r14; reg(:r14); end
+          def r15; reg(:r15); end
 
-          def pushq(op); instruction(:push,8,op); end
-          def popq(op);  instruction(:pop,8,op); end
-          def movq(op);  instruction(:mov,8,op);  end
+          def syscall(number); instruction(:syscall); end
+
+          protected
+
+          def initialize_arch
+            super
+
+            general_purpose = lambda { |name|
+              define_register "#{name}b", 1, true
+              define_register "#{name}w", 2, true
+              define_register "#{name}d", 4, true
+              define_register name,       8, true
+            }
+
+            define_register :rax, 8, true
+            define_register :rbx, 8, true
+            define_register :rcx, 8, true
+            define_register :rdx, 8, true
+
+            define_register :rsi, 8
+            define_register :rdi, 8
+
+            define_register :rsp, 8
+            define_register :rbp, 8
+
+            general_purpose[:r8]
+            general_purpose[:r9]
+
+            general_purpose[:r10]
+            general_purpose[:r11]
+            general_purpose[:r12]
+            general_purpose[:r13]
+            general_purpose[:r14]
+            general_purpose[:r15]
+          end
         end
       end
     end
