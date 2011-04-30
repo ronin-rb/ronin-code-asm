@@ -72,11 +72,7 @@ module Ronin
             elsif scale
               '(,' + emit(base) + ',' + emit(scale) + ')'
             elsif offset
-              if offset >= 0
-                '(' + emit(base) + ',' + emit(offset) + ')'
-              else
-                emit(offset) + '(' + emit(base) + ')'
-              end
+              emit(offset) + '(' + emit(base) + ')'
             else
               '(' + emit(base) + ')'
             end
