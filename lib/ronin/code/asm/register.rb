@@ -26,8 +26,8 @@ module Ronin
     module ASM
       class Register < Struct.new(:name, :width)
 
-        def [](width=nil,index=nil)
-          Immediate.new(self,width,index)
+        def [](index)
+          Immediate.new(self,self.width,index)
         end
 
         def +(offset)
