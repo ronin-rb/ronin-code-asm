@@ -25,8 +25,9 @@ module Ronin
   module ASM
     module Config
       include DataPaths
+      extend DataPaths::Finders
 
-      register_data_dir File.join(File.dirname(__FILE__),'..','..','..','data')
+      register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
     end
   end
 end
