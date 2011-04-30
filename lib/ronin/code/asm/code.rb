@@ -19,76 +19,89 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/code/asm/source_file'
+require 'ronin/code/asm/program'
 
 module Ronin
   module Code
     #
-    # Assembles a file using `yasm`.
+    # Creates a new Assembly Program.
     #
     # @param [Hash{Symbol => Object}] options
-    #   Additional assembly options.
+    #   Additional options.
     #
-    # @yield [yasm]
-    #   If a block is given, it will be passed a task object used to
-    #   specify options for yasm. 
+    # @option options [String, Symbol] :arch (:x86)
+    #   The architecture of the Program.
     #
-    # @yieldparam [YASM::Task] yasm
-    #   The yasm task.
+    # @option options [Hash{Symbol => Object}] :variables
+    #   Variables to set in the program.
     #
-    # @return [Boolean]
-    #   Specifies whether the command exited normally. 
+    # @yield []
+    #   The given block will be evaluated within the program.
+    #
+    # @return [Program]
+    #   The new Assembly Program.
     #
     # @example
-    #   Code.asm('code.s', :output => 'code.o')
+    #   Code.asm do
+    #     mov  1, eax
+    #     mov  1, ebx
+    #     mov  2, ecx
     #
-    # @example
-    #   Code.asm('file.s') do |yasm|
-    #     yasm.output = 'code.o'
+    #     label :_loop do
+    #       push  ecx
+    #       imul  ebx, ecx
+    #       pop   ebx
+    #
+    #       inc eax
+    #       cmp ebx, 10
+    #       jl  :_loop
+    #     end
     #   end
     #
-    # @since 0.1.0
-    #
-    # @see ASM::SourceFile
-    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
-    # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
-    #
-    def Code.asm(path,options={},&block)
-      source_file = ASM::SourceFile.new(path)
-
-      return source_file.assemble(options,&block)
+    def Code.asm(options={},&block)
+      ASM::Program.new(options,&block)
     end
 
     #
-    # Assembles inline assembly code using `yasm`.
+    # Assembles a Program using `yasm`.
     #
     # @param [Hash{Symbol => Object}] options
-    #   Additional assembly options.
+    #   Additional options.
     #
-    # @yield [yasm]
-    #   If a block is given, it will be passed a task object used to
-    #   specify options for yasm. 
+    # @option options [String, Symbol] :arch (:x86)
+    #   The architecture of the Program.
     #
-    # @yieldparam [YASM::Task] yasm
-    #   The yasm task.
+    # @option options [Hash{Symbol => Object}] :variables
+    #   Variables to set in the program.
+    #
+    # @yield []
+    #   The given block will be evaluated within the program.
     #
     # @return [String]
-    #   The assembled inline code.
+    #   The Object Code of the Program.
     #
     # @example
-    #   Code.asm_inline('code.s')
+    #   Code.assemble do
+    #     mov  1, eax
+    #     mov  1, ebx
+    #     mov  2, ecx
+    #
+    #     label :_loop do
+    #       push  ecx
+    #       imul  ebx, ecx
+    #       pop   ebx
+    #
+    #       inc eax
+    #       cmp ebx, 10
+    #       jl  :_loop
+    #     end
+    #   end
     #   # => "..."
     #
-    # @since 0.1.0
+    # @see ASM::Program#assemble
     #
-    # @see ASM::SourceFile
-    # @see http://ruby-yasm.rubyforge.org/YASM/Program.html#assemble-class_method
-    # @see http://ruby-yasm.rubyforge.org/YASM/Task.html
-    #
-    def Code.asm_inline(path,options={},&block)
-      source_file = ASM::SourceFile.new(path)
-
-      return source_file.assemble_inline(options,&block)
+    def Code.assemble(options={},&block)
+      Code.asm(options,&block).assemble
     end
   end
 end
