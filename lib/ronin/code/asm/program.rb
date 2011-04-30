@@ -95,6 +95,45 @@ module Ronin
         end
 
         #
+        # Accesses a register.
+        #
+        # @param [String, Symbol] name
+        #   The name of the register.
+        #
+        # @return [Register]
+        #   The register.
+        #
+        def register(name,width)
+          @register_table[name.to_sym] ||= Register.new(name.to_sym,width)
+        end
+
+        #
+        # Adds a new instruction to the program.
+        #
+        # @param [String, Symbol] name
+        #
+        # @param [Array] operands
+        #
+        def instruction(name,*operands)
+          @instructions << Instruction.new(name.to_sym,operands)
+        end
+
+        #
+        # Adds a label to the program.
+        #
+        # @param [Symbol, String] name
+        #   The name of the label.
+        #
+        # @yield []
+        #   The given block will be evaluated after the label has been added.
+        #
+        def label(name)
+          @instructions << name.to_sym
+
+          yield if block_given?
+        end
+
+        #
         # Evaluates code within the Program.
         #
         # @yield []
@@ -149,45 +188,6 @@ module Ronin
         end
 
         protected
-
-        #
-        # Accesses a register.
-        #
-        # @param [String, Symbol] name
-        #   The name of the register.
-        #
-        # @return [Register]
-        #   The register.
-        #
-        def register(name,width)
-          @register_table[name.to_sym] ||= Register.new(name.to_sym,width)
-        end
-
-        #
-        # Adds a new instruction to the program.
-        #
-        # @param [String, Symbol] name
-        #
-        # @param [Array] operands
-        #
-        def instruction(name,*operands)
-          @instructions << Instruction.new(name.to_sym,operands)
-        end
-
-        #
-        # Adds a label to the program.
-        #
-        # @param [Symbol, String] name
-        #   The name of the label.
-        #
-        # @yield []
-        #   The given block will be evaluated after the label has been added.
-        #
-        def label(name)
-          @instructions << name.to_sym
-
-          yield if block_given?
-        end
 
         #
         # Allows adding unknown instructions to the program.
