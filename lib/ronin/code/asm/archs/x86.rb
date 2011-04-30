@@ -66,7 +66,7 @@ module Ronin
           def gs; reg(:gs); end
           def ss; reg(:ss); end
 
-          def syscall(number); instruction(:int, 0x80); end
+          def syscall_int(number); instruction(:int, 0x80); end
 
           def stack_base; ebp; end
           def stack_pointer; esp; end

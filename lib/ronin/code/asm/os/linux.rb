@@ -28,16 +28,18 @@ module Ronin
 
                 reg_set stack_pointer, regs[0]
                 reg_set number, @general_registers[0]
-                super(number)
+                syscall_int(number)
               end
             else
               regs = @general_registers[1,arguments.length]
 
               critical_region(regs) do
-                arguments.reverse_each { |arg| reg_set(arg,regs.pop) }
+                (arguments.length - 1).downto(0) do |index|
+                  reg_set(arguments[index],regs[index])
+                end
 
                 reg_set number, @general_registers[0]
-                super(number)
+                syscall_int(number)
               end
             end
           end

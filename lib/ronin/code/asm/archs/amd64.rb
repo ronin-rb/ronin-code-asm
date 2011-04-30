@@ -48,7 +48,7 @@ module Ronin
           def r14; reg(:r14); end
           def r15; reg(:r15); end
 
-          def syscall(number); instruction(:syscall); end
+          def syscall_int(number); instruction(:syscall); end
 
           protected
 
