@@ -43,15 +43,17 @@ module Ronin
             end
           end
 
-          def self.emit_immediate(value)
-            if (value.width && value.index)
-              '[' + emit(value.base) + '+' + emit(value.width) + '*' + emit(value.index) + ']'
-            elsif value.index
-              '[' + emit(value.width) + '*' + emit(value.index) + ']'
-            elsif value.width
-              '[' + emit(value.base) + '+' + emit(value.width) + ']'
+          def self.emit_immediate(imm)
+            base, offset, scale = imm
+
+            if (offset && scale)
+              '[' + emit(base) + '+' + emit(offset) + '*' + emit(scale) + ']'
+            elsif scale
+              '[' + emit(base) + '*' + emit(scale) + ']'
+            elsif offset
+              '[' + emit(base) + '+' + emit(offset) + ']'
             else
-              '[' + emit(value.base) + ']'
+              '[' + emit(base) + ']'
             end
           end
 

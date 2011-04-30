@@ -53,7 +53,7 @@ module Ronin
 
           def self.emit_operand(value)
             case value
-            when Immediate
+            when Immediate, Array
               emit_immediate(value)
             else
               emit(value)

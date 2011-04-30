@@ -38,6 +38,10 @@ module Ronin
           base.width if base.kind_of?(Register)
         end
 
+        def to_ary
+          [self.base, self.offset, self.scale]
+        end
+
       end
     end
   end
