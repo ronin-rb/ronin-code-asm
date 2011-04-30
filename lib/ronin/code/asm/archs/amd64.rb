@@ -26,7 +26,7 @@ module Ronin
     module ASM
       module Archs
         module AMD64
-          include X84
+          include X86
 
           def rax; reg(:rax); end
           def rbx; reg(:rbx); end
@@ -82,6 +82,8 @@ module Ronin
             general_purpose[:r13]
             general_purpose[:r14]
             general_purpose[:r15]
+
+            @word_size = 8
           end
         end
       end
