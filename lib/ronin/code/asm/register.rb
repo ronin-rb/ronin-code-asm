@@ -31,7 +31,12 @@ module Ronin
         end
 
         def +(offset)
-          Immediate.new(self,offset,nil)
+          case offset
+          when Immediate
+            Immediate.new(self,offset.offset,offset.scale)
+          else
+            Immediate.new(self,offset,nil)
+          end
         end
 
         def *(index)
