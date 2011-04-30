@@ -75,7 +75,12 @@ module Ronin
             lines = [emit_label('_start')]
 
             program.instructions.each do |ins|
-              lines << "\t#{emit_instruction(ins)}"
+              case ins
+              when Symbol
+                lines << emit_label(ins)
+              when Instruction
+                lines << "\t#{emit_instruction(ins)}"
+              end
             end
 
             lines << ''

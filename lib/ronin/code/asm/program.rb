@@ -175,6 +175,21 @@ module Ronin
         end
 
         #
+        # Adds a label to the program.
+        #
+        # @param [Symbol, String] name
+        #   The name of the label.
+        #
+        # @yield []
+        #   The given block will be evaluated after the label has been added.
+        #
+        def label(name)
+          @instructions << name.to_sym
+
+          yield if block_given?
+        end
+
+        #
         # Allows adding unknown instructions to the program.
         #
         # @param [Symbol] name
