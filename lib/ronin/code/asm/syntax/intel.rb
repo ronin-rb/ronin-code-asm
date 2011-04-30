@@ -44,7 +44,7 @@ module Ronin
           end
 
           def self.emit_immediate(imm)
-            base, offset, scale = imm
+            base, offset, scale = *imm
 
             if (offset && scale)
               '[' + emit(base) + '+' + emit(offset) + '*' + emit(scale) + ']'
