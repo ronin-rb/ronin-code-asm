@@ -12,7 +12,7 @@ gemspec
 gem 'ronin',          '~> 1.0', :git => "#{RONIN_URI}/ronin.git"
 
 group :development do
-  gem 'rake',         '~> 0.8.7'
+  gem 'rake',         '~> 0.8'
 
   gem 'kramdown',     '~> 0.12'
 
