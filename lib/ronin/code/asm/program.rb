@@ -226,7 +226,7 @@ module Ronin
         end
 
         #
-        # Defines a critical region, where the General Purpose Regiseters
+        # Defines a critical region, where the specified Registers
         # should be saved and then reloaded.
         #
         # @param [Array<Symbol>] regs
@@ -236,7 +236,7 @@ module Ronin
         #   The given block will be evaluated after the registers
         #   have been saved.
         #
-        def critical_region(regs=(@general_registers & @allocated_registers))
+        def critical(*regs)
           regs.each { |name| reg_save(name) }
 
           yield if block_given?
