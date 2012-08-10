@@ -1,105 +1,107 @@
 #
-# Ronin ASM - A Ruby library that provides dynamic Assembly source code
-# generation.
+# Ronin ASM - A Ruby DSL for crafting Assembly programs and Shellcode.
 #
-# Copyright (c) 2007-2011 Hal Brodigan (postmodern.mod3 at gmail.com)
+# Copyright (c) 2007-2012 Hal Brodigan (postmodern.mod3 at gmail.com)
 #
-# This program is free software; you can redistribute it and/or modify
+# This file is part of Ronin ASM.
+#
+# Ronin is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
+# the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# Ronin is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+# along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'udis86'
+require 'ronin/asm/program'
 
 module Ronin
   module ASM
     #
-    # Creates a new `FFI::UDis86::UD` disassembler object.
+    # Creates a new Assembly Program.
     #
-    # @param [Hash] options
+    # @param [Hash{Symbol => Object}] options
     #   Additional options.
     #
-    # @option options [Integer] :mode (32)
-    #   The mode of disassembly, can either 16, 32 or 64.
+    # @option options [String, Symbol] :arch (:x86)
+    #   The architecture of the Program.
     #
-    # @option options [Integer] :syntax (:intel)
-    #   The assembly syntax the disassembler will emit, can be either
-    #   `:att` or `:intel`.
+    # @option options [Hash{Symbol => Object}] :variables
+    #   Variables to set in the program.
     #
-    # @option options [String] :buffer
-    #   A buffer to disassemble.
+    # @yield []
+    #   The given block will be evaluated within the program.
     #
-    # @option options [Symbol] :vendor
-    #   Sets the vendor of whose instructions to choose from. Can be
-    #   either `:amd` or `:intel`.
+    # @return [Program]
+    #   The new Assembly Program.
     #
-    # @option options [Integer] :pc
-    #   Initial value of the Program Counter (PC).
+    # @example
+    #   asm do
+    #     mov  1, eax
+    #     mov  1, ebx
+    #     mov  2, ecx
     #
-    # @yield [ud]
-    #   If a block is given, it will be used as an input callback to
-    #   return the next byte to disassemble. When the block returns
-    #   -1, the disassembler will stop processing input.
+    #     _loop do
+    #       push  ecx
+    #       imul  ebx, ecx
+    #       pop   ebx
     #
-    # @yieldparam [FFI::UDis86::UD] ud
-    #   The disassembler.
+    #       inc eax
+    #       cmp ebx, 10
+    #       jl  :_loop
+    #     end
+    #   end
     #
-    # @return [FFI::UDis86::UD]
-    #   The newly created disassembler.
-    #
-    # @see http://yardoc.org/docs/sophsec-ffi-udis86/FFI/UDis86/UD
-    #
-    def ASM.disas(options={},&block)
-      FFI::UDis86::UD.create(options,&block)
+    def asm(options={},&block)
+      ASM::Program.new(options,&block)
     end
 
     #
-    # Opens a file and disassembles it.
+    # Assembles a Program using `yasm`.
     #
-    # @param [String] path
-    #   The path to the file.
+    # @param [Hash{Symbol => Object}] options
+    #   Additional options.
     #
-    # @param [Hash] options
-    #   Additional dissaembly options.
+    # @option options [String, Symbol] :arch (:x86)
+    #   The architecture of the Program.
     #
-    # @option options [Integer] :mode (32)
-    #   The mode of disassembly, can either 16, 32 or 64.
+    # @option options [Hash{Symbol => Object}] :variables
+    #   Variables to set in the program.
     #
-    # @option options [Integer] :syntax (:intel)
-    #   The assembly syntax the disassembler will emit, can be either
-    #   `:att` or `:intel`.
+    # @yield []
+    #   The given block will be evaluated within the program.
     #
-    # @option options [String] :buffer
-    #   A buffer to disassemble.
+    # @return [String]
+    #   The Object Code of the Program.
     #
-    # @option options [Symbol] :vendor
-    #   Sets the vendor of whose instructions to choose from. Can be
-    #   either `:amd` or `:intel`.
+    # @example
+    #   assemble do
+    #     mov  1, eax
+    #     mov  1, ebx
+    #     mov  2, ecx
     #
-    # @option options [Integer] :pc
-    #   Initial value of the Program Counter (PC).
+    #     _loop do
+    #       push  ecx
+    #       imul  ebx, ecx
+    #       pop   ebx
     #
-    # @yield [ud]
-    #   If a block is given, it will be passed the newly created
-    #   UD object, configured to disassembler the file.
+    #       inc eax
+    #       cmp ebx, 10
+    #       jl  :_loop
+    #     end
+    #   end
+    #   # => "..."
     #
-    # @yieldparam [FFI::UDis86::UD] ud
-    #   The newly created disassembler.
+    # @see ASM::Program#assemble
     #
-    # @see http://yardoc.org/docs/sophsec-ffi-udis86/FFI/UDis86/UD
-    #
-    def ASM.disas_file(path,options={},&block)
-      FFI::UDis86::UD.open(path,options,&block)
+    def assemble(options={},&block)
+      asm(options,&block).assemble
     end
   end
 end

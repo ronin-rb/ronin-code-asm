@@ -5,23 +5,43 @@
 #
 # This file is part of Ronin ASM.
 #
-# Ronin Asm is free software: you can redistribute it and/or modify
+# Ronin is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# Ronin Asm is distributed in the hope that it will be useful,
+# Ronin is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Ronin Asm.  If not, see <http://www.gnu.org/licenses/>.
+# along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
+
+require 'ronin/asm/immediate'
 
 module Ronin
   module ASM
-    # ronin-asm version
-    VERSION = '0.1.0'
+    class Register < Struct.new(:name, :width)
+
+      def [](index)
+        Immediate.new(self,self.width,index)
+      end
+
+      def +(offset)
+        case offset
+        when Immediate
+          Immediate.new(self,offset.offset,offset.scale)
+        else
+          Immediate.new(self,offset,nil)
+        end
+      end
+
+      def *(index)
+        Immediate.new(nil,self,index)
+      end
+
+    end
   end
 end

@@ -1,10 +1,9 @@
 name: ronin-asm
-summary: A Ruby library for Ronin that provides dynamic Assembly (ASM) generation of programs or shellcode.
+summary: A Ruby DSL for crafting Assembly programs and Shellcode.
 description:
-  Ronin ASM is a Ruby library for Ronin that provides dynamic Assembly
-  (ASM) generation of programs or shellcode.
+  ronin-asm is a Ruby DSL for crafting Assmebly programs and Shellcode.
 
-license: GPL-2
+license: GPL-3
 authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: http://github.com/ronin-ruby/ronin-asm
@@ -13,13 +12,11 @@ has_yard: true
 requirements: yasm >= 0.6.0
 
 dependencies:
+  open_namespace: ~> 0.4
   data_paths: ~> 0.3
-  ffi-udis86: ~> 0.1
   ruby-yasm: ~> 0.2
   # Ronin dependencies:
-  ronin-support: ~> 0.2
-  ronin: ~> 1.1
 
 development_dependencies:
-  bundler: ~> 1.0.0
-  yard: ~> 0.7.0
+  bundler: ~> 1.0
+  yard: ~> 0.7

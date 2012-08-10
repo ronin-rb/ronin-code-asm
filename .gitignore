@@ -9,6 +9,3 @@ Gemfile.lock
 *.log
 *.swp
 *~
-*.o
-*.a
-*.so

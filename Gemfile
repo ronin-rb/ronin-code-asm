@@ -1,23 +1,29 @@
 source 'https://rubygems.org'
 
-DM_URI = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.1.0'
-RONIN_URI = 'http://github.com/ronin-ruby'
-SOPHSEC_URI = 'http://github.com/sophsec'
+DM_URI     = 'http://github.com/datamapper'
+DM_VERSION = '~> 1.2'
+RONIN_URI  = 'http://github.com/ronin-ruby'
 
 gemspec
 
-# Ronin dependencies
-# gem 'ronin-support',	'~> 0.2', :git => "#{RONIN_URI}/ronin-support.git"
-# gem 'ronin',          '~> 1.0', :git => "#{RONIN_URI}/ronin.git"
+gem 'jruby-openssl',	'~> 0.7', :platforms => :jruby
+
+# Ronin dependencies:
+# gem 'ronin-support',  '~> 0.5.1', :git => "#{RONIN_URI}/ronin-support.git"
+# gem 'ronin',          '~> 1.5.0', :git => "#{RONIN_URI}/ronin.git"
 
 group :development do
   gem 'rake',         '~> 0.8'
-
   gem 'kramdown',     '~> 0.12'
 
-  gem 'ore-tasks',    '~> 0.4'
-  gem 'rspec',        '~> 2.4'
+  gem 'ripl',              '~> 0.3'
+  gem 'ripl-multi_line',   '~> 0.2'
+  gem 'ripl-auto_indent',  '~> 0.1'
+  gem 'ripl-short_errors', '~> 0.1'
+  gem 'ripl-color_result', '~> 0.3'
+
+  gem 'rubygems-tasks', '~> 0.1'
+  gem 'rspec',          '~> 2.4'
 end
 
 #

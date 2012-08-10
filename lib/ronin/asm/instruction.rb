@@ -19,15 +19,32 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'data_paths'
+require 'ronin/asm/literal'
+require 'ronin/asm/immediate'
 
 module Ronin
   module ASM
-    module Config
-      include DataPaths
-      extend DataPaths::Finders
+    class Instruction < Struct.new(:name, :operands)
 
-      register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
+      def initialize(name,operands)
+        operands = operands.map do |op|
+          case op
+          when Array
+            Immediate.new(*op)
+          when Integer, nil
+            Literal.new(op)
+          else
+            op
+          end
+        end
+
+        super(name,operands)
+      end
+
+      def width
+        self.operands.map { |op| op.width }.max
+      end
+
     end
   end
 end

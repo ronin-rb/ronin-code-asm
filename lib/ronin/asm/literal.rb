@@ -19,15 +19,29 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'data_paths'
-
 module Ronin
   module ASM
-    module Config
-      include DataPaths
-      extend DataPaths::Finders
+    class Literal < Struct.new(:value, :width)
 
-      register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
+      def initialize(value,width=nil)
+        value   = value.to_i
+        width ||= if (value >= (2 ** 32))
+                    8
+                  elsif (value >= (2 ** 16))
+                    4
+                  elsif (value >= (2 ** 8))
+                    2
+                  else
+                    1
+                  end
+
+        super(value,width)
+      end
+
+      def to_i
+        self.value
+      end
+
     end
   end
 end
