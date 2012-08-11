@@ -45,5 +45,4 @@ You should have received a copy of the GNU General Public License
 along with Ronin Asm.  If not, see <http://www.gnu.org/licenses/>.
 
 [data_paths]: https://github.com/postmodern/data_paths#readme
-[open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ruby-yasm]: https://github.com/sophsec/ruby-yasm#readme

@@ -12,7 +12,6 @@ has_yard: true
 requirements: yasm >= 0.6.0
 
 dependencies:
-  open_namespace: ~> 0.4
   data_paths: ~> 0.3
   ruby-yasm: ~> 0.2
   # Ronin dependencies:

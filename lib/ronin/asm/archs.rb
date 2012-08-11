@@ -19,4 +19,5 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'ronin/asm/archs/archs'
+require 'ronin/asm/archs/x86'
+require 'ronin/asm/archs/amd64'
