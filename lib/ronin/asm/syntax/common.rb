@@ -39,23 +39,17 @@ module Ronin
 
         def self.emit(value)
           case value
-          when Register
-            emit_register(value)
-          when Literal
-            emit_literal(value)
-          when Symbol
-            emit_keyword(value)
-          when Float
-            emit_float(value)
+          when Register then emit_register(value)
+          when Literal  then emit_literal(value)
+          when Symbol   then emit_keyword(value)
+          when Float         emit_float(value)
           end
         end
 
         def self.emit_operand(value)
           case value
-          when Immediate
-            emit_immediate(value)
-          else
-            emit(value)
+          when Immediate then emit_immediate(value)
+          else                emit(value)
           end
         end
 
@@ -75,10 +69,8 @@ module Ronin
 
           program.instructions.each do |ins|
             case ins
-            when Symbol
-              lines << emit_label(ins)
-            when Instruction
-              lines << "\t#{emit_instruction(ins)}"
+            when Symbol      then lines << emit_label(ins)
+            when Instruction then lines << "\t#{emit_instruction(ins)}"
             end
           end
 

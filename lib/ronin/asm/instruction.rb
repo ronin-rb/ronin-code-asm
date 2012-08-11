@@ -29,12 +29,9 @@ module Ronin
       def initialize(name,operands)
         operands = operands.map do |op|
           case op
-          when Array
-            Immediate.new(*op)
-          when Integer, nil
-            Literal.new(op)
-          else
-            op
+          when Array        then Immediate.new(*op)
+          when Integer, nil then Literal.new(op)
+          else                   op
           end
         end
 
@@ -42,7 +39,7 @@ module Ronin
       end
 
       def width
-        self.operands.map { |op| op.width }.max
+        self.operands.map(&:width).max
       end
 
     end

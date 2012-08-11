@@ -43,10 +43,8 @@ module Ronin
 
         def self.emit_literal(literal)
           width  = WIDTHS[literal.width]
-          format = if literal.value > 0
-                     "0x%x"
-                   else
-                     "%d"
+          format = if literal.value > 0 then "0x%x"
+                   else                      "%d"
                    end
 
           return "#{width} #{format % literal.value}"
