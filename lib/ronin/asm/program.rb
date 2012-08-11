@@ -319,6 +319,9 @@ module Ronin
       #
       # Assembles the program.
       #
+      # @param [String] output
+      #   The path for the assembled program.
+      #
       # @param [Hash] options
       #   Additional options.
       #
@@ -344,31 +347,26 @@ module Ronin
       #   * `:xdf` - Extended Dynamic Object.
       #
       # @return [String]
-      #   The raw Object Code of the program.
+      #   The path to the assembled program.
       #
-      def assemble(options={})
+      def assemble(output,options={})
         syntax  = options.fetch(:syntax,:att)
         format  = options.fetch(:format,:bin)
         parser  = PARSERS[syntax]
-        objcode = nil
 
-        source= Tempfile.new('ronin-asm.S')
+        source = Tempfile.new('ronin-asm.S')
         source.write(to_asm(syntax))
         source.close
 
-        Tempfile.open('ronin-asm.o') do |output|
-          YASM::Program.assemble(
-            :file          => source.path,
-            :parser        => PARSERS[syntax],
-            :target        => @arch,
-            :output_format => format,
-            :output        => output.path
-          )
+        YASM::Program.assemble(
+          :file          => source.path,
+          :parser        => PARSERS[syntax],
+          :target        => @arch,
+          :output_format => format,
+          :output        => output
+        )
 
-          objcode = output.read
-        end
-
-        return objcode
+        return output
       end
 
       protected

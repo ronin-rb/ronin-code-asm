@@ -21,6 +21,8 @@
 
 require 'ronin/asm/program'
 
+require 'tempfile'
+
 module Ronin
   module ASM
     class Shellcode < Program
@@ -37,7 +39,10 @@ module Ronin
       # @see Program#assemble
       #
       def assemble(options={})
-        super(options.merge(:format => :bin))
+        output = Tempfile.new('ronin-shellcode.bin')
+
+        super(output.path,options.merge(:format => :bin))
+        return output.read
       end
 
     end
