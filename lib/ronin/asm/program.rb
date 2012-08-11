@@ -96,7 +96,7 @@ module Ronin
 
         @instructions = []
 
-        extend Archs.require_const(@arch)
+        extend Archs.const_get(@arch.to_s.upcase)
         initialize_arch if respond_to?(:initialize_arch)
 
         if options.has_key?(:os)
@@ -148,8 +148,14 @@ module Ronin
       #
       # @param [Array] operands
       #
+      # @return [Instruction]
+      #   The newly created instruction.
+      #
       def instruction(name,*operands)
-        @instructions << Instruction.new(name.to_sym,operands)
+        insn = Instruction.new(name.to_sym,operands)
+
+        @instructions << insn
+        return insn
       end
 
       #
