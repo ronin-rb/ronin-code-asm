@@ -20,6 +20,7 @@
 #
 
 require 'ronin/asm/program'
+require 'ronin/asm/shellcode'
 
 module Ronin
   module ASM
@@ -42,7 +43,7 @@ module Ronin
     #   The new Assembly Program.
     #
     # @example
-    #   asm do
+    #   ASM.program do
     #     mov  1, eax
     #     mov  1, ebx
     #     mov  2, ecx
@@ -58,12 +59,12 @@ module Ronin
     #     end
     #   end
     #
-    def asm(options={},&block)
-      ASM::Program.new(options,&block)
+    def ASM.program(options={},&block)
+      Program.new(options,&block)
     end
 
     #
-    # Assembles a Program using `yasm`.
+    # Creates a new Shellcode program.
     #
     # @param [Hash{Symbol => Object}] options
     #   Additional options.
@@ -77,31 +78,26 @@ module Ronin
     # @yield []
     #   The given block will be evaluated within the program.
     #
-    # @return [String]
-    #   The Object Code of the Program.
+    # @return [Shellcode]
+    #   The new Shellcode program.
     #
     # @example
-    #   assemble do
-    #     mov  1, eax
-    #     mov  1, ebx
-    #     mov  2, ecx
-    #
-    #     _loop do
-    #       push  ecx
-    #       imul  ebx, ecx
-    #       pop   ebx
-    #
-    #       inc eax
-    #       cmp ebx, 10
-    #       jl  :_loop
-    #     end
+    #   ASM.shellcode(:arch => :x86) do
+    #     xor   eax,  eax
+    #     push  eax
+    #     push  0x68732f2f
+    #     push  0x6e69622f
+    #     mov   esp,  ebx
+    #     push  eax
+    #     push  ebx
+    #     mov   esp,  ecx
+    #     xor   edx,  edx
+    #     mov   0xb,  al
+    #     int   0x80
     #   end
-    #   # => "..."
     #
-    # @see ASM::Program#assemble
-    #
-    def assemble(options={},&block)
-      asm(options,&block).assemble
+    def ASM.shellcode(options={},&block)
+      Shellcode.new(options,&block)
     end
   end
 end
