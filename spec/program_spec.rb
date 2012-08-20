@@ -81,6 +81,26 @@ describe ASM::Program do
   end
 
   describe "#label" do
+    let(:name) { :_start }
+
+    it "should return the label name" do
+      subject.label(name).should == name
+    end
+
+    it "should add the label to the instructions" do
+      subject.label(name)
+
+      subject.instructions.last.should == name
+    end
+
+    it "should accept a block" do
+      subject.label(name) do
+        subject.instruction :push, 2
+      end
+
+      subject.instructions[-1].name.should == :push
+      subject.instructions[-2].should == name
+    end
   end
 
   describe "#to_asm" do
