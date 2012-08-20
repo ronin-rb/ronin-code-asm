@@ -42,7 +42,7 @@ module Ronin
           when Register then emit_register(value)
           when Literal  then emit_literal(value)
           when Symbol   then emit_keyword(value)
-          when Float         emit_float(value)
+          when Float    then emit_float(value)
           end
         end
 
