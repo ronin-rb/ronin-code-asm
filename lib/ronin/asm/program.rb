@@ -220,10 +220,15 @@ module Ronin
       #   The given block will be evaluated after the label has been
       #   added.
       #
+      # @return [Symbol]
+      #   The label name.
+      #
       def label(name)
-        @instructions << name.to_sym
+        name = name.to_sym
 
+        @instructions << name
         yield if block_given?
+        return name
       end
 
       #
