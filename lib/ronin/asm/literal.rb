@@ -25,14 +25,10 @@ module Ronin
 
       def initialize(value,width=nil)
         value   = value.to_i
-        width ||= if (value >= (2 ** 32))
-                    8
-                  elsif (value >= (2 ** 16))
-                    4
-                  elsif (value >= (2 ** 8))
-                    2
-                  else
-                    1
+        width ||= if (value >= (2 ** 32))    then 8
+                  elsif (value >= (2 ** 16)) then 4
+                  elsif (value >= (2 ** 8))  then 2
+                  else                            1
                   end
 
         super(value,width)
