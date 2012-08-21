@@ -23,14 +23,23 @@ require 'ronin/asm/register'
 
 module Ronin
   module ASM
-    class Immediate < Struct.new(:base, :offset, :scale)
+    #
+    # Represents immediate memory.
+    #
+    # @see http://asm.sourceforge.net/articles/linasm.html#Memory
+    #
+    class Immediate < Struct.new(:base, :offset, :index, :scale)
+
+      def initialize(base,offset=0,index=nil,scale=1)
+        super(base,offset.to_i,index,scale.to_i)
+      end
+
+      def +(offset)
+        Immediate.new(self.base,self.offset+offset,self.index,self.scale)
+      end
 
       def width
         base.width if base.kind_of?(Register)
-      end
-
-      def to_a
-        [self.base, self.offset, self.scale]
       end
 
     end

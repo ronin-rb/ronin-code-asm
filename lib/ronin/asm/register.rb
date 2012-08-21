@@ -25,19 +25,11 @@ module Ronin
   module ASM
     class Register < Struct.new(:name, :width)
 
-      def [](index)
-        Immediate.new(self,self.width,index)
-      end
-
-      def +(offset)
-        case offset
-        when Immediate then Immediate.new(self,offset.offset,offset.scale)
-        else                Immediate.new(self,offset,nil)
+      def [](index,scale=1)
+        case index
+        when Register then Immediate.new(self,0,index,scale)
+        else               Immediate.new(self,index)
         end
-      end
-
-      def *(index)
-        Immediate.new(nil,self,index)
       end
 
     end

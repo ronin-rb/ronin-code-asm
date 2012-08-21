@@ -46,17 +46,22 @@ module Ronin
         end
 
         def self.emit_immediate(imm)
-          base, offset, scale = *imm
+          asm = emit(imm.base)
 
-          if (offset && scale)
-            '[' + emit(base) + '+' + emit(offset) + '*' + emit(scale) + ']'
-          elsif scale
-            '[' + emit(base) + '*' + emit(scale) + ']'
-          elsif offset
-            '[' + emit(base) + '+' + emit(offset) + ']'
-          else
-            '[' + emit(base) + ']'
+          if imm.index
+            asm << '+' << emit_register(imm.index)
+            asm << '*' << emit_integer(imm.scale) if imm.scale > 1
           end
+
+          if imm.offset != 0
+            sign = if imm.offset >= 0 then '+'
+                   else                    '-'
+                   end
+
+            asm << sign << emit_integer(imm.offset)
+          end
+
+          return "[#{asm}]"
         end
 
         def self.emit_operands(operands)

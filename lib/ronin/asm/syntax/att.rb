@@ -43,17 +43,17 @@ module Ronin
         end
 
         def self.emit_immediate(imm)
-          base, offset, scale = *imm
+          asm = emit(imm.base)
 
-          if (offset && scale)
-            '(' + emit(base) + ',' + emit(offset) + ',' + emit(scale) + ')'
-          elsif scale
-            '(,' + emit(base) + ',' + emit(scale) + ')'
-          elsif offset
-            emit(offset) + '(' + emit(base) + ')'
-          else
-            '(' + emit(base) + ')'
+          if imm.index
+            asm << ',' << emit_register(imm.index)
+            asm << ',' << imm.scale.to_s if imm.scale > 1
           end
+
+          asm = "(#{asm})"
+          asm = emit_integer(imm.offset) + asm if imm.offset != 0
+
+          return asm
         end
 
         def self.emit_instruction(ins)
