@@ -43,6 +43,7 @@ module Ronin
           when Literal  then emit_literal(value)
           when Symbol   then emit_keyword(value)
           when Float    then emit_float(value)
+          when nil      then emit_literal(0)
           end
         end
 
