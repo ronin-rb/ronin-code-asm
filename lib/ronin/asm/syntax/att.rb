@@ -39,11 +39,7 @@ module Ronin
         end
 
         def self.emit_literal(literal)
-          format = if literal.value > 0 then "$0x%x"
-                   else                      "$%d"
-                   end
-
-          return format % literal.value
+          "$#{emit_integer(literal.value)}"
         end
 
         def self.emit_immediate(imm)
