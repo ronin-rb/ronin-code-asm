@@ -104,7 +104,53 @@ describe ASM::Program do
   end
 
   describe "#to_asm" do
+    subject do
+      described_class.new do
+        push eax
+        push ebx
+        push ecx
+
+        mov eax, ebx
+        mov eax[0], ebx
+        mov eax[4], ebx
+        mov eax[esi], ebx
+        mov eax[esi,4], ebx
+        mov eax[esi,4]+10, ebx
+      end
+    end
+
+    it "should convert the program to ATT syntax" do
+      subject.to_asm.should == [
+        "_start:",
+        "\tpushl\t%eax",
+        "\tpushl\t%ebx",
+        "\tpushl\t%ecx",
+        "\tmovl\t%eax,\t%ebx",
+        "\tmovl\t(%eax),\t%ebx",
+        "\tmovl\t0x4(%eax),\t%ebx",
+        "\tmovl\t(%eax,%esi),\t%ebx",
+        "\tmovl\t(%eax,%esi,4),\t%ebx",
+        "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
+        ""
+      ].join($/)
+    end
+
     context "with intel syntax" do
+      it "should convert the program to Intel syntax" do
+        subject.to_asm(:intel).should == [
+          "_start:",
+          "\tpush\teax",
+          "\tpush\tebx",
+          "\tpush\tecx",
+          "\tmov\tebx,\teax",
+          "\tmov\tebx,\t[eax]",
+          "\tmov\tebx,\t[eax+0x4]",
+          "\tmov\tebx,\t[eax+esi]",
+          "\tmov\tebx,\t[eax+esi*0x4]",
+          "\tmov\tebx,\t[eax+esi*0x4+0xa]",
+          ""
+        ].join($/)
+      end
     end
   end
 
