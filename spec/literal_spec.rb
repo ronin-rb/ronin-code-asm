@@ -16,19 +16,19 @@ describe ASM::Literal do
     end
 
     describe "default width for" do
-      context "0xffffffff .. 0xffffffffffffffff" do
+      context "0x100000000 .. 0xffffffffffffffff" do
         subject { described_class.new(0xffffffffffffffff).width }
 
         it { should == 8 }
       end
 
-      context "0xffff .. 0xffffffff" do
+      context "0x10000 .. 0xffffffff" do
         subject { described_class.new(0xffffffff).width }
 
         it { should == 4 }
       end
 
-      context "0xff .. 0xffff" do
+      context "0x100 .. 0xffff" do
         subject { described_class.new(0xffff).width }
 
         it { should == 2 }
