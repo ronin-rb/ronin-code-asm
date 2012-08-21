@@ -135,7 +135,7 @@ describe ASM::Program do
       ].join($/)
     end
 
-    context "with intel syntax" do
+    context "when given :intel" do
       it "should convert the program to Intel syntax" do
         subject.to_asm(:intel).should == [
           "_start:",
