@@ -101,7 +101,6 @@ module Ronin
 
         if options.has_key?(:os)
           @os = options[:os].to_s
-
           extend OS.const_get(@os)
         end
 
