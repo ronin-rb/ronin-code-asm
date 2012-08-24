@@ -41,6 +41,10 @@ module Ronin
         self.value
       end
 
+      def to_s
+        self.value.to_s
+      end
+
     end
   end
 end

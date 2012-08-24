@@ -40,6 +40,10 @@ module Ronin
         Immediate.new(self,-offset)
       end
 
+      def to_s
+        self.name.to_s
+      end
+
     end
   end
 end
