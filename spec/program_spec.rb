@@ -94,12 +94,29 @@ describe ASM::Program do
     end
 
     it "should accept a block" do
-      subject.label(name) do
-        subject.instruction :push, 2
-      end
+      subject.label(name) { push 2 }
 
       subject.instructions[-1].name.should == :push
       subject.instructions[-2].should == name
+    end
+  end
+
+  describe "#method_missing" do
+    context "when called without a block" do
+      it "should add a new instruction" do
+        subject.pop
+
+        subject.instructions[-1].name.should == :pop
+      end
+    end
+
+    context "when called with one argument and a block" do
+      it "should add a new label" do
+        subject._loop { mov eax, ebx }
+
+        subject.instructions[-2].should      == :_loop
+        subject.instructions[-1].name.should == :mov
+      end
     end
   end
 
