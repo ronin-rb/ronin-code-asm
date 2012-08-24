@@ -223,11 +223,11 @@ module Ronin
       # @return [Symbol]
       #   The label name.
       #
-      def label(name)
+      def label(name,&block)
         name = name.to_sym
 
         @instructions << name
-        yield if block_given?
+        instance_eval(&block) if block
         return name
       end
 
