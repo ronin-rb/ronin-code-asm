@@ -299,10 +299,10 @@ module Ronin
       #   The given block will be evaluated after the registers
       #   have been saved.
       #
-      def critical(*regs)
+      def critical(*regs,&block)
         regs.each { |name| reg_save(name) }
 
-        yield if block_given?
+        instance_eval(&block) if block
 
         regs.reverse_each { |name| reg_load(name) }
       end
