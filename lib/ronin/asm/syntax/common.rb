@@ -36,7 +36,7 @@ module Ronin
 
         def self.emit_integer(value)
           if value >= 0 then "0x%x" % value
-          else               "-0x%x" % value
+          else               "-0x%x" % value.abs
           end
         end
 
