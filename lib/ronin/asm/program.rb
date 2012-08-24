@@ -90,8 +90,8 @@ module Ronin
       def initialize(options={},&block)
         @arch = options.fetch(:arch,:x86).to_sym
 
-        @registers = {}
-        @general_registers = []
+        @registers           = {}
+        @general_registers   = []
         @allocated_registers = []
 
         @instructions = []
