@@ -32,6 +32,14 @@ module Ronin
         end
       end
 
+      def +(offset)
+        Immediate.new(self,offset)
+      end
+
+      def -(offset)
+        Immediate.new(self,-offset)
+      end
+
     end
   end
 end
