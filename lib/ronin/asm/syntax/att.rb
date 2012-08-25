@@ -60,12 +60,7 @@ module Ronin
           line = emit_keyword(ins.name)
 
           unless ins.operands.empty?
-            width = ins.width
-
-            # instructions with no width suffix, default to 'b'
-            width = nil if (ins.operands.length == 1 && width == 1)
-
-            line << WIDTHS[width] << "\t" << emit_operands(ins.operands)
+            line << WIDTHS[ins.width] << "\t" << emit_operands(ins.operands)
           end
 
           return line
