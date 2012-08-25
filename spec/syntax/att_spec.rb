@@ -109,8 +109,37 @@ describe ASM::Syntax::ATT do
         "_start:",
         "\tmovl\t$0xff,\t%eax",
         "\tret",
-        ''
+        ""
       ].join($/)
+    end
+
+    context "when emitting labels" do
+      let(:program) do
+        Program.new do
+          mov 0, eax
+
+          _loop do
+            inc eax
+            cmp eax, 10
+            jl  :_loop
+          end
+
+          ret
+        end
+      end
+
+      it "should emit both labels and instructions" do
+        subject.emit_program(program).should == [
+          "_start:",
+          "\tmovl\t$0x0,\t%eax",
+          "_loop:",
+          "\tincl\t%eax",
+          "\tcmpl\t%eax,\t$0xa",
+          "\tjl\t_loop",
+          "\tret",
+          ""
+        ].join($/)
+      end
     end
 
     context "when the program arch is :amd64" do
