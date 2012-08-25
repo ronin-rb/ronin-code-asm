@@ -34,10 +34,28 @@ module Ronin
         super(base,offset.to_i,index,scale.to_i)
       end
 
+      #
+      # Adds to the offset of the Immediate value.
+      #
+      # @param [Integer] offset
+      #   The offset to add to the immediate value.
+      #
+      # @return [Immeidate]
+      #   The new Immediate object.
+      #
       def +(offset)
         Immediate.new(self.base,self.offset+offset,self.index,self.scale)
       end
 
+      #
+      # Subtracts from the offset of the Immediate value.
+      #
+      # @param [Integer] offset
+      #   The offset to subject from the immediate value.
+      #
+      # @return [Immeidate]
+      #   The new Immediate object.
+      #
       def -(offset)
         Immediate.new(self.base,self.offset-offset,self.index,self.scale)
       end
