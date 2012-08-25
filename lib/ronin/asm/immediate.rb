@@ -30,7 +30,33 @@ module Ronin
     #
     class Immediate < Struct.new(:base, :offset, :index, :scale)
 
+      #
+      # Creates a new Immediate value.
+      #
+      # @param [Register, nil] base
+      #   The base of the value.
+      #
+      # @param [Integer] offset
+      #   The fixed offset to add to the `base`.
+      #
+      # @param [Register, nil] index
+      #   The variable index to multiple by `scale`, then add to `base.
+      #
+      # @param [Integer] scale
+      #   The scale to multiple `index` by.
+      #
+      # @raise [TypeError]
+      #   `base` or `index` was not a {Register} or `nil`.
+      #
       def initialize(base,offset=0,index=nil,scale=1)
+        unless (base.nil? || base.kind_of?(Register))
+          raise(TypeError,"base must be a Register or nil")
+        end
+
+        unless (index.nil? || index.kind_of?(Register))
+          raise(TypeError,"index must be a Register or nil")
+        end
+
         super(base,offset.to_i,index,scale.to_i)
       end
 
@@ -60,8 +86,14 @@ module Ronin
         Immediate.new(self.base,self.offset-offset,self.index,self.scale)
       end
 
+      #
+      # The width of the immediate value.
+      #
+      # @return [Integer]
+      #   The width taken from the base {Register}.
+      #
       def width
-        base.width if base.kind_of?(Register)
+        base.width
       end
 
     end
