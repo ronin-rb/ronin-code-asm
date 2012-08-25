@@ -30,4 +30,13 @@ describe ASM::Syntax::Common do
       end
     end
   end
+
+  describe "emit_label" do
+    let(:name)  { :_start   }
+    let(:label) { '_start:' }
+
+    it "should append a ':' to the name" do
+      subject.emit_label(name).should == label
+    end
+  end
 end
