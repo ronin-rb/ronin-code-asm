@@ -128,11 +128,11 @@ describe ASM::Program do
         push ecx
 
         mov eax, ebx
-        mov eax[0], ebx
-        mov eax[4], ebx
-        mov eax[esi], ebx
-        mov eax[esi,4], ebx
-        mov eax[esi,4]+10, ebx
+        mov eax+0, ebx
+        mov eax+4, ebx
+        mov eax+esi, ebx
+        mov eax+(esi*4), ebx
+        mov eax+(esi*4)+10, ebx
       end
     end
 

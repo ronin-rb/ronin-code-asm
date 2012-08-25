@@ -25,21 +25,58 @@ module Ronin
   module ASM
     class Register < Struct.new(:name, :width)
 
-      def [](index,scale=1)
-        case index
-        when Register then Immediate.new(self,0,index,scale)
-        else               Immediate.new(self,0,index)
+      #
+      # Adds an offset to the value within the register and dereferences the
+      # address.
+      #
+      # @param [Immediate, Register, Integer] offset
+      #   The offset to add to the value of the register.
+      #
+      # @return [Immediate]
+      #   The new Immediate value.
+      #
+      def +(offset)
+        case offset
+        when Immediate
+          Immediate.new(self,offset.offset,offset.index,offset.scale)
+        when Register
+          Immediate.new(self,0,offset)
+        else
+          Immediate.new(self,offset)
         end
       end
 
-      def +(offset)
-        Immediate.new(self,offset)
-      end
-
+      #
+      # Substracts from the value within the register and dereferences the
+      # address.
+      #
+      # @param [Integer] offset
+      #   The value to subtract from the value of the register.
+      #
+      # @return [Immediate]
+      #   The new Immediate value.
+      #
       def -(offset)
         Immediate.new(self,-offset)
       end
 
+      #
+      # Multiples the value within the register.
+      #
+      # @param [Integer] scale
+      #   The scale to multiply the value within register by.
+      #
+      # @return [Immediate]
+      #   The new Immediate value.
+      #
+      def *(scale)
+        Immediate.new(nil,0,self,scale)
+      end
+
+      #
+      # @return [String]
+      #   The register's name.
+      #
       def to_s
         self.name.to_s
       end
