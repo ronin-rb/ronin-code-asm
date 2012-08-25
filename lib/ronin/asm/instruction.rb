@@ -39,7 +39,9 @@ module Ronin
       end
 
       def width
-        self.operands.map(&:width).max
+        self.operands.map { |op|
+          op.width if op.respond_to?(:width)
+        }.compact.max
       end
 
     end
