@@ -35,14 +35,19 @@ module Ronin
       # @return [Immediate]
       #   The new Immediate value.
       #
+      # @raise [TypeError]
+      #   the `offset` was not an {Immediate}, {Register} or Integer.
+      #
       def +(offset)
         case offset
         when Immediate
           Immediate.new(self,offset.offset,offset.index,offset.scale)
         when Register
           Immediate.new(self,0,offset)
-        else
+        when Integer
           Immediate.new(self,offset)
+        else
+          raise(TypeError,"offset was not an Immediate, Register or Integer")
         end
       end
 
