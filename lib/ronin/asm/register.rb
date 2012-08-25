@@ -28,7 +28,7 @@ module Ronin
       def [](index,scale=1)
         case index
         when Register then Immediate.new(self,0,index,scale)
-        else               Immediate.new(self,index)
+        else               Immediate.new(self,0,index)
         end
       end
 
