@@ -29,7 +29,6 @@ module Ronin
       def initialize(name,operands)
         operands = operands.map do |op|
           case op
-          when Array        then Immediate.new(*op)
           when Integer, nil then Literal.new(op)
           else                   op
           end
