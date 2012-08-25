@@ -59,7 +59,7 @@ module Ronin
         def self.emit_instruction(ins)
           line = emit_keyword(ins.name)
 
-          if ins.operands
+          unless ins.operands.empty?
             width = ins.width
 
             # instructions with no width suffix, default to 'b'
