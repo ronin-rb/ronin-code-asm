@@ -14,6 +14,87 @@
 
 ## Examples
 
+Create a program:
+
+    asm = ASM.new do
+      push ebx
+      mov  ebx, eax
+      pop  ebx
+      hlt
+    end
+
+    puts asm.to_asm
+    # _start:
+    #	pushl	%ebx
+    #	movl	%ebx,	%eax
+    #	popl	%ebx
+    #	hlt
+
+    puts asm.to_asm(:intel)
+    # _start:
+    #	push	ebx
+    #	mov	eax,	ebx
+    #	pop	ebx
+    #	hlt
+
+Create shellcode:
+
+    shellcode = ASM.shellcode(:arch => :x86) do
+      xor   eax,  eax
+      push  eax
+      push  0x68732f2f
+      push  0x6e69622f
+      mov   esp,  ebx
+      push  eax
+      push  ebx
+      mov   esp,  ecx
+      xor   edx,  edx
+      mov   0xb,  al
+      int   0x80
+    end
+    
+    shellcode.assemble
+    # => "f1\xC0fPfh//shfh/binf\x89\xE3fPfSf\x89\xE1f1Ұ\v̀"
+
+### Immediate Operands
+
+Immediate operands can be Integers or `nil`:
+
+    mov 0xff, eax
+    mov nil, ebx
+
+The size of the operand can also be specified explicitly:
+
+    push byte(0xff)
+    push word(0xffff)
+    push dword(0xffffffff)
+    push qword(0xffffffffffffffff)
+
+### Memory Operands
+
+Memory operands can be expressed as arithmatic on registers:
+
+    mov eax+8, ebx
+    mov eax-8, ebx
+    mov eax+esi, ebx
+    mov eax+(esi*4), ebx
+
+### Labels
+
+Labels can be expressed with blocks:
+
+    _loop do
+      inc eax
+      cmp eax, 10
+      jl :_loop
+    end
+
+### Syscalls
+
+Syscalls can be called by name using the `syscall` method:
+
+    syscall :exit, -1
+
 ## Requirements
 
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
