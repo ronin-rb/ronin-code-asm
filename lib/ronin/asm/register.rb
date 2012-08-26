@@ -23,6 +23,9 @@ require 'ronin/asm/memory_operand'
 
 module Ronin
   module ASM
+    #
+    # Represents a Register.
+    #
     class Register < Struct.new(:name, :width)
 
       #
