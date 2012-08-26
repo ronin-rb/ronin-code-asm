@@ -113,6 +113,12 @@ describe ASM::Program do
         subject.instructions[-1].operands[0].value.should == 0x80
       end
     end
+
+    context "when :os => 'Linux'" do
+      subject { described_class.new(:arch => :x86, :os => 'Linux') }
+
+      its(:syscalls) { should_not be_empty }
+    end
   end
 
   context "when :arch => :amd64" do
@@ -126,6 +132,12 @@ describe ASM::Program do
       it "should add a 'syscall' instruction" do
         subject.instructions[-1].name.should == :syscall
       end
+    end
+
+    context "when :os => 'Linux'" do
+      subject { described_class.new(:arch => :amd64, :os => 'Linux') }
+
+      its(:syscalls) { should_not be_empty }
     end
   end
 
