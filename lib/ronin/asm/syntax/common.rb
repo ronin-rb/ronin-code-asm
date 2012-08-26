@@ -28,28 +28,98 @@ module Ronin
     module Syntax
       class Common
 
+        #
+        # Emits a keyword.
+        #
+        # @param [Symbol] name
+        #   Name of the keyword.
+        #
+        # @return [String]
+        #   The formatted keyword.
+        #
         def self.emit_keyword(name)
           name.to_s
         end
 
+        #
+        # Emits a register.
+        #
+        # @param [Register] reg
+        #
+        # @return [String]
+        #   The formatted register.
+        #
+        # @abstract
+        #
         def self.emit_register(reg)
         end
 
+        #
+        # Emits an integer.
+        #
+        # @param [Integer] value
+        #   The integer.
+        #
+        # @return [String]
+        #   The formatted integer.
+        #
         def self.emit_integer(value)
           if value >= 0 then "0x%x" % value
           else               "-0x%x" % value.abs
           end
         end
 
+        #
+        # Emits a floating point number.
+        #
+        # @param [Float] value
+        #   The number.
+        #
+        # @return [String]
+        #   The formatted float.
+        #
+        # @abstract
+        #
         def self.emit_float(value)
         end
 
+        #
+        # Emits an immediate operand.
+        #
+        # @param [ImmediateOperand] op
+        #   The immediate operand.
+        #
+        # @return [String]
+        #   The formatted immediate operand.
+        #
+        # @abstract
+        #
         def self.emit_immediate_operand(op)
         end
 
+        #
+        # Emits an memory operand.
+        #
+        # @param [MemoryOperand] op
+        #   The memory operand.
+        #
+        # @return [String]
+        #   The formatted memory operand.
+        #
+        # @abstract
+        #
         def self.emit_memory_operand(op)
         end
 
+        #
+        # Emits an operand.
+        #
+        # @param [ImmediateOperand, MemoryOperand, Register, Symbol] op
+        #   The operand.
+        #
+        # @return [String]
+        #   The formatted operand.
+        #
         def self.emit_operand(op)
           case op
           when ImmediateOperand then emit_immediate_operand(op)
@@ -59,19 +129,57 @@ module Ronin
           end
         end
 
+        #
+        # Emits multiple operands.
+        #
+        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] op
+        #   The Array of operands.
+        #
+        # @return [String]
+        #   The formatted operands.
+        #
         def self.emit_operands(operands)
           operands.map { |op| emit_operand(op) }.join(",\t")
         end
 
+        #
+        # Emits a label.
+        #
+        # @param [Symbol] name
+        #   The name of the label.
+        #
+        # @return [String]
+        #   The formatted label.
+        #
         def self.emit_label(name)
           "#{name}:"
         end
 
+        #
+        # Emits an instruction.
+        #
+        # @param [Instruction] ins
+        #   The instruction.
+        #
+        # @return [String]
+        #   The formatted instruction.
+        #
+        # @abstract
+        #
         def self.emit_instruction(ins)
         end
 
+        #
+        # Emits a program.
+        #
+        # @param [Program] program
+        #   The program.
+        #
+        # @return [String]
+        #   The formatted program.
+        #
         def self.emit_program(program)
-          lines = [emit_label('_start')]
+          lines = [emit_label(:_start)]
 
           program.instructions.each do |ins|
             case ins

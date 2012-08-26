@@ -24,6 +24,9 @@ require 'ronin/asm/syntax/common'
 module Ronin
   module ASM
     module Syntax
+      #
+      # Handles emitting Assembly source code in ATT syntax.
+      #
       class ATT < Common
 
         WIDTHS = {
@@ -34,14 +37,41 @@ module Ronin
           nil => ''
         }
 
+        #
+        # Emits a register.
+        #
+        # @param [Register] reg
+        #   The register.
+        #
+        # @return [String]
+        #   The register name.
+        #
         def self.emit_register(reg)
           "%#{reg.name}"
         end
 
+        #
+        # Emits an immediate operand.
+        #
+        # @param [ImmediateOperand] op
+        #   The operand.
+        #
+        # @return [String]
+        #   The formatted immediate operand.
+        #
         def self.emit_immediate_operand(op)
           "$#{emit_integer(op.value)}"
         end
 
+        #
+        # Emits a memory operand.
+        #
+        # @param [MemoryOperand] op
+        #   The operand.
+        #
+        # @return [String]
+        #   The formatted memory operand.
+        #
         def self.emit_memory_operand(op)
           asm = emit_register(op.base)
 
@@ -56,6 +86,15 @@ module Ronin
           return asm
         end
 
+        #
+        # Emits an instruction.
+        #
+        # @param [Instruction] ins
+        #   The instruction.
+        #
+        # @return [String]
+        #   The formatted instruction.
+        #
         def self.emit_instruction(ins)
           line = emit_keyword(ins.name)
 
@@ -70,6 +109,15 @@ module Ronin
           return line
         end
 
+        #
+        # Emits a program.
+        #
+        # @param [Program] program
+        #   The program.
+        #
+        # @return [String]
+        #   The formatted program.
+        #
         def self.emit_program(program)
           asm = super(program)
 
