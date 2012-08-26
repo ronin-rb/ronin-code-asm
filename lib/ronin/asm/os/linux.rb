@@ -27,10 +27,9 @@ module Ronin
       module Linux
         DATA_DIR = File.join('ronin','asm','linux')
 
-        SYSCALLS = {
-          :x86 => Config.load_yaml_file(File.join(DATA_DIR,'x86','syscalls.yml')),
-          :amd64 => Config.load_yaml_file(File.join(DATA_DIR,'amd64','syscalls.yml'))
-        }
+        SYSCALLS = Hash.new do |hash,key|
+          hash[key] = Config.load_yaml_file(File.join(DATA_DIR,key.to_s,'syscalls.yml'))
+        end
 
         def syscall(name,*arguments)
           name = name.to_sym
