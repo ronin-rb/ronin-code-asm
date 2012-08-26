@@ -11,6 +11,8 @@ describe ASM::Program do
   context "when :arch => :x86" do
     subject { described_class.new(:arch => :x86) }
 
+    its(:word_size) { should == 4 }
+
     describe "#syscall" do
       before { subject.syscall }
 
@@ -23,6 +25,8 @@ describe ASM::Program do
 
   context "when :arch => :amd64" do
     subject { described_class.new(:arch => :amd64) }
+
+    its(:word_size) { should == 8 }
 
     describe "#syscall" do
       before { subject.syscall }
