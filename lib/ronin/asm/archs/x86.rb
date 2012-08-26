@@ -262,9 +262,14 @@ module Ronin
         def ss; reg(:ss); end
 
         #
+        # Generates the instruction to trigger an interrupt.
+        #
+        def interupt(number); instruction(:int,number); end
+
+        #
         # Generates the instruction to invoke a syscall.
         #
-        def syscall; instruction(:int, 0x80); end
+        def syscall; interrupt(0x80); end
 
         #
         # The Stack Base Pointer register.

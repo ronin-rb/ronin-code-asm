@@ -104,7 +104,9 @@ module Ronin
 
         if options.has_key?(:os)
           @os = options[:os].to_s
+
           extend OS.const_get(@os)
+          initialize_os if respond_to?(:initialize_os)
         end
 
         if options[:define]
@@ -231,6 +233,25 @@ module Ronin
         @instructions << name
         instance_eval(&block)
         return name
+      end
+
+      #
+      # Generic method for generating the instruction for causing an interrupt.
+      #
+      # @param [Integer] number
+      #   The interrupt number to call.
+      #
+      # @abstract
+      #
+      def interrupt(number)
+      end
+
+      #
+      # Generic method for generating the instruction for invoking a syscall.
+      #
+      # @abstract
+      #
+      def syscall
       end
 
       #
