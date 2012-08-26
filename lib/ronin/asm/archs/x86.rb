@@ -264,7 +264,7 @@ module Ronin
         #
         # Generates the instruction to invoke a syscall.
         #
-        def syscall_int; instruction(:int, 0x80); end
+        def syscall; instruction(:int, 0x80); end
 
         #
         # The Stack Base Pointer register.

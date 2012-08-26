@@ -61,7 +61,7 @@ module Ronin
 
               reg_set stack_pointer, regs[0]
               reg_set number, @general_registers[0]
-              syscall_int(number)
+              syscall
             end
           else
             regs = @general_registers[1,arguments.length]
@@ -72,7 +72,7 @@ module Ronin
               end
 
               reg_set number, @general_registers[0]
-              syscall_int(number)
+              syscall
             end
           end
         end

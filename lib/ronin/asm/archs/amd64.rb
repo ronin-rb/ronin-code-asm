@@ -142,7 +142,7 @@ module Ronin
         #
         # Generates the instruction to invoke a syscall.
         #
-        def syscall_int; instruction(:syscall); end
+        def syscall; instruction(:syscall); end
 
         protected
 
