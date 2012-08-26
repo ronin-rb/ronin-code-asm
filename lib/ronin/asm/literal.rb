@@ -23,6 +23,15 @@ module Ronin
   module ASM
     class Literal < Struct.new(:value, :width)
 
+      #
+      # Initializes a new Literal.
+      #
+      # @param [Integer, nil] value
+      #   The literal value.
+      #
+      # @param [nil, 1, 2, 4, 8] width
+      #   The size in bytes of the value.
+      #
       def initialize(value,width=nil)
         value   = value.to_i
         width ||= case value
@@ -37,10 +46,22 @@ module Ronin
         super(value,width)
       end
 
+      #
+      # Converts the literal to an Integer.
+      #
+      # @return [Integer]
+      #   The literal value.
+      #
       def to_i
         self.value
       end
 
+      #
+      # Converts the literal to a String.
+      #
+      # @return [String]
+      #   The literal value.
+      #
       def to_s
         self.value.to_s
       end
