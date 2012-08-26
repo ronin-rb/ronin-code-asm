@@ -19,4 +19,5 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
+require 'ronin/asm/os/os'
 require 'ronin/asm/os/linux'

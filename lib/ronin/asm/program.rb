@@ -55,7 +55,16 @@ module Ronin
       attr_reader :word_size
 
       # The registers available to the program
+      #
+      # @return [Hash{Symbol => Register}]
+      #   The names and registers.
       attr_reader :registers
+
+      # The syscalls available to the program
+      #
+      # @return [Hash{Symbol => Integer}]
+      #   The syscall names and numbers.
+      attr_reader :syscalls
 
       # The registers used by the program
       attr_reader :allocated_registers
@@ -100,8 +109,11 @@ module Ronin
 
         extend Archs.const_get(@arch.to_s.upcase)
 
+        @syscalls = {}
+
         if options.has_key?(:os)
-          @os = options[:os].to_s
+          @os       = options[:os].to_s
+          @syscalls = OS::SYSCALLS[@os][@arch]
 
           extend OS.const_get(@os)
         end

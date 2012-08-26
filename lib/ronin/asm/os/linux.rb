@@ -28,54 +28,6 @@ module Ronin
       # Contains Linux specific helper methods.
       #
       module Linux
-        # Data directory for Linux
-        DATA_DIR = File.join('ronin','asm','linux')
-
-        # Linux syscalls organized by architecture
-        SYSCALLS = Hash.new do |hash,key|
-          hash[key] = Config.load_yaml_file(File.join(DATA_DIR,key.to_s,'syscalls.yml'))
-        end
-
-        #
-        # Generates instructions to invoke a syscall.
-        #
-        # @param [Symbol] name
-        #   The name of the syscall.
-        #
-        # @param [Array] arguments
-        #   Arguments for the syscall.
-        #
-        def syscall(name,*arguments)
-          name   = name.to_sym
-          number = SYSCALLS[@arch][name]
-
-          unless number
-            raise(ArgumentError,"unknown syscall: #{name}")
-          end
-
-          if arguments.length > 6
-            regs = [@general_registers[1]]
-
-            critical_region(regs) do
-              arguments.reverse_each { |arg| stack_push(arg) }
-
-              reg_set stack_pointer, regs[0]
-              reg_set number, @general_registers[0]
-              super()
-            end
-          else
-            regs = @general_registers[1,arguments.length]
-
-            critical_region(regs) do
-              (arguments.length - 1).downto(0) do |index|
-                reg_set(arguments[index],regs[index])
-              end
-
-              reg_set number, @general_registers[0]
-              super()
-            end
-          end
-        end
       end
     end
   end

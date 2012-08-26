@@ -19,17 +19,22 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'data_paths'
+require 'ronin/asm/config'
 
 module Ronin
   module ASM
-    module Config
-      include DataPaths
-      extend DataPaths::Finders
-
-      register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
-
-      DATA_DIR = File.join('ronin','asm')
+    module OS
+      #
+      # Collection of all known syscalls, grouped by OS and Arch.
+      #
+      # @return [Hash{Symbol => Hash{Symbol => Hash{Symbol => Integer}}}]
+      #   Syscall names and numbers, organized by OS then Arch.
+      #
+      SYSCALLS = Hash.new do |hash,os|
+        hash[os] = Hash.new do |subhash,arch|
+          subhash[arch] = Config.load_yaml_file(File.join(Config::DATA_DIR,os.to_s.downcase,arch.to_s,'syscalls.yml'))
+        end
+      end
     end
   end
 end
