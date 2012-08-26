@@ -13,6 +13,17 @@ describe ASM::Program do
 
     its(:word_size) { should == 4 }
 
+    describe "#interrupt" do
+      let(:number) { 0x0a }
+
+      before { subject.interrupt(number) }
+
+      it "should add an 'int' instruction with the interrupt number" do
+        subject.instructions[-1].name.should == :int
+        subject.instructions[-1].operands[0].value.should == number
+      end
+    end
+
     describe "#syscall" do
       before { subject.syscall }
 
