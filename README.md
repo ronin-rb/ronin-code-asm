@@ -96,9 +96,14 @@ Labels can be expressed with blocks:
 
 ### Syscalls
 
-Syscalls can be called by name using the `syscall` method:
+If `:os` is specified, then syscall numbers can be looked up via the `syscalls` 
+Hash:
 
-    syscall :exit, -1
+    ASM.new(:os => 'Linux') do
+      # ...
+      mov syscalls[:execve], al
+      int 0x80
+    end
 
 ## Requirements
 
