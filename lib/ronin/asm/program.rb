@@ -54,6 +54,9 @@ module Ronin
       # The registers available to the program
       attr_reader :registers
 
+      # The general purpose registers
+      attr_reader :general_registers
+
       # The registers used by the program
       attr_reader :allocated_registers
 
