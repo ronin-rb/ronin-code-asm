@@ -13,6 +13,87 @@ describe ASM::Program do
 
     its(:word_size) { should == 4 }
 
+    describe "#stask_base" do
+      it "should be ebp" do
+        subject.stack_base.name.should == :ebp
+      end
+    end
+
+    describe "#stask_pointer" do
+      it "should be esp" do
+        subject.stack_pointer.name.should == :esp
+      end
+    end
+
+    describe "#stack_push" do
+      let(:value) { 0xff }
+
+      before { subject.stack_push(value) }
+
+      it "should add a 'push' instruction with a value" do
+        subject.instructions[-1].name.should == :push
+        subject.instructions[-1].operands[0].value.should == value
+      end
+    end
+
+    describe "#stack_pop" do
+      let(:register) { subject.register(:eax) }
+
+      before { subject.stack_pop(register) }
+
+      it "should add a 'pop' instruction with a register" do
+        subject.instructions[-1].name.should == :pop
+        subject.instructions[-1].operands[0].should == register
+      end
+    end
+
+    describe "#register_clear" do
+      let(:name) { :eax }
+
+      before { subject.register_clear(name) }
+
+      it "should add a 'xor' instruction with a registers" do
+        subject.instructions[-1].name.should == :xor
+        subject.instructions[-1].operands[0].name.should == name
+        subject.instructions[-1].operands[1].name.should == name
+      end
+    end
+
+    describe "#register_set" do
+      let(:name)  { :eax }
+      let(:value) { 0xff }
+
+      before { subject.register_set(value,name) }
+
+      it "should add a 'xor' instruction with a registers" do
+        subject.instructions[-1].name.should == :mov
+        subject.instructions[-1].operands[0].value.should == value
+        subject.instructions[-1].operands[1].name.should == name
+      end
+    end
+
+    describe "#register_save" do
+      let(:name)  { :eax }
+
+      before { subject.register_save(name) }
+
+      it "should add a 'xor' instruction with a registers" do
+        subject.instructions[-1].name.should == :push
+        subject.instructions[-1].operands[0].name.should == name
+      end
+    end
+
+    describe "#register_save" do
+      let(:name)  { :eax }
+
+      before { subject.register_load(name) }
+
+      it "should add a 'xor' instruction with a registers" do
+        subject.instructions[-1].name.should == :pop
+        subject.instructions[-1].operands[0].name.should == name
+      end
+    end
+
     describe "#interrupt" do
       let(:number) { 0x0a }
 
