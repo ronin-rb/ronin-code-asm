@@ -24,13 +24,27 @@ require 'ronin/asm/config'
 module Ronin
   module ASM
     module OS
+      #
+      # Contains Linux specific helper methods.
+      #
       module Linux
+        # Data directory for Linux
         DATA_DIR = File.join('ronin','asm','linux')
 
+        # Linux syscalls organized by architecture
         SYSCALLS = Hash.new do |hash,key|
           hash[key] = Config.load_yaml_file(File.join(DATA_DIR,key.to_s,'syscalls.yml'))
         end
 
+        #
+        # Generates instructions to invoke a syscall.
+        #
+        # @param [Symbol] name
+        #   The name of the syscall.
+        #
+        # @param [Array] arguments
+        #   Arguments for the syscall.
+        #
         def syscall(name,*arguments)
           name   = name.to_sym
           number = SYSCALLS[@arch][name]
