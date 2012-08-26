@@ -132,14 +132,14 @@ module Ronin
         #
         # Emits multiple operands.
         #
-        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] op
+        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
         #   The Array of operands.
         #
         # @return [String]
         #   The formatted operands.
         #
-        def self.emit_operands(operands)
-          operands.map { |op| emit_operand(op) }.join(",\t")
+        def self.emit_operands(ops)
+          ops.map { |op| emit_operand(op) }.join(",\t")
         end
 
         #
