@@ -33,10 +33,6 @@ module Ronin
           8 => 'QWORD'
         }
 
-        def self.emit_label(name)
-          "#{name}:"
-        end
-
         def self.emit_register(reg)
           reg.name.to_s
         end
