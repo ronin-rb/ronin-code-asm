@@ -73,4 +73,12 @@ describe Archs::AMD64 do
       )
     end
   end
+
+  describe "#syscall" do
+    before { subject.syscall }
+
+    it "should add a 'syscall' instruction" do
+      subject.instructions[-1].name.should == :syscall
+    end
+  end
 end

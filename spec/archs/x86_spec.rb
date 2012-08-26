@@ -10,4 +10,13 @@ describe Archs::X86 do
   subject { program }
 
   it_should_behave_like "Archs::X86"
+
+  describe "#syscall" do
+    before { subject.syscall }
+
+    it "should add an 'int 0x80' instruction" do
+      subject.instructions[-1].name.should == :int
+      subject.instructions[-1].operands[0].value.should == 0x80
+    end
+  end
 end
