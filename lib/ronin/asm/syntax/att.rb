@@ -60,7 +60,11 @@ module Ronin
           line = emit_keyword(ins.name)
 
           unless ins.operands.empty?
-            line << WIDTHS[ins.width] << "\t" << emit_operands(ins.operands)
+            unless (ins.operands.length == 1 && ins.width == 1)
+              line << WIDTHS[ins.width]
+            end
+
+            line << "\t" << emit_operands(ins.operands)
           end
 
           return line

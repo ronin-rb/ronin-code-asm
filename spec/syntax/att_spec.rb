@@ -79,6 +79,17 @@ describe ASM::Syntax::ATT do
       end
     end
 
+    context "with one operand" do
+      context "with width of 1" do
+        let(:literal)     { Literal.new(0x80, 1) }
+        let(:instruction) { Instruction.new(:int, [literal]) }
+
+        it "should not append a size specifier to the instruction name" do
+          subject.emit_instruction(instruction).should == "int\t$0x80"
+        end
+      end
+    end
+
     context "with multiple operands" do
       let(:register)    { Register.new(:eax, 4) }
       let(:literal)     { Literal.new(0xff, 1)  }
