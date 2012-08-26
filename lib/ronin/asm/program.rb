@@ -21,9 +21,9 @@
 
 require 'ronin/asm/archs'
 require 'ronin/asm/os'
-require 'ronin/asm/literal'
 require 'ronin/asm/register'
 require 'ronin/asm/instruction'
+require 'ronin/asm/immediate_operand'
 require 'ronin/asm/syntax'
 
 require 'tempfile'
@@ -158,55 +158,55 @@ module Ronin
       end
 
       #
-      # Creates a literal of size 1 (byte).
+      # Creates an operand of size 1 (byte).
       #
       # @param [Integer] number
-      #   The value of the literal.
+      #   The value of the operand.
       #
-      # @return [Literal]
-      #   The new literal value.
+      # @return [ImmediateOperand]
+      #   The new operand value.
       #
       def byte(number)
-        Literal.new(number,1)
+        ImmediateOperand.new(number,1)
       end
 
       #
-      # Creates a literal of size 2 (bytes).
+      # Creates a operand of size 2 (bytes).
       #
       # @param [Integer] number
-      #   The value of the literal.
+      #   The value of the operand.
       #
-      # @return [Literal]
-      #   The new literal value.
+      # @return [ImmediateOperand]
+      #   The new operand value.
       #
       def word(number)
-        Literal.new(number,2)
+        ImmediateOperand.new(number,2)
       end
 
       #
-      # Creates a literal of size 4 (bytes).
+      # Creates a operand of size 4 (bytes).
       #
       # @param [Integer] number
-      #   The value of the literal.
+      #   The value of the operand.
       #
-      # @return [Literal]
-      #   The new literal value.
+      # @return [ImmediateOperand]
+      #   The new operand value.
       #
       def dword(number)
-        Literal.new(number,4)
+        ImmediateOperand.new(number,4)
       end
 
       #
-      # Creates a literal of size 8 (bytes).
+      # Creates a operand of size 8 (bytes).
       #
       # @param [Integer] number
-      #   The value of the literal.
+      #   The value of the operand.
       #
-      # @return [Literal]
-      #   The new literal value.
+      # @return [ImmediateOperand]
+      #   The new operand.
       #
       def qword(number)
-        Literal.new(number,8)
+        ImmediateOperand.new(number,8)
       end
 
       #

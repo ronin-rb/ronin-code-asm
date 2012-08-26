@@ -2,8 +2,8 @@ require 'spec_helper'
 
 require 'ronin/asm/syntax/intel'
 require 'ronin/asm/register'
-require 'ronin/asm/literal'
-require 'ronin/asm/immediate'
+require 'ronin/asm/immediate_operand'
+require 'ronin/asm/memory_operand'
 require 'ronin/asm/instruction'
 require 'ronin/asm/program'
 
@@ -18,53 +18,53 @@ describe ASM::Syntax::Intel do
     end
   end
 
-  describe "emit_literal" do
-    let(:literal) { Literal.new(255, 1) }
+  describe "emit_immediate_operand" do
+    let(:operand) { ImmediateOperand.new(255, 1) }
 
     it "should prepend a size specifier" do
-      subject.emit_literal(literal).should == "BYTE 0xff"
+      subject.emit_immediate_operand(operand).should == "BYTE 0xff"
     end
   end
 
-  describe "emit_immediate" do
-    let(:register)  { Register.new(:eax, 4)   }
-    let(:immediate) { Immediate.new(register) }
+  describe "emit_memory_operand" do
+    let(:register) { Register.new(:eax, 4)   }
+    let(:operand)  { MemoryOperand.new(register) }
 
-    it "should enclose the immediate in brackets" do
-      subject.emit_immediate(immediate).should == "[eax]"
+    it "should enclose the memory in brackets" do
+      subject.emit_memory_operand(operand).should == "[eax]"
     end
 
     context "with an offset" do
-      let(:offset)    { 255 }
-      let(:immediate) { Immediate.new(register,offset) }
+      let(:offset)  { 255 }
+      let(:operand) { MemoryOperand.new(register,offset) }
 
       it "should add the offset to the base" do
-        subject.emit_immediate(immediate).should == "[eax+0xff]"
+        subject.emit_memory_operand(operand).should == "[eax+0xff]"
       end
 
       context "when 0" do
-        let(:immediate) { Immediate.new(register,0) }
+        let(:operand) { MemoryOperand.new(register,0) }
 
         it "should omit the offset" do
-          subject.emit_immediate(immediate).should == "[eax]"
+          subject.emit_memory_operand(operand).should == "[eax]"
         end
       end
     end
 
     context "with an index" do
-      let(:index)     { Register.new(:esi, 4) }
-      let(:immediate) { Immediate.new(register,0,index) }
+      let(:index)   { Register.new(:esi, 4) }
+      let(:operand) { MemoryOperand.new(register,0,index) }
 
       it "should add the index to the base" do
-        subject.emit_immediate(immediate).should == "[eax+esi]"
+        subject.emit_memory_operand(operand).should == "[eax+esi]"
       end
 
       context "with a scale" do
-        let(:scale)     { 4 }
-        let(:immediate) { Immediate.new(register,0,index,scale) }
+        let(:scale)   { 4 }
+        let(:operand) { MemoryOperand.new(register,0,index,scale) }
 
         it "should multiple the index by the scale" do
-          subject.emit_immediate(immediate).should == "[eax+esi*0x4]"
+          subject.emit_memory_operand(operand).should == "[eax+esi*0x4]"
         end
       end
     end
@@ -81,8 +81,8 @@ describe ASM::Syntax::Intel do
 
     context "with multiple operands" do
       let(:register)    { Register.new(:eax, 4) }
-      let(:literal)     { Literal.new(0xff, 1)  }
-      let(:instruction) { Instruction.new(:mov, [literal, register]) }
+      let(:immediate)   { ImmediateOperand.new(0xff, 1)  }
+      let(:instruction) { Instruction.new(:mov, [immediate, register]) }
 
       it "should emit the operands" do
         subject.emit_instruction(instruction).should == "mov\teax,\tBYTE 0xff"

@@ -41,8 +41,8 @@ describe ASM::Program do
   end
 
   describe "#byte" do
-    it "should return a Literal" do
-      subject.byte(1).should be_kind_of(ASM::Literal)
+    it "should return a ImmedateOperand" do
+      subject.byte(1).should be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 1" do
@@ -51,8 +51,8 @@ describe ASM::Program do
   end
 
   describe "#word" do
-    it "should return a Literal" do
-      subject.word(1).should be_kind_of(ASM::Literal)
+    it "should return a ImmediateOperand" do
+      subject.word(1).should be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 2" do
@@ -61,8 +61,8 @@ describe ASM::Program do
   end
 
   describe "#dword" do
-    it "should return a Literal" do
-      subject.dword(1).should be_kind_of(ASM::Literal)
+    it "should return a ImmediateOperand" do
+      subject.dword(1).should be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 4" do
@@ -71,8 +71,8 @@ describe ASM::Program do
   end
 
   describe "#qword" do
-    it "should return a Literal" do
-      subject.qword(1).should be_kind_of(ASM::Literal)
+    it "should return a ImmediateOperand" do
+      subject.qword(1).should be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 8" do

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 require 'ronin/asm/syntax/att'
 require 'ronin/asm/register'
-require 'ronin/asm/literal'
-require 'ronin/asm/immediate'
+require 'ronin/asm/immediate_operand'
+require 'ronin/asm/memory_operand'
 require 'ronin/asm/instruction'
 require 'ronin/asm/program'
 
@@ -18,53 +18,53 @@ describe ASM::Syntax::ATT do
     end
   end
 
-  describe "emit_literal" do
-    let(:literal) { Literal.new(255, 1) }
+  describe "emit_immediate_operand" do
+    let(:operand) { ImmediateOperand.new(255, 1) }
 
-    it "should prepend a '$' to the literal" do
-      subject.emit_literal(literal).should == "$0xff"
+    it "should prepend a '$' to the immediate" do
+      subject.emit_immediate_operand(operand).should == "$0xff"
     end
   end
 
-  describe "emit_immediate" do
-    let(:register)  { Register.new(:eax, 4)   }
-    let(:immediate) { Immediate.new(register) }
+  describe "emit_memory_operand" do
+    let(:register) { Register.new(:eax, 4)   }
+    let(:operand)  { MemoryOperand.new(register) }
 
-    it "should enclose the immediate in parenthesis" do
-      subject.emit_immediate(immediate).should == "(%eax)"
+    it "should enclose the memory in parenthesis" do
+      subject.emit_memory_operand(operand).should == "(%eax)"
     end
 
     context "with an offset" do
-      let(:offset)    { 255 }
-      let(:immediate) { Immediate.new(register,offset) }
+      let(:offset)  { 255 }
+      let(:operand) { MemoryOperand.new(register,offset) }
 
       it "should prepend the offset as an integer" do
-        subject.emit_immediate(immediate).should == "0xff(%eax)"
+        subject.emit_memory_operand(operand).should == "0xff(%eax)"
       end
 
       context "when 0" do
-        let(:immediate) { Immediate.new(register,0) }
+        let(:operand) { MemoryOperand.new(register,0) }
 
         it "should omit the offset" do
-          subject.emit_immediate(immediate).should == "(%eax)"
+          subject.emit_memory_operand(operand).should == "(%eax)"
         end
       end
     end
 
     context "with an index" do
-      let(:index)     { Register.new(:esi, 4) }
-      let(:immediate) { Immediate.new(register,0,index) }
+      let(:index)   { Register.new(:esi, 4) }
+      let(:operand) { MemoryOperand.new(register,0,index) }
 
       it "should include the index argument" do
-        subject.emit_immediate(immediate).should == "(%eax,%esi)"
+        subject.emit_memory_operand(operand).should == "(%eax,%esi)"
       end
 
       context "with a scale" do
-        let(:scale)     { 4 }
-        let(:immediate) { Immediate.new(register,0,index,scale) }
+        let(:scale)   { 4 }
+        let(:operand) { MemoryOperand.new(register,0,index,scale) }
 
         it "should prepend the scale argument as a decimal" do
-          subject.emit_immediate(immediate).should == "(%eax,%esi,#{scale})"
+          subject.emit_memory_operand(operand).should == "(%eax,%esi,#{scale})"
         end
       end
     end
@@ -81,8 +81,8 @@ describe ASM::Syntax::ATT do
 
     context "with one operand" do
       context "with width of 1" do
-        let(:literal)     { Literal.new(0x80, 1) }
-        let(:instruction) { Instruction.new(:int, [literal]) }
+        let(:immediate)   { ImmediateOperand.new(0x80, 1) }
+        let(:instruction) { Instruction.new(:int, [immediate]) }
 
         it "should not append a size specifier to the instruction name" do
           subject.emit_instruction(instruction).should == "int\t$0x80"
@@ -92,8 +92,8 @@ describe ASM::Syntax::ATT do
 
     context "with multiple operands" do
       let(:register)    { Register.new(:eax, 4) }
-      let(:literal)     { Literal.new(0xff, 1)  }
-      let(:instruction) { Instruction.new(:mov, [literal, register]) }
+      let(:immediate)   { ImmediateOperand.new(0xff, 1)  }
+      let(:instruction) { Instruction.new(:mov, [immediate, register]) }
 
       it "should add a size specifier to the instruction name" do
         subject.emit_instruction(instruction).should =~ /^movl/

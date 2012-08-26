@@ -19,7 +19,7 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'ronin/asm/immediate'
+require 'ronin/asm/memory_operand'
 
 module Ronin
   module ASM
@@ -29,25 +29,25 @@ module Ronin
       # Adds an offset to the value within the register and dereferences the
       # address.
       #
-      # @param [Immediate, Register, Integer] offset
+      # @param [MemoryOperand, Register, Integer] offset
       #   The offset to add to the value of the register.
       #
-      # @return [Immediate]
-      #   The new Immediate value.
+      # @return [MemoryOperand]
+      #   The new Memory Operand.
       #
       # @raise [TypeError]
-      #   the `offset` was not an {Immediate}, {Register} or Integer.
+      #   the `offset` was not an {MemoryOperand}, {Register} or Integer.
       #
       def +(offset)
         case offset
-        when Immediate
-          Immediate.new(self,offset.offset,offset.index,offset.scale)
+        when MemoryOperand
+          MemoryOperand.new(self,offset.offset,offset.index,offset.scale)
         when Register
-          Immediate.new(self,0,offset)
+          MemoryOperand.new(self,0,offset)
         when Integer
-          Immediate.new(self,offset)
+          MemoryOperand.new(self,offset)
         else
-          raise(TypeError,"offset was not an Immediate, Register or Integer")
+          raise(TypeError,"offset was not an MemoryOperand, Register or Integer")
         end
       end
 
@@ -58,11 +58,11 @@ module Ronin
       # @param [Integer] offset
       #   The value to subtract from the value of the register.
       #
-      # @return [Immediate]
-      #   The new Immediate value.
+      # @return [MemoryOperand]
+      #   The new Memory Operand.
       #
       def -(offset)
-        Immediate.new(self,-offset)
+        MemoryOperand.new(self,-offset)
       end
 
       #
@@ -71,11 +71,11 @@ module Ronin
       # @param [Integer] scale
       #   The scale to multiply the value within register by.
       #
-      # @return [Immediate]
-      #   The new Immediate value.
+      # @return [MemoryOperand]
+      #   The new Memory Operand.
       #
       def *(scale)
-        Immediate.new(nil,0,self,scale)
+        MemoryOperand.new(nil,0,self,scale)
       end
 
       #

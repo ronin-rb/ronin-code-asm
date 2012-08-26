@@ -8,28 +8,28 @@ describe Register do
   subject { register }
 
   describe "#+" do
-    context "when given an Immediate" do
-      let(:immediate) { Immediate.new(nil,10,register,2) }
+    context "when given an MemoryOperand" do
+      let(:operand) { MemoryOperand.new(nil,10,register,2) }
 
-      subject { register + immediate }
+      subject { register + operand }
 
-      it { should be_kind_of(Immediate) }
+      it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
         subject.base.should == register
       end
 
       it "should preserve the offset, index and scale" do
-        subject.offset.should == immediate.offset
-        subject.index.should  == immediate.index
-        subject.scale.should  == immediate.scale
+        subject.offset.should == operand.offset
+        subject.index.should  == operand.index
+        subject.scale.should  == operand.scale
       end
     end
 
     context "when given a Register" do
       subject { register + register }
 
-      it { should be_kind_of(Immediate) }
+      it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
         subject.base.should == register
@@ -47,7 +47,7 @@ describe Register do
 
       subject { register + offset }
 
-      it { should be_kind_of(Immediate) }
+      it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
         subject.base.should == register
@@ -72,7 +72,7 @@ describe Register do
 
     subject { register - offset }
 
-    it { should be_kind_of(Immediate) }
+    it { should be_kind_of(MemoryOperand) }
 
     it "should set the base" do
       subject.base.should == register
@@ -88,7 +88,7 @@ describe Register do
 
     subject { register * scale }
 
-    it { should be_kind_of(Immediate) }
+    it { should be_kind_of(MemoryOperand) }
 
     its(:base)   { should be_nil }
     its(:offset) { should == 0 }

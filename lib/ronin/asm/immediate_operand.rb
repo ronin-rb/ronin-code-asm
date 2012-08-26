@@ -21,13 +21,18 @@
 
 module Ronin
   module ASM
-    class Literal < Struct.new(:value, :width)
+    #
+    # Represents an Immediate Data Operand.
+    #
+    # @see http://asm.sourceforge.net/articles/linasm.html#Prefixes
+    #
+    class ImmediateOperand < Struct.new(:value, :width)
 
       #
-      # Initializes a new Literal.
+      # Initializes a new Immediate Operand.
       #
       # @param [Integer, nil] value
-      #   The literal value.
+      #   The value.
       #
       # @param [nil, 1, 2, 4, 8] width
       #   The size in bytes of the value.
@@ -47,20 +52,20 @@ module Ronin
       end
 
       #
-      # Converts the literal to an Integer.
+      # Converts the operand to an Integer.
       #
       # @return [Integer]
-      #   The literal value.
+      #   The value.
       #
       def to_i
         self.value
       end
 
       #
-      # Converts the literal to a String.
+      # Converts the operand to a String.
       #
       # @return [String]
-      #   The literal value.
+      #   The value in String form.
       #
       def to_s
         self.value.to_s

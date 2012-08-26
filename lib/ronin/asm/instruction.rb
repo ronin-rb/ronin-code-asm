@@ -19,8 +19,7 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'ronin/asm/literal'
-require 'ronin/asm/immediate'
+require 'ronin/asm/immediate_operand'
 
 module Ronin
   module ASM
@@ -29,7 +28,7 @@ module Ronin
       def initialize(name,operands)
         operands = operands.map do |op|
           case op
-          when Integer, nil then Literal.new(op)
+          when Integer, nil then ImmediateOperand.new(op)
           else                   op
           end
         end

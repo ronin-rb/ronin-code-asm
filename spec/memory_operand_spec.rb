@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-require 'ronin/asm/immediate'
+require 'ronin/asm/memory_operand'
 require 'ronin/asm/register'
 
-describe Immediate do
+describe MemoryOperand do
   let(:register) { Register.new(:eax, 4) }
 
   describe "#initialize" do
@@ -39,34 +39,34 @@ describe Immediate do
   end
 
   describe "#+" do
-    let(:immediate) { described_class.new(register,4,register,2) }
+    let(:operand) { described_class.new(register,4,register,2) }
 
-    subject { immediate + 4 }
+    subject { operand + 4 }
 
     it "should add to offset" do
       subject.offset.should == 8
     end
 
     it "should not change base, index or scale" do
-      subject.base.should  == immediate.base
-      subject.index.should == immediate.index
-      subject.scale.should == immediate.scale
+      subject.base.should  == operand.base
+      subject.index.should == operand.index
+      subject.scale.should == operand.scale
     end
   end
 
   describe "#-" do
-    let(:immediate) { described_class.new(register,4,register,2) }
+    let(:operand) { described_class.new(register,4,register,2) }
 
-    subject { immediate - 2 }
+    subject { operand - 2 }
 
     it "should subtract from offset" do
       subject.offset.should == 2
     end
 
     it "should not change base, index or scale" do
-      subject.base.should  == immediate.base
-      subject.index.should == immediate.index
-      subject.scale.should == immediate.scale
+      subject.base.should  == operand.base
+      subject.index.should == operand.index
+      subject.scale.should == operand.scale
     end
   end
 

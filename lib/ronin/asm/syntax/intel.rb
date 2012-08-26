@@ -41,24 +41,24 @@ module Ronin
           reg.name.to_s
         end
 
-        def self.emit_literal(literal)
-          "#{WIDTHS[literal.width]} #{emit_integer(literal.value)}"
+        def self.emit_immediate_operand(op)
+          "#{WIDTHS[op.width]} #{emit_integer(op.value)}"
         end
 
-        def self.emit_immediate(imm)
-          asm = emit(imm.base)
+        def self.emit_memory_operand(op)
+          asm = emit_register(op.base)
 
-          if imm.index
-            asm << '+' << emit_register(imm.index)
-            asm << '*' << emit_integer(imm.scale) if imm.scale > 1
+          if op.index
+            asm << '+' << emit_register(op.index)
+            asm << '*' << emit_integer(op.scale) if op.scale > 1
           end
 
-          if imm.offset != 0
-            sign = if imm.offset >= 0 then '+'
-                   else                    '-'
+          if op.offset != 0
+            sign = if op.offset >= 0 then '+'
+                   else                   '-'
                    end
 
-            asm << sign << emit_integer(imm.offset)
+            asm << sign << emit_integer(op.offset)
           end
 
           return "[#{asm}]"

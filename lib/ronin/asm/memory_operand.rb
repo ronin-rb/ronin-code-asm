@@ -24,14 +24,14 @@ require 'ronin/asm/register'
 module Ronin
   module ASM
     #
-    # Represents immediate memory.
+    # Represents a Memory Operand.
     #
     # @see http://asm.sourceforge.net/articles/linasm.html#Memory
     #
-    class Immediate < Struct.new(:base, :offset, :index, :scale)
+    class MemoryOperand < Struct.new(:base, :offset, :index, :scale)
 
       #
-      # Creates a new Immediate value.
+      # Creates a new Memory Operand.
       #
       # @param [Register, nil] base
       #   The base of the value.
@@ -69,33 +69,33 @@ module Ronin
       end
 
       #
-      # Adds to the offset of the Immediate value.
+      # Adds to the offset of the Memory Operand.
       #
       # @param [Integer] offset
-      #   The offset to add to the immediate value.
+      #   The offset to add to the Memory Operand.
       #
-      # @return [Immeidate]
-      #   The new Immediate object.
+      # @return [MemoryOperand]
+      #   The new Memory Operand.
       #
       def +(offset)
-        Immediate.new(self.base,self.offset+offset,self.index,self.scale)
+        MemoryOperand.new(self.base,self.offset+offset,self.index,self.scale)
       end
 
       #
-      # Subtracts from the offset of the Immediate value.
+      # Subtracts from the offset of the Memory Operand.
       #
       # @param [Integer] offset
-      #   The offset to subject from the immediate value.
+      #   The offset to subject from the Memory Operand.
       #
-      # @return [Immeidate]
-      #   The new Immediate object.
+      # @return [Memoryoperand]
+      #   The new Memory Operand.
       #
       def -(offset)
-        Immediate.new(self.base,self.offset-offset,self.index,self.scale)
+        MemoryOperand.new(self.base,self.offset-offset,self.index,self.scale)
       end
 
       #
-      # The width of the immediate value.
+      # The width of the Memory Operand.
       #
       # @return [Integer]
       #   The width taken from the base {Register}.

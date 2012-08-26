@@ -38,20 +38,20 @@ module Ronin
           "%#{reg.name}"
         end
 
-        def self.emit_literal(literal)
-          "$#{emit_integer(literal.value)}"
+        def self.emit_immediate_operand(op)
+          "$#{emit_integer(op.value)}"
         end
 
-        def self.emit_immediate(imm)
-          asm = emit(imm.base)
+        def self.emit_memory_operand(op)
+          asm = emit_register(op.base)
 
-          if imm.index
-            asm << ',' << emit_register(imm.index)
-            asm << ',' << imm.scale.to_s if imm.scale > 1
+          if op.index
+            asm << ',' << emit_register(op.index)
+            asm << ',' << op.scale.to_s if op.scale > 1
           end
 
           asm = "(#{asm})"
-          asm = emit_integer(imm.offset) + asm if imm.offset != 0
+          asm = emit_integer(op.offset) + asm if op.offset != 0
 
           return asm
         end

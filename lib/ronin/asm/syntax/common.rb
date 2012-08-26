@@ -19,6 +19,10 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
+require 'ronin/asm/register'
+require 'ronin/asm/immediate_operand'
+require 'ronin/asm/memory_operand'
+
 module Ronin
   module ASM
     module Syntax
@@ -31,9 +35,6 @@ module Ronin
         def self.emit_register(reg)
         end
 
-        def self.emit_literal(literal)
-        end
-
         def self.emit_integer(value)
           if value >= 0 then "0x%x" % value
           else               "-0x%x" % value.abs
@@ -43,19 +44,18 @@ module Ronin
         def self.emit_float(value)
         end
 
-        def self.emit(value)
-          case value
-          when Register then emit_register(value)
-          when Literal  then emit_literal(value)
-          when Symbol   then emit_keyword(value)
-          when Float    then emit_float(value)
-          end
+        def self.emit_immediate_operand(op)
         end
 
-        def self.emit_operand(value)
-          case value
-          when Immediate then emit_immediate(value)
-          else                emit(value)
+        def self.emit_memory_operand(op)
+        end
+
+        def self.emit_operand(op)
+          case op
+          when ImmediateOperand then emit_immediate_operand(op)
+          when MemoryOperand    then emit_memory_operand(op)
+          when Register         then emit_register(op)
+          when Symbol           then emit_keyword(op)
           end
         end
 
