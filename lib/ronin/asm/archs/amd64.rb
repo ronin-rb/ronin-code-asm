@@ -66,8 +66,8 @@ module Ronin
           define_register :rcx, 8, true
           define_register :rdx, 8, true
 
-          define_register :rsi, 8
-          define_register :rdi, 8
+          define_register :rsi, 8, true
+          define_register :rdi, 8, true
 
           define_register :rsp, 8
           define_register :rbp, 8
