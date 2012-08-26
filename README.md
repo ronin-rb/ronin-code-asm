@@ -12,6 +12,11 @@
 
 ## Features
 
+* Provides a Ruby DSL for writing Assembly programs.
+* Supports emitting ATT and Intel syntax.
+* Uses [yasm] to assemble the programs.
+* Supports assembling shellcode.
+
 ## Examples
 
 Create a program:
@@ -97,8 +102,9 @@ Syscalls can be called by name using the `syscall` method:
 
 ## Requirements
 
-* [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
-* [ruby-yasm](http://github.com/sophsec/ruby-yasm/) ~> 0.2
+* [data_paths] ~> 0.3
+* [yasm]: >= 0.6.0
+* [ruby-yasm] ~> 0.2
 
 ## Install
 
@@ -125,5 +131,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Ronin Asm.  If not, see <http://www.gnu.org/licenses/>.
 
+[yasm]: http://yasm.tortall.net/
 [data_paths]: https://github.com/postmodern/data_paths#readme
 [ruby-yasm]: https://github.com/sophsec/ruby-yasm#readme
