@@ -48,7 +48,7 @@ module Ronin
       # @raise [TypeError]
       #   `base` or `index` was not a {Register} or `nil`.
       #
-      def initialize(base,offset=0,index=nil,scale=1)
+      def initialize(base=nil,offset=0,index=nil,scale=1)
         unless (base.nil? || base.kind_of?(Register))
           raise(TypeError,"base must be a Register or nil")
         end
