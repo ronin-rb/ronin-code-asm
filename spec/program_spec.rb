@@ -37,6 +37,16 @@ describe ASM::Program do
     end
   end
 
+  describe "#register?" do
+    it "should return true for existing registers" do
+      subject.register?(:eax).should be_true
+    end
+
+    it "should return false for unknown registers" do
+      subject.register?(:foo).should be_false
+    end
+  end
+
   describe "#register" do
     it "should return a Register" do
       subject.register(:eax).should be_kind_of(ASM::Register)
