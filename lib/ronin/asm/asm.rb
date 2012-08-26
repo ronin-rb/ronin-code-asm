@@ -59,7 +59,7 @@ module Ronin
     #     end
     #   end
     #
-    def ASM.program(options={},&block)
+    def ASM.new(options={},&block)
       Program.new(options,&block)
     end
 
