@@ -19,6 +19,16 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
-require 'ronin/asm/os/os'
-require 'ronin/asm/os/freebsd'
-require 'ronin/asm/os/linux'
+require 'ronin/asm/config'
+
+module Ronin
+  module ASM
+    module OS
+      #
+      # Contains FreeBSD specific helper methods.
+      #
+      module FreeBSD
+      end
+    end
+  end
+end
