@@ -157,7 +157,6 @@ module Ronin
         def register_load(name)
           stack_pop(register(name))
         end
-
       end
     end
   end
