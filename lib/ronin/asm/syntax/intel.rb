@@ -77,7 +77,7 @@ module Ronin
         def self.emit_instruction(ins)
           line = emit_keyword(ins.name)
 
-          if ins.operands
+          unless ins.operands.empty?
             line << "\t" << emit_operands(ins.operands)
           end
 
