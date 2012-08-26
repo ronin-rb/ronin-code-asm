@@ -51,6 +51,9 @@ module Ronin
       # The targeted Operating System
       attr_reader :os
 
+      # The default word size
+      attr_reader :word_size
+
       # The registers available to the program
       attr_reader :registers
 
