@@ -27,30 +27,125 @@ module Ronin
       module AMD64
         include X86
 
+        #
+        # The `rax` 64bit register.
+        #
+        # @return [Register]
+        #
         def rax; reg(:rax); end
+
+        #
+        # The `rbx` 64bit register.
+        #
+        # @return [Register]
+        #
         def rbx; reg(:rbx); end
+
+        #
+        # The `rcx` 64bit register.
+        #
+        # @return [Register]
+        #
         def rcx; reg(:rcx); end
+
+        #
+        # The `rdx` 64bit register.
+        #
+        # @return [Register]
+        #
         def rdx; reg(:rdx); end
 
-        def rsb; reg(:rsb); end
+        #
+        # The `rsp` 64bit register.
+        #
+        # @return [Register]
+        #
+        def rbp; reg(:rbp); end
+
+        #
+        # The `rsp` 64bit register.
+        #
+        # @return [Register]
+        #
         def rsp; reg(:rsp); end
 
+        #
+        # The `rsi` 64bit register.
+        #
+        # @return [Register]
+        #
         def rsi; reg(:rsi); end
+
+        #
+        # The `rdi` 64bit register.
+        #
+        # @return [Register]
+        #
         def rdi; reg(:rdi); end
 
+        #
+        # The `r8` 64bit register.
+        #
+        # @return [Register]
+        #
         def r8;  reg(:r8); end
+
+        #
+        # The `r9` 64bit register.
+        #
+        # @return [Register]
+        #
         def r9;  reg(:r9); end
+
+        #
+        # The `r10` 64bit register.
+        #
+        # @return [Register]
+        #
         def r10; reg(:r10); end
+
+        #
+        # The `r11` 64bit register.
+        #
+        # @return [Register]
+        #
         def r11; reg(:r11); end
+
+        #
+        # The `r12` 64bit register.
+        #
+        # @return [Register]
+        #
         def r12; reg(:r12); end
+
+        #
+        # The `r13` 64bit register.
+        #
+        # @return [Register]
+        #
         def r13; reg(:r13); end
+
+        #
+        # The `r14` 64bit register.
+        #
+        # @return [Register]
+        #
         def r14; reg(:r14); end
+
+        #
+        # The `r15` 64bit register.
+        #
+        # @return [Register]
+        #
         def r15; reg(:r15); end
 
         def syscall_int(number); instruction(:syscall); end
 
         protected
 
+        #
+        # Initializes the program for the amd64 architecture.
+        #
         def initialize_arch
           super
 
