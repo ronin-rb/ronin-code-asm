@@ -84,11 +84,13 @@ describe ASM::Program do
     let(:name) { :_start }
 
     it "should return the label name" do
-      subject.label(name).should == name
+      label = subject.label(name) { }
+      
+      label.should == name
     end
 
     it "should add the label to the instructions" do
-      subject.label(name)
+      subject.label(name) { }
 
       subject.instructions.last.should == name
     end
