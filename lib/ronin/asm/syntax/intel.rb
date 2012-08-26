@@ -33,14 +33,41 @@ module Ronin
           8 => 'QWORD'
         }
 
+        #
+        # Emits a register.
+        #
+        # @param [Register] reg
+        #   The register.
+        #
+        # @return [String]
+        #   The register name.
+        #
         def self.emit_register(reg)
           reg.name.to_s
         end
 
+        #
+        # Emits an immediate operand.
+        #
+        # @param [ImmediateOperand] op
+        #   The operand.
+        #
+        # @return [String]
+        #   The formatted immediate operand.
+        #
         def self.emit_immediate_operand(op)
           "#{WIDTHS[op.width]} #{emit_integer(op.value)}"
         end
 
+        #
+        # Emits a memory operand.
+        #
+        # @param [MemoryOperand] op
+        #   The operand.
+        #
+        # @return [String]
+        #   The formatted memory operand.
+        #
         def self.emit_memory_operand(op)
           asm = emit_register(op.base)
 
@@ -60,16 +87,32 @@ module Ronin
           return "[#{asm}]"
         end
 
-        def self.emit_operands(operands)
-          if operands.length > 1
-            [operands[-1], *operands[0..-2]].map { |op|
-              emit_operand(op)
-            }.join(",\t")
+        #
+        # Emits multiple operands.
+        #
+        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
+        #   The Array of operands.
+        #
+        # @return [String]
+        #   The formatted operands.
+        #
+        def self.emit_operands(ops)
+          if ops.length > 1
+            [ops[-1], *ops[0..-2]].map { |op| emit_operand(op) }.join(",\t")
           else
-            super(operands)
+            super(ops)
           end
         end
 
+        #
+        # Emits an instruction.
+        #
+        # @param [Instruction] ins
+        #   The instruction.
+        #
+        # @return [String]
+        #   The formatted instruction.
+        #
         def self.emit_instruction(ins)
           line = emit_keyword(ins.name)
 
@@ -80,6 +123,15 @@ module Ronin
           return line
         end
 
+        #
+        # Emits a program.
+        #
+        # @param [Program] program
+        #   The program.
+        #
+        # @return [String]
+        #   The formatted program.
+        #
         def self.emit_program(program)
           asm = super(program)
 
