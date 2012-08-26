@@ -27,6 +27,9 @@ module Ronin
       module AMD64
         include X86
 
+        # Default word size
+        WORD_SIZE = 8
+
         # AMD64 registers
         REGISTERS = X86::REGISTERS.merge(
           :rax => Register.new(:rax, 8, true),
