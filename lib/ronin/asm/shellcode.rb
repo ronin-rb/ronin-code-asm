@@ -25,6 +25,10 @@ require 'tempfile'
 
 module Ronin
   module ASM
+    #
+    # Represents Shellcode. Shellcode is like an Assembly {Program}, but
+    # assembles into raw machine code which can be injected into a process.
+    #
     class Shellcode < Program
 
       #
