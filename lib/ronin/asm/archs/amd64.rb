@@ -139,7 +139,10 @@ module Ronin
         #
         def r15; reg(:r15); end
 
-        def syscall_int(number); instruction(:syscall); end
+        #
+        # Generates the instruction to invoke a syscall.
+        #
+        def syscall_int; instruction(:syscall); end
 
         protected
 
