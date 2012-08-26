@@ -8,6 +8,31 @@ describe ASM::Program do
     end
   end
 
+  context "when :arch => :x86" do
+    subject { described_class.new(:arch => :x86) }
+
+    describe "#syscall" do
+      before { subject.syscall }
+
+      it "should add an 'int 0x80' instruction" do
+        subject.instructions[-1].name.should == :int
+        subject.instructions[-1].operands[0].value.should == 0x80
+      end
+    end
+  end
+
+  context "when :arch => :amd64" do
+    subject { described_class.new(:arch => :amd64) }
+
+    describe "#syscall" do
+      before { subject.syscall }
+
+      it "should add a 'syscall' instruction" do
+        subject.instructions[-1].name.should == :syscall
+      end
+    end
+  end
+
   describe "#register" do
     it "should return a Register" do
       subject.register(:eax).should be_kind_of(ASM::Register)
