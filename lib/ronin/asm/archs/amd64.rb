@@ -82,6 +82,8 @@ module Ronin
           general_purpose[:r14]
           general_purpose[:r15]
 
+          define_register :rip, 8
+
           @word_size = 8
         end
       end
