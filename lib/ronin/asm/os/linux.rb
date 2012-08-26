@@ -32,7 +32,7 @@ module Ronin
         end
 
         def syscall(name,*arguments)
-          name = name.to_sym
+          name   = name.to_sym
           number = SYSCALLS[@arch][name]
 
           unless number

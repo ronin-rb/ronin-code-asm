@@ -226,7 +226,7 @@ module Ronin
         name = name.to_sym
 
         @instructions << name
-        instance_eval(&block) if block
+        instance_eval(&block)
         return name
       end
 
@@ -301,7 +301,7 @@ module Ronin
       def critical(*regs,&block)
         regs.each { |name| reg_save(name) }
 
-        instance_eval(&block) if block
+        instance_eval(&block)
 
         regs.reverse_each { |name| reg_load(name) }
       end
