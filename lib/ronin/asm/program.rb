@@ -239,6 +239,8 @@ module Ronin
       # @param [Register, Integer] value
       #   The value to push.
       #
+      # @abstract
+      #
       def stack_push(value)
       end
 
@@ -248,6 +250,8 @@ module Ronin
       # @param [Symbol] name
       #   The name of the reigster.
       #
+      # @abstract
+      #
       def stack_pop(name)
       end
 
@@ -256,6 +260,8 @@ module Ronin
       #
       # @param [Symbol] name
       #   The name of the reigster.
+      #
+      # @abstract
       #
       def reg_clear(name)
       end
@@ -269,6 +275,8 @@ module Ronin
       # @param [Symbol] name
       #   The name of the reigster.
       #
+      # @abstract
+      #
       def reg_set(value,name)
       end
 
@@ -278,6 +286,8 @@ module Ronin
       # @param [Symbol] name
       #   The name of the reigster.
       #
+      # @abstract
+      #
       def reg_save(name)
       end
 
@@ -286,6 +296,8 @@ module Ronin
       #
       # @param [Symbol] name
       #   The name of the reigster.
+      #
+      # @abstract
       #
       def reg_load(name)
       end
