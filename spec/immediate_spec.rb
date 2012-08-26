@@ -18,11 +18,24 @@ describe Immediate do
       }.should raise_error(TypeError)
     end
 
-    it "should only accept nil and a Register for index" do
+    it "should only accept Integers for offset" do
       lambda {
-        described_class.new(nil,0,Object.new)
+        described_class.new(register,2.0)
       }.should raise_error(TypeError)
     end
+
+    it "should only accept nil and a Register for index" do
+      lambda {
+        described_class.new(register,0,Object.new)
+      }.should raise_error(TypeError)
+    end
+
+    it "should only accept Integers for offset" do
+      lambda {
+        described_class.new(register,0,nil,2.0)
+      }.should raise_error(TypeError)
+    end
+
   end
 
   describe "#+" do

@@ -53,11 +53,19 @@ module Ronin
           raise(TypeError,"base must be a Register or nil")
         end
 
+        unless offset.kind_of?(Integer)
+          raise(TypeError,"offset must be an Integer")
+        end
+
         unless (index.nil? || index.kind_of?(Register))
           raise(TypeError,"index must be a Register or nil")
         end
 
-        super(base,offset.to_i,index,scale.to_i)
+        unless scale.kind_of?(Integer)
+          raise(TypeError,"scale must be an Integer")
+        end
+
+        super(base,offset,index,scale)
       end
 
       #
