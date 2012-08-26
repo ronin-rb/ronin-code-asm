@@ -23,8 +23,20 @@ require 'ronin/asm/immediate_operand'
 
 module Ronin
   module ASM
+    #
+    # Represents an instruction.
+    #
     class Instruction < Struct.new(:name, :operands)
 
+      #
+      # Initializes the instruction.
+      #
+      # @param [Symbol] name
+      #   The instruction name.
+      #
+      # @param [Array<MemoryOperand, Register, Symbo, Integer>] operands
+      #   Operands for the instruction.
+      #
       def initialize(name,operands)
         operands = operands.map do |op|
           case op
@@ -36,6 +48,12 @@ module Ronin
         super(name,operands)
       end
 
+      #
+      # The word size of the instruction.
+      #
+      # @return [Integer, nil]
+      #   The word size in bytes.
+      #
       def width
         self.operands.map { |op|
           op.width if op.respond_to?(:width)
