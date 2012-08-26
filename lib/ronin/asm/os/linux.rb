@@ -54,14 +54,14 @@ module Ronin
           end
 
           if arguments.length > 6
-            regs = @general_registers[1,1]
+            regs = [@general_registers[1]]
 
             critical_region(regs) do
               arguments.reverse_each { |arg| stack_push(arg) }
 
               reg_set stack_pointer, regs[0]
               reg_set number, @general_registers[0]
-              syscall
+              super()
             end
           else
             regs = @general_registers[1,arguments.length]
@@ -72,7 +72,7 @@ module Ronin
               end
 
               reg_set number, @general_registers[0]
-              syscall
+              super()
             end
           end
         end

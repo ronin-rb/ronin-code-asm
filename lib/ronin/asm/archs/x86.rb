@@ -19,252 +19,66 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>
 #
 
+require 'ronin/asm/register'
+
 module Ronin
   module ASM
     module Archs
       module X86
-        #
-        # The `al` 8bit Accumulator register.
-        #
-        # @return [Register]
-        #
-        def al;  reg(:al);  end
+        # Default word size
+        WORD_SIZE = 4
 
-        #
-        # The `ah` 8bit Accumulator register.
-        #
-        # @return [Register]
-        #
-        def ah;  reg(:ah);  end
+        # X86 registers
+        REGISTERS = {
+          :al  => Register.new(:al, 1),
+          :ah  => Register.new(:ah, 1),
+          :ax  => Register.new(:ax, 2),
+          :eax => Register.new(:eax, 4, true),
 
-        #
-        # The `ax` 16bit Accumulator register.
-        #
-        # @return [Register]
-        #
-        def ax;  reg(:ax);  end
+          :bl  => Register.new(:bl, 1),
+          :bh  => Register.new(:bh, 1),
+          :bx  => Register.new(:bx, 2),
+          :ebx => Register.new(:ebx, 4, true),
 
-        #
-        # The `eax` 32bit Accumulator register.
-        #
-        # @return [Register]
-        #
-        def eax; reg(:eax); end
+          :cl  => Register.new(:cl, 1),
+          :ch  => Register.new(:ch, 1),
+          :cx  => Register.new(:cx, 2),
+          :ecx => Register.new(:ecx, 4, true),
 
-        #
-        # The `bl` 8bit Base register.
-        #
-        # @return [Register]
-        #
-        def bl;  reg(:bl);  end
+          :dl  => Register.new(:dl, 1),
+          :dh  => Register.new(:dh, 1),
+          :dx  => Register.new(:dx, 2),
+          :edx => Register.new(:edx, 4, true),
 
-        #
-        # The `bh` 8bit Base register.
-        #
-        # @return [Register]
-        #
-        def bh;  reg(:bh);  end
+          :bp  => Register.new(:bp, 2),
+          :ebp => Register.new(:ebp, 4),
 
-        #
-        # The `bx` 16bit Base register.
-        #
-        # @return [Register]
-        #
-        def bx;  reg(:bx);  end
+          :sp  => Register.new(:sp, 2),
+          :esp => Register.new(:esp, 4),
 
-        #
-        # The `ebx` 32bit Base register.
-        #
-        # @return [Register]
-        #
-        def ebx; reg(:ebx); end
+          :ip  => Register.new(:ip, 2),
+          :eip => Register.new(:eip, 4),
 
-        #
-        # The `cl` 8bit Counter register.
-        #
-        # @return [Register]
-        #
-        def cl;  reg(:cl);  end
+          :sil => Register.new(:sil, 1),
+          :si  => Register.new(:si, 2),
+          :esi => Register.new(:esi, 4, true),
 
-        #
-        # The `ch` 8bit Counter register.
-        #
-        # @return [Register]
-        #
-        def ch;  reg(:ch);  end
+          :dil => Register.new(:dil, 1),
+          :di  => Register.new(:di, 2),
+          :edi => Register.new(:edi, 4, true),
 
-        #
-        # The `cx` 16bit Counter register.
-        #
-        # @return [Register]
-        #
-        def cx;  reg(:cx);  end
-
-        #
-        # The `ecx` 32bit Counter register.
-        #
-        # @return [Register]
-        #
-        def ecx; reg(:ecx); end
-
-        #
-        # The `dl` 8bit Data register.
-        #
-        # @return [Register]
-        #
-        def dl;  reg(:dl);  end
-
-        #
-        # The `dh` 8bit Data register.
-        #
-        # @return [Register]
-        #
-        def dh;  reg(:dh);  end
-
-        #
-        # The `dx` 16bit Data register.
-        #
-        # @return [Register]
-        #
-        def dx;  reg(:dx);  end
-
-        #
-        # The `edx` 32bit Data register.
-        #
-        # @return [Register]
-        #
-        def edx; reg(:edx); end
-
-        #
-        # The `sb` 16bit Stack Base Pointer register.
-        #
-        # @return [Register]
-        #
-        def sb;  reg(:sb); end
-
-        #
-        # The `esb` 32bit Stack Base Pointer register.
-        #
-        # @return [Register]
-        #
-        def esb; reg(:esb); end
-
-        #
-        # The `sp` 16bit Stack Pointer register.
-        #
-        # @return [Register]
-        #
-        def sp;  reg(:sp); end
-
-        #
-        # The `esp` 32bit Stack Pointer register.
-        #
-        # @return [Register]
-        #
-        def esp; reg(:esp); end
-
-        #
-        # The `ip` 16bit Instruction Pointer register.
-        #
-        # @return [Register]
-        #
-        def ip;  reg(:ip); end
-
-        #
-        # The `eip` 32bit Instruction Pointer register.
-        #
-        # @return [Register]
-        #
-        def eip; reg(:eip); end
-
-        #
-        # The `sil` 8bit Source Index register.
-        #
-        # @return [Register]
-        #
-        def sil; reg(:sil); end
-
-        #
-        # The `si` 16bit Source Index register.
-        #
-        # @return [Register]
-        #
-        def si;  reg(:si); end
-
-        #
-        # The `esi` 32bit Source Index register.
-        #
-        # @return [Register]
-        #
-        def esi; reg(:esi); end
-
-        #
-        # The `dil` 8bit Destination Index register.
-        #
-        # @return [Register]
-        #
-        def dil; reg(:dil); end
-
-        #
-        # The `di` 16bit Destination Index register.
-        #
-        # @return [Register]
-        #
-        def di;  reg(:di); end
-
-        #
-        # The `edi` 32bit Destination Index register.
-        #
-        # @return [Register]
-        #
-        def edi; reg(:edi); end
-
-        #
-        # The `cs` 16bit Code Segment register.
-        #
-        # @return [Register]
-        #
-        def cs; reg(:cs); end
-
-        #
-        # The `ds` 16bit Data Segment register.
-        #
-        # @return [Register]
-        #
-        def ds; reg(:ds); end
-
-        #
-        # The `es` 16bit Auxiliary Segment register.
-        #
-        # @return [Register]
-        #
-        def es; reg(:es); end
-
-        #
-        # The `fs` 16bit Auxiliary Segment register.
-        #
-        # @return [Register]
-        #
-        def fs; reg(:fs); end
-
-        #
-        # The `fs` 16bit Auxiliary Segment register.
-        #
-        # @return [Register]
-        #
-        def gs; reg(:gs); end
-
-        #
-        # The `ss` 16bit Stack Segment register.
-        #
-        # @return [Register]
-        #
-        def ss; reg(:ss); end
+          :cs => Register.new(:cs, 2),
+          :ds => Register.new(:ds, 2),
+          :es => Register.new(:es, 2),
+          :fs => Register.new(:fs, 2),
+          :gs => Register.new(:gs, 2),
+          :ss => Register.new(:ss, 2)
+        }
 
         #
         # Generates the instruction to trigger an interrupt.
         #
-        def interupt(number); instruction(:int,number); end
+        def interrupt(number); instruction(:int,number); end
 
         #
         # Generates the instruction to invoke a syscall.
@@ -307,7 +121,9 @@ module Ronin
         # @param [Symbol] name
         #   The name of the register.
         #
-        def reg_clear(name); instruction(:xor,reg(name),reg(name)); end
+        def register_clear(name)
+          instruction(:xor,register(name),register(name))
+        end
 
         #
         # Generates the instruction to set a register.
@@ -318,7 +134,9 @@ module Ronin
         # @param [Symbol] name
         #   The name of the register.
         #
-        def reg_set(value,name); instruction(:mov,value,reg(name)); end
+        def register_set(value,name)
+          instruction(:mov,value,register(name))
+        end
 
         #
         # Generates the instruction to save a register.
@@ -326,7 +144,9 @@ module Ronin
         # @param [Symbol] name
         #   The name of the register.
         #
-        def reg_save(name); stack_push(reg(name)); end
+        def register_save(name)
+          stack_push(register(name))
+        end
 
         #
         # Generates the instruction to restore a register.
@@ -334,50 +154,8 @@ module Ronin
         # @param [Symbol] name
         #   The name of the register.
         #
-        def reg_load(name); stack_pop(reg(name)); end
-
-        protected
-
-        #
-        # Initializes the program for the x86 architecture.
-        #
-        def initialize_arch
-          general_purpose = lambda { |name|
-            define_register "#{name}l",  1
-            define_register "#{name}h",  1
-            define_register "#{name}x",  2
-            define_register "e#{name}x", 4, true
-          }
-
-          general_purpose[:a]
-          general_purpose[:b]
-          general_purpose[:c]
-          general_purpose[:d]
-
-          define_register :sil, 1
-          define_register :si,  2
-          define_register :esi, 4, true
-
-          define_register :dil, 1
-          define_register :di,  2
-          define_register :edi, 4, true
-
-          define_register :bpl, 1
-          define_register :bp,  2
-          define_register :ebp, 4
-
-          define_register :spl, 1
-          define_register :sp,  2
-          define_register :esp, 4
-
-          define_register :cs, 2
-          define_register :ds, 2
-          define_register :es, 2
-          define_register :fs, 2
-          define_register :gs, 2
-          define_register :ss, 2
-
-          define_register :eip, 4
+        def register_load(name)
+          stack_pop(register(name))
         end
 
       end

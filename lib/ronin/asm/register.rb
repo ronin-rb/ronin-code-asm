@@ -26,7 +26,23 @@ module Ronin
     #
     # Represents a Register.
     #
-    class Register < Struct.new(:name, :width)
+    class Register < Struct.new(:name, :width, :general)
+
+      #
+      # Initializes a register.
+      #
+      # @param [Symbol] name
+      #   The register name.
+      #
+      # @param [Integer] width
+      #   The width of the register.
+      #
+      # @param [Boolean] general
+      #   Specifies whether the register is a General Purpose Register (GPR).
+      #
+      def initialize(name,width,general=false)
+        super(name,width,general)
+      end
 
       #
       # Adds an offset to the value within the register and dereferences the

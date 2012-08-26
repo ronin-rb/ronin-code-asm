@@ -54,9 +54,6 @@ module Ronin
       # The registers available to the program
       attr_reader :registers
 
-      # The general purpose registers
-      attr_reader :general_registers
-
       # The registers used by the program
       attr_reader :allocated_registers
 
@@ -93,20 +90,17 @@ module Ronin
       def initialize(options={},&block)
         @arch = options.fetch(:arch,:x86).to_sym
 
-        @registers           = {}
-        @general_registers   = []
-        @allocated_registers = []
+        arch = Archs.const_get(@arch.to_s.upcase)
 
-        @instructions = []
+        @word_size = arch::WORD_SIZE
+        @registers = arch::REGISTERS
 
         extend Archs.const_get(@arch.to_s.upcase)
-        initialize_arch if respond_to?(:initialize_arch)
 
         if options.has_key?(:os)
           @os = options[:os].to_s
 
           extend OS.const_get(@os)
-          initialize_os if respond_to?(:initialize_os)
         end
 
         if options[:define]
@@ -115,7 +109,23 @@ module Ronin
           end
         end
 
+        @allocated_registers = []
+        @instructions = []
+
         instance_eval(&block) if block
+      end
+
+      #
+      # Determines if a register exists.
+      #
+      # @param [Symbol] name
+      #   The name of the register.
+      #
+      # @return [Boolean]
+      #   Specifies whether the register exists.
+      #
+      def register?(name)
+        @registers.has_key?(name.to_sym)
       end
 
       #
@@ -130,10 +140,10 @@ module Ronin
       # @raise [ArgumentError]
       #   The register could not be found.
       #
-      def reg(name)
+      def register(name)
         name = name.to_sym
 
-        unless @registers.has_key?(name)
+        unless register?(name)
           raise(ArgumentError,"unknown register: #{name}")
         end
 
@@ -284,7 +294,7 @@ module Ronin
       #
       # @abstract
       #
-      def reg_clear(name)
+      def register_clear(name)
       end
 
       #
@@ -298,7 +308,7 @@ module Ronin
       #
       # @abstract
       #
-      def reg_set(value,name)
+      def register_set(value,name)
       end
 
       #
@@ -309,7 +319,7 @@ module Ronin
       #
       # @abstract
       #
-      def reg_save(name)
+      def register_save(name)
       end
 
       #
@@ -320,7 +330,7 @@ module Ronin
       #
       # @abstract
       #
-      def reg_load(name)
+      def register_load(name)
       end
 
       #
@@ -335,11 +345,11 @@ module Ronin
       #   have been saved.
       #
       def critical(*regs,&block)
-        regs.each { |name| reg_save(name) }
+        regs.each { |name| register_save(name) }
 
         instance_eval(&block)
 
-        regs.reverse_each { |name| reg_load(name) }
+        regs.reverse_each { |name| register_load(name) }
       end
 
       #
@@ -421,22 +431,6 @@ module Ronin
       undef syscall
 
       #
-      # Defines a register.
-      #
-      # @param [Symbol] name
-      #   The name of the reigster.
-      #
-      # @param [Integer] width
-      #   The width of the register (in bytes).
-      #
-      def define_register(name,width,general=false)
-        name = name.to_sym
-
-        @registers[name] = Register.new(name,width)
-        @general_registers << name if general
-      end
-
-      #
       # Allows adding unknown instructions to the program.
       #
       # @param [Symbol] name
@@ -446,9 +440,16 @@ module Ronin
       #   Additional operands.
       #
       def method_missing(name,*arguments,&block)
-        if (block && arguments.empty?) then label(name,&block)
-        elsif block.nil?               then instruction(name,*arguments)
-        else                                super(name,*arguments,&block)
+        if (block && arguments.empty?)
+          label(name,&block)
+        elsif block.nil?
+          if (arguments.empty? && register?(name))
+            register(name)
+          else
+            instruction(name,*arguments)
+          end
+        else
+          super(name,*arguments,&block)
         end
       end
 

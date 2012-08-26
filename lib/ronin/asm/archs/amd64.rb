@@ -27,161 +27,66 @@ module Ronin
       module AMD64
         include X86
 
-        #
-        # The `rax` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rax; reg(:rax); end
+        # AMD64 registers
+        REGISTERS = X86::REGISTERS.merge(
+          :rax => Register.new(:rax, 8, true),
+          :rbx => Register.new(:rbx, 8, true),
+          :rcx => Register.new(:rcx, 8, true),
+          :rdx => Register.new(:rdx, 8, true),
 
-        #
-        # The `rbx` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rbx; reg(:rbx); end
+          :rsi => Register.new(:rsi, 8, true),
+          :rdi => Register.new(:rdi, 8, true),
 
-        #
-        # The `rcx` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rcx; reg(:rcx); end
+          :rsp => Register.new(:rsp, 8, true),
+          :rbp => Register.new(:rbp, 8, true),
 
-        #
-        # The `rdx` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rdx; reg(:rdx); end
+          :r8b => Register.new(:r8b, 1, true),
+          :r8w => Register.new(:r8w, 2, true),
+          :r8d => Register.new(:r8d, 4, true),
+          :r8  => Register.new(:r8, 8, true),
 
-        #
-        # The `rsp` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rbp; reg(:rbp); end
+          :r9b => Register.new(:r9b, 1, true),
+          :r9w => Register.new(:r9w, 2, true),
+          :r9d => Register.new(:r9d, 4, true),
+          :r9  => Register.new(:r9, 8, true),
 
-        #
-        # The `rsp` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rsp; reg(:rsp); end
+          :r10b => Register.new(:r10b, 1, true),
+          :r10w => Register.new(:r10w, 2, true),
+          :r10d => Register.new(:r10d, 4, true),
+          :r10  => Register.new(:r10, 8, true),
 
-        #
-        # The `rsi` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rsi; reg(:rsi); end
+          :r11b => Register.new(:r11b, 1, true),
+          :r11w => Register.new(:r11w, 2, true),
+          :r11d => Register.new(:r11d, 4, true),
+          :r11  => Register.new(:r11, 8, true),
 
-        #
-        # The `rdi` 64bit register.
-        #
-        # @return [Register]
-        #
-        def rdi; reg(:rdi); end
+          :r12b => Register.new(:r12b, 1, true),
+          :r12w => Register.new(:r12w, 2, true),
+          :r12d => Register.new(:r12d, 4, true),
+          :r12  => Register.new(:r12, 8, true),
 
-        #
-        # The `r8` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r8;  reg(:r8); end
+          :r13b => Register.new(:r13b, 1, true),
+          :r13w => Register.new(:r13w, 2, true),
+          :r13d => Register.new(:r13d, 4, true),
+          :r13  => Register.new(:r13, 8, true),
 
-        #
-        # The `r9` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r9;  reg(:r9); end
+          :r14b => Register.new(:r14b, 1, true),
+          :r14w => Register.new(:r14w, 2, true),
+          :r14d => Register.new(:r14d, 4, true),
+          :r14  => Register.new(:r14, 8, true),
 
-        #
-        # The `r10` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r10; reg(:r10); end
+          :r15b => Register.new(:r15b, 1, true),
+          :r15w => Register.new(:r15w, 2, true),
+          :r15d => Register.new(:r15d, 4, true),
+          :r15  => Register.new(:r15, 8, true),
 
-        #
-        # The `r11` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r11; reg(:r11); end
-
-        #
-        # The `r12` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r12; reg(:r12); end
-
-        #
-        # The `r13` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r13; reg(:r13); end
-
-        #
-        # The `r14` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r14; reg(:r14); end
-
-        #
-        # The `r15` 64bit register.
-        #
-        # @return [Register]
-        #
-        def r15; reg(:r15); end
+          :rip => Register.new(:rip, 8, true),
+        )
 
         #
         # Generates the instruction to invoke a syscall.
         #
         def syscall; instruction(:syscall); end
-
-        protected
-
-        #
-        # Initializes the program for the amd64 architecture.
-        #
-        def initialize_arch
-          super
-
-          general_purpose = lambda { |name|
-            define_register "#{name}b", 1, true
-            define_register "#{name}w", 2, true
-            define_register "#{name}d", 4, true
-            define_register name,       8, true
-          }
-
-          define_register :rax, 8, true
-          define_register :rbx, 8, true
-          define_register :rcx, 8, true
-          define_register :rdx, 8, true
-
-          define_register :rsi, 8, true
-          define_register :rdi, 8, true
-
-          define_register :rsp, 8
-          define_register :rbp, 8
-
-          general_purpose[:r8]
-          general_purpose[:r9]
-
-          general_purpose[:r10]
-          general_purpose[:r11]
-          general_purpose[:r12]
-          general_purpose[:r13]
-          general_purpose[:r14]
-          general_purpose[:r15]
-
-          define_register :rip, 8
-        end
       end
     end
   end

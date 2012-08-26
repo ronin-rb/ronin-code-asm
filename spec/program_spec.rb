@@ -8,13 +8,13 @@ describe ASM::Program do
     end
   end
 
-  describe "#reg" do
+  describe "#register" do
     it "should return a Register" do
-      subject.reg(:eax).should be_kind_of(ASM::Register)
+      subject.register(:eax).should be_kind_of(ASM::Register)
     end
 
     it "should allocate the register" do
-      subject.reg(:ebx)
+      subject.register(:ebx)
 
       subject.allocated_registers.should include(:ebx)
     end
@@ -22,7 +22,7 @@ describe ASM::Program do
     context "when given an unknown register name" do
       it "should raise an ArgumentError" do
         lambda {
-          subject.reg(:foo)
+          subject.register(:foo)
         }.should raise_error(ArgumentError)
       end
     end
