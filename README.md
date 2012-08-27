@@ -109,7 +109,7 @@ Hash:
 ## Requirements
 
 * [data_paths] ~> 0.3
-* [yasm]: >= 0.6.0
+* [yasm] >= 0.6.0
 * [ruby-yasm] ~> 0.2
 
 ## Install
