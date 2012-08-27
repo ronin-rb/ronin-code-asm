@@ -19,5 +19,7 @@
 # along with Ronin Asm.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+require 'ronin/asm/program'
+require 'ronin/asm/shellcode'
 require 'ronin/asm/asm'
 require 'ronin/asm/version'
