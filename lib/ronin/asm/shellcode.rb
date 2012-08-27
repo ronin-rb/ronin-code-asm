@@ -58,7 +58,7 @@ module Ronin
       # @see Program#assemble
       #
       def assemble(options={})
-        output = Tempfile.new('ronin-shellcode.bin').path
+        output = Tempfile.new(['ronin-shellcode', '.bin']).path
 
         super(output,options.merge(:format => :bin))
 

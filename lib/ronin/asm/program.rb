@@ -428,7 +428,7 @@ module Ronin
         format  = options.fetch(:format,:bin)
         parser  = PARSERS[syntax]
 
-        source = Tempfile.new('ronin-asm.S')
+        source = Tempfile.new(['ronin-asm', '.s'])
         source.write(to_asm(syntax))
         source.close
 
