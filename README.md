@@ -60,7 +60,7 @@ Create shellcode:
     end
     
     shellcode.assemble
-    # => "f1\xC0fPfh//shfh/binf\x89\xE3fPfSf\x89\xE1f1Ұ\v̀"
+    # => "f1\xC0fPfh//shfh/binf\x89\xE3fPfSf\x89\xE1f1\xD2\xB0\v\xCD\x80"
 
 ### Immediate Operands
 
