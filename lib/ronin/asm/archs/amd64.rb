@@ -86,7 +86,7 @@ module Ronin
           :r15d => Register.new(:r15d, 4, true),
           :r15  => Register.new(:r15, 8, true),
 
-          :rip => Register.new(:rip, 8, true),
+          :rip => Register.new(:rip, 8, true)
         )
 
         #
