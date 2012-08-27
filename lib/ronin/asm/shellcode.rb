@@ -58,10 +58,11 @@ module Ronin
       # @see Program#assemble
       #
       def assemble(options={})
-        output = Tempfile.new('ronin-shellcode.bin')
+        output = Tempfile.new('ronin-shellcode.bin').path
 
-        super(output.path,options.merge(:format => :bin))
-        return output.read
+        super(output,options.merge(:format => :bin))
+
+        return File.new(output,'rb').read
       end
 
     end
