@@ -43,7 +43,7 @@ module Ronin
     #   The new Assembly Program.
     #
     # @example
-    #   ASM.program do
+    #   ASM.new do
     #     mov  1, eax
     #     mov  1, ebx
     #     mov  2, ecx
