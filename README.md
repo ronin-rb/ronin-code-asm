@@ -13,9 +13,10 @@
 ## Features
 
 * Provides a Ruby DSL for writing Assembly programs.
-* Supports emitting ATT and Intel syntax.
+  * Supports X86 and AMD64 instruction sets.
+  * Supports ATT and Intel syntax.
 * Uses [yasm] to assemble the programs.
-* Supports assembling shellcode.
+* Supports assembling Shellcode.
 
 ## Examples
 
