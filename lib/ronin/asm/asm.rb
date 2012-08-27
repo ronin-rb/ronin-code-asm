@@ -62,42 +62,5 @@ module Ronin
     def ASM.new(options={},&block)
       Program.new(options,&block)
     end
-
-    #
-    # Creates a new Shellcode program.
-    #
-    # @param [Hash{Symbol => Object}] options
-    #   Additional options.
-    #
-    # @option options [String, Symbol] :arch (:x86)
-    #   The architecture of the Program.
-    #
-    # @option options [Hash{Symbol => Object}] :variables
-    #   Variables to set in the program.
-    #
-    # @yield []
-    #   The given block will be evaluated within the program.
-    #
-    # @return [Shellcode]
-    #   The new Shellcode program.
-    #
-    # @example
-    #   ASM.shellcode(:arch => :x86) do
-    #     xor   eax,  eax
-    #     push  eax
-    #     push  0x68732f2f
-    #     push  0x6e69622f
-    #     mov   esp,  ebx
-    #     push  eax
-    #     push  ebx
-    #     mov   esp,  ecx
-    #     xor   edx,  edx
-    #     mov   0xb,  al
-    #     int   0x80
-    #   end
-    #
-    def ASM.shellcode(options={},&block)
-      Shellcode.new(options,&block)
-    end
   end
 end
