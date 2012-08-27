@@ -97,8 +97,8 @@ Labels can be expressed with blocks:
 
 ### Syscalls
 
-If `:os` is specified, then syscall numbers can be looked up via the `syscalls` 
-Hash:
+If the `:os` option is specified, then syscall numbers can be looked up via the 
+`syscalls` Hash:
 
     ASM.new(:os => 'Linux') do
       # ...
