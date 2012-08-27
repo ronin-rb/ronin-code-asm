@@ -24,5 +24,11 @@ describe ASM::Shellcode do
     it "assemble down to raw machine code" do
       subject.assemble.should == shellcode
     end
+
+    context "with :syntax => :intel" do
+      it "assemble down to raw machine code" do
+        subject.assemble(:syntax => :intel).should == shellcode
+      end
+    end
   end
 end
