@@ -26,6 +26,9 @@ require 'ronin/asm/memory_operand'
 module Ronin
   module ASM
     module Syntax
+      #
+      # Abstract base-class for all Assembly Syntax classes.
+      #
       class Common
 
         #

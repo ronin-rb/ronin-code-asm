@@ -24,6 +24,9 @@ require 'ronin/asm/archs/x86'
 module Ronin
   module ASM
     module Archs
+      #
+      # Contains AMD64 Archtecture information.
+      #
       module AMD64
         include X86
 

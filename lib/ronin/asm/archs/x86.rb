@@ -24,6 +24,9 @@ require 'ronin/asm/register'
 module Ronin
   module ASM
     module Archs
+      #
+      # Contains X86 Archtecture information.
+      #
       module X86
         # Default word size
         WORD_SIZE = 4

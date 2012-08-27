@@ -31,6 +31,9 @@ require 'yasm/program'
 
 module Ronin
   module ASM
+    #
+    # Represents a full Assembly program.
+    #
     class Program
 
       # Supported Assembly Syntaxs

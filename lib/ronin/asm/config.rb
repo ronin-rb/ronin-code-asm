@@ -23,12 +23,16 @@ require 'data_paths'
 
 module Ronin
   module ASM
+    #
+    # Handles configuration for ronin-asm.
+    #
     module Config
       include DataPaths
       extend DataPaths::Finders
 
       register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
 
+      # Data directory for ronin-asm
       DATA_DIR = File.join('ronin','asm')
     end
   end

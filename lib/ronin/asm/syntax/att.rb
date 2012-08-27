@@ -29,6 +29,7 @@ module Ronin
       #
       class ATT < Common
 
+        # Data sizes and their instruction mnemonics
         WIDTHS = {
           8 => 'q',
           4 => 'l',

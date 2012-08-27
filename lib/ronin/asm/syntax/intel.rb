@@ -26,6 +26,7 @@ module Ronin
     module Syntax
       class Intel < Common
 
+        # Data sizes and their identifiers
         WIDTHS = {
           1 => 'BYTE',
           2 => 'WORD',
