@@ -329,5 +329,37 @@ describe ASM::Program do
   end
 
   describe "#assemble" do
+    subject do
+      described_class.new do
+        push eax
+        push ebx
+        push ecx
+
+        mov eax, ebx
+        mov eax+0, ebx
+        mov eax+4, ebx
+        mov eax+esi, ebx
+        mov eax+(esi*4), ebx
+        mov eax+(esi*4)+10, ebx
+      end
+    end
+
+    let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
+
+    before { subject.assemble(output) }
+
+    it "should write to the output file" do
+      File.size(output).should > 0
+    end
+
+    context "with :syntax => :intel" do
+      let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
+
+      before { subject.assemble(output, :syntax => :intel) }
+
+      it "should write to the output file" do
+        File.size(output).should > 0
+      end
+    end
   end
 end
