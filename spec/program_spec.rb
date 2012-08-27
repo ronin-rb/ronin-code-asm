@@ -328,7 +328,7 @@ describe ASM::Program do
     end
   end
 
-  describe "#assemble" do
+  describe "#assemble", :yasm => true do
     subject do
       described_class.new do
         push eax

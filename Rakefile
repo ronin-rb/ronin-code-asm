@@ -32,5 +32,13 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 task :default => :spec
 
+namespace :spec do
+  RSpec::Core::RakeTask.new(:yasm) do |t|
+    t.pattern    = 'spec/program_spec.rb spec/shellcode_spec.rb'
+    t.rspec_opts = '--tag yasm'
+  end
+end
+
+
 require 'yard'
 YARD::Rake::YardocTask.new

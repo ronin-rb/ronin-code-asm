@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ronin/asm/shellcode'
 
 describe ASM::Shellcode do
-  describe "#assemble" do
+  describe "#assemble", :yasm => true do
     subject do
       described_class.new do
         xor   eax,  eax
