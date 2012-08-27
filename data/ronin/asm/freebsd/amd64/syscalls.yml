@@ -25,9 +25,6 @@
 :getuid: 24	# { int getuid(void); } 
 :geteuid: 25	# { int geteuid(void); } 
 :ptrace: 26	# { int ptrace(int req, pid_t pid, caddr_t addr, int data); } 
-#
-# Sockets
-#
 :recvmsg: 27	# { int recvmsg(int s, struct msghdr *msg, int flags); } 
 :sendmsg: 28	# { int sendmsg(int s, caddr_t msg, int flags); } 
 :recvfrom: 29	# { int recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *from, int *fromlenaddr); } 
@@ -305,7 +302,7 @@
 :psynch_rw_rdlock: 306	# { uint32_t psynch_rw_rdlock(user_addr_t rwlock, uint32_t lgenval, uint32_t ugenval, uint32_t rw_wc, int flags)  NO_SYSCALL_STUB; }
 :psynch_rw_wrlock: 307	# { uint32_t psynch_rw_wrlock(user_addr_t rwlock, uint32_t lgenval, uint32_t ugenval, uint32_t rw_wc, int flags)  NO_SYSCALL_STUB; }
 :psynch_rw_unlock: 308	# { uint32_t psynch_rw_unlock(user_addr_t rwlock, uint32_t lgenval, uint32_t ugenval, uint32_t rw_wc, int flags)  NO_SYSCALL_STUB; }
-:psynch_rw_unlock2: 309	{ uint32_t psynch_rw_unlock2(user_addr_t rwlock, uint32_t lgenval, uint32_t ugenval, uint32_t rw_wc, int flags)  NO_SYSCALL_STUB; }
+:psynch_rw_unlock2: 309	# { uint32_t psynch_rw_unlock2(user_addr_t rwlock, uint32_t lgenval, uint32_t ugenval, uint32_t rw_wc, int flags)  NO_SYSCALL_STUB; }
 :getsid: 310	# { int getsid(pid_t pid); } 
 :settid_with_pid: 311	# { int settid_with_pid(pid_t pid, int assume) NO_SYSCALL_STUB; } 
 :old__pthread_cond_timedwait: 312	# { int nosys(void); } { old __pthread_cond_timedwait }
@@ -328,9 +325,7 @@ iopolicysys: 322	# { int iopolicysys(int cmd, void *arg) NO_SYSCALL_STUB; }
 :__disable_threadsignal: 331	# { int __disable_threadsignal(int value); } 
 :__pthread_markcancel: 332	# { int __pthread_markcancel(int thread_port); } 
 :__pthread_canceled: 333	# { int __pthread_canceled(int  action); } 
-
 :__semwait_signal: 334     # { int __semwait_signal(int cond_sem, int mutex_sem, int timeout, int relative, int64_t tv_sec, int32_t tv_nsec); }
-
 :old_utrace: 335	# { int nosys(void); }   { old utrace }
 :proc_info: 336	# { int proc_info(int32_t callnum,int32_t pid,uint32_t flavor, uint64_t arg,user_addr_t buffer,int32_t buffersize) NO_SYSCALL_STUB; } 
 :sendfile: 337	# { int sendfile(int fd, int s, off_t offset, off_t *nbytes, struct sf_hdtr *hdtr, int flags); } 
