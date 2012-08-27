@@ -119,6 +119,12 @@ describe ASM::Program do
 
       its(:syscalls) { should_not be_empty }
     end
+
+    context "when :os => 'FreeBSD'" do
+      subject { described_class.new(:arch => :x86, :os => 'FreeBSD') }
+
+      its(:syscalls) { should_not be_empty }
+    end
   end
 
   context "when :arch => :amd64" do
@@ -136,6 +142,12 @@ describe ASM::Program do
 
     context "when :os => 'Linux'" do
       subject { described_class.new(:arch => :amd64, :os => 'Linux') }
+
+      its(:syscalls) { should_not be_empty }
+    end
+
+    context "when :os => 'FreeBSD'" do
+      subject { described_class.new(:arch => :amd64, :os => 'FreeBSD') }
 
       its(:syscalls) { should_not be_empty }
     end
