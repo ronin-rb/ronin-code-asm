@@ -14,7 +14,6 @@ requirements: yasm >= 0.6.0
 dependencies:
   data_paths: ~> 0.3
   ruby-yasm: ~> 0.2
-  # Ronin dependencies:
 
 development_dependencies:
   bundler: ~> 1.0
