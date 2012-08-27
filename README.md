@@ -45,7 +45,7 @@ Create a program:
 
 Create shellcode:
 
-    shellcode = ASM::Shellcode(:arch => :x86) do
+    shellcode = ASM::Shellcode.new(:arch => :x86) do
       xor   eax,  eax
       push  eax
       push  0x68732f2f
