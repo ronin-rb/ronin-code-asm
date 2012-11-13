@@ -5,7 +5,7 @@ gemspec
 gem 'jruby-openssl',	'~> 0.7', :platforms => :jruby
 
 group :development do
-  gem 'rake',         '~> 0.8'
+  gem 'rake',         '~> 10.0'
   gem 'kramdown',     '~> 0.12'
 
   gem 'ripl',              '~> 0.3'
