@@ -1,7 +1,7 @@
 #
 # Ronin ASM - A Ruby DSL for crafting Assembly programs and Shellcode.
 #
-# Copyright (c) 2007-2012 Hal Brodigan (postmodern.mod3 at gmail.com)
+# Copyright (c) 2007-2013 Hal Brodigan (postmodern.mod3 at gmail.com)
 #
 # This file is part of Ronin ASM.
 #
