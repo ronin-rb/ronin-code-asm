@@ -108,7 +108,7 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 
 ## Requirements
 
-* [data_paths] ~> 0.3
+* [data\_paths] ~> 0.3
 * [yasm] >= 0.6.0
 * [ruby-yasm] ~> 0.2
 
