@@ -140,7 +140,7 @@ describe ASM::Syntax::Intel do
 
     context "when the program arch is :amd64" do
       let(:program) do
-        Program.new(:arch => :amd64) do
+        Program.new(arch: :amd64) do
           push rax
           push rbx
           mov 0xff, rax

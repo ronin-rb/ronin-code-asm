@@ -33,49 +33,49 @@ module Ronin
 
         # X86 registers
         REGISTERS = {
-          :al  => Register.new(:al, 1),
-          :ah  => Register.new(:ah, 1),
-          :ax  => Register.new(:ax, 2),
-          :eax => Register.new(:eax, 4, true),
+          al:  Register.new(:al, 1),
+          ah:  Register.new(:ah, 1),
+          ax:  Register.new(:ax, 2),
+          eax: Register.new(:eax, 4, true),
 
-          :bl  => Register.new(:bl, 1),
-          :bh  => Register.new(:bh, 1),
-          :bx  => Register.new(:bx, 2),
-          :ebx => Register.new(:ebx, 4, true),
+          bl:  Register.new(:bl, 1),
+          bh:  Register.new(:bh, 1),
+          bx:  Register.new(:bx, 2),
+          ebx: Register.new(:ebx, 4, true),
 
-          :cl  => Register.new(:cl, 1),
-          :ch  => Register.new(:ch, 1),
-          :cx  => Register.new(:cx, 2),
-          :ecx => Register.new(:ecx, 4, true),
+          cl:  Register.new(:cl, 1),
+          ch:  Register.new(:ch, 1),
+          cx:  Register.new(:cx, 2),
+          ecx: Register.new(:ecx, 4, true),
 
-          :dl  => Register.new(:dl, 1),
-          :dh  => Register.new(:dh, 1),
-          :dx  => Register.new(:dx, 2),
-          :edx => Register.new(:edx, 4, true),
+          dl:  Register.new(:dl, 1),
+          dh:  Register.new(:dh, 1),
+          dx:  Register.new(:dx, 2),
+          edx: Register.new(:edx, 4, true),
 
-          :bp  => Register.new(:bp, 2),
-          :ebp => Register.new(:ebp, 4),
+          bp:  Register.new(:bp, 2),
+          ebp: Register.new(:ebp, 4),
 
-          :sp  => Register.new(:sp, 2),
-          :esp => Register.new(:esp, 4),
+          sp:  Register.new(:sp, 2),
+          esp: Register.new(:esp, 4),
 
-          :ip  => Register.new(:ip, 2),
-          :eip => Register.new(:eip, 4),
+          ip:  Register.new(:ip, 2),
+          eip: Register.new(:eip, 4),
 
-          :sil => Register.new(:sil, 1),
-          :si  => Register.new(:si, 2),
-          :esi => Register.new(:esi, 4, true),
+          sil: Register.new(:sil, 1),
+          si:  Register.new(:si, 2),
+          esi: Register.new(:esi, 4, true),
 
-          :dil => Register.new(:dil, 1),
-          :di  => Register.new(:di, 2),
-          :edi => Register.new(:edi, 4, true),
+          dil: Register.new(:dil, 1),
+          di:  Register.new(:di, 2),
+          edi: Register.new(:edi, 4, true),
 
-          :cs => Register.new(:cs, 2),
-          :ds => Register.new(:ds, 2),
-          :es => Register.new(:es, 2),
-          :fs => Register.new(:fs, 2),
-          :gs => Register.new(:gs, 2),
-          :ss => Register.new(:ss, 2)
+          cs: Register.new(:cs, 2),
+          ds: Register.new(:ds, 2),
+          es: Register.new(:es, 2),
+          fs: Register.new(:fs, 2),
+          gs: Register.new(:gs, 2),
+          ss: Register.new(:ss, 2)
         }
 
         #

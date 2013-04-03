@@ -8,8 +8,8 @@ describe ASM::Program do
     end
   end
 
-  context "when :arch => :x86" do
-    subject { described_class.new(:arch => :x86) }
+  context "when :arch is :x86" do
+    subject { described_class.new(arch: :x86) }
 
     its(:word_size) { should == 4 }
 
@@ -114,21 +114,21 @@ describe ASM::Program do
       end
     end
 
-    context "when :os => 'Linux'" do
-      subject { described_class.new(:arch => :x86, :os => 'Linux') }
+    context "when :os is 'Linux'" do
+      subject { described_class.new(arch: :x86, os: 'Linux') }
 
       its(:syscalls) { should_not be_empty }
     end
 
-    context "when :os => 'FreeBSD'" do
-      subject { described_class.new(:arch => :x86, :os => 'FreeBSD') }
+    context "when :os is 'FreeBSD'" do
+      subject { described_class.new(arch: :x86, os: 'FreeBSD') }
 
       its(:syscalls) { should_not be_empty }
     end
   end
 
-  context "when :arch => :amd64" do
-    subject { described_class.new(:arch => :amd64) }
+  context "when :arch is :amd64" do
+    subject { described_class.new(arch: :amd64) }
 
     its(:word_size) { should == 8 }
 
@@ -140,14 +140,14 @@ describe ASM::Program do
       end
     end
 
-    context "when :os => 'Linux'" do
-      subject { described_class.new(:arch => :amd64, :os => 'Linux') }
+    context "when :os is 'Linux'" do
+      subject { described_class.new(arch: :amd64, os: 'Linux') }
 
       its(:syscalls) { should_not be_empty }
     end
 
-    context "when :os => 'FreeBSD'" do
-      subject { described_class.new(:arch => :amd64, :os => 'FreeBSD') }
+    context "when :os is 'FreeBSD'" do
+      subject { described_class.new(arch: :amd64, os: 'FreeBSD') }
 
       its(:syscalls) { should_not be_empty }
     end
@@ -328,7 +328,7 @@ describe ASM::Program do
     end
   end
 
-  describe "#assemble", :yasm => true do
+  describe "#assemble", yasm: true do
     subject do
       described_class.new do
         push eax
@@ -352,10 +352,10 @@ describe ASM::Program do
       File.size(output).should > 0
     end
 
-    context "with :syntax => :intel" do
+    context "with :syntax is :intel" do
       let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
 
-      before { subject.assemble(output, :syntax => :intel) }
+      before { subject.assemble(output, syntax: :intel) }
 
       it "should write to the output file" do
         File.size(output).should > 0

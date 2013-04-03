@@ -38,14 +38,14 @@ module Ronin
 
       # Supported Assembly Syntaxs
       SYNTAX = {
-        :att   => Syntax::ATT,
-        :intel => Syntax::Intel
+        att:   Syntax::ATT,
+        intel: Syntax::Intel
       }
 
       # The Assembly Parsers
       PARSERS = {
-        :att   => :gas,
-        :intel => :nasm
+        att:   :gas,
+        intel: :nasm
       }
 
       # The targeted architecture
@@ -94,7 +94,7 @@ module Ronin
       #   The given block will be evaluated within the program.
       #
       # @example
-      #   Program.new(:arch => :amd64) do
+      #   Program.new(arch: :amd64) do
       #     push  rax
       #     push  rbx
       #
@@ -433,11 +433,11 @@ module Ronin
         source.close
 
         YASM::Program.assemble(
-          :file          => source.path,
-          :parser        => PARSERS[syntax],
-          :target        => @arch,
-          :output_format => format,
-          :output        => output
+          file:          source.path,
+          parser:        PARSERS[syntax],
+          target:        @arch,
+          output_format: format,
+          output:        output
         )
 
         return output

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ronin/asm/shellcode'
 
 describe ASM::Shellcode do
-  describe "#assemble", :yasm => true do
+  describe "#assemble", yasm: true do
     subject do
       described_class.new do
         xor   eax,  eax
@@ -25,9 +25,9 @@ describe ASM::Shellcode do
       subject.assemble.should == shellcode
     end
 
-    context "with :syntax => :intel" do
+    context "with :syntax is :intel" do
       it "assemble down to raw machine code" do
-        subject.assemble(:syntax => :intel).should == shellcode
+        subject.assemble(syntax: :intel).should == shellcode
       end
     end
   end
