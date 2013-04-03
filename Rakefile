@@ -19,7 +19,7 @@ end
 require 'rake'
 
 require 'rubygems/tasks'
-Gem::Tasks.new(:sign => {:checksum => true, :pgp => true}) do |tasks|
+Gem::Tasks.new(sign: {checksum: true, pgp: true}) do |tasks|
   tasks.console.command = 'ripl'
   tasks.console.options = %w[
     -rripl/multi_line
