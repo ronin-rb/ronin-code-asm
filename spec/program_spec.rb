@@ -328,7 +328,7 @@ describe ASM::Program do
     end
   end
 
-  describe "#assemble", yasm: true do
+  describe "#assemble", integration: true do
     subject do
       described_class.new do
         push eax
