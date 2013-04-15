@@ -34,7 +34,7 @@ task :default => :spec
 
 namespace :spec do
   RSpec::Core::RakeTask.new(:yasm) do |t|
-    t.pattern    = 'spec/program_spec.rb spec/shellcode_spec.rb'
+    t.pattern    = %w[spec/program_spec.rb spec/shellcode_spec.rb]
     t.rspec_opts = '--tag yasm'
   end
 end
