@@ -34,7 +34,7 @@ task :default => :spec
 
 namespace :spec do
   RSpec::Core::RakeTask.new(:integration) do |t|
-    t.pattern    = %w[spec/program_spec.rb spec/shellcode_spec.rb]
+    t.pattern    = ['spec/*_spec.rb', "spec/**/*_spec.rb"] # %w[spec/program_spec.rb spec/shellcode_spec.rb]
     t.rspec_opts = '--tag integration'
   end
 end
@@ -43,6 +43,7 @@ RSpec::Core::RakeTask.new(:current) do |t|
   t.pattern    = %w[spec/program_spec.rb spec/shellcode_spec.rb]
   t.rspec_opts = '--tag current'
 end
+
 
 
 
