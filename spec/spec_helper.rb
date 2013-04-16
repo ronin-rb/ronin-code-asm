@@ -1,5 +1,6 @@
 require 'rspec'
 require 'ronin/asm/version'
+require 'pry'
 
 include Ronin
 include Ronin::ASM

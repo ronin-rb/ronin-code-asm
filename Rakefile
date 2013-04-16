@@ -39,6 +39,12 @@ namespace :spec do
   end
 end
 
+RSpec::Core::RakeTask.new(:current) do |t|
+  t.pattern    = %w[spec/program_spec.rb spec/shellcode_spec.rb]
+  t.rspec_opts = '--tag current'
+end
+
+
 
 require 'yard'
 YARD::Rake::YardocTask.new
