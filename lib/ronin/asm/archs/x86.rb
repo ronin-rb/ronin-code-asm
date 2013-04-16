@@ -138,7 +138,11 @@ module Ronin
         #   The name of the register.
         #
         def register_set(value,name)
-          instruction(:mov,value,register(name))
+          if @syntax == :intel
+            instruction(:mov,register(name), value)
+          else
+            instruction(:mov,value,register(name))
+          end
         end
 
         #

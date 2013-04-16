@@ -5,6 +5,7 @@ Gemfile.lock
 .bundle
 .DS_Store
 .yardoc
+.project
 *.db
 *.log
 *.swp

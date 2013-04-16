@@ -1,4 +1,6 @@
 language: ruby
+before_install:
+  - sudo apt-get install yasm
 rvm:
   - 1.9.2
   - 1.9.3

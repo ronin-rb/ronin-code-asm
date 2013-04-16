@@ -93,7 +93,7 @@ describe ASM::Syntax::Intel do
   describe "emit_program" do
     let(:program) do
       Program.new do
-        mov 0xff, eax
+        mov eax, 0xff
         ret
       end
     end
@@ -112,7 +112,7 @@ describe ASM::Syntax::Intel do
     context "when emitting labels" do
       let(:program) do
         Program.new do
-          mov 0, eax
+          mov eax, 0
 
           _loop do
             inc eax
@@ -130,7 +130,7 @@ describe ASM::Syntax::Intel do
           "\tmov\teax,\tBYTE 0x0",
           "_loop:",
           "\tinc\teax",
-          "\tcmp\tBYTE 0xa,\teax",
+          "\tcmp\teax,\tBYTE 0xa",
           "\tjl\t_loop",
           "\tret",
           ""
@@ -143,7 +143,7 @@ describe ASM::Syntax::Intel do
         Program.new(arch: :amd64) do
           push rax
           push rbx
-          mov 0xff, rax
+          mov rax, 0xff
           ret
         end
       end
