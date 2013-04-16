@@ -131,13 +131,13 @@ module Ronin
         #
         # Generates the instruction to set a register.
         # 
-        # @param [ImmediateOperand, MemoryOperate, Register, Integer, Symbol] value
-        #   The value to set.
-        #
         # @param [Symbol] name
         #   The name of the register.
         #
-        def register_set(value,name)
+        # @param [ImmediateOperand, MemoryOperate, Register, Integer, Symbol] value
+        #   The value to set.
+        #
+        def register_set(name,value)
           instruction(:mov,value,register(name))
         end
 
