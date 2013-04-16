@@ -323,15 +323,15 @@ module Ronin
       #
       # Generic method for setting a register.
       #
+      # @param [Symbol] reg
+      #   The name of the reigster.
+      #
       # @param [Register, Immediate, Integer] value
       #   The new value for the register.
       #
-      # @param [Symbol] name
-      #   The name of the reigster.
-      #
       # @abstract
       #
-      def register_set(value,name)
+      def register_set(reg, value)
       end
 
       #

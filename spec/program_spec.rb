@@ -63,7 +63,7 @@ describe ASM::Program do
       let(:name)  { :eax }
       let(:value) { 0xff }
 
-      before { subject.register_set(value,name) }
+      before { subject.register_set(name, value) }
 
       it "should add a 'xor' instruction with a registers" do
         subject.instructions[-1].name.should == :mov
