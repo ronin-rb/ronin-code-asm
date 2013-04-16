@@ -88,6 +88,23 @@ module Ronin
         end
 
         #
+        # Emits multiple operands.
+        #
+        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
+        #   The Array of operands.
+        #
+        # @return [String]
+        #   The formatted operands.
+        #
+        def self.emit_operands(ops)
+          if ops.length > 1
+            [*ops[1..-1], ops[0]].map { |op| emit_operand(op) }.join(",\t")
+          else
+            super(ops)
+          end
+        end
+
+        #
         # Emits an instruction.
         #
         # @param [Instruction] ins

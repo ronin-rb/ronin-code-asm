@@ -284,12 +284,12 @@ describe ASM::Program do
         push ebx
         push ecx
 
-        mov eax, ebx
-        mov eax+0, ebx
-        mov eax+4, ebx
-        mov eax+esi, ebx
-        mov eax+(esi*4), ebx
-        mov eax+(esi*4)+10, ebx
+        mov ebx, eax
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
       end
     end
 
@@ -335,12 +335,12 @@ describe ASM::Program do
         push ebx
         push ecx
 
-        mov eax, ebx
-        mov eax+0, ebx
-        mov eax+4, ebx
-        mov eax+esi, ebx
-        mov eax+(esi*4), ebx
-        mov eax+(esi*4)+10, ebx
+        mov ebx, eax
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
       end
     end
 

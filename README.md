@@ -24,7 +24,7 @@ Create a program:
 
     asm = ASM.new do
       push ebx
-      mov  ebx, eax
+      mov  eax, 0xc0ffee
       pop  ebx
       hlt
     end
@@ -39,7 +39,7 @@ Create a program:
     puts asm.to_asm(:intel)
     # _start:
     #	push	ebx
-    #	mov	eax,	ebx
+    #	mov	eax,	WORD 0xc0ffee
     #	pop	ebx
     #	hlt
 
@@ -66,8 +66,8 @@ Create shellcode:
 
 Immediate operands can be Integers or `nil`:
 
-    mov 0xff, eax
-    mov nil, ebx
+    mov eax, 0xff
+    mov ebx, nil
 
 The size of the operand can also be specified explicitly:
 
@@ -80,10 +80,10 @@ The size of the operand can also be specified explicitly:
 
 Memory operands can be expressed as arithmatic on registers:
 
-    mov eax+8, ebx
-    mov eax-8, ebx
-    mov eax+esi, ebx
-    mov eax+(esi*4), ebx
+    mov ebx, eax+8
+    mov ebx, eax-8
+    mov ebx, eax+esi
+    mov ebx, eax+(esi*4)
 
 ### Labels
 
