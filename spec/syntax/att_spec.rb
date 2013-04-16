@@ -107,7 +107,7 @@ describe ASM::Syntax::ATT do
 
   describe "emit_program" do
     let(:program) do
-      Program.new do
+      Program.new({syntax: :att}) do
         mov 0xff, eax
         ret
       end
@@ -126,7 +126,7 @@ describe ASM::Syntax::ATT do
 
     context "when emitting labels" do
       let(:program) do
-        Program.new do
+        Program.new({syntax: :att}) do
           mov 0, eax
 
           _loop do

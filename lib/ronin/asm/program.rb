@@ -50,6 +50,9 @@ module Ronin
 
       # The targeted architecture
       attr_reader :arch
+      
+      # The syntax withwhich to use during assembly of the asm source code
+      attr_reader :syntax
 
       # The targeted Operating System
       attr_reader :os
@@ -104,6 +107,7 @@ module Ronin
       #
       def initialize(options={},&block)
         @arch = options.fetch(:arch,:x86).to_sym
+        @syntax = options.fetch(:syntax,:intel).to_sym
 
         arch = Archs.const_get(@arch.to_s.upcase)
 
@@ -184,7 +188,8 @@ module Ronin
       #   The newly created instruction.
       #
       def instruction(name,*operands)
-        insn = Instruction.new(name.to_sym,operands)
+        ordered_operands = @syntax == :intel ? operands.reverse : operands
+        insn = Instruction.new(name.to_sym, ordered_operands)
 
         @instructions << insn
         return insn
@@ -386,7 +391,7 @@ module Ronin
       # @param [Symbol] syntax
       #   The syntax to compile the program to.
       #
-      def to_asm(syntax=:att)
+      def to_asm(syntax=:intel)
         SYNTAX[syntax].emit_program(self)
       end
 
@@ -399,7 +404,7 @@ module Ronin
       # @param [Hash] options
       #   Additional options.
       #
-      # @option options [Symbol, String] :syntax (:att)
+      # @option options [Symbol, String] :syntax (:intel)
       #   The syntax to compile the program to.
       #
       # @option options [Symbol] :format (:bin)
@@ -424,7 +429,7 @@ module Ronin
       #   The path to the assembled program.
       #
       def assemble(output,options={})
-        syntax  = options.fetch(:syntax,:att)
+        syntax  = options.fetch(:syntax,:intel)
         format  = options.fetch(:format,:bin)
         parser  = PARSERS[syntax]
 
