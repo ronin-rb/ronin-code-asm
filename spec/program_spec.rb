@@ -9,7 +9,7 @@ describe ASM::Program do
   end
 
   context "when :arch is :x86" do
-    subject { described_class.new(arch: :x86) }
+    subject { described_class.new(arch: :x86, syntax: :intel) }
 
     its(:word_size) { should == 4 }
 
@@ -284,57 +284,59 @@ describe ASM::Program do
         push ebx
         push ecx
 
-        mov eax, ebx
-        mov eax+0, ebx
-        mov eax+4, ebx
-        mov eax+esi, ebx
-        mov eax+(esi*4), ebx
-        mov eax+(esi*4)+10, ebx
+        mov ebx, eax
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
       end
     end
-
-    it "should convert the program to ATT syntax" do
+    
+    it "should convert the program to Intel syntax" do
       subject.to_asm.should == [
         "_start:",
-        "\tpushl\t%eax",
-        "\tpushl\t%ebx",
-        "\tpushl\t%ecx",
-        "\tmovl\t%eax,\t%ebx",
-        "\tmovl\t(%eax),\t%ebx",
-        "\tmovl\t0x4(%eax),\t%ebx",
-        "\tmovl\t(%eax,%esi),\t%ebx",
-        "\tmovl\t(%eax,%esi,4),\t%ebx",
-        "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
+        "\tpush\teax",
+        "\tpush\tebx",
+        "\tpush\tecx",
+        "\tmov\tebx,\teax",
+        "\tmov\tebx,\t[eax]",
+        "\tmov\tebx,\t[eax+0x4]",
+        "\tmov\tebx,\t[eax+esi]",
+        "\tmov\tebx,\t[eax+esi*0x4]",
+        "\tmov\tebx,\t[eax+esi*0x4+0xa]",
         ""
       ].join($/)
     end
 
-    context "when given :intel" do
-      it "should convert the program to Intel syntax" do
-        subject.to_asm(:intel).should == [
+    context "when given :att" do
+      it "should convert the program to ATT syntax" do
+        subject.to_asm(:att).should == [
           "_start:",
-          "\tpush\teax",
-          "\tpush\tebx",
-          "\tpush\tecx",
-          "\tmov\tebx,\teax",
-          "\tmov\tebx,\t[eax]",
-          "\tmov\tebx,\t[eax+0x4]",
-          "\tmov\tebx,\t[eax+esi]",
-          "\tmov\tebx,\t[eax+esi*0x4]",
-          "\tmov\tebx,\t[eax+esi*0x4+0xa]",
+          "\tpushl\t%eax",
+          "\tpushl\t%ebx",
+          "\tpushl\t%ecx",
+          "\tmovl\t%eax,\t%ebx",
+          "\tmovl\t(%eax),\t%ebx",
+          "\tmovl\t0x4(%eax),\t%ebx",
+          "\tmovl\t(%eax,%esi),\t%ebx",
+          "\tmovl\t(%eax,%esi,4),\t%ebx",
+          "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
           ""
         ].join($/)
       end
     end
+    
   end
 
   describe "#assemble", integration: true do
     subject do
-      described_class.new do
+      described_class.new({syntax: :att}) do
         push eax
         push ebx
         push ecx
-
+        
+        mov 1, eax
         mov eax, ebx
         mov eax+0, ebx
         mov eax+4, ebx
@@ -362,4 +364,41 @@ describe ASM::Program do
       end
     end
   end
+  
+  describe "#assemble :intel syntax", yasm: true do
+    subject do
+      described_class.new({ syntax: :intel }) do
+        push eax
+        push ebx
+        push ecx
+        
+        mov eax, 1
+        mov ebx, eax 
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
+      end
+    end
+
+    let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
+
+    before { subject.assemble(output) }
+
+    it "should write to the output file" do
+      File.size(output).should > 0
+    end
+
+    context "with :syntax is :intel" do
+      let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
+
+      before { subject.assemble(output, syntax: :intel) }
+
+      it "should write to the output file" do
+        File.size(output).should > 0
+      end
+    end
+  end
+  
 end
