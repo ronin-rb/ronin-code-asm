@@ -388,7 +388,6 @@ describe ASM::Program do
     before { subject.assemble(output) }
 
     it "should write to the output file" do
-      binding.pry
       File.size(output).should > 0
     end
 
