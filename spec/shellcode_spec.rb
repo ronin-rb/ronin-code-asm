@@ -3,7 +3,7 @@ require 'ronin/asm/shellcode'
 require 'ronin/asm'
 
 describe ASM::Shellcode do
-  describe "#assemble att syntax", yasm: true do
+  describe "#assemble", integration: true do
     subject do
       described_class.new({ syntax: :att }) do
         xor   eax,  eax

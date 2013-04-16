@@ -329,7 +329,7 @@ describe ASM::Program do
     
   end
 
-  describe "#assemble :att syntax", yasm: true do
+  describe "#assemble", integration: true do
     subject do
       described_class.new({syntax: :att}) do
         push eax
