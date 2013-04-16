@@ -31,16 +31,16 @@ Create a program:
 
     puts asm.to_asm
     # _start:
-    #	pushl	%ebx
-    #	movl	%ebx,	%eax
-    #	popl	%ebx
-    #	hlt
-
-    puts asm.to_asm(:intel)
-    # _start:
     #	push	ebx
     #	mov	eax,	WORD 0xc0ffee
     #	pop	ebx
+    #	hlt
+
+    puts asm.to_asm(:att)
+    # _start:
+    #	pushl	%ebx
+    #	movl	%ebx,	%eax
+    #	popl	%ebx
     #	hlt
 
 Create shellcode:

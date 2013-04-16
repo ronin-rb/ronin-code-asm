@@ -386,7 +386,7 @@ module Ronin
       # @param [Symbol] syntax
       #   The syntax to compile the program to.
       #
-      def to_asm(syntax=:att)
+      def to_asm(syntax=:intel)
         SYNTAX[syntax].emit_program(self)
       end
 

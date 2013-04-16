@@ -293,35 +293,35 @@ describe ASM::Program do
       end
     end
 
-    it "should convert the program to ATT syntax" do
+    it "should convert the program to Intel syntax" do
       subject.to_asm.should == [
         "_start:",
-        "\tpushl\t%eax",
-        "\tpushl\t%ebx",
-        "\tpushl\t%ecx",
-        "\tmovl\t%eax,\t%ebx",
-        "\tmovl\t(%eax),\t%ebx",
-        "\tmovl\t0x4(%eax),\t%ebx",
-        "\tmovl\t(%eax,%esi),\t%ebx",
-        "\tmovl\t(%eax,%esi,4),\t%ebx",
-        "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
+        "\tpush\teax",
+        "\tpush\tebx",
+        "\tpush\tecx",
+        "\tmov\tebx,\teax",
+        "\tmov\tebx,\t[eax]",
+        "\tmov\tebx,\t[eax+0x4]",
+        "\tmov\tebx,\t[eax+esi]",
+        "\tmov\tebx,\t[eax+esi*0x4]",
+        "\tmov\tebx,\t[eax+esi*0x4+0xa]",
         ""
       ].join($/)
     end
 
-    context "when given :intel" do
-      it "should convert the program to Intel syntax" do
-        subject.to_asm(:intel).should == [
+    context "when given :att" do
+      it "should convert the program to ATT syntax" do
+        subject.to_asm(:att).should == [
           "_start:",
-          "\tpush\teax",
-          "\tpush\tebx",
-          "\tpush\tecx",
-          "\tmov\tebx,\teax",
-          "\tmov\tebx,\t[eax]",
-          "\tmov\tebx,\t[eax+0x4]",
-          "\tmov\tebx,\t[eax+esi]",
-          "\tmov\tebx,\t[eax+esi*0x4]",
-          "\tmov\tebx,\t[eax+esi*0x4+0xa]",
+          "\tpushl\t%eax",
+          "\tpushl\t%ebx",
+          "\tpushl\t%ecx",
+          "\tmovl\t%eax,\t%ebx",
+          "\tmovl\t(%eax),\t%ebx",
+          "\tmovl\t0x4(%eax),\t%ebx",
+          "\tmovl\t(%eax,%esi),\t%ebx",
+          "\tmovl\t(%eax,%esi,4),\t%ebx",
+          "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
           ""
         ].join($/)
       end
