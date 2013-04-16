@@ -329,14 +329,14 @@ describe ASM::Program do
     
   end
 
-  describe "#assemble", integration: true, current: true do
+  describe "#assemble", integration: true, current: false do
     subject do
       described_class.new({syntax: :att}) do
         push eax
         push ebx
         push ecx
         
-        mov 1, eax
+        mov 0x0001, eax
         mov eax, ebx
         mov eax+0, ebx
         mov eax+4, ebx
@@ -351,6 +351,7 @@ describe ASM::Program do
     before { subject.assemble(output) }
 
     it "should write to the output file" do
+      #puts subject.to_asm(:intel)
       File.size(output).should > 0
     end
 
@@ -365,7 +366,7 @@ describe ASM::Program do
     end
   end
   
-  describe "#assemble :intel syntax", yasm: true do
+  describe "#assemble :intel syntax", integration: true, current: true do
     subject do
       described_class.new({ syntax: :intel }) do
         push eax
@@ -387,6 +388,7 @@ describe ASM::Program do
     before { subject.assemble(output) }
 
     it "should write to the output file" do
+      binding.pry
       File.size(output).should > 0
     end
 

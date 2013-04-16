@@ -33,7 +33,7 @@ describe ASM::Shellcode do
     end
   end
   
-  describe "#assemble intel syntax", yasm: true do
+  describe "#assemble intel syntax", integration: true do
     subject do
       described_class.new do
         xor   eax,  eax

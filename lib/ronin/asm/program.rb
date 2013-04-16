@@ -436,6 +436,7 @@ module Ronin
         source = Tempfile.new(['ronin-asm', '.s'])
         source.write(to_asm(syntax))
         source.close
+        #binding.pry
 
         YASM::Program.assemble(
           file:          source.path,
