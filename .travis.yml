@@ -9,4 +9,4 @@ rvm:
 matrix:
   allow_failures:
     - rvm: jruby-19mode
-script: sudo rake test
+script: rake test
