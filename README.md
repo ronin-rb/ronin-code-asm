@@ -6,6 +6,8 @@
 * [Mailing List](https://groups.google.com/group/ronin-ruby)
 * [irc.freenode.net #ronin](http://ronin-ruby.github.com/irc/)
 
+[![Build Status](https://secure.travis-ci.org/ronin-ruby/ronin-asm.png?branch=master)](https://travis-ci.org/ronin-ruby/ronin-asm)
+
 ## Description
 
 {Ronin::ASM} is a Ruby DSL for crafting Assmebly programs and Shellcode.
