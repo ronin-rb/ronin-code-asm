@@ -31,6 +31,7 @@ end
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 task :default => :spec
+task :test    => :spec
 
 namespace :spec do
   RSpec::Core::RakeTask.new(:integration) do |t|
