@@ -391,6 +391,13 @@ module Ronin
       end
 
       #
+      # @see #to_s
+      #
+      def to_s
+        to_asm
+      end
+
+      #
       # Assembles the program.
       #
       # @param [String] output
