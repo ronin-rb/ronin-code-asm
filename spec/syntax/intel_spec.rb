@@ -34,6 +34,12 @@ describe ASM::Syntax::Intel do
       subject.emit_memory_operand(operand).should == "[eax]"
     end
 
+    context "when operand width does not match the base width" do
+      it "should specify the width" do
+        subject.emit_memory_operand(operand.word).should == "WORD [eax]"
+      end
+    end
+
     context "with an offset" do
       let(:offset)  { 255 }
       let(:operand) { MemoryOperand.new(register,offset) }

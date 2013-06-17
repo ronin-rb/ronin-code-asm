@@ -85,7 +85,13 @@ module Ronin
             asm << sign << emit_integer(op.offset)
           end
 
-          return "[#{asm}]"
+          asm = "[#{asm}]"
+
+          unless op.width == op.base.width
+            asm = "#{WIDTHS[op.width]} #{asm}"
+          end
+
+          return asm
         end
 
         #
