@@ -117,6 +117,8 @@ describe ASM::Syntax::ATT do
       asm = subject.emit_program(program)
 
       asm.should == [
+        ".code32",
+        "",
         "_start:",
         "\tmovl\t$0xff,\t%eax",
         "\tret",
@@ -141,6 +143,8 @@ describe ASM::Syntax::ATT do
 
       it "should emit both labels and instructions" do
         subject.emit_program(program).should == [
+          ".code32",
+          "",
           "_start:",
           "\tmovl\t$0x0,\t%eax",
           "_loop:",

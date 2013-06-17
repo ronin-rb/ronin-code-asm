@@ -31,6 +31,12 @@ module Ronin
       #
       class Common
 
+        # Bit sizes for various architectures
+        BITS = {
+          x86:   32,
+          amd64: 64,
+        }
+
         #
         # Emits a keyword.
         #

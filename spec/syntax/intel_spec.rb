@@ -108,6 +108,8 @@ describe ASM::Syntax::Intel do
       asm = subject.emit_program(program)
 
       asm.should == [
+        "BITS 32",
+        "",
         "_start:",
         "\tmov\teax,\tBYTE 0xff",
         "\tret",
@@ -132,6 +134,8 @@ describe ASM::Syntax::Intel do
 
       it "should emit both labels and instructions" do
         subject.emit_program(program).should == [
+          "BITS 32",
+          "",
           "_start:",
           "\tmov\teax,\tBYTE 0x0",
           "_loop:",

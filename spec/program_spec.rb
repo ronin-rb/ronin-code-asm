@@ -295,6 +295,8 @@ describe ASM::Program do
 
     it "should convert the program to Intel syntax" do
       subject.to_asm.should == [
+        "BITS 32",
+        "",
         "_start:",
         "\tpush\teax",
         "\tpush\tebx",
@@ -312,6 +314,8 @@ describe ASM::Program do
     context "when given :att" do
       it "should convert the program to ATT syntax" do
         subject.to_asm(:att).should == [
+          ".code32",
+          "",
           "_start:",
           "\tpushl\t%eax",
           "\tpushl\t%ebx",

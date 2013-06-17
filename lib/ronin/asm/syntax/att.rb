@@ -137,14 +137,7 @@ module Ronin
         #   The formatted program.
         #
         def self.emit_program(program)
-          asm = super(program)
-
-          # prepend the `.code64` directive for YASM
-          if program.arch == :amd64
-            asm = [".code64", '', asm].join($/)
-          end
-
-          return asm
+          [".code#{BITS[program.arch]}", "", super(program)].join($/)
         end
 
       end
