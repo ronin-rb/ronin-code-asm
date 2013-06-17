@@ -55,12 +55,12 @@ Create shellcode:
       push  ebx
       mov   esp,  ecx
       xor   edx,  edx
-      mov   0xb,  al
+      mov   al,   0xb
       int   0x80
     end
     
     shellcode.assemble
-    # => "f1\xC0fPfh//shfh/binf\x89\xE3fPfSf\x89\xE1f1\xD2\xB0\v\xCD\x80"
+    # => "1\xC0Ph//shh/bin\x89\xDCPS\x89\xCC1\xD2\xB0\v\xCD\x80"
 
 ### Immediate Operands
 
@@ -102,7 +102,7 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 
     ASM.new(:os => 'Linux') do
       # ...
-      mov syscalls[:execve], al
+      mov al, syscalls[:execve]
       int 0x80
     end
 
