@@ -30,6 +30,8 @@ Create a program:
     end
 
     puts asm.to_asm
+    # BITS 32
+    # section .text
     # _start:
     #	push	ebx
     #	mov	eax,	WORD 0xc0ffee
@@ -37,6 +39,8 @@ Create a program:
     #	hlt
 
     puts asm.to_asm(:att)
+    # .code32
+    # .text
     # _start:
     #	pushl	%ebx
     #	movl	%ebx,	%eax
