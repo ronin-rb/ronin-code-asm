@@ -193,6 +193,20 @@ module Ronin
         end
 
         #
+        # Emits the program's prologue.
+        #
+        # @param [Program] program
+        #   The program.
+        #
+        # @return [String]
+        #   The formatted prologue.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_prologue(program)
+        end
+
+        #
         # Emits a program.
         #
         # @param [Program] program
@@ -203,9 +217,10 @@ module Ronin
         #
         def self.emit_program(program)
           lines = [
+            emit_prologue(program),
             emit_section(:text),
             emit_label(:_start)
-          ]
+          ].compact
 
           program.instructions.each do |ins|
             case ins

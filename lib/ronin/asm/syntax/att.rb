@@ -143,16 +143,18 @@ module Ronin
         end
 
         #
-        # Emits a program.
+        # Emits the program's prologue.
         #
         # @param [Program] program
         #   The program.
         #
         # @return [String]
-        #   The formatted program.
+        #   The formatted prologue.
         #
-        def self.emit_program(program)
-          [".code#{BITS[program.arch]}", "", super(program)].join($/)
+        # @since 0.2.0
+        #
+        def self.emit_prologue(program)
+          ".code#{BITS[program.arch]}"
         end
 
       end
