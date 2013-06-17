@@ -399,7 +399,7 @@ module Ronin
       # @param [Hash] options
       #   Additional options.
       #
-      # @option options [Symbol, String] :syntax (:att)
+      # @option options [Symbol, String] :syntax (:intel)
       #   The syntax to compile the program to.
       #
       # @option options [Symbol] :format (:bin)
@@ -424,7 +424,7 @@ module Ronin
       #   The path to the assembled program.
       #
       def assemble(output,options={})
-        syntax  = options.fetch(:syntax,:att)
+        syntax  = options.fetch(:syntax,:intel)
         format  = options.fetch(:format,:bin)
         parser  = PARSERS[syntax]
 
