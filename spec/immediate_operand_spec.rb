@@ -15,7 +15,9 @@ describe ImmediateOperand do
         subject.width.should == width
       end
     end
+  end
 
+  describe "#width" do
     describe "default width for" do
       context "0x100000000 .. 0xffffffffffffffff" do
         subject { described_class.new(0xffffffffffffffff).width }

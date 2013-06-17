@@ -38,17 +38,24 @@ module Ronin
       #   The size in bytes of the value.
       #
       def initialize(value,width=nil)
-        value   = value.to_i
-        width ||= case value
-                  when (0x100000000..0xffffffffffffffff),
-                       (-0x7fffffffffffffff..-0x800000000) then 8
-                  when (0x10000..0xffffffff),
-                       (-0x7fffffff..-0x80000)             then 4
-                  when (0x100..0xffff), (-0x7fff..-0x80)   then 2
-                  when (0..0xff), (-0x7f..0)               then 1
-                  end
+        super(value.to_i,width)
+      end
 
-        super(value,width)
+      #
+      # The width of the immediate operand.
+      #
+      # @return [8, 4, 2, 1]
+      #   The width.
+      #
+      def width
+        super || case value
+                 when (0x100000000..0xffffffffffffffff),
+                      (-0x7fffffffffffffff..-0x800000000) then 8
+                 when (0x10000..0xffffffff),
+                      (-0x7fffffff..-0x80000)             then 4
+                 when (0x100..0xffff), (-0x7fff..-0x80)   then 2
+                 when (0..0xff), (-0x7f..0)               then 1
+                 end
       end
 
       #
