@@ -114,6 +114,21 @@ module Ronin
         end
 
         #
+        # Emits a section name.
+        #
+        # @param [Symbol] name
+        #   The section name.
+        #
+        # @return [String]
+        #   The formatted section name.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_section(name)
+          "section .#{name}"
+        end
+
+        #
         # Emits a program.
         #
         # @param [Program] program

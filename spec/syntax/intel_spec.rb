@@ -96,6 +96,12 @@ describe ASM::Syntax::Intel do
     end
   end
 
+  describe "emit_section" do
+    it "should emit the section name" do
+      subject.emit_section(:text).should == "section .text"
+    end
+  end
+
   describe "emit_program" do
     let(:program) do
       Program.new do
@@ -110,6 +116,7 @@ describe ASM::Syntax::Intel do
       asm.should == [
         "BITS 32",
         "",
+        "section .text",
         "_start:",
         "\tmov\teax,\tBYTE 0xff",
         "\tret",
@@ -136,6 +143,7 @@ describe ASM::Syntax::Intel do
         subject.emit_program(program).should == [
           "BITS 32",
           "",
+          "section .text",
           "_start:",
           "\tmov\teax,\tBYTE 0x0",
           "_loop:",

@@ -179,6 +179,20 @@ module Ronin
         end
 
         #
+        # Emits a section name.
+        #
+        # @param [Symbol] name
+        #   The section name.
+        #
+        # @return [String]
+        #   The formatted section name.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_section(name)
+        end
+
+        #
         # Emits a program.
         #
         # @param [Program] program
@@ -188,7 +202,10 @@ module Ronin
         #   The formatted program.
         #
         def self.emit_program(program)
-          lines = [emit_label(:_start)]
+          lines = [
+            emit_section(:text),
+            emit_label(:_start)
+          ]
 
           program.instructions.each do |ins|
             case ins

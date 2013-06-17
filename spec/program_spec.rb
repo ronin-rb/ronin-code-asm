@@ -297,6 +297,7 @@ describe ASM::Program do
       subject.to_asm.should == [
         "BITS 32",
         "",
+        "section .text",
         "_start:",
         "\tpush\teax",
         "\tpush\tebx",
@@ -316,6 +317,7 @@ describe ASM::Program do
         subject.to_asm(:att).should == [
           ".code32",
           "",
+          ".text",
           "_start:",
           "\tpushl\t%eax",
           "\tpushl\t%ebx",

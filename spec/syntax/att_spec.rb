@@ -105,6 +105,12 @@ describe ASM::Syntax::ATT do
     end
   end
 
+  describe "emit_section" do
+    it "should emit the section name" do
+      subject.emit_section(:text).should == ".text"
+    end
+  end
+
   describe "emit_program" do
     let(:program) do
       Program.new do
@@ -119,6 +125,7 @@ describe ASM::Syntax::ATT do
       asm.should == [
         ".code32",
         "",
+        ".text",
         "_start:",
         "\tmovl\t$0xff,\t%eax",
         "\tret",
@@ -145,6 +152,7 @@ describe ASM::Syntax::ATT do
         subject.emit_program(program).should == [
           ".code32",
           "",
+          ".text",
           "_start:",
           "\tmovl\t$0x0,\t%eax",
           "_loop:",
