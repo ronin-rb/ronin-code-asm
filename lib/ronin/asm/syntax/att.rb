@@ -88,6 +88,23 @@ module Ronin
         end
 
         #
+        # Emits multiple operands.
+        #
+        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
+        #   The Array of operands.
+        #
+        # @return [String]
+        #   The formatted operands.
+        #
+        def self.emit_operands(ops)
+          if ops.length > 1
+            [*ops[1..-1], ops[0]].map { |op| emit_operand(op) }.join(",\t")
+          else
+            super(ops)
+          end
+        end
+
+        #
         # Emits an instruction.
         #
         # @param [Instruction] ins
@@ -111,23 +128,33 @@ module Ronin
         end
 
         #
-        # Emits a program.
+        # Emits a section name.
+        #
+        # @param [Symbol] name
+        #   The section name.
+        #
+        # @return [String]
+        #   The formatted section name.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_section(name)
+          ".#{name}"
+        end
+
+        #
+        # Emits the program's prologue.
         #
         # @param [Program] program
         #   The program.
         #
         # @return [String]
-        #   The formatted program.
+        #   The formatted prologue.
         #
-        def self.emit_program(program)
-          asm = super(program)
-
-          # prepend the `.code64` directive for YASM
-          if program.arch == :amd64
-            asm = [".code64", '', asm].join($/)
-          end
-
-          return asm
+        # @since 0.2.0
+        #
+        def self.emit_prologue(program)
+          ".code#{BITS[program.arch]}"
         end
 
       end

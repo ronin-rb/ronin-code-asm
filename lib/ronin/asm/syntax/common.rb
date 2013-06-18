@@ -31,6 +31,12 @@ module Ronin
       #
       class Common
 
+        # Bit sizes for various architectures
+        BITS = {
+          x86:   32,
+          amd64: 64,
+        }
+
         #
         # Emits a keyword.
         #
@@ -173,6 +179,34 @@ module Ronin
         end
 
         #
+        # Emits a section name.
+        #
+        # @param [Symbol] name
+        #   The section name.
+        #
+        # @return [String]
+        #   The formatted section name.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_section(name)
+        end
+
+        #
+        # Emits the program's prologue.
+        #
+        # @param [Program] program
+        #   The program.
+        #
+        # @return [String]
+        #   The formatted prologue.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_prologue(program)
+        end
+
+        #
         # Emits a program.
         #
         # @param [Program] program
@@ -182,7 +216,11 @@ module Ronin
         #   The formatted program.
         #
         def self.emit_program(program)
-          lines = [emit_label(:_start)]
+          lines = [
+            emit_prologue(program),
+            emit_section(:text),
+            emit_label(:_start)
+          ].compact
 
           program.instructions.each do |ins|
             case ins

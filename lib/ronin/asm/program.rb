@@ -193,53 +193,73 @@ module Ronin
       #
       # Creates an operand of size 1 (byte).
       #
-      # @param [Integer] number
+      # @param [MemoryOperand, Integer] op 
       #   The value of the operand.
       #
-      # @return [ImmediateOperand]
+      # @return [MemoryOperand, ImmediateOperand]
       #   The new operand value.
       #
-      def byte(number)
-        ImmediateOperand.new(number,1)
+      def byte(op)
+        case op
+        when MemoryOperand
+          MemoryOperand.new(op.base,op.offset,op.index,op.scale,1)
+        else
+          ImmediateOperand.new(op,1)
+        end
       end
 
       #
       # Creates a operand of size 2 (bytes).
       #
-      # @param [Integer] number
+      # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [ImmediateOperand]
+      # @return [MemoryOperand, ImmediateOperand]
       #   The new operand value.
       #
-      def word(number)
-        ImmediateOperand.new(number,2)
+      def word(op)
+        case op
+        when MemoryOperand
+          MemoryOperand.new(op.base,op.offset,op.index,op.scale,2)
+        else
+          ImmediateOperand.new(op,2)
+        end
       end
 
       #
       # Creates a operand of size 4 (bytes).
       #
-      # @param [Integer] number
+      # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
       # @return [ImmediateOperand]
       #   The new operand value.
       #
-      def dword(number)
-        ImmediateOperand.new(number,4)
+      def dword(op)
+        case op
+        when MemoryOperand
+          MemoryOperand.new(op.base,op.offset,op.index,op.scale,4)
+        else
+          ImmediateOperand.new(op,4)
+        end
       end
 
       #
       # Creates a operand of size 8 (bytes).
       #
-      # @param [Integer] number
+      # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [ImmediateOperand]
+      # @return [MemoryOperand, ImmediateOperand]
       #   The new operand.
       #
-      def qword(number)
-        ImmediateOperand.new(number,8)
+      def qword(op)
+        case op
+        when MemoryOperand
+          MemoryOperand.new(op.base,op.offset,op.index,op.scale,8)
+        else
+          ImmediateOperand.new(op,8)
+        end
       end
 
       #
@@ -318,15 +338,15 @@ module Ronin
       #
       # Generic method for setting a register.
       #
-      # @param [Register, Immediate, Integer] value
-      #   The new value for the register.
-      #
       # @param [Symbol] name
       #   The name of the reigster.
       #
+      # @param [Register, Immediate, Integer] value
+      #   The new value for the register.
+      #
       # @abstract
       #
-      def register_set(value,name)
+      def register_set(name,value)
       end
 
       #
@@ -386,7 +406,7 @@ module Ronin
       # @param [Symbol] syntax
       #   The syntax to compile the program to.
       #
-      def to_asm(syntax=:att)
+      def to_asm(syntax=:intel)
         SYNTAX[syntax].emit_program(self)
       end
 
@@ -406,7 +426,7 @@ module Ronin
       # @param [Hash] options
       #   Additional options.
       #
-      # @option options [Symbol, String] :syntax (:att)
+      # @option options [Symbol, String] :syntax (:intel)
       #   The syntax to compile the program to.
       #
       # @option options [Symbol] :format (:bin)
@@ -431,7 +451,7 @@ module Ronin
       #   The path to the assembled program.
       #
       def assemble(output,options={})
-        syntax  = options.fetch(:syntax,:att)
+        syntax  = options.fetch(:syntax,:intel)
         format  = options.fetch(:format,:bin)
         parser  = PARSERS[syntax]
 

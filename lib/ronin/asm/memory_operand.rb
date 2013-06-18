@@ -28,7 +28,7 @@ module Ronin
     #
     # @see http://asm.sourceforge.net/articles/linasm.html#Memory
     #
-    class MemoryOperand < Struct.new(:base, :offset, :index, :scale)
+    class MemoryOperand < Struct.new(:base, :offset, :index, :scale, :width)
 
       #
       # Creates a new Memory Operand.
@@ -48,7 +48,7 @@ module Ronin
       # @raise [TypeError]
       #   `base` or `index` was not a {Register} or `nil`.
       #
-      def initialize(base=nil,offset=0,index=nil,scale=1)
+      def initialize(base=nil,offset=0,index=nil,scale=1,width=nil)
         unless (base.nil? || base.kind_of?(Register))
           raise(TypeError,"base must be a Register or nil")
         end
@@ -65,7 +65,11 @@ module Ronin
           raise(TypeError,"scale must be an Integer")
         end
 
-        super(base,offset,index,scale)
+        if base
+          width ||= base.width
+        end
+
+        super(base,offset,index,scale,width)
       end
 
       #
@@ -78,7 +82,13 @@ module Ronin
       #   The new Memory Operand.
       #
       def +(offset)
-        MemoryOperand.new(self.base,self.offset+offset,self.index,self.scale)
+        MemoryOperand.new(
+          self.base,
+          self.offset + offset,
+          self.index,
+          self.scale,
+          self.width
+        )
       end
 
       #
@@ -91,17 +101,13 @@ module Ronin
       #   The new Memory Operand.
       #
       def -(offset)
-        MemoryOperand.new(self.base,self.offset-offset,self.index,self.scale)
-      end
-
-      #
-      # The width of the Memory Operand.
-      #
-      # @return [Integer]
-      #   The width taken from the base {Register}.
-      #
-      def width
-        base.width
+        MemoryOperand.new(
+          self.base,
+          self.offset - offset,
+          self.index,
+          self.scale,
+          self.width
+        )
       end
 
     end

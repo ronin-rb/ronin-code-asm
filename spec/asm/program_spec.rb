@@ -63,7 +63,7 @@ describe ASM::Program do
       let(:name)  { :eax }
       let(:value) { 0xff }
 
-      before { subject.register_set(value,name) }
+      before { subject.register_set(name,value) }
 
       it "should add a 'xor' instruction with a registers" do
         subject.instructions[-1].name.should == :mov
@@ -203,6 +203,19 @@ describe ASM::Program do
     it "should have width of 1" do
       subject.byte(1).width.should == 1
     end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.byte(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 1" do
+        subject.byte(memory_operand).width.should == 1
+      end
+    end
   end
 
   describe "#word" do
@@ -212,6 +225,19 @@ describe ASM::Program do
 
     it "should have width of 2" do
       subject.word(1).width.should == 2
+    end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.word(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 2" do
+        subject.word(memory_operand).width.should == 2
+      end
     end
   end
 
@@ -223,6 +249,19 @@ describe ASM::Program do
     it "should have width of 4" do
       subject.dword(1).width.should == 4
     end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.dword(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 4" do
+        subject.dword(memory_operand).width.should == 4
+      end
+    end
   end
 
   describe "#qword" do
@@ -232,6 +271,19 @@ describe ASM::Program do
 
     it "should have width of 8" do
       subject.qword(1).width.should == 8
+    end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.qword(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 8" do
+        subject.qword(memory_operand).width.should == 8
+      end
     end
   end
 
@@ -284,44 +336,48 @@ describe ASM::Program do
         push ebx
         push ecx
 
-        mov eax, ebx
-        mov eax+0, ebx
-        mov eax+4, ebx
-        mov eax+esi, ebx
-        mov eax+(esi*4), ebx
-        mov eax+(esi*4)+10, ebx
+        mov ebx, eax
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
       end
     end
 
-    it "should convert the program to ATT syntax" do
+    it "should convert the program to Intel syntax" do
       subject.to_asm.should == [
+        "BITS 32",
+        "section .text",
         "_start:",
-        "\tpushl\t%eax",
-        "\tpushl\t%ebx",
-        "\tpushl\t%ecx",
-        "\tmovl\t%eax,\t%ebx",
-        "\tmovl\t(%eax),\t%ebx",
-        "\tmovl\t0x4(%eax),\t%ebx",
-        "\tmovl\t(%eax,%esi),\t%ebx",
-        "\tmovl\t(%eax,%esi,4),\t%ebx",
-        "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
+        "\tpush\teax",
+        "\tpush\tebx",
+        "\tpush\tecx",
+        "\tmov\tebx,\teax",
+        "\tmov\tebx,\t[eax]",
+        "\tmov\tebx,\t[eax+0x4]",
+        "\tmov\tebx,\t[eax+esi]",
+        "\tmov\tebx,\t[eax+esi*0x4]",
+        "\tmov\tebx,\t[eax+esi*0x4+0xa]",
         ""
       ].join($/)
     end
 
-    context "when given :intel" do
-      it "should convert the program to Intel syntax" do
-        subject.to_asm(:intel).should == [
+    context "when given :att" do
+      it "should convert the program to ATT syntax" do
+        subject.to_asm(:att).should == [
+          ".code32",
+          ".text",
           "_start:",
-          "\tpush\teax",
-          "\tpush\tebx",
-          "\tpush\tecx",
-          "\tmov\tebx,\teax",
-          "\tmov\tebx,\t[eax]",
-          "\tmov\tebx,\t[eax+0x4]",
-          "\tmov\tebx,\t[eax+esi]",
-          "\tmov\tebx,\t[eax+esi*0x4]",
-          "\tmov\tebx,\t[eax+esi*0x4+0xa]",
+          "\tpushl\t%eax",
+          "\tpushl\t%ebx",
+          "\tpushl\t%ecx",
+          "\tmovl\t%eax,\t%ebx",
+          "\tmovl\t(%eax),\t%ebx",
+          "\tmovl\t0x4(%eax),\t%ebx",
+          "\tmovl\t(%eax,%esi),\t%ebx",
+          "\tmovl\t(%eax,%esi,4),\t%ebx",
+          "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
           ""
         ].join($/)
       end
@@ -335,12 +391,12 @@ describe ASM::Program do
         push ebx
         push ecx
 
-        mov eax, ebx
-        mov eax+0, ebx
-        mov eax+4, ebx
-        mov eax+esi, ebx
-        mov eax+(esi*4), ebx
-        mov eax+(esi*4)+10, ebx
+        mov ebx, eax
+        mov ebx, eax+0
+        mov ebx, eax+4
+        mov ebx, eax+esi
+        mov ebx, eax+(esi*4)
+        mov ebx, eax+(esi*4)+10
       end
     end
 

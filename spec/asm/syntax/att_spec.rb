@@ -93,7 +93,7 @@ describe ASM::Syntax::ATT do
     context "with multiple operands" do
       let(:register)    { Register.new(:eax, 4) }
       let(:immediate)   { ImmediateOperand.new(0xff, 1)  }
-      let(:instruction) { Instruction.new(:mov, [immediate, register]) }
+      let(:instruction) { Instruction.new(:mov, [register, immediate]) }
 
       it "should add a size specifier to the instruction name" do
         subject.emit_instruction(instruction).should =~ /^movl/
@@ -105,10 +105,16 @@ describe ASM::Syntax::ATT do
     end
   end
 
+  describe "emit_section" do
+    it "should emit the section name" do
+      subject.emit_section(:text).should == ".text"
+    end
+  end
+
   describe "emit_program" do
     let(:program) do
       Program.new do
-        mov 0xff, eax
+        mov eax, 0xff
         ret
       end
     end
@@ -117,6 +123,8 @@ describe ASM::Syntax::ATT do
       asm = subject.emit_program(program)
 
       asm.should == [
+        ".code32",
+        ".text",
         "_start:",
         "\tmovl\t$0xff,\t%eax",
         "\tret",
@@ -127,7 +135,7 @@ describe ASM::Syntax::ATT do
     context "when emitting labels" do
       let(:program) do
         Program.new do
-          mov 0, eax
+          mov eax, 0
 
           _loop do
             inc eax
@@ -141,11 +149,13 @@ describe ASM::Syntax::ATT do
 
       it "should emit both labels and instructions" do
         subject.emit_program(program).should == [
+          ".code32",
+          ".text",
           "_start:",
           "\tmovl\t$0x0,\t%eax",
           "_loop:",
           "\tincl\t%eax",
-          "\tcmpl\t%eax,\t$0xa",
+          "\tcmpl\t$0xa,\t%eax",
           "\tjl\t_loop",
           "\tret",
           ""

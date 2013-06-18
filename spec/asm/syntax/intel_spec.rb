@@ -34,6 +34,14 @@ describe ASM::Syntax::Intel do
       subject.emit_memory_operand(operand).should == "[eax]"
     end
 
+    context "when operand width does not match the base width" do
+      before { operand.width = 2 }
+
+      it "should specify the width" do
+        subject.emit_memory_operand(operand).should == "WORD [eax]"
+      end
+    end
+
     context "with an offset" do
       let(:offset)  { 255 }
       let(:operand) { MemoryOperand.new(register,offset) }
@@ -82,7 +90,7 @@ describe ASM::Syntax::Intel do
     context "with multiple operands" do
       let(:register)    { Register.new(:eax, 4) }
       let(:immediate)   { ImmediateOperand.new(0xff, 1)  }
-      let(:instruction) { Instruction.new(:mov, [immediate, register]) }
+      let(:instruction) { Instruction.new(:mov, [register, immediate]) }
 
       it "should emit the operands" do
         subject.emit_instruction(instruction).should == "mov\teax,\tBYTE 0xff"
@@ -90,10 +98,16 @@ describe ASM::Syntax::Intel do
     end
   end
 
+  describe "emit_section" do
+    it "should emit the section name" do
+      subject.emit_section(:text).should == "section .text"
+    end
+  end
+
   describe "emit_program" do
     let(:program) do
       Program.new do
-        mov 0xff, eax
+        mov eax, 0xff
         ret
       end
     end
@@ -102,6 +116,8 @@ describe ASM::Syntax::Intel do
       asm = subject.emit_program(program)
 
       asm.should == [
+        "BITS 32",
+        "section .text",
         "_start:",
         "\tmov\teax,\tBYTE 0xff",
         "\tret",
@@ -112,7 +128,7 @@ describe ASM::Syntax::Intel do
     context "when emitting labels" do
       let(:program) do
         Program.new do
-          mov 0, eax
+          mov eax, 0
 
           _loop do
             inc eax
@@ -126,11 +142,13 @@ describe ASM::Syntax::Intel do
 
       it "should emit both labels and instructions" do
         subject.emit_program(program).should == [
+          "BITS 32",
+          "section .text",
           "_start:",
           "\tmov\teax,\tBYTE 0x0",
           "_loop:",
           "\tinc\teax",
-          "\tcmp\tBYTE 0xa,\teax",
+          "\tcmp\teax,\tBYTE 0xa",
           "\tjl\t_loop",
           "\tret",
           ""
@@ -143,7 +161,7 @@ describe ASM::Syntax::Intel do
         Program.new(arch: :amd64) do
           push rax
           push rbx
-          mov 0xff, rax
+          mov  rax, 0xff
           ret
         end
       end

@@ -85,24 +85,13 @@ module Ronin
             asm << sign << emit_integer(op.offset)
           end
 
-          return "[#{asm}]"
-        end
+          asm = "[#{asm}]"
 
-        #
-        # Emits multiple operands.
-        #
-        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
-        #   The Array of operands.
-        #
-        # @return [String]
-        #   The formatted operands.
-        #
-        def self.emit_operands(ops)
-          if ops.length > 1
-            [ops[-1], *ops[0..-2]].map { |op| emit_operand(op) }.join(",\t")
-          else
-            super(ops)
+          unless op.width == op.base.width
+            asm = "#{WIDTHS[op.width]} #{asm}"
           end
+
+          return asm
         end
 
         #
@@ -125,23 +114,33 @@ module Ronin
         end
 
         #
-        # Emits a program.
+        # Emits a section name.
+        #
+        # @param [Symbol] name
+        #   The section name.
+        #
+        # @return [String]
+        #   The formatted section name.
+        #
+        # @since 0.2.0
+        #
+        def self.emit_section(name)
+          "section .#{name}"
+        end
+
+        #
+        # Emits the program's prologue.
         #
         # @param [Program] program
         #   The program.
         #
         # @return [String]
-        #   The formatted program.
+        #   The formatted prologue.
         #
-        def self.emit_program(program)
-          asm = super(program)
-
-          # prepend the `BITS 64` directive for YASM
-          if program.arch == :amd64
-            asm = ["BITS 64", '', asm].join($/)
-          end
-
-          return asm
+        # @since 0.2.0
+        #
+        def self.emit_prologue(program)
+          "BITS #{BITS[program.arch]}"
         end
 
       end
