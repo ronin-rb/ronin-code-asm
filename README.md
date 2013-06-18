@@ -49,7 +49,7 @@ Create a program:
 
 Create shellcode:
 
-    shellcode = ASM::Shellcode.new(:arch => :x86) do
+    shellcode = ASM::Shellcode.new(arch: :x86) do
       xor   eax,  eax
       push  eax
       push  0x68732f2f
@@ -104,7 +104,7 @@ Labels can be expressed with blocks:
 If the `:os` option is specified, then syscall numbers can be looked up via the 
 `syscalls` Hash:
 
-    ASM.new(:os => 'Linux') do
+    ASM.new(os: 'Linux') do
       # ...
       mov al, syscalls[:execve]
       int 0x80
