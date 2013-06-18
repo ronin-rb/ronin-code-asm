@@ -211,7 +211,7 @@ module Ronin
       #
       # Creates a operand of size 2 (bytes).
       #
-      # @param [MemoryOperand, Integer] number
+      # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
       # @return [MemoryOperand, ImmediateOperand]
