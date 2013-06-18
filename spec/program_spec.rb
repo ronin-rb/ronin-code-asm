@@ -203,6 +203,19 @@ describe ASM::Program do
     it "should have width of 1" do
       subject.byte(1).width.should == 1
     end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.byte(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 1" do
+        subject.byte(memory_operand).width.should == 1
+      end
+    end
   end
 
   describe "#word" do
@@ -212,6 +225,19 @@ describe ASM::Program do
 
     it "should have width of 2" do
       subject.word(1).width.should == 2
+    end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.word(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 2" do
+        subject.word(memory_operand).width.should == 2
+      end
     end
   end
 
@@ -223,6 +249,19 @@ describe ASM::Program do
     it "should have width of 4" do
       subject.dword(1).width.should == 4
     end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.dword(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 4" do
+        subject.dword(memory_operand).width.should == 4
+      end
+    end
   end
 
   describe "#qword" do
@@ -232,6 +271,19 @@ describe ASM::Program do
 
     it "should have width of 8" do
       subject.qword(1).width.should == 8
+    end
+
+    context "when given a MemoryOperand" do
+      let(:register)       { Register.new(:eax, 4)       }
+      let(:memory_operand) { MemoryOperand.new(register) }
+
+      it "should return a MemoryOperand" do
+        subject.qword(memory_operand).should be_kind_of(MemoryOperand)
+      end
+
+      it "should have a width of 8" do
+        subject.qword(memory_operand).width.should == 8
+      end
     end
   end
 

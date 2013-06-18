@@ -35,8 +35,10 @@ describe ASM::Syntax::Intel do
     end
 
     context "when operand width does not match the base width" do
+      before { operand.width = 2 }
+
       it "should specify the width" do
-        subject.emit_memory_operand(operand.word).should == "WORD [eax]"
+        subject.emit_memory_operand(operand).should == "WORD [eax]"
       end
     end
 

@@ -110,46 +110,6 @@ module Ronin
         )
       end
 
-      #
-      # Sets the width to 1.
-      #
-      # @return [self]
-      #
-      def byte
-        self.width = 1
-        return self
-      end
-
-      #
-      # Sets the width to 2.
-      #
-      # @return [self]
-      #
-      def word
-        self.width = 2
-        return self
-      end
-
-      #
-      # Sets the width to 2.
-      #
-      # @return [self]
-      #
-      def dword
-        self.width = 4
-        return self
-      end
-
-      #
-      # Sets the width to 8.
-      #
-      # @return [self]
-      #
-      def qword
-        self.width = 8
-        return self
-      end
-
     end
   end
 end
