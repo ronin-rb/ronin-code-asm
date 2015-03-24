@@ -27,6 +27,18 @@ describe ASM::Shellcode do
       subject.assemble.should == shellcode
     end
 
+    context "with :output" do
+      let(:output) do
+        Tempfile.new(['ronin-shellcode-custom-path', '.bin']).path
+      end
+
+      it "should write to the custom path" do
+        subject.assemble(output: output).should == shellcode
+
+        File.binread(output)
+      end
+    end
+
     context "with :syntax is :intel" do
       it "assemble down to raw machine code" do
         subject.assemble(syntax: :intel).should == shellcode
