@@ -17,5 +17,5 @@ dependencies:
   ruby-yasm: ~> 0.2
 
 development_dependencies:
-  bundler: ~> 1.0
+  bundler: ~> 2.0
   yard: ~> 0.7
