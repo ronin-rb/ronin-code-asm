@@ -16,13 +16,13 @@ describe Register do
       it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
-        subject.base.should == register
+        expect(subject.base).to eq(register)
       end
 
       it "should preserve the offset, index and scale" do
-        subject.offset.should == operand.offset
-        subject.index.should  == operand.index
-        subject.scale.should  == operand.scale
+        expect(subject.offset).to eq(operand.offset)
+        expect(subject.index).to  eq(operand.index)
+        expect(subject.scale).to  eq(operand.scale)
       end
     end
 
@@ -32,13 +32,13 @@ describe Register do
       it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
-        subject.base.should == register
+        expect(subject.base).to eq(register)
       end
 
       its(:offset) { should == 0 }
 
       it "should set the index" do
-        subject.index.should == register
+        expect(subject.index).to eq(register)
       end
     end
 
@@ -50,19 +50,19 @@ describe Register do
       it { should be_kind_of(MemoryOperand) }
 
       it "should set the base" do
-        subject.base.should == register
+        expect(subject.base).to eq(register)
       end
 
       it "should set the offset" do
-        subject.offset.should == offset
+        expect(subject.offset).to eq(offset)
       end
     end
 
     context "otherwise" do
       it "should raise a TypeError" do
-        lambda {
+        expect {
           register + Object.new
-        }.should raise_error(TypeError)
+        }.to raise_error(TypeError)
       end
     end
   end
@@ -75,11 +75,11 @@ describe Register do
     it { should be_kind_of(MemoryOperand) }
 
     it "should set the base" do
-      subject.base.should == register
+      expect(subject.base).to eq(register)
     end
 
     it "should set a negative offset" do
-      subject.offset.should == -offset
+      expect(subject.offset).to eq(-offset)
     end
   end
 
@@ -94,17 +94,17 @@ describe Register do
     its(:offset) { should == 0 }
 
     it "should set the index" do
-      subject.index.should == register
+      expect(subject.index).to eq(register)
     end
 
     it "should set the scale" do
-      subject.scale.should == scale
+      expect(subject.scale).to eq(scale)
     end
   end
 
   describe "#to_s" do
     it "should return the register name" do
-      subject.to_s.should == subject.name.to_s
+      expect(subject.to_s).to eq(subject.name.to_s)
     end
   end
 end

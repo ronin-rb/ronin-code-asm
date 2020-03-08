@@ -13,27 +13,27 @@ describe MemoryOperand do
     its(:scale)  { should == 1    }
 
     it "should only accept nil and a Register for base" do
-      lambda {
+      expect {
         described_class.new(Object.new)
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
 
     it "should only accept Integers for offset" do
-      lambda {
+      expect {
         described_class.new(register,2.0)
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
 
     it "should only accept nil and a Register for index" do
-      lambda {
+      expect {
         described_class.new(register,0,Object.new)
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
 
     it "should only accept Integers for offset" do
-      lambda {
+      expect {
         described_class.new(register,0,nil,2.0)
-      }.should raise_error(TypeError)
+      }.to raise_error(TypeError)
     end
 
   end
@@ -44,13 +44,13 @@ describe MemoryOperand do
     subject { operand + 4 }
 
     it "should add to offset" do
-      subject.offset.should == 8
+      expect(subject.offset).to eq(8)
     end
 
     it "should not change base, index or scale" do
-      subject.base.should  == operand.base
-      subject.index.should == operand.index
-      subject.scale.should == operand.scale
+      expect(subject.base).to  eq(operand.base)
+      expect(subject.index).to eq(operand.index)
+      expect(subject.scale).to eq(operand.scale)
     end
   end
 
@@ -60,13 +60,13 @@ describe MemoryOperand do
     subject { operand - 2 }
 
     it "should subtract from offset" do
-      subject.offset.should == 2
+      expect(subject.offset).to eq(2)
     end
 
     it "should not change base, index or scale" do
-      subject.base.should  == operand.base
-      subject.index.should == operand.index
-      subject.scale.should == operand.scale
+      expect(subject.base).to  eq(operand.base)
+      expect(subject.index).to eq(operand.index)
+      expect(subject.scale).to eq(operand.scale)
     end
   end
 
@@ -74,7 +74,7 @@ describe MemoryOperand do
     subject { described_class.new(register,10) }
 
     it "should return the width of base" do
-      subject.width.should == register.width
+      expect(subject.width).to eq(register.width)
     end
   end
 end

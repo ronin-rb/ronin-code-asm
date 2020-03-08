@@ -14,7 +14,7 @@ describe ASM::Syntax::ATT do
     let(:register) { Register.new(:eax, 4) }
 
     it "should prepend a '%' to the register name" do
-      subject.emit_register(register).should == "%eax"
+      expect(subject.emit_register(register)).to eq("%eax")
     end
   end
 
@@ -22,7 +22,7 @@ describe ASM::Syntax::ATT do
     let(:operand) { ImmediateOperand.new(255, 1) }
 
     it "should prepend a '$' to the immediate" do
-      subject.emit_immediate_operand(operand).should == "$0xff"
+      expect(subject.emit_immediate_operand(operand)).to eq("$0xff")
     end
   end
 
@@ -31,7 +31,7 @@ describe ASM::Syntax::ATT do
     let(:operand)  { MemoryOperand.new(register) }
 
     it "should enclose the memory in parenthesis" do
-      subject.emit_memory_operand(operand).should == "(%eax)"
+      expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
     end
 
     context "with an offset" do
@@ -39,14 +39,14 @@ describe ASM::Syntax::ATT do
       let(:operand) { MemoryOperand.new(register,offset) }
 
       it "should prepend the offset as an integer" do
-        subject.emit_memory_operand(operand).should == "0xff(%eax)"
+        expect(subject.emit_memory_operand(operand)).to eq("0xff(%eax)")
       end
 
       context "when 0" do
         let(:operand) { MemoryOperand.new(register,0) }
 
         it "should omit the offset" do
-          subject.emit_memory_operand(operand).should == "(%eax)"
+          expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
         end
       end
     end
@@ -56,7 +56,7 @@ describe ASM::Syntax::ATT do
       let(:operand) { MemoryOperand.new(register,0,index) }
 
       it "should include the index argument" do
-        subject.emit_memory_operand(operand).should == "(%eax,%esi)"
+        expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi)")
       end
 
       context "with a scale" do
@@ -64,7 +64,7 @@ describe ASM::Syntax::ATT do
         let(:operand) { MemoryOperand.new(register,0,index,scale) }
 
         it "should prepend the scale argument as a decimal" do
-          subject.emit_memory_operand(operand).should == "(%eax,%esi,#{scale})"
+          expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi,#{scale})")
         end
       end
     end
@@ -75,7 +75,7 @@ describe ASM::Syntax::ATT do
       let(:instruction) { Instruction.new(:ret, []) }
 
       it "should emit the instruction name" do
-        subject.emit_instruction(instruction).should == 'ret'
+        expect(subject.emit_instruction(instruction)).to eq('ret')
       end
     end
 
@@ -85,7 +85,7 @@ describe ASM::Syntax::ATT do
         let(:instruction) { Instruction.new(:int, [immediate]) }
 
         it "should not append a size specifier to the instruction name" do
-          subject.emit_instruction(instruction).should == "int\t$0x80"
+          expect(subject.emit_instruction(instruction)).to eq("int\t$0x80")
         end
       end
     end
@@ -96,18 +96,18 @@ describe ASM::Syntax::ATT do
       let(:instruction) { Instruction.new(:mov, [register, immediate]) }
 
       it "should add a size specifier to the instruction name" do
-        subject.emit_instruction(instruction).should =~ /^movl/
+        expect(subject.emit_instruction(instruction)).to match(/^movl/)
       end
 
       it "should emit the operands" do
-        subject.emit_instruction(instruction).should == "movl\t$0xff,\t%eax"
+        expect(subject.emit_instruction(instruction)).to eq("movl\t$0xff,\t%eax")
       end
     end
   end
 
   describe "emit_section" do
     it "should emit the section name" do
-      subject.emit_section(:text).should == ".text"
+      expect(subject.emit_section(:text)).to eq(".text")
     end
   end
 
@@ -122,14 +122,14 @@ describe ASM::Syntax::ATT do
     it "should output the _start label and the program" do
       asm = subject.emit_program(program)
 
-      asm.should == [
+      expect(asm).to eq([
         ".code32",
         ".text",
         "_start:",
         "\tmovl\t$0xff,\t%eax",
         "\tret",
         ""
-      ].join($/)
+      ].join($/))
     end
 
     context "when emitting labels" do
@@ -148,7 +148,7 @@ describe ASM::Syntax::ATT do
       end
 
       it "should emit both labels and instructions" do
-        subject.emit_program(program).should == [
+        expect(subject.emit_program(program)).to eq([
           ".code32",
           ".text",
           "_start:",
@@ -159,7 +159,7 @@ describe ASM::Syntax::ATT do
           "\tjl\t_loop",
           "\tret",
           ""
-        ].join($/)
+        ].join($/))
       end
     end
 
@@ -174,7 +174,7 @@ describe ASM::Syntax::ATT do
       end
 
       it "should include start with the '.code64' directive" do
-        subject.emit_program(program).should =~ /^\.code64$/
+        expect(subject.emit_program(program)).to match(/^\.code64$/)
       end
     end
   end

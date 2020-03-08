@@ -4,7 +4,7 @@ require 'ronin/asm/program'
 describe ASM::Program do
   describe "#arch" do
     it "should default to :x86" do
-      subject.arch.should == :x86
+      expect(subject.arch).to eq(:x86)
     end
   end
 
@@ -15,13 +15,13 @@ describe ASM::Program do
 
     describe "#stask_base" do
       it "should be ebp" do
-        subject.stack_base.name.should == :ebp
+        expect(subject.stack_base.name).to eq(:ebp)
       end
     end
 
     describe "#stask_pointer" do
       it "should be esp" do
-        subject.stack_pointer.name.should == :esp
+        expect(subject.stack_pointer.name).to eq(:esp)
       end
     end
 
@@ -31,8 +31,8 @@ describe ASM::Program do
       before { subject.stack_push(value) }
 
       it "should add a 'push' instruction with a value" do
-        subject.instructions[-1].name.should == :push
-        subject.instructions[-1].operands[0].value.should == value
+        expect(subject.instructions[-1].name).to eq(:push)
+        expect(subject.instructions[-1].operands[0].value).to eq(value)
       end
     end
 
@@ -42,8 +42,8 @@ describe ASM::Program do
       before { subject.stack_pop(register) }
 
       it "should add a 'pop' instruction with a register" do
-        subject.instructions[-1].name.should == :pop
-        subject.instructions[-1].operands[0].should == register
+        expect(subject.instructions[-1].name).to eq(:pop)
+        expect(subject.instructions[-1].operands[0]).to eq(register)
       end
     end
 
@@ -53,9 +53,9 @@ describe ASM::Program do
       before { subject.register_clear(name) }
 
       it "should add a 'xor' instruction with a registers" do
-        subject.instructions[-1].name.should == :xor
-        subject.instructions[-1].operands[0].name.should == name
-        subject.instructions[-1].operands[1].name.should == name
+        expect(subject.instructions[-1].name).to eq(:xor)
+        expect(subject.instructions[-1].operands[0].name).to eq(name)
+        expect(subject.instructions[-1].operands[1].name).to eq(name)
       end
     end
 
@@ -66,9 +66,9 @@ describe ASM::Program do
       before { subject.register_set(name,value) }
 
       it "should add a 'xor' instruction with a registers" do
-        subject.instructions[-1].name.should == :mov
-        subject.instructions[-1].operands[0].value.should == value
-        subject.instructions[-1].operands[1].name.should == name
+        expect(subject.instructions[-1].name).to eq(:mov)
+        expect(subject.instructions[-1].operands[0].value).to eq(value)
+        expect(subject.instructions[-1].operands[1].name).to eq(name)
       end
     end
 
@@ -78,8 +78,8 @@ describe ASM::Program do
       before { subject.register_save(name) }
 
       it "should add a 'xor' instruction with a registers" do
-        subject.instructions[-1].name.should == :push
-        subject.instructions[-1].operands[0].name.should == name
+        expect(subject.instructions[-1].name).to eq(:push)
+        expect(subject.instructions[-1].operands[0].name).to eq(name)
       end
     end
 
@@ -89,8 +89,8 @@ describe ASM::Program do
       before { subject.register_load(name) }
 
       it "should add a 'xor' instruction with a registers" do
-        subject.instructions[-1].name.should == :pop
-        subject.instructions[-1].operands[0].name.should == name
+        expect(subject.instructions[-1].name).to eq(:pop)
+        expect(subject.instructions[-1].operands[0].name).to eq(name)
       end
     end
 
@@ -100,8 +100,8 @@ describe ASM::Program do
       before { subject.interrupt(number) }
 
       it "should add an 'int' instruction with the interrupt number" do
-        subject.instructions[-1].name.should == :int
-        subject.instructions[-1].operands[0].value.should == number
+        expect(subject.instructions[-1].name).to eq(:int)
+        expect(subject.instructions[-1].operands[0].value).to eq(number)
       end
     end
 
@@ -109,8 +109,8 @@ describe ASM::Program do
       before { subject.syscall }
 
       it "should add an 'int 0x80' instruction" do
-        subject.instructions[-1].name.should == :int
-        subject.instructions[-1].operands[0].value.should == 0x80
+        expect(subject.instructions[-1].name).to eq(:int)
+        expect(subject.instructions[-1].operands[0].value).to eq(0x80)
       end
     end
 
@@ -136,7 +136,7 @@ describe ASM::Program do
       before { subject.syscall }
 
       it "should add a 'syscall' instruction" do
-        subject.instructions[-1].name.should == :syscall
+        expect(subject.instructions[-1].name).to eq(:syscall)
       end
     end
 
@@ -155,53 +155,53 @@ describe ASM::Program do
 
   describe "#register?" do
     it "should return true for existing registers" do
-      subject.register?(:eax).should be_true
+      expect(subject.register?(:eax)).to be_true
     end
 
     it "should return false for unknown registers" do
-      subject.register?(:foo).should be_false
+      expect(subject.register?(:foo)).to be_false
     end
   end
 
   describe "#register" do
     it "should return a Register" do
-      subject.register(:eax).should be_kind_of(ASM::Register)
+      expect(subject.register(:eax)).to be_kind_of(ASM::Register)
     end
 
     it "should allocate the register" do
       subject.register(:ebx)
 
-      subject.allocated_registers.should include(:ebx)
+      expect(subject.allocated_registers).to include(:ebx)
     end
 
     context "when given an unknown register name" do
       it "should raise an ArgumentError" do
-        lambda {
+        expect {
           subject.register(:foo)
-        }.should raise_error(ArgumentError)
+        }.to raise_error(ArgumentError)
       end
     end
   end
 
   describe "#instruction" do
     it "should return an Instruction" do
-      subject.instruction(:hlt).should be_kind_of(ASM::Instruction)
+      expect(subject.instruction(:hlt)).to be_kind_of(ASM::Instruction)
     end
 
     it "should append the new Instruction" do
       subject.instruction(:push, 1)
 
-      subject.instructions.last.name.should == :push
+      expect(subject.instructions.last.name).to eq(:push)
     end
   end
 
   describe "#byte" do
     it "should return a ImmedateOperand" do
-      subject.byte(1).should be_kind_of(ImmediateOperand)
+      expect(subject.byte(1)).to be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 1" do
-      subject.byte(1).width.should == 1
+      expect(subject.byte(1).width).to eq(1)
     end
 
     context "when given a MemoryOperand" do
@@ -209,22 +209,22 @@ describe ASM::Program do
       let(:memory_operand) { MemoryOperand.new(register) }
 
       it "should return a MemoryOperand" do
-        subject.byte(memory_operand).should be_kind_of(MemoryOperand)
+        expect(subject.byte(memory_operand)).to be_kind_of(MemoryOperand)
       end
 
       it "should have a width of 1" do
-        subject.byte(memory_operand).width.should == 1
+        expect(subject.byte(memory_operand).width).to eq(1)
       end
     end
   end
 
   describe "#word" do
     it "should return a ImmediateOperand" do
-      subject.word(1).should be_kind_of(ImmediateOperand)
+      expect(subject.word(1)).to be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 2" do
-      subject.word(1).width.should == 2
+      expect(subject.word(1).width).to eq(2)
     end
 
     context "when given a MemoryOperand" do
@@ -232,22 +232,22 @@ describe ASM::Program do
       let(:memory_operand) { MemoryOperand.new(register) }
 
       it "should return a MemoryOperand" do
-        subject.word(memory_operand).should be_kind_of(MemoryOperand)
+        expect(subject.word(memory_operand)).to be_kind_of(MemoryOperand)
       end
 
       it "should have a width of 2" do
-        subject.word(memory_operand).width.should == 2
+        expect(subject.word(memory_operand).width).to eq(2)
       end
     end
   end
 
   describe "#dword" do
     it "should return a ImmediateOperand" do
-      subject.dword(1).should be_kind_of(ImmediateOperand)
+      expect(subject.dword(1)).to be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 4" do
-      subject.dword(1).width.should == 4
+      expect(subject.dword(1).width).to eq(4)
     end
 
     context "when given a MemoryOperand" do
@@ -255,22 +255,22 @@ describe ASM::Program do
       let(:memory_operand) { MemoryOperand.new(register) }
 
       it "should return a MemoryOperand" do
-        subject.dword(memory_operand).should be_kind_of(MemoryOperand)
+        expect(subject.dword(memory_operand)).to be_kind_of(MemoryOperand)
       end
 
       it "should have a width of 4" do
-        subject.dword(memory_operand).width.should == 4
+        expect(subject.dword(memory_operand).width).to eq(4)
       end
     end
   end
 
   describe "#qword" do
     it "should return a ImmediateOperand" do
-      subject.qword(1).should be_kind_of(ImmediateOperand)
+      expect(subject.qword(1)).to be_kind_of(ImmediateOperand)
     end
 
     it "should have width of 8" do
-      subject.qword(1).width.should == 8
+      expect(subject.qword(1).width).to eq(8)
     end
 
     context "when given a MemoryOperand" do
@@ -278,11 +278,11 @@ describe ASM::Program do
       let(:memory_operand) { MemoryOperand.new(register) }
 
       it "should return a MemoryOperand" do
-        subject.qword(memory_operand).should be_kind_of(MemoryOperand)
+        expect(subject.qword(memory_operand)).to be_kind_of(MemoryOperand)
       end
 
       it "should have a width of 8" do
-        subject.qword(memory_operand).width.should == 8
+        expect(subject.qword(memory_operand).width).to eq(8)
       end
     end
   end
@@ -293,20 +293,20 @@ describe ASM::Program do
     it "should return the label name" do
       label = subject.label(name) { }
       
-      label.should == name
+      expect(label).to eq(name)
     end
 
     it "should add the label to the instructions" do
       subject.label(name) { }
 
-      subject.instructions.last.should == name
+      expect(subject.instructions.last).to eq(name)
     end
 
     it "should accept a block" do
       subject.label(name) { push 2 }
 
-      subject.instructions[-1].name.should == :push
-      subject.instructions[-2].should == name
+      expect(subject.instructions[-1].name).to eq(:push)
+      expect(subject.instructions[-2]).to eq(name)
     end
   end
 
@@ -315,7 +315,7 @@ describe ASM::Program do
       it "should add a new instruction" do
         subject.pop
 
-        subject.instructions[-1].name.should == :pop
+        expect(subject.instructions[-1].name).to eq(:pop)
       end
     end
 
@@ -323,8 +323,8 @@ describe ASM::Program do
       it "should add a new label" do
         subject._loop { mov eax, ebx }
 
-        subject.instructions[-2].should      == :_loop
-        subject.instructions[-1].name.should == :mov
+        expect(subject.instructions[-2]).to      eq(:_loop)
+        expect(subject.instructions[-1].name).to eq(:mov)
       end
     end
   end
@@ -346,7 +346,7 @@ describe ASM::Program do
     end
 
     it "should convert the program to Intel syntax" do
-      subject.to_asm.should == [
+      expect(subject.to_asm).to eq([
         "BITS 32",
         "section .text",
         "_start:",
@@ -360,12 +360,12 @@ describe ASM::Program do
         "\tmov\tebx,\t[eax+esi*0x4]",
         "\tmov\tebx,\t[eax+esi*0x4+0xa]",
         ""
-      ].join($/)
+      ].join($/))
     end
 
     context "when given :att" do
       it "should convert the program to ATT syntax" do
-        subject.to_asm(:att).should == [
+        expect(subject.to_asm(:att)).to eq([
           ".code32",
           ".text",
           "_start:",
@@ -379,7 +379,7 @@ describe ASM::Program do
           "\tmovl\t(%eax,%esi,4),\t%ebx",
           "\tmovl\t0xa(%eax,%esi,4),\t%ebx",
           ""
-        ].join($/)
+        ].join($/))
       end
     end
   end
@@ -405,7 +405,7 @@ describe ASM::Program do
     before { subject.assemble(output) }
 
     it "should write to the output file" do
-      File.size(output).should > 0
+      expect(File.size(output)).to be > 0
     end
 
     context "with :syntax is :intel" do
@@ -414,7 +414,7 @@ describe ASM::Program do
       before { subject.assemble(output, syntax: :intel) }
 
       it "should write to the output file" do
-        File.size(output).should > 0
+        expect(File.size(output)).to be > 0
       end
     end
   end

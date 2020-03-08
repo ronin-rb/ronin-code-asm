@@ -9,7 +9,7 @@ describe ASM::Syntax::Common do
     let(:name) { :_start }
 
     it "should convert a keyword to a String" do
-      subject.emit_keyword(name).should == name.to_s
+      expect(subject.emit_keyword(name)).to eq(name.to_s)
     end
   end
 
@@ -18,7 +18,7 @@ describe ASM::Syntax::Common do
     let(:hexadecimal) { "0xff" }
 
     it "should convert it into a hexadecimal value" do
-      subject.emit_integer(integer).should == hexadecimal
+      expect(subject.emit_integer(integer)).to eq(hexadecimal)
     end
 
     context "when given a negative number" do
@@ -26,7 +26,7 @@ describe ASM::Syntax::Common do
       let(:hexadecimal) { "-0xff" }
 
       it "should convert it into a hexadecimal value" do
-        subject.emit_integer(negative).should == hexadecimal
+        expect(subject.emit_integer(negative)).to eq(hexadecimal)
       end
     end
   end
@@ -36,7 +36,7 @@ describe ASM::Syntax::Common do
     let(:label) { '_start:' }
 
     it "should append a ':' to the name" do
-      subject.emit_label(name).should == label
+      expect(subject.emit_label(name)).to eq(label)
     end
   end
 end

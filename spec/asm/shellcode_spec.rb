@@ -24,7 +24,7 @@ describe ASM::Shellcode do
     let(:shellcode) { "1\xC0Ph//shh/bin\x89\xE3PS\x89\xE11\xD2\xB0\v\xCD\x80" }
 
     it "assemble down to raw machine code" do
-      subject.assemble.should == shellcode
+      expect(subject.assemble).to eq(shellcode)
     end
 
     context "with :output" do
@@ -33,7 +33,7 @@ describe ASM::Shellcode do
       end
 
       it "should write to the custom path" do
-        subject.assemble(output: output).should == shellcode
+        expect(subject.assemble(output: output)).to eq(shellcode)
 
         File.binread(output)
       end
@@ -41,13 +41,13 @@ describe ASM::Shellcode do
 
     context "with :syntax is :intel" do
       it "assemble down to raw machine code" do
-        subject.assemble(syntax: :intel).should == shellcode
+        expect(subject.assemble(syntax: :intel)).to eq(shellcode)
       end
     end
 
     context "with :syntax is :att" do
       it "assemble down to raw machine code" do
-        subject.assemble(syntax: :att).should == shellcode
+        expect(subject.assemble(syntax: :att)).to eq(shellcode)
       end
     end
   end

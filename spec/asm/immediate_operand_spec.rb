@@ -12,7 +12,7 @@ describe ImmediateOperand do
       subject { described_class.new(value,width) }
 
       it "should set the width" do
-        subject.width.should == width
+        expect(subject.width).to eq(width)
       end
     end
   end
@@ -73,7 +73,7 @@ describe ImmediateOperand do
     subject { described_class.new(value) }
 
     it "should return the value" do
-      subject.to_i.should == value
+      expect(subject.to_i).to eq(value)
     end
   end
 end

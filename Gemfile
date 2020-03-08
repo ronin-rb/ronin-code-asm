@@ -15,5 +15,5 @@ group :development do
   gem 'ripl-color_result', '~> 0.3'
 
   gem 'rubygems-tasks', '~> 0.1'
-  gem 'rspec',          '~> 2.4'
+  gem 'rspec',          '~> 3.0'
 end

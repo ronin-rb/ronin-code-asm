@@ -16,11 +16,11 @@ describe Instruction do
     subject { described_class.new(name,operands) }
 
     it "should set the name" do
-      subject.name.should == :mov
+      expect(subject.name).to eq(:mov)
     end
 
     it "should set the operands" do
-      subject.operands.should == operands
+      expect(subject.operands).to eq(operands)
     end
 
     context "when given an Integer operand" do
@@ -29,8 +29,8 @@ describe Instruction do
       subject { described_class.new(name, [integer, register]) }
 
       it "should wrap the operand to in a ImmediateOperand" do
-        subject.operands[0].should be_kind_of(ImmediateOperand)
-        subject.operands[0].value.should == integer
+        expect(subject.operands[0]).to be_kind_of(ImmediateOperand)
+        expect(subject.operands[0].value).to eq(integer)
       end
     end
 
@@ -38,8 +38,8 @@ describe Instruction do
       subject { described_class.new(name, [nil, register]) }
 
       it "should wrap the operand to in a ImmediateOperand" do
-        subject.operands[0].should be_kind_of(ImmediateOperand)
-        subject.operands[0].value.should == 0
+        expect(subject.operands[0]).to be_kind_of(ImmediateOperand)
+        expect(subject.operands[0].value).to eq(0)
       end
     end
   end
@@ -48,14 +48,14 @@ describe Instruction do
     subject { described_class.new(:mov, [immediate, register]) }
 
     it "should return the maximum width of the operands" do
-      subject.width.should == register.width
+      expect(subject.width).to eq(register.width)
     end
 
     context "when one of the operands does not define #width" do
       subject { described_class.new(:mov, [:label, register]) }
 
       it "should ignore them" do
-        subject.width.should == register.width
+        expect(subject.width).to eq(register.width)
       end
     end
   end

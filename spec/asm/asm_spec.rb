@@ -3,6 +3,6 @@ require 'ronin/asm/version'
 
 describe ASM do
   it "should have a version" do
-    subject.const_defined?('VERSION').should == true
+    expect(subject.const_defined?('VERSION')).to eq(true)
   end
 end

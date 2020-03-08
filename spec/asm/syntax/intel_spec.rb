@@ -14,7 +14,7 @@ describe ASM::Syntax::Intel do
     let(:register) { Register.new(:eax, 4) }
 
     it "should return the register name" do
-      subject.emit_register(register).should == "eax"
+      expect(subject.emit_register(register)).to eq("eax")
     end
   end
 
@@ -22,7 +22,7 @@ describe ASM::Syntax::Intel do
     let(:operand) { ImmediateOperand.new(255, 1) }
 
     it "should prepend a size specifier" do
-      subject.emit_immediate_operand(operand).should == "BYTE 0xff"
+      expect(subject.emit_immediate_operand(operand)).to eq("BYTE 0xff")
     end
   end
 
@@ -31,14 +31,14 @@ describe ASM::Syntax::Intel do
     let(:operand)  { MemoryOperand.new(register) }
 
     it "should enclose the memory in brackets" do
-      subject.emit_memory_operand(operand).should == "[eax]"
+      expect(subject.emit_memory_operand(operand)).to eq("[eax]")
     end
 
     context "when operand width does not match the base width" do
       before { operand.width = 2 }
 
       it "should specify the width" do
-        subject.emit_memory_operand(operand).should == "WORD [eax]"
+        expect(subject.emit_memory_operand(operand)).to eq("WORD [eax]")
       end
     end
 
@@ -47,14 +47,14 @@ describe ASM::Syntax::Intel do
       let(:operand) { MemoryOperand.new(register,offset) }
 
       it "should add the offset to the base" do
-        subject.emit_memory_operand(operand).should == "[eax+0xff]"
+        expect(subject.emit_memory_operand(operand)).to eq("[eax+0xff]")
       end
 
       context "when 0" do
         let(:operand) { MemoryOperand.new(register,0) }
 
         it "should omit the offset" do
-          subject.emit_memory_operand(operand).should == "[eax]"
+          expect(subject.emit_memory_operand(operand)).to eq("[eax]")
         end
       end
     end
@@ -64,7 +64,7 @@ describe ASM::Syntax::Intel do
       let(:operand) { MemoryOperand.new(register,0,index) }
 
       it "should add the index to the base" do
-        subject.emit_memory_operand(operand).should == "[eax+esi]"
+        expect(subject.emit_memory_operand(operand)).to eq("[eax+esi]")
       end
 
       context "with a scale" do
@@ -72,7 +72,7 @@ describe ASM::Syntax::Intel do
         let(:operand) { MemoryOperand.new(register,0,index,scale) }
 
         it "should multiple the index by the scale" do
-          subject.emit_memory_operand(operand).should == "[eax+esi*0x4]"
+          expect(subject.emit_memory_operand(operand)).to eq("[eax+esi*0x4]")
         end
       end
     end
@@ -83,7 +83,7 @@ describe ASM::Syntax::Intel do
       let(:instruction) { Instruction.new(:ret, []) }
 
       it "should emit the instruction name" do
-        subject.emit_instruction(instruction).should == 'ret'
+        expect(subject.emit_instruction(instruction)).to eq('ret')
       end
     end
 
@@ -93,14 +93,14 @@ describe ASM::Syntax::Intel do
       let(:instruction) { Instruction.new(:mov, [register, immediate]) }
 
       it "should emit the operands" do
-        subject.emit_instruction(instruction).should == "mov\teax,\tBYTE 0xff"
+        expect(subject.emit_instruction(instruction)).to eq("mov\teax,\tBYTE 0xff")
       end
     end
   end
 
   describe "emit_section" do
     it "should emit the section name" do
-      subject.emit_section(:text).should == "section .text"
+      expect(subject.emit_section(:text)).to eq("section .text")
     end
   end
 
@@ -115,14 +115,14 @@ describe ASM::Syntax::Intel do
     it "should output the _start label and the program" do
       asm = subject.emit_program(program)
 
-      asm.should == [
+      expect(asm).to eq([
         "BITS 32",
         "section .text",
         "_start:",
         "\tmov\teax,\tBYTE 0xff",
         "\tret",
         ""
-      ].join($/)
+      ].join($/))
     end
 
     context "when emitting labels" do
@@ -141,7 +141,7 @@ describe ASM::Syntax::Intel do
       end
 
       it "should emit both labels and instructions" do
-        subject.emit_program(program).should == [
+        expect(subject.emit_program(program)).to eq([
           "BITS 32",
           "section .text",
           "_start:",
@@ -152,7 +152,7 @@ describe ASM::Syntax::Intel do
           "\tjl\t_loop",
           "\tret",
           ""
-        ].join($/)
+        ].join($/))
       end
     end
 
@@ -167,7 +167,7 @@ describe ASM::Syntax::Intel do
       end
 
       it "should include start with the '.code64' directive" do
-        subject.emit_program(program).should =~ /^BITS 64$/
+        expect(subject.emit_program(program)).to match(/^BITS 64$/)
       end
     end
   end
