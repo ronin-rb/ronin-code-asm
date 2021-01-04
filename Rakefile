@@ -40,6 +40,7 @@ namespace :spec do
   end
 end
 
+task :test => 'spec:integration'
 
 require 'yard'
 YARD::Rake::YardocTask.new
