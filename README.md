@@ -139,9 +139,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Ronin Asm.  If not, see <http://www.gnu.org/licenses/>.
+along with Ronin Asm.  If not, see <https://www.gnu.org/licenses/>.
 
-[Ruby]: http://www.ruby-lang.org
-[yasm]: http://yasm.tortall.net/
+[Ruby]: https://www.ruby-lang.org
+[yasm]: https://yasm.tortall.net/
 [data_paths]: https://github.com/postmodern/data_paths#readme
 [ruby-yasm]: https://github.com/sophsec/ruby-yasm#readme
