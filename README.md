@@ -3,7 +3,10 @@
 * [Source](https://github.com/ronin-rb/ronin-asm)
 * [Issues](https://github.com/ronin-rb/ronin-asm/issues)
 * [Documentation](https://ronin-rb.dev/docs/ronin-asm/frames)
-* [IRC](https://ronin-rb.dev/irc/)
+* [Slack](https://ronin-rb.slack.com) |
+  [Discord](https://discord.gg/F5Ap9B2N) |
+  [Twitter](https://twitter.com/ronin_rb) |
+  [IRC](https://ronin-rb.dev/irc/)
 
 ## Description
 
