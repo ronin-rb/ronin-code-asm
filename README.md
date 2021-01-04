@@ -3,7 +3,6 @@
 * [Source](https://github.com/ronin-rb/ronin-asm)
 * [Issues](https://github.com/ronin-rb/ronin-asm/issues)
 * [Documentation](http://rubydoc.info/github/ronin-rb/ronin-asm/frames)
-* [Mailing List](https://groups.google.com/group/ronin-rb)
 * [irc.freenode.net #ronin](http://ronin-rb.github.com/irc/)
 
 ## Description
