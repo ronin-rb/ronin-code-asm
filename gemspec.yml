@@ -6,7 +6,7 @@ description:
 license: GPL-3
 authors: Postmodern
 email: postmodern.mod3@gmail.com
-homepage: https://github.com/ronin-ruby/ronin-asm#readme
+homepage: https://github.com/ronin-rb/ronin-asm#readme
 has_yard: true
 
 requirements: yasm >= 0.6.0
