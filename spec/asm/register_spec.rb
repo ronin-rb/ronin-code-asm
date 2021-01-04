@@ -35,7 +35,7 @@ describe Register do
         expect(subject.base).to eq(register)
       end
 
-      its(:offset) { should == 0 }
+      it { expect(subject.offset).to eq(0) }
 
       it "should set the index" do
         expect(subject.index).to eq(register)
@@ -90,8 +90,8 @@ describe Register do
 
     it { should be_kind_of(MemoryOperand) }
 
-    its(:base)   { should be_nil }
-    its(:offset) { should == 0 }
+    it { expect(subject.base).to be_nil }
+    it { expect(subject.offset).to eq(0) }
 
     it "should set the index" do
       expect(subject.index).to eq(register)

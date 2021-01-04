@@ -11,7 +11,7 @@ describe ASM::Program do
   context "when :arch is :x86" do
     subject { described_class.new(arch: :x86) }
 
-    its(:word_size) { should == 4 }
+    it { expect(subject.word_size).to eq(4) }
 
     describe "#stask_base" do
       it "should be ebp" do
@@ -117,20 +117,20 @@ describe ASM::Program do
     context "when :os is 'Linux'" do
       subject { described_class.new(arch: :x86, os: 'Linux') }
 
-      its(:syscalls) { should_not be_empty }
+      it { expect(subject.syscalls).to_not be_empty }
     end
 
     context "when :os is 'FreeBSD'" do
       subject { described_class.new(arch: :x86, os: 'FreeBSD') }
 
-      its(:syscalls) { should_not be_empty }
+      it { expect(subject.syscalls).to_not be_empty }
     end
   end
 
   context "when :arch is :amd64" do
     subject { described_class.new(arch: :amd64) }
 
-    its(:word_size) { should == 8 }
+    it { expect(subject.word_size).to eq(8) }
 
     describe "#syscall" do
       before { subject.syscall }
@@ -143,13 +143,13 @@ describe ASM::Program do
     context "when :os is 'Linux'" do
       subject { described_class.new(arch: :amd64, os: 'Linux') }
 
-      its(:syscalls) { should_not be_empty }
+      it { expect(subject.syscalls).to_not be_empty }
     end
 
     context "when :os is 'FreeBSD'" do
       subject { described_class.new(arch: :amd64, os: 'FreeBSD') }
 
-      its(:syscalls) { should_not be_empty }
+      it { expect(subject.syscalls).to_not be_empty }
     end
   end
 

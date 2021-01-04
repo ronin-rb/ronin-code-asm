@@ -7,10 +7,10 @@ describe MemoryOperand do
   let(:register) { Register.new(:eax, 4) }
 
   describe "#initialize" do
-    its(:base)   { should be_nil  }
-    its(:offset) { should == 0    }
-    its(:index)  { should be_nil  }
-    its(:scale)  { should == 1    }
+    it { expect(subject.base).to   be_nil }
+    it { expect(subject.offset).to eq(0)  }
+    it { expect(subject.index).to  be_nil }
+    it { expect(subject.scale).to  eq(1)  }
 
     it "should only accept nil and a Register for base" do
       expect {
