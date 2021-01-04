@@ -155,11 +155,11 @@ describe ASM::Program do
 
   describe "#register?" do
     it "should return true for existing registers" do
-      expect(subject.register?(:eax)).to be_true
+      expect(subject.register?(:eax)).to be(true)
     end
 
     it "should return false for unknown registers" do
-      expect(subject.register?(:foo)).to be_false
+      expect(subject.register?(:foo)).to be(false)
     end
   end
 
