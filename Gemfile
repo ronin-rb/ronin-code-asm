@@ -6,7 +6,7 @@ gem 'jruby-openssl',	'~> 0.7', platforms: :jruby
 
 group :development do
   gem 'rake'
-  gem 'kramdown',     '~> 0.12'
+  gem 'kramdown',     '~> 2.3'
 
   gem 'ripl',              '~> 0.3'
   gem 'ripl-multi_line',   '~> 0.2'
