@@ -1,4 +1,4 @@
-# Ronin ASM
+# ronin-asm
 
 * [Source](https://github.com/ronin-rb/ronin-asm)
 * [Issues](https://github.com/ronin-rb/ronin-asm/issues)
