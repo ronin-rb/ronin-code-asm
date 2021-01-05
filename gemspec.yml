@@ -3,7 +3,7 @@ summary: A Ruby DSL for crafting Assembly programs and Shellcode.
 description:
   ronin-asm is a Ruby DSL for crafting Assmebly programs and Shellcode.
 
-license: GPL-3
+license: GPL-3.0
 authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/ronin-rb/ronin-asm#readme
