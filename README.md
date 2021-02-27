@@ -1,5 +1,7 @@
 # ronin-asm
 
+[![CI](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
+
 * [Source](https://github.com/ronin-rb/ronin-asm)
 * [Issues](https://github.com/ronin-rb/ronin-asm/issues)
 * [Documentation](https://ronin-rb.dev/docs/ronin-asm/frames)
