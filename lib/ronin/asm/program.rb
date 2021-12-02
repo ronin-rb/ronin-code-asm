@@ -459,7 +459,7 @@ module Ronin
         source.write(to_asm(syntax))
         source.close
 
-        YASM::Program.assemble(
+        YASM::Command.run(
           file:          source.path,
           parser:        PARSERS[syntax],
           target:        @arch,

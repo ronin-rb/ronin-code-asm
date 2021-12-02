@@ -4,7 +4,7 @@ gemspec
 
 gem 'jruby-openssl',	'~> 0.7', platforms: :jruby
 
-# gem 'ruby-yasm', '~> 0.2', github: 'postmodern/ruby-yasm',
+# gem 'ruby-yasm', '~> 0.3', github: 'postmodern/ruby-yasm',
 #                            branch: 'main'
 
 group :development do

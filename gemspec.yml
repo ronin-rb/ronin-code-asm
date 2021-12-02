@@ -13,7 +13,7 @@ requirements: yasm >= 0.6.0
 required_ruby_version: ">= 1.9.1"
 
 dependencies:
-  ruby-yasm: ~> 0.2
+  ruby-yasm: ~> 0.3
 
 development_dependencies:
   bundler: ~> 2.0

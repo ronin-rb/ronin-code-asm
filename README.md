@@ -118,7 +118,7 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 
 * [Ruby] >= 1.9.1
 * [yasm] >= 0.6.0
-* [ruby-yasm] ~> 0.2
+* [ruby-yasm] ~> 0.3
 
 ## Install
 
