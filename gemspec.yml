@@ -12,6 +12,12 @@ has_yard: true
 requirements: yasm >= 0.6.0
 required_ruby_version: ">= 1.9.1"
 
+metadata:
+  documentation_uri: https://ronin-rb.dev/docs/ronin-asm/frames
+  source_code_uri:   https://github.com/ronin-rb/ronin-asm
+  bug_tracker_uri:   https://github.com/ronin-rb/ronin-asm/issues
+  changelog_uri:     https://github.com/ronin-rb/ronin-asm/blob/master/ChangeLog.md
+
 dependencies:
   ruby-yasm: ~> 0.3
 
