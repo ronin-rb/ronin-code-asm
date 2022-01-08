@@ -37,7 +37,7 @@ module Ronin
       SYSCALLS = Hash.new do |hash,os|
         hash[os] = Hash.new do |subhash,arch|
           subhash[arch] = YAML.load_file(
-            File.join(Config::DATA_DIR,os.to_s.downcase,arch.to_s,'syscalls.yml')
+            File.join(Config::DATA_DIR,'os',os.to_s.downcase,arch.to_s,'syscalls.yml')
           )
         end
       end

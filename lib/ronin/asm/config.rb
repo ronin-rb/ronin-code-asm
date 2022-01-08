@@ -26,7 +26,7 @@ module Ronin
     #
     module Config
       # Data directory for ronin-asm
-      DATA_DIR = File.expand_path(File.join(__dir__,'..','..','..','data','ronin','asm'))
+      DATA_DIR = File.expand_path(File.join(__dir__,'..','..','..','data'))
     end
   end
 end
