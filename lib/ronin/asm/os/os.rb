@@ -32,6 +32,8 @@ module Ronin
       # @return [Hash{Symbol => Hash{Symbol => Hash{Symbol => Integer}}}]
       #   Syscall names and numbers, organized by OS then Arch.
       #
+      # @api private
+      #
       SYSCALLS = Hash.new do |hash,os|
         hash[os] = Hash.new do |subhash,arch|
           subhash[arch] = YAML.load_file(File.join(Config::DATA_DIR,os.to_s.downcase,arch.to_s,'syscalls.yml'))
