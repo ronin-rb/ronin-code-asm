@@ -117,7 +117,6 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 ## Requirements
 
 * [Ruby] >= 1.9.1
-* [data\_paths] ~> 0.3
 * [yasm] >= 0.6.0
 * [ruby-yasm] ~> 0.2
 
@@ -148,5 +147,4 @@ along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 
 [Ruby]: https://www.ruby-lang.org
 [yasm]: https://yasm.tortall.net/
-[data_paths]: https://github.com/postmodern/data_paths#readme
 [ruby-yasm]: https://github.com/sophsec/ruby-yasm#readme

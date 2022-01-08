@@ -21,6 +21,8 @@
 
 require 'ronin/asm/config'
 
+require 'yaml'
+
 module Ronin
   module ASM
     module OS
@@ -32,7 +34,7 @@ module Ronin
       #
       SYSCALLS = Hash.new do |hash,os|
         hash[os] = Hash.new do |subhash,arch|
-          subhash[arch] = Config.load_yaml_file(File.join(Config::DATA_DIR,os.to_s.downcase,arch.to_s,'syscalls.yml'))
+          subhash[arch] = YAML.load_file(File.join(Config::DATA_DIR,os.to_s.downcase,arch.to_s,'syscalls.yml'))
         end
       end
     end

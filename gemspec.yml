@@ -13,7 +13,6 @@ requirements: yasm >= 0.6.0
 required_ruby_version: ">= 1.9.1"
 
 dependencies:
-  data_paths: ~> 0.3
   ruby-yasm: ~> 0.2
 
 development_dependencies:
