@@ -9,8 +9,10 @@ gem 'jruby-openssl',	'~> 0.7', platforms: :jruby
 
 group :development do
   gem 'rake'
-  gem 'kramdown',     '~> 2.3'
 
   gem 'rubygems-tasks', '~> 0.1'
   gem 'rspec',          '~> 3.0'
+
+  gem 'kramdown',       '~> 2.3'
+  gem 'yard',           '~> 0.9'
 end
