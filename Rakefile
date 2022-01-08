@@ -28,7 +28,7 @@ task :test    => :spec
 
 namespace :spec do
   RSpec::Core::RakeTask.new(:integration) do |t|
-    t.pattern    = %w[spec/asm/program_spec.rb spec/asm/shellcode_spec.rb]
+    t.pattern    = %w[spec/program_spec.rb spec/shellcode_spec.rb]
     t.rspec_opts = '--tag integration'
   end
 end
