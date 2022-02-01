@@ -78,16 +78,13 @@ module Ronin
       #
       # Initializes a new Assembly Program.
       #
-      # @param [Hash] options
-      #   Additional options.
-      #
-      # @option options [String, Symbol] :arch (:x86)
+      # @param [String, Symbol] arch
       #   The Architecture to target.
       #
-      # @option options [String, Symbol] :os
+      # @param [String, Symbol] os
       #   The Operating System to target.
       #
-      # @option options [Hash{Symbol => Object}] :define
+      # @param [Hash{Symbol => Object}] define
       #   Constants to define in the program.
       #
       # @yield []
@@ -102,8 +99,8 @@ module Ronin
       #     mov   rax[8],  rbx
       #   end
       #
-      def initialize(options={},&block)
-        @arch = options.fetch(:arch,:x86).to_sym
+      def initialize(arch: :x86, os: nil, define: {}, &block)
+        @arch = arch.to_sym
 
         arch = Archs.const_get(@arch.to_s.upcase)
 
@@ -114,17 +111,15 @@ module Ronin
 
         @syscalls = {}
 
-        if options.has_key?(:os)
-          @os       = options[:os].to_s
+        if os
+          @os       = os.to_s
           @syscalls = OS::SYSCALLS[@os][@arch]
 
           extend OS.const_get(@os)
         end
 
-        if options[:define]
-          options[:define].each do |name,value|
-            instance_variable_set("@#{name}",value)
-          end
+        define.each do |name,value|
+          instance_variable_set("@#{name}",value)
         end
 
         @allocated_registers = []
@@ -423,13 +418,10 @@ module Ronin
       # @param [String] output
       #   The path for the assembled program.
       #
-      # @param [Hash] options
-      #   Additional options.
-      #
-      # @option options [Symbol, String] :syntax (:intel)
+      # @param [Symbol, String] syntax
       #   The syntax to compile the program to.
       #
-      # @option options [Symbol] :format (:bin)
+      # @param [Symbol] format
       #   The format of the assembled executable. May be one of:
       #
       #   * `:dbg` - Trace of all info passed to object format module.
@@ -450,10 +442,8 @@ module Ronin
       # @return [String]
       #   The path to the assembled program.
       #
-      def assemble(output,options={})
-        syntax  = options.fetch(:syntax,:intel)
-        format  = options.fetch(:format,:bin)
-        parser  = PARSERS[syntax]
+      def assemble(output, syntax: :intel, format: :bin)
+        parser = PARSERS[syntax]
 
         source = Tempfile.new(['ronin-asm', '.s'])
         source.write(to_asm(syntax))

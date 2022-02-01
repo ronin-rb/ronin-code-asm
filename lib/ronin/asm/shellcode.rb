@@ -49,24 +49,22 @@ module Ronin
       #
       # Assembles the Shellcode.
       #
-      # @param [Hash] options
-      #   Additional options.
-      #
-      # @option options [String] :output
+      # @param [String] output
       #   The optional output to write the shellcode to. If no `:output` is
       #   given a tempfile will be used.
+      #
+      # @param [Hash{Symbol => Object}] kwargs
+      #   Additional keyword arguments for {Program#assemble}.
       #
       # @return [String]
       #   The raw object-code of the Shellcode.
       #
       # @see Program#assemble
       #
-      def assemble(options={})
-        output = options.fetch(:output) do
-          Tempfile.new(['ronin-shellcode', '.bin']).path
-        end
+      def assemble(output: nil, **kwargs)
+        output ||= Tempfile.new(['ronin-shellcode', '.bin']).path
 
-        super(output,options.merge(format: :bin))
+        super(output, format: :bin, **kwargs)
 
         return File.new(output,'rb').read
       end
