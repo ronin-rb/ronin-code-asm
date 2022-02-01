@@ -27,13 +27,13 @@ module Ronin
     #
     # Creates a new Assembly Program.
     #
-    # @param [Hash{Symbol => Object}] options
-    #   Additional options.
+    # @param [Hash{Symbol => Object}] kwargs
+    #   Additional keyword arguments for {Program#initialize}.
     #
-    # @option options [String, Symbol] :arch (:x86)
+    # @option kwargs [String, Symbol] :arch (:x86)
     #   The architecture of the Program.
     #
-    # @option options [Hash{Symbol => Object}] :variables
+    # @option kwargs [Hash{Symbol => Object}] :variables
     #   Variables to set in the program.
     #
     # @yield []
@@ -59,8 +59,8 @@ module Ronin
     #     end
     #   end
     #
-    def ASM.new(options={},&block)
-      Program.new(options,&block)
+    def ASM.new(**kwargs,&block)
+      Program.new(**kwargs,&block)
     end
   end
 end
