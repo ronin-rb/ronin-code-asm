@@ -10,7 +10,7 @@ homepage: https://github.com/ronin-rb/ronin-asm#readme
 has_yard: true
 
 requirements: yasm >= 0.6.0
-required_ruby_version: ">= 1.9.1"
+required_ruby_version: ">= 2.0.0"
 
 metadata:
   documentation_uri: https://ronin-rb.dev/docs/ronin-asm/frames
