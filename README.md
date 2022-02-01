@@ -130,7 +130,7 @@ end
 
 ## Requirements
 
-* [Ruby] >= 1.9.1
+* [Ruby] >= 2.0.0
 * [yasm] >= 0.6.0
 * [ruby-yasm] ~> 0.3
 
