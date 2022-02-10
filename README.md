@@ -26,93 +26,107 @@
 
 Create a program:
 
-    asm = ASM.new do
-      push ebx
-      mov  eax, 0xc0ffee
-      pop  ebx
-      hlt
-    end
+```ruby
+asm = ASM.new do
+  push ebx
+  mov  eax, 0xc0ffee
+  pop  ebx
+  hlt
+end
 
-    puts asm.to_asm
-    # BITS 32
-    # section .text
-    # _start:
-    #	push	ebx
-    #	mov	eax,	WORD 0xc0ffee
-    #	pop	ebx
-    #	hlt
+puts asm.to_asm
+# BITS 32
+# section .text
+# _start:
+#	push	ebx
+#	mov	eax,	WORD 0xc0ffee
+#	pop	ebx
+#	hlt
 
-    puts asm.to_asm(:att)
-    # .code32
-    # .text
-    # _start:
-    #	pushl	%ebx
-    #	movl	%ebx,	%eax
-    #	popl	%ebx
-    #	hlt
+puts asm.to_asm(:att)
+# .code32
+# .text
+# _start:
+#	pushl	%ebx
+#	movl	%ebx,	%eax
+#	popl	%ebx
+#	hlt
+```
 
 Create shellcode:
 
-    shellcode = ASM::Shellcode.new(arch: :x86) do
-      xor   eax,  eax
-      push  eax
-      push  0x68732f2f
-      push  0x6e69622f
-      mov   esp,  ebx
-      push  eax
-      push  ebx
-      mov   esp,  ecx
-      xor   edx,  edx
-      mov   al,   0xb
-      int   0x80
-    end
-    
-    shellcode.assemble
-    # => "1\xC0Ph//shh/bin\x89\xDCPS\x89\xCC1\xD2\xB0\v\xCD\x80"
+```ruby
+shellcode = ASM::Shellcode.new(arch: :x86) do
+  xor   eax,  eax
+  push  eax
+  push  0x68732f2f
+  push  0x6e69622f
+  mov   esp,  ebx
+  push  eax
+  push  ebx
+  mov   esp,  ecx
+  xor   edx,  edx
+  mov   al,   0xb
+  int   0x80
+end
+
+shellcode.assemble
+# => "1\xC0Ph//shh/bin\x89\xDCPS\x89\xCC1\xD2\xB0\v\xCD\x80"
+```
 
 ### Immediate Operands
 
 Immediate operands can be Integers or `nil`:
 
-    mov eax, 0xff
-    mov ebx, nil
+```ruby
+mov eax, 0xff
+mov ebx, nil
+```
 
 The size of the operand can also be specified explicitly:
 
-    push byte(0xff)
-    push word(0xffff)
-    push dword(0xffffffff)
-    push qword(0xffffffffffffffff)
+```ruby
+push byte(0xff)
+push word(0xffff)
+push dword(0xffffffff)
+push qword(0xffffffffffffffff)
+```
 
 ### Memory Operands
 
 Memory operands can be expressed as arithmatic on registers:
 
-    mov ebx, eax+8
-    mov ebx, eax-8
-    mov ebx, eax+esi
-    mov ebx, eax+(esi*4)
+```ruby
+mov ebx, eax+8
+mov ebx, eax-8
+mov ebx, eax+esi
+mov ebx, eax+(esi*4)
+```
 
 ### Labels
 
 Labels can be expressed with blocks:
 
-    _loop do
-      inc eax
-      cmp eax, 10
-      jl :_loop
-    end
+```ruby
+_loop do
+  inc eax
+  cmp eax, 10
+  jl :_loop
+end
+```
 
 ### Syscalls
 
 If the `:os` option is specified, then syscall numbers can be looked up via the 
 `syscalls` Hash:
 
-    ASM.new(os: 'Linux') do
-      # ...
-      mov al, syscalls[:execve]
-      int 0x80
-    end
+```ruby
+ASM.new(os: 'Linux') do
+  # ...
+  mov al, syscalls[:execve]
+  int 0x80
+end
+```
 
 ## Requirements
 
@@ -122,7 +136,9 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 
 ## Install
 
-    $ gem install ronin-asm
+```shell
+$ gem install ronin-asm
+```
 
 ## License
 

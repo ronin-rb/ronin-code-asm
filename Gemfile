@@ -14,5 +14,6 @@ group :development do
   gem 'rspec',          '~> 3.0'
 
   gem 'kramdown',       '~> 2.3'
+  gem 'redcarpet',      platform: :mri
   gem 'yard',           '~> 0.9'
 end
