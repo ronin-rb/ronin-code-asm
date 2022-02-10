@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'jruby-openssl',	'~> 0.7', platforms: :jruby
+gem 'jruby-openssl',	'~> 0.7', platform: :jruby
 
 # gem 'ruby-yasm', '~> 0.3', github: 'postmodern/ruby-yasm',
 #                            branch: 'main'
