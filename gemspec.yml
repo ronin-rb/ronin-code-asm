@@ -17,6 +17,7 @@ metadata:
   source_code_uri:   https://github.com/ronin-rb/ronin-asm
   bug_tracker_uri:   https://github.com/ronin-rb/ronin-asm/issues
   changelog_uri:     https://github.com/ronin-rb/ronin-asm/blob/master/ChangeLog.md
+  rubygems_mfa_required: 'true'
 
 dependencies:
   ruby-yasm: ~> 0.3
