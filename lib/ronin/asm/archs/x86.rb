@@ -81,6 +81,9 @@ module Ronin
         #
         # Generates the instruction to trigger an interrupt.
         #
+        # @param [Integer] number
+        #   The interrupt number.
+        #
         def interrupt(number); instruction(:int,number); end
 
         #
