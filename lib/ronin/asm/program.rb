@@ -49,12 +49,18 @@ module Ronin
       }
 
       # The targeted architecture
+      #
+      # @return [Symbol]
       attr_reader :arch
 
       # The targeted Operating System
+      #
+      # @return [String]
       attr_reader :os
 
       # The default word size
+      #
+      # @return [Integer]
       attr_reader :word_size
 
       # The registers available to the program
