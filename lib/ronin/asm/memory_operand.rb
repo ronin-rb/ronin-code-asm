@@ -45,6 +45,9 @@ module Ronin
       # @param [Integer] scale
       #   The scale to multiple `index` by.
       #
+      # @param [Integer, nil] width
+      #   The optional width of the memory operand.
+      #
       # @raise [TypeError]
       #   `base` or `index` was not a {Register} or `nil`.
       #
