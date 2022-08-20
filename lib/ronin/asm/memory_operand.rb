@@ -97,7 +97,7 @@ module Ronin
       # @param [Integer] offset
       #   The offset to subject from the Memory Operand.
       #
-      # @return [Memoryoperand]
+      # @return [MemoryOperand]
       #   The new Memory Operand.
       #
       def -(offset)
