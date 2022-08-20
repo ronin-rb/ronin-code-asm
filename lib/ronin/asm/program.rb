@@ -70,9 +70,13 @@ module Ronin
       attr_reader :syscalls
 
       # The registers used by the program
+      #
+      # @return [Array<Symbol>]
       attr_reader :allocated_registers
 
       # The instructions of the program
+      #
+      # @return [Array<Instruction>]
       attr_reader :instructions
 
       #
