@@ -34,7 +34,7 @@ module Ronin
       # @param [Symbol] name
       #   The instruction name.
       #
-      # @param [Array<MemoryOperand, Register, Symbo, Integer>] operands
+      # @param [Array<MemoryOperand, Register, Symbol, Integer>] operands
       #   Operands for the instruction.
       #
       def initialize(name,operands)
