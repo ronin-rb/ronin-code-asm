@@ -336,7 +336,7 @@ module Ronin
       # @param [Symbol] name
       #   The name of the reigster.
       #
-      # @param [Register, Immediate, Integer] value
+      # @param [Register, ImmediateOperand, Integer] value
       #   The new value for the register.
       #
       # @abstract
