@@ -1,5 +1,5 @@
 require 'rspec'
-require 'ronin/asm/version'
+require 'ronin/code/asm/version'
 
 RSpec.configure do |specs|
   specs.filter_run_excluding :yasm

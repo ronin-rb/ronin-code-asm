@@ -1,18 +1,18 @@
-# ronin-asm
+# ronin-code-asm
 
-[![CI](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
-[![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-asm.svg)](https://codeclimate.com/github/ronin-rb/ronin-asm)
+[![CI](https://github.com/ronin-rb/ronin-code-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-code-asm.svg)](https://codeclimate.com/github/ronin-rb/ronin-asm)
 
-* [Source](https://github.com/ronin-rb/ronin-asm)
-* [Issues](https://github.com/ronin-rb/ronin-asm/issues)
-* [Documentation](https://ronin-rb.dev/docs/ronin-asm/frames)
+* [Source](https://github.com/ronin-rb/ronin-code-asm)
+* [Issues](https://github.com/ronin-rb/ronin-code-asm/issues)
+* [Documentation](https://ronin-rb.dev/docs/ronin-code-asm/frames)
 * [Slack](https://ronin-rb.slack.com) |
   [Discord](https://discord.gg/6WAb3PsVX9) |
   [Twitter](https://twitter.com/ronin_rb)
 
 ## Description
 
-{Ronin::ASM} is a Ruby DSL for crafting Assembly programs and Shellcode.
+{Ronin::Code::ASM} is a Ruby DSL for crafting Assembly programs and Shellcode.
 
 ## Features
 
@@ -137,27 +137,27 @@ end
 ## Install
 
 ```shell
-$ gem install ronin-asm
+$ gem install ronin-code-asm
 ```
 
 ## License
 
-ronin-asm - A Ruby DSL for crafting Assembly programs and Shellcode.
+ronin-code-asm - A Ruby DSL for crafting Assembly programs and Shellcode.
 
 Copyright (c) 2007-2022 Hal Brodigan (postmodern.mod3 at gmail.com)
 
-ronin-asm is free software: you can redistribute it and/or modify
+ronin-code-asm is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-ronin-asm is distributed in the hope that it will be useful,
+ronin-code-asm is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
-along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
+along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 
 [Ruby]: https://www.ruby-lang.org
 [yasm]: https://yasm.tortall.net/
