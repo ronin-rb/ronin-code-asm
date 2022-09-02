@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'ronin/asm/os'
+require 'ronin/code/asm/os'
 
-describe Ronin::ASM::OS do
+describe Ronin::Code::ASM::OS do
   describe "SYSCALLS" do
     subject { described_class::SYSCALLS }
 
-    let(:data_dir) { Ronin::ASM::Config::DATA_DIR }
+    let(:data_dir) { Ronin::Code::ASM::Config::DATA_DIR }
 
     it { expect(subject).to be_kind_of(Hash) }
 
