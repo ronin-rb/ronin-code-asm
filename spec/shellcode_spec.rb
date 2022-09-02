@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'ronin/asm/shellcode'
 
-describe ASM::Shellcode do
+describe Ronin::ASM::Shellcode do
   describe "#assemble", integration: true do
     subject do
       described_class.new do

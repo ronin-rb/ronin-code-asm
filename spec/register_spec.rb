@@ -2,18 +2,20 @@ require 'spec_helper'
 
 require 'ronin/asm/register'
 
-describe Register do
+describe Ronin::ASM::Register do
   let(:register) { described_class.new(:eax, 4) }
 
   subject { register }
 
   describe "#+" do
-    context "when given an MemoryOperand" do
-      let(:operand) { MemoryOperand.new(nil,10,register,2) }
+    context "when given an Ronin::ASM::MemoryOperand" do
+      let(:operand) do
+        Ronin::ASM::MemoryOperand.new(nil,10,register,2)
+      end
 
       subject { register + operand }
 
-      it { should be_kind_of(MemoryOperand) }
+      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -29,7 +31,7 @@ describe Register do
     context "when given a Register" do
       subject { register + register }
 
-      it { should be_kind_of(MemoryOperand) }
+      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -47,7 +49,7 @@ describe Register do
 
       subject { register + offset }
 
-      it { should be_kind_of(MemoryOperand) }
+      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -72,7 +74,7 @@ describe Register do
 
     subject { register - offset }
 
-    it { should be_kind_of(MemoryOperand) }
+    it { should be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it "should set the base" do
       expect(subject.base).to eq(register)
@@ -88,7 +90,7 @@ describe Register do
 
     subject { register * scale }
 
-    it { should be_kind_of(MemoryOperand) }
+    it { should be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it { expect(subject.base).to be_nil }
     it { expect(subject.offset).to eq(0) }
