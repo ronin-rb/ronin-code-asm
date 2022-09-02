@@ -6,8 +6,8 @@ require 'ronin/asm/immediate_operand'
 require 'ronin/asm/memory_operand'
 
 describe Ronin::ASM::Instruction do
-  let(:register) { Ronin::ASM::Register.new(:eax, 4) }
-  let(:immediate)  { Ronin::ASM::ImmediateOperand.new(0xff, 1)  }
+  let(:register)  { Ronin::ASM::Register.new(:eax, 4) }
+  let(:immediate) { Ronin::ASM::ImmediateOperand.new(0xff, 1) }
 
   describe "#initialize" do
     let(:name)     { :mov }

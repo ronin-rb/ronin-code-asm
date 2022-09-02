@@ -15,7 +15,7 @@ describe Ronin::ASM::Register do
 
       subject { register + operand }
 
-      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -31,7 +31,7 @@ describe Ronin::ASM::Register do
     context "when given a Register" do
       subject { register + register }
 
-      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -49,7 +49,7 @@ describe Ronin::ASM::Register do
 
       subject { register + offset }
 
-      it { should be_kind_of(Ronin::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "should set the base" do
         expect(subject.base).to eq(register)
@@ -74,7 +74,7 @@ describe Ronin::ASM::Register do
 
     subject { register - offset }
 
-    it { should be_kind_of(Ronin::ASM::MemoryOperand) }
+    it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it "should set the base" do
       expect(subject.base).to eq(register)
@@ -90,7 +90,7 @@ describe Ronin::ASM::Register do
 
     subject { register * scale }
 
-    it { should be_kind_of(Ronin::ASM::MemoryOperand) }
+    it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it { expect(subject.base).to be_nil }
     it { expect(subject.offset).to eq(0) }
