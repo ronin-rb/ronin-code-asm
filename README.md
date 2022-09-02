@@ -94,7 +94,7 @@ push qword(0xffffffffffffffff)
 
 ### Memory Operands
 
-Memory operands can be expressed as arithmatic on registers:
+Memory operands can be expressed as arithmetic on registers:
 
 ```ruby
 mov ebx, esp+8
