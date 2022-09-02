@@ -1,26 +1,26 @@
 ### 0.2.0 / 2013-06-17
 
 * Require [Ruby] >= 1.9.1.
-* Added {Ronin::ASM::Syntax::ATT.emit_section} and
-  {Ronin::ASM::Syntax::Intel.emit_section}.
-* Added {Ronin::ASM::Syntax::ATT.emit_prologue} and
-  {Ronin::ASM::Syntax::Intel.emit_prologue}.
-* {Ronin::ASM::Instruction} now assumes Intel operand order:
+* Added `Ronin::ASM::Syntax::ATT.emit_section` and
+  `Ronin::ASM::Syntax::Intel.emit_section`.
+* Added `Ronin::ASM::Syntax::ATT.emit_prologue` and
+  `Ronin::ASM::Syntax::Intel.emit_prologue`.
+* `Ronin::ASM::Instruction` now assumes Intel operand order:
 
       mov eax, 0x41
 
-* {Ronin::ASM::Program#byte}, {Ronin::ASM::Program#word}, 
-  {Ronin::ASM::Program#dword} and {Ronin::ASM::Program#qword} methods can now
-  accept {Ronin::ASM::MemoryOperand}s.
+* `Ronin::ASM::Program#byte`, `Ronin::ASM::Program#word`, 
+  `Ronin::ASM::Program#dword` and `Ronin::ASM::Program#qword` methods can now
+  accept `Ronin::ASM::MemoryOperand`s.
 
       mov bx, word(ebp+8)
 
-* {Ronin::ASM::Program#to_asm} now emits Intel syntax by default.
-* {Ronin::ASM::Program#assemble} now uses Intel syntax by default.
-* {Ronin::ASM::Syntax::ATT} emit `.code32` directive to forcibly enable 32-bit
+* `Ronin::ASM::Program#to_asm` now emits Intel syntax by default.
+* `Ronin::ASM::Program#assemble` now uses Intel syntax by default.
+* `Ronin::ASM::Syntax::ATT` emit `.code32` directive to forcibly enable 32-bit
   mode for the x86 architecture. [YASM][yasm] apparently defaults to 16-bit
   mode.
-* {Ronin::ASM::Syntax::Intel} emit `BITS 32` directive to forcibly enable
+* `Ronin::ASM::Syntax::Intel` emit `BITS 32` directive to forcibly enable
   32-bit mode for the x86 architecture.
 
 ### 0.1.0 / 2012-08-26
