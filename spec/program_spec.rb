@@ -3,7 +3,7 @@ require 'ronin/asm/program'
 
 describe Ronin::ASM::Program do
   describe "#arch" do
-    it "should default to :x86" do
+    it "must default to :x86" do
       expect(subject.arch).to eq(:x86)
     end
   end
@@ -14,13 +14,13 @@ describe Ronin::ASM::Program do
     it { expect(subject.word_size).to eq(4) }
 
     describe "#stask_base" do
-      it "should be ebp" do
+      it "must be ebp" do
         expect(subject.stack_base.name).to eq(:ebp)
       end
     end
 
     describe "#stask_pointer" do
-      it "should be esp" do
+      it "must be esp" do
         expect(subject.stack_pointer.name).to eq(:esp)
       end
     end
@@ -30,7 +30,7 @@ describe Ronin::ASM::Program do
 
       before { subject.stack_push(value) }
 
-      it "should add a 'push' instruction with a value" do
+      it "must add a 'push' instruction with a value" do
         expect(subject.instructions[-1].name).to eq(:push)
         expect(subject.instructions[-1].operands[0].value).to eq(value)
       end
@@ -41,7 +41,7 @@ describe Ronin::ASM::Program do
 
       before { subject.stack_pop(register) }
 
-      it "should add a 'pop' instruction with a register" do
+      it "must add a 'pop' instruction with a register" do
         expect(subject.instructions[-1].name).to eq(:pop)
         expect(subject.instructions[-1].operands[0]).to eq(register)
       end
@@ -52,7 +52,7 @@ describe Ronin::ASM::Program do
 
       before { subject.register_clear(name) }
 
-      it "should add a 'xor' instruction with a registers" do
+      it "must add a 'xor' instruction with a registers" do
         expect(subject.instructions[-1].name).to eq(:xor)
         expect(subject.instructions[-1].operands[0].name).to eq(name)
         expect(subject.instructions[-1].operands[1].name).to eq(name)
@@ -65,7 +65,7 @@ describe Ronin::ASM::Program do
 
       before { subject.register_set(name,value) }
 
-      it "should add a 'xor' instruction with a registers" do
+      it "must add a 'xor' instruction with a registers" do
         expect(subject.instructions[-1].name).to eq(:mov)
         expect(subject.instructions[-1].operands[0].value).to eq(value)
         expect(subject.instructions[-1].operands[1].name).to eq(name)
@@ -77,7 +77,7 @@ describe Ronin::ASM::Program do
 
       before { subject.register_save(name) }
 
-      it "should add a 'xor' instruction with a registers" do
+      it "must add a 'xor' instruction with a registers" do
         expect(subject.instructions[-1].name).to eq(:push)
         expect(subject.instructions[-1].operands[0].name).to eq(name)
       end
@@ -88,7 +88,7 @@ describe Ronin::ASM::Program do
 
       before { subject.register_load(name) }
 
-      it "should add a 'xor' instruction with a registers" do
+      it "must add a 'xor' instruction with a registers" do
         expect(subject.instructions[-1].name).to eq(:pop)
         expect(subject.instructions[-1].operands[0].name).to eq(name)
       end
@@ -99,7 +99,7 @@ describe Ronin::ASM::Program do
 
       before { subject.interrupt(number) }
 
-      it "should add an 'int' instruction with the interrupt number" do
+      it "must add an 'int' instruction with the interrupt number" do
         expect(subject.instructions[-1].name).to eq(:int)
         expect(subject.instructions[-1].operands[0].value).to eq(number)
       end
@@ -108,7 +108,7 @@ describe Ronin::ASM::Program do
     describe "#syscall" do
       before { subject.syscall }
 
-      it "should add an 'int 0x80' instruction" do
+      it "must add an 'int 0x80' instruction" do
         expect(subject.instructions[-1].name).to eq(:int)
         expect(subject.instructions[-1].operands[0].value).to eq(0x80)
       end
@@ -135,7 +135,7 @@ describe Ronin::ASM::Program do
     describe "#syscall" do
       before { subject.syscall }
 
-      it "should add a 'syscall' instruction" do
+      it "must add a 'syscall' instruction" do
         expect(subject.instructions[-1].name).to eq(:syscall)
       end
     end
@@ -154,28 +154,28 @@ describe Ronin::ASM::Program do
   end
 
   describe "#register?" do
-    it "should return true for existing registers" do
+    it "must return true for existing registers" do
       expect(subject.register?(:eax)).to be(true)
     end
 
-    it "should return false for unknown registers" do
+    it "must return false for unknown registers" do
       expect(subject.register?(:foo)).to be(false)
     end
   end
 
   describe "#register" do
-    it "should return a Register" do
+    it "must return a Register" do
       expect(subject.register(:eax)).to be_kind_of(Ronin::ASM::Register)
     end
 
-    it "should allocate the register" do
+    it "must allocate the register" do
       subject.register(:ebx)
 
       expect(subject.allocated_registers).to include(:ebx)
     end
 
     context "when given an unknown register name" do
-      it "should raise an ArgumentError" do
+      it "must raise an ArgumentError" do
         expect {
           subject.register(:foo)
         }.to raise_error(ArgumentError)
@@ -184,11 +184,11 @@ describe Ronin::ASM::Program do
   end
 
   describe "#instruction" do
-    it "should return an Instruction" do
+    it "must return an Instruction" do
       expect(subject.instruction(:hlt)).to be_kind_of(Ronin::ASM::Instruction)
     end
 
-    it "should append the new Instruction" do
+    it "must append the new Instruction" do
       subject.instruction(:push, 1)
 
       expect(subject.instructions.last.name).to eq(:push)
@@ -196,11 +196,11 @@ describe Ronin::ASM::Program do
   end
 
   describe "#byte" do
-    it "should return a ImmedateOperand" do
+    it "must return a ImmedateOperand" do
       expect(subject.byte(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
-    it "should have width of 1" do
+    it "must have width of 1" do
       expect(subject.byte(1).width).to eq(1)
     end
 
@@ -208,24 +208,24 @@ describe Ronin::ASM::Program do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
       let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
-      it "should return a MemoryOperand" do
+      it "must return a MemoryOperand" do
         expect(subject.byte(memory_operand)).to be_kind_of(
           Ronin::ASM::MemoryOperand
         )
       end
 
-      it "should have a width of 1" do
+      it "must have a width of 1" do
         expect(subject.byte(memory_operand).width).to eq(1)
       end
     end
   end
 
   describe "#word" do
-    it "should return a Ronin::ASM::ImmediateOperand" do
+    it "must return a Ronin::ASM::ImmediateOperand" do
       expect(subject.word(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
-    it "should have width of 2" do
+    it "must have width of 2" do
       expect(subject.word(1).width).to eq(2)
     end
 
@@ -233,24 +233,24 @@ describe Ronin::ASM::Program do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
       let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
-      it "should return a MemoryOperand" do
+      it "must return a MemoryOperand" do
         expect(subject.word(memory_operand)).to be_kind_of(
           Ronin::ASM::MemoryOperand
         )
       end
 
-      it "should have a width of 2" do
+      it "must have a width of 2" do
         expect(subject.word(memory_operand).width).to eq(2)
       end
     end
   end
 
   describe "#dword" do
-    it "should return a Ronin::ASM::ImmediateOperand" do
+    it "must return a Ronin::ASM::ImmediateOperand" do
       expect(subject.dword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
-    it "should have width of 4" do
+    it "must have width of 4" do
       expect(subject.dword(1).width).to eq(4)
     end
 
@@ -258,24 +258,24 @@ describe Ronin::ASM::Program do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
       let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
-      it "should return a MemoryOperand" do
+      it "must return a MemoryOperand" do
         expect(subject.dword(memory_operand)).to be_kind_of(
           Ronin::ASM::MemoryOperand
         )
       end
 
-      it "should have a width of 4" do
+      it "must have a width of 4" do
         expect(subject.dword(memory_operand).width).to eq(4)
       end
     end
   end
 
   describe "#qword" do
-    it "should return a Ronin::ASM::ImmediateOperand" do
+    it "must return a Ronin::ASM::ImmediateOperand" do
       expect(subject.qword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
-    it "should have width of 8" do
+    it "must have width of 8" do
       expect(subject.qword(1).width).to eq(8)
     end
 
@@ -283,13 +283,13 @@ describe Ronin::ASM::Program do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
       let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
-      it "should return a MemoryOperand" do
+      it "must return a MemoryOperand" do
         expect(subject.qword(memory_operand)).to be_kind_of(
           Ronin::ASM::MemoryOperand
         )
       end
 
-      it "should have a width of 8" do
+      it "must have a width of 8" do
         expect(subject.qword(memory_operand).width).to eq(8)
       end
     end
@@ -298,19 +298,19 @@ describe Ronin::ASM::Program do
   describe "#label" do
     let(:name) { :_start }
 
-    it "should return the label name" do
+    it "must return the label name" do
       label = subject.label(name) { }
       
       expect(label).to eq(name)
     end
 
-    it "should add the label to the instructions" do
+    it "must add the label to the instructions" do
       subject.label(name) { }
 
       expect(subject.instructions.last).to eq(name)
     end
 
-    it "should accept a block" do
+    it "must accept a block" do
       subject.label(name) { push 2 }
 
       expect(subject.instructions[-1].name).to eq(:push)
@@ -320,7 +320,7 @@ describe Ronin::ASM::Program do
 
   describe "#method_missing" do
     context "when called without a block" do
-      it "should add a new instruction" do
+      it "must add a new instruction" do
         subject.pop
 
         expect(subject.instructions[-1].name).to eq(:pop)
@@ -328,7 +328,7 @@ describe Ronin::ASM::Program do
     end
 
     context "when called with one argument and a block" do
-      it "should add a new label" do
+      it "must add a new label" do
         subject._loop { mov eax, ebx }
 
         expect(subject.instructions[-2]).to      eq(:_loop)
@@ -353,7 +353,7 @@ describe Ronin::ASM::Program do
       end
     end
 
-    it "should convert the program to Intel syntax" do
+    it "must convert the program to Intel syntax" do
       expect(subject.to_asm).to eq([
         "BITS 32",
         "section .text",
@@ -372,7 +372,7 @@ describe Ronin::ASM::Program do
     end
 
     context "when given :att" do
-      it "should convert the program to ATT syntax" do
+      it "must convert the program to ATT syntax" do
         expect(subject.to_asm(:att)).to eq([
           ".code32",
           ".text",
@@ -412,7 +412,7 @@ describe Ronin::ASM::Program do
 
     before { subject.assemble(output) }
 
-    it "should write to the output file" do
+    it "must write to the output file" do
       expect(File.size(output)).to be > 0
     end
 
@@ -421,7 +421,7 @@ describe Ronin::ASM::Program do
 
       before { subject.assemble(output, syntax: :intel) }
 
-      it "should write to the output file" do
+      it "must write to the output file" do
         expect(File.size(output)).to be > 0
       end
     end

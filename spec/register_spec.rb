@@ -17,11 +17,11 @@ describe Ronin::ASM::Register do
 
       it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
-      it "should set the base" do
+      it "must set the base" do
         expect(subject.base).to eq(register)
       end
 
-      it "should preserve the offset, index and scale" do
+      it "must preserve the offset, index and scale" do
         expect(subject.offset).to eq(operand.offset)
         expect(subject.index).to  eq(operand.index)
         expect(subject.scale).to  eq(operand.scale)
@@ -33,13 +33,13 @@ describe Ronin::ASM::Register do
 
       it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
-      it "should set the base" do
+      it "must set the base" do
         expect(subject.base).to eq(register)
       end
 
       it { expect(subject.offset).to eq(0) }
 
-      it "should set the index" do
+      it "must set the index" do
         expect(subject.index).to eq(register)
       end
     end
@@ -51,17 +51,17 @@ describe Ronin::ASM::Register do
 
       it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
-      it "should set the base" do
+      it "must set the base" do
         expect(subject.base).to eq(register)
       end
 
-      it "should set the offset" do
+      it "must set the offset" do
         expect(subject.offset).to eq(offset)
       end
     end
 
     context "otherwise" do
-      it "should raise a TypeError" do
+      it "must raise a TypeError" do
         expect {
           register + Object.new
         }.to raise_error(TypeError)
@@ -76,11 +76,11 @@ describe Ronin::ASM::Register do
 
     it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
-    it "should set the base" do
+    it "must set the base" do
       expect(subject.base).to eq(register)
     end
 
-    it "should set a negative offset" do
+    it "must set a negative offset" do
       expect(subject.offset).to eq(-offset)
     end
   end
@@ -95,17 +95,17 @@ describe Ronin::ASM::Register do
     it { expect(subject.base).to be_nil }
     it { expect(subject.offset).to eq(0) }
 
-    it "should set the index" do
+    it "must set the index" do
       expect(subject.index).to eq(register)
     end
 
-    it "should set the scale" do
+    it "must set the scale" do
       expect(subject.scale).to eq(scale)
     end
   end
 
   describe "#to_s" do
-    it "should return the register name" do
+    it "must return the register name" do
       expect(subject.to_s).to eq(subject.name.to_s)
     end
   end

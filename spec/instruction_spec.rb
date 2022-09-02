@@ -15,11 +15,11 @@ describe Ronin::ASM::Instruction do
 
     subject { described_class.new(name,operands) }
 
-    it "should set the name" do
+    it "must set the name" do
       expect(subject.name).to eq(:mov)
     end
 
-    it "should set the operands" do
+    it "must set the operands" do
       expect(subject.operands).to eq(operands)
     end
 
@@ -28,7 +28,7 @@ describe Ronin::ASM::Instruction do
 
       subject { described_class.new(name, [integer, register]) }
 
-      it "should wrap the operand to in a Ronin::ASM::ImmediateOperand" do
+      it "must wrap the operand to in a Ronin::ASM::ImmediateOperand" do
         expect(subject.operands[0]).to be_kind_of(Ronin::ASM::ImmediateOperand)
         expect(subject.operands[0].value).to eq(integer)
       end
@@ -37,7 +37,7 @@ describe Ronin::ASM::Instruction do
     context "when given a nil operand" do
       subject { described_class.new(name, [nil, register]) }
 
-      it "should wrap the operand to in a Ronin::ASM::ImmediateOperand" do
+      it "must wrap the operand to in a Ronin::ASM::ImmediateOperand" do
         expect(subject.operands[0]).to be_kind_of(Ronin::ASM::ImmediateOperand)
         expect(subject.operands[0].value).to eq(0)
       end
@@ -47,14 +47,14 @@ describe Ronin::ASM::Instruction do
   describe "#width" do
     subject { described_class.new(:mov, [immediate, register]) }
 
-    it "should return the maximum width of the operands" do
+    it "must return the maximum width of the operands" do
       expect(subject.width).to eq(register.width)
     end
 
     context "when one of the operands does not define #width" do
       subject { described_class.new(:mov, [:label, register]) }
 
-      it "should ignore them" do
+      it "must ignore them" do
         expect(subject.width).to eq(register.width)
       end
     end
