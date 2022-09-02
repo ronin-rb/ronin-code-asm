@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'ronin/asm/immediate_operand'
 
-describe ImmediateOperand do
+describe Ronin::ASM::ImmediateOperand do
   let(:value) { 0xff }
 
   describe "#initialize" do

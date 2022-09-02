@@ -3,8 +3,8 @@ require 'spec_helper'
 require 'ronin/asm/memory_operand'
 require 'ronin/asm/register'
 
-describe MemoryOperand do
-  let(:register) { Register.new(:eax, 4) }
+describe Ronin::ASM::MemoryOperand do
+  let(:register) { Ronin::ASM::Register.new(:eax, 4) }
 
   describe "#initialize" do
     it { expect(subject.base).to   be_nil }

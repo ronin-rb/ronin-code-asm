@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require 'ronin/asm/syntax/common'
 
-describe ASM::Syntax::Common do
+describe Ronin::ASM::Syntax::Common do
   subject { described_class }
 
   describe "emit_keyword" do
