@@ -19,5 +19,47 @@
 
 require 'ronin/asm/program'
 require 'ronin/asm/shellcode'
-require 'ronin/asm/asm'
 require 'ronin/asm/version'
+
+module Ronin
+  module ASM
+    #
+    # Creates a new Assembly Program.
+    #
+    # @param [Hash{Symbol => Object}] kwargs
+    #   Additional keyword arguments for {Program#initialize}.
+    #
+    # @option kwargs [String, Symbol] :arch (:x86)
+    #   The architecture of the Program.
+    #
+    # @option kwargs [Hash{Symbol => Object}] :variables
+    #   Variables to set in the program.
+    #
+    # @yield []
+    #   The given block will be evaluated within the program.
+    #
+    # @return [Program]
+    #   The new Assembly Program.
+    #
+    # @example
+    #   ASM.new do
+    #     mov  1, eax
+    #     mov  1, ebx
+    #     mov  2, ecx
+    #
+    #     _loop do
+    #       push  ecx
+    #       imul  ebx, ecx
+    #       pop   ebx
+    #
+    #       inc eax
+    #       cmp ebx, 10
+    #       jl  :_loop
+    #     end
+    #   end
+    #
+    def ASM.new(**kwargs,&block)
+      Program.new(**kwargs,&block)
+    end
+  end
+end
