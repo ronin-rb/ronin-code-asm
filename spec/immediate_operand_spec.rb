@@ -11,7 +11,7 @@ describe Ronin::ASM::ImmediateOperand do
 
       subject { described_class.new(value,width) }
 
-      it "should set the width" do
+      it "must set the width" do
         expect(subject.width).to eq(width)
       end
     end
@@ -72,7 +72,7 @@ describe Ronin::ASM::ImmediateOperand do
   describe "#to_i" do
     subject { described_class.new(value) }
 
-    it "should return the value" do
+    it "must return the value" do
       expect(subject.to_i).to eq(value)
     end
   end

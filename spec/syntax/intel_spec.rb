@@ -13,7 +13,7 @@ describe Ronin::ASM::Syntax::Intel do
   describe "emit_register" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4) }
 
-    it "should return the register name" do
+    it "must return the register name" do
       expect(subject.emit_register(register)).to eq("eax")
     end
   end
@@ -21,7 +21,7 @@ describe Ronin::ASM::Syntax::Intel do
   describe "emit_immediate_operand" do
     let(:operand) { Ronin::ASM::ImmediateOperand.new(255, 1) }
 
-    it "should prepend a size specifier" do
+    it "must prepend a size specifier" do
       expect(subject.emit_immediate_operand(operand)).to eq("BYTE 0xff")
     end
   end
@@ -30,14 +30,14 @@ describe Ronin::ASM::Syntax::Intel do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
     let(:operand)  { Ronin::ASM::MemoryOperand.new(register) }
 
-    it "should enclose the memory in brackets" do
+    it "must enclose the memory in brackets" do
       expect(subject.emit_memory_operand(operand)).to eq("[eax]")
     end
 
     context "when operand width does not match the base width" do
       before { operand.width = 2 }
 
-      it "should specify the width" do
+      it "must specify the width" do
         expect(subject.emit_memory_operand(operand)).to eq("WORD [eax]")
       end
     end
@@ -46,14 +46,14 @@ describe Ronin::ASM::Syntax::Intel do
       let(:offset)  { 255 }
       let(:operand) { Ronin::ASM::MemoryOperand.new(register,offset) }
 
-      it "should add the offset to the base" do
+      it "must add the offset to the base" do
         expect(subject.emit_memory_operand(operand)).to eq("[eax+0xff]")
       end
 
       context "when 0" do
         let(:operand) { Ronin::ASM::MemoryOperand.new(register,0) }
 
-        it "should omit the offset" do
+        it "must omit the offset" do
           expect(subject.emit_memory_operand(operand)).to eq("[eax]")
         end
       end
@@ -63,7 +63,7 @@ describe Ronin::ASM::Syntax::Intel do
       let(:index)   { Ronin::ASM::Register.new(:esi, 4) }
       let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index) }
 
-      it "should add the index to the base" do
+      it "must add the index to the base" do
         expect(subject.emit_memory_operand(operand)).to eq("[eax+esi]")
       end
 
@@ -71,7 +71,7 @@ describe Ronin::ASM::Syntax::Intel do
         let(:scale)   { 4 }
         let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index,scale) }
 
-        it "should multiple the index by the scale" do
+        it "must multiple the index by the scale" do
           expect(subject.emit_memory_operand(operand)).to eq("[eax+esi*0x4]")
         end
       end
@@ -82,7 +82,7 @@ describe Ronin::ASM::Syntax::Intel do
     context "with no operands" do
       let(:instruction) { Ronin::ASM::Instruction.new(:ret, []) }
 
-      it "should emit the instruction name" do
+      it "must emit the instruction name" do
         expect(subject.emit_instruction(instruction)).to eq('ret')
       end
     end
@@ -92,14 +92,14 @@ describe Ronin::ASM::Syntax::Intel do
       let(:immediate)   { Ronin::ASM::ImmediateOperand.new(0xff, 1)  }
       let(:instruction) { Ronin::ASM::Instruction.new(:mov, [register, immediate]) }
 
-      it "should emit the operands" do
+      it "must emit the operands" do
         expect(subject.emit_instruction(instruction)).to eq("mov\teax,\tBYTE 0xff")
       end
     end
   end
 
   describe "emit_section" do
-    it "should emit the section name" do
+    it "must emit the section name" do
       expect(subject.emit_section(:text)).to eq("section .text")
     end
   end
@@ -112,7 +112,7 @@ describe Ronin::ASM::Syntax::Intel do
       end
     end
 
-    it "should output the _start label and the program" do
+    it "must output the _start label and the program" do
       asm = subject.emit_program(program)
 
       expect(asm).to eq([
@@ -140,7 +140,7 @@ describe Ronin::ASM::Syntax::Intel do
         end
       end
 
-      it "should emit both labels and instructions" do
+      it "must emit both labels and instructions" do
         expect(subject.emit_program(program)).to eq([
           "BITS 32",
           "section .text",
@@ -166,7 +166,7 @@ describe Ronin::ASM::Syntax::Intel do
         end
       end
 
-      it "should include start with the '.code64' directive" do
+      it "must include start with the '.code64' directive" do
         expect(subject.emit_program(program)).to match(/^BITS 64$/)
       end
     end

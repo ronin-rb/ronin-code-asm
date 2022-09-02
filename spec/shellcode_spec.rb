@@ -32,7 +32,7 @@ describe Ronin::ASM::Shellcode do
         Tempfile.new(['ronin-shellcode-custom-path', '.bin']).path
       end
 
-      it "should write to the custom path" do
+      it "must write to the custom path" do
         expect(subject.assemble(output: output)).to eq(shellcode)
 
         File.binread(output)
