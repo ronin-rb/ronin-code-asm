@@ -27,7 +27,7 @@
 Create a program:
 
 ```ruby
-asm = ASM.new do
+asm = Ronin::Code::ASM.new do
   push ebx
   mov  eax, 0xc0ffee
   pop  ebx
@@ -56,7 +56,7 @@ puts asm.to_asm(:att)
 Create shellcode:
 
 ```ruby
-shellcode = ASM::Shellcode.new(arch: :x86) do
+shellcode = Ronin::Code::ASM::Shellcode.new(arch: :x86) do
   xor   eax,  eax
   push  eax
   push  0x68732f2f
@@ -121,7 +121,7 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 `syscalls` Hash:
 
 ```ruby
-ASM.new(os: 'Linux') do
+Ronin::Code::ASM.new(os: 'Linux') do
   # ...
   mov al, syscalls[:execve]
   int 0x80
