@@ -20,3 +20,37 @@
 require 'ronin/code/asm/os/os'
 require 'ronin/code/asm/os/freebsd'
 require 'ronin/code/asm/os/linux'
+
+module Ronin
+  module Code
+    module ASM
+      module OS
+        # The mapping of OS names to modules.
+        NAMES = {
+          linux:   Linux,
+          freebsd: FreeBSD
+        }
+
+        #
+        # Fetches the OS module with the given name.
+        #
+        # @param [Symbol] name
+        #   The OS name (ex: `:linux`).
+        #
+        # @return [Linux, FreeBSD]
+        #   The OS module.
+        #
+        # @raise [ArgumentError]
+        #   The OS name was unknown.
+        #
+        # @since 1.0.0
+        #
+        def self.[](name)
+          NAMES.fetch(name) do
+            raise(ArgumentError,"unknown OS name: #{name.inspect}")
+          end
+        end
+      end
+    end
+  end
+end

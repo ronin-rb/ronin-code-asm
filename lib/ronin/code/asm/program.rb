@@ -124,7 +124,7 @@ module Ronin
             @os       = os.to_s
             @syscalls = OS::SYSCALLS[@os][@arch]
 
-            extend OS.const_get(@os)
+            extend OS[@os]
           end
 
           define.each do |name,value|
