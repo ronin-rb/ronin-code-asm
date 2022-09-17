@@ -451,8 +451,13 @@ module Ronin
         # @return [String]
         #   The path to the assembled program.
         #
+        # @raise [ArgumentError]
+        #   The given syntax was not `:intel` or `:att`.
+        #
         def assemble(output, syntax: :intel, format: :bin)
-          parser = PARSERS[syntax]
+          parser = PARSERS.fetch(syntax) do
+            raise(ArgumentError,"unknown ASM syntax: #{syntax.inspect}")
+          end
 
           source = Tempfile.new(['ronin-code-asm', '.s'])
           source.write(to_asm(syntax))

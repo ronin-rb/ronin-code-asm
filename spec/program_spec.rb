@@ -416,13 +416,23 @@ describe Ronin::Code::ASM::Program do
       expect(File.size(output)).to be > 0
     end
 
-    context "with :syntax is :intel" do
+    context "when syntax: :intel is given" do
       let(:output) { Tempfile.new(['ronin-asm', '.o']).path }
 
       before { subject.assemble(output, syntax: :intel) }
 
       it "must write to the output file" do
         expect(File.size(output)).to be > 0
+      end
+    end
+
+    context "when syntax is unknown" do
+      let(:syntax) { :foo }
+
+      it do
+        expect {
+          subject.assemble(output, syntax: syntax)
+        }.to raise_error(ArgumentError,"unknown ASM syntax: #{syntax.inspect}")
       end
     end
   end
