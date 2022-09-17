@@ -465,7 +465,7 @@ module Ronin
 
           YASM::Command.run(
             file:          source.path,
-            parser:        PARSERS[syntax],
+            parser:        parser,
             target:        @arch,
             output_format: format,
             output:        output
