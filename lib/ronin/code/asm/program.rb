@@ -116,7 +116,7 @@ module Ronin
           @word_size = arch::WORD_SIZE
           @registers = arch::REGISTERS
 
-          extend Archs.const_get(@arch.to_s.upcase)
+          extend arch
 
           @syscalls = {}
 
