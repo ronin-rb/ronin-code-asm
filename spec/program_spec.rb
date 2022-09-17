@@ -114,14 +114,14 @@ describe Ronin::Code::ASM::Program do
       end
     end
 
-    context "when :os is 'Linux'" do
-      subject { described_class.new(arch: :x86, os: 'Linux') }
+    context "when :os is :linux" do
+      subject { described_class.new(arch: :x86, os: :linux) }
 
       it { expect(subject.syscalls).to_not be_empty }
     end
 
-    context "when :os is 'FreeBSD'" do
-      subject { described_class.new(arch: :x86, os: 'FreeBSD') }
+    context "when :os is :freebsd" do
+      subject { described_class.new(arch: :x86, os: :freebsd) }
 
       it { expect(subject.syscalls).to_not be_empty }
     end
@@ -140,14 +140,14 @@ describe Ronin::Code::ASM::Program do
       end
     end
 
-    context "when :os is 'Linux'" do
-      subject { described_class.new(arch: :amd64, os: 'Linux') }
+    context "when :os is :linux" do
+      subject { described_class.new(arch: :amd64, os: :linux) }
 
       it { expect(subject.syscalls).to_not be_empty }
     end
 
-    context "when :os is 'FreeBSD'" do
-      subject { described_class.new(arch: :amd64, os: 'FreeBSD') }
+    context "when :os is :freebsd" do
+      subject { described_class.new(arch: :amd64, os: :freebsd) }
 
       it { expect(subject.syscalls).to_not be_empty }
     end

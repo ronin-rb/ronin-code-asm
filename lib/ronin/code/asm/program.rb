@@ -54,7 +54,7 @@ module Ronin
 
         # The targeted Operating System
         #
-        # @return [String]
+        # @return [Symbol]
         attr_reader :os
 
         # The default word size
@@ -87,10 +87,10 @@ module Ronin
         #
         # Initializes a new Assembly Program.
         #
-        # @param [String, Symbol] arch
+        # @param [Symbol] arch
         #   The Architecture to target.
         #
-        # @param [String, Symbol] os
+        # @param [Symbol] os
         #   The Operating System to target.
         #
         # @param [Hash{Symbol => Object}] define
@@ -109,7 +109,7 @@ module Ronin
         #   end
         #
         def initialize(arch: :x86, os: nil, define: {}, &block)
-          @arch = arch.to_sym
+          @arch = arch
 
           arch = Archs.const_get(@arch.to_s.upcase)
 
@@ -121,7 +121,7 @@ module Ronin
           @syscalls = {}
 
           if os
-            @os       = os.to_s
+            @os       = os
             @syscalls = OS::SYSCALLS[@os][@arch]
 
             extend OS[@os]
