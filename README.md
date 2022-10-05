@@ -12,7 +12,7 @@
 
 ## Description
 
-{Ronin::ASM} is a Ruby DSL for crafting Assmebly programs and Shellcode.
+{Ronin::ASM} is a Ruby DSL for crafting Assembly programs and Shellcode.
 
 ## Features
 
@@ -142,7 +142,7 @@ $ gem install ronin-asm
 
 ## License
 
-ronin-asm - A Ruby DSL for crafting Assmebly programs and Shellcode.
+ronin-asm - A Ruby DSL for crafting Assembly programs and Shellcode.
 
 Copyright (c) 2007-2022 Hal Brodigan (postmodern.mod3 at gmail.com)
 
