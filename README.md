@@ -97,10 +97,10 @@ push qword(0xffffffffffffffff)
 Memory operands can be expressed as arithmatic on registers:
 
 ```ruby
-mov ebx, eax+8
-mov ebx, eax-8
-mov ebx, eax+esi
-mov ebx, eax+(esi*4)
+mov ebx, esp+8
+mov ebx, esp-8
+mov ebx, esp+esi
+mov ebx, esp+(esi*4)
 ```
 
 ### Labels
