@@ -37,10 +37,10 @@ module Ronin
         #   Operands for the instruction.
         #
         def initialize(name,operands)
-          operands = operands.map do |op|
-            case op
-            when Integer, nil then ImmediateOperand.new(op)
-            else                   op
+          operands = operands.map do |value|
+            case value
+            when Integer, nil then ImmediateOperand.new(value)
+            else                   value
             end
           end
 
