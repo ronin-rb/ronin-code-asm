@@ -48,7 +48,7 @@ puts asm.to_asm(:att)
 # .text
 # _start:
 #	pushl	%ebx
-#	movl	%ebx,	%eax
+#	movl	$0xc0ffee,      %eax
 #	popl	%ebx
 #	hlt
 ```
