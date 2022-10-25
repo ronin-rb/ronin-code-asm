@@ -13,7 +13,8 @@ group :development do
   gem 'rubygems-tasks', '~> 0.1'
   gem 'rspec',          '~> 3.0'
 
-  gem 'kramdown',       '~> 2.3'
-  gem 'redcarpet',      platform: :mri
-  gem 'yard',           '~> 0.9'
+  gem 'kramdown',        '~> 2.3'
+  gem 'redcarpet',       platform: :mri
+  gem 'yard',            '~> 0.9'
+  gem 'yard-spellcheck', require: false
 end
