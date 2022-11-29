@@ -7,7 +7,8 @@
 * [Issues](https://github.com/ronin-rb/ronin-code-asm/issues)
 * [Documentation](https://ronin-rb.dev/docs/ronin-code-asm/frames)
 * [Discord](https://discord.gg/6WAb3PsVX9) |
-  [Twitter](https://twitter.com/ronin_rb)
+  [Twitter](https://twitter.com/ronin_rb) |
+  [Mastodon](https://infosec.exchange/@ronin_rb)
 
 ## Description
 
