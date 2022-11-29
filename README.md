@@ -21,6 +21,8 @@
   * Supports ATT and Intel syntax.
 * Uses [yasm] to assemble the programs.
 * Supports assembling Shellcode.
+* Has 95% documentation coverage.
+* Has 99% test coverage.
 
 ## Examples
 
