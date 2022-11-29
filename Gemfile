@@ -12,6 +12,7 @@ group :development do
   gem 'rubygems-tasks',  '~> 0.1'
 
   gem 'rspec',           '~> 3.0'
+  gem 'simplecov',       '~> 0.20'
 
   gem 'kramdown',        '~> 2.3'
   gem 'redcarpet',       platform: :mri

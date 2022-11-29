@@ -1,5 +1,6 @@
 require 'rspec'
-require 'ronin/code/asm/version'
+require 'simplecov'
+SimpleCov.start
 
 RSpec.configure do |specs|
   specs.filter_run_excluding :yasm
