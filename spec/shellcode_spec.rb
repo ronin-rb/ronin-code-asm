@@ -23,7 +23,7 @@ describe Ronin::Code::ASM::Shellcode do
 
     let(:shellcode) { "1\xC0Ph//shh/bin\x89\xE3PS\x89\xE11\xD2\xB0\v\xCD\x80" }
 
-    it "assemble down to raw machine code" do
+    it "must assemble down to raw machine code" do
       expect(subject.assemble).to eq(shellcode)
     end
 
