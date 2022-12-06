@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-code-asm - A Ruby DSL for crafting Assembly programs and Shellcode.
 #
