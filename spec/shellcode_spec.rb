@@ -27,6 +27,10 @@ describe Ronin::Code::ASM::Shellcode do
       expect(subject.assemble).to eq(shellcode)
     end
 
+    it "must return an ASCII-8bit encoded String" do
+      expect(subject.assemble.encoding).to eq(Encoding::ASCII_8BIT)
+    end
+
     context "with :output" do
       let(:output) do
         Tempfile.new(['ronin-shellcode-custom-path', '.bin']).path

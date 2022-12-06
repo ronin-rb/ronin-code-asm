@@ -65,7 +65,7 @@ module Ronin
 
           super(output, format: :bin, **kwargs)
 
-          return File.new(output,'rb').read
+          return File.binread(output)
         end
 
       end
