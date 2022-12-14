@@ -1,7 +1,7 @@
 name: ronin-code-asm
 summary: A Ruby DSL for crafting Assembly programs and Shellcode.
 description:
-  ronin-code-asm is a Ruby DSL for crafting Assembly programs and Shellcode.
+  ronin-code-asm is a Ruby DSL for crafting Assembly programs and shellcode.
 
 license: LGPL-3.0
 authors: Postmodern

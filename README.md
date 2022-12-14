@@ -144,7 +144,7 @@ $ gem install ronin-code-asm
 
 ## License
 
-ronin-code-asm - A Ruby DSL for crafting Assembly programs and Shellcode.
+ronin-code-asm - A Ruby DSL for crafting Assembly programs and shellcode.
 
 Copyright (c) 2007-2022 Hal Brodigan (postmodern.mod3 at gmail.com)
 
