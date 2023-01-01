@@ -1,5 +1,6 @@
 ### 1.0.0 / 2023-XX-XX
 
+* Require `ruby` >= 3.0.0.
 * Renamed the gem to `ronin-code-asm`.
 * Require `ruby-yasm` ~> 0.3.
 * Added {Ronin::Code::ASM::OS.[]}.
