@@ -13,7 +13,7 @@ requirements: yasm >= 0.6.0
 required_ruby_version: ">= 3.0.0"
 
 metadata:
-  documentation_uri: https://ronin-rb.dev/docs/ronin-code-asm/frames
+  documentation_uri: https://ronin-rb.dev/docs/ronin-code-asm
   source_code_uri:   https://github.com/ronin-rb/ronin-code-asm
   bug_tracker_uri:   https://github.com/ronin-rb/ronin-code-asm/issues
   changelog_uri:     https://github.com/ronin-rb/ronin-code-asm/blob/master/ChangeLog.md
