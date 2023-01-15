@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/ronin-rb/ronin-code-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
 [![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-code-asm.svg)](https://codeclimate.com/github/ronin-rb/ronin-asm)
+[![Gem Version](https://badge.fury.io/rb/ronin-code-asm.svg)](https://badge.fury.io/rb/ronin-code-asm)
 
 * [Source](https://github.com/ronin-rb/ronin-code-asm)
 * [Issues](https://github.com/ronin-rb/ronin-code-asm/issues)
