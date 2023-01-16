@@ -71,7 +71,7 @@ module Ronin
         end
 
         #
-        # Substracts from the value within the register and dereferences the
+        # Subtracts from the value within the register and dereferences the
         # address.
         #
         # @param [Integer] offset

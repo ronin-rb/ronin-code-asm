@@ -322,7 +322,7 @@ module Ronin
         # Generic method for popping off the stack.
         #
         # @param [Symbol] name
-        #   The name of the reigster.
+        #   The name of the register.
         #
         # @abstract
         #
@@ -333,7 +333,7 @@ module Ronin
         # Generic method for clearing a register.
         #
         # @param [Symbol] name
-        #   The name of the reigster.
+        #   The name of the register.
         #
         # @abstract
         #
@@ -344,7 +344,7 @@ module Ronin
         # Generic method for setting a register.
         #
         # @param [Symbol] name
-        #   The name of the reigster.
+        #   The name of the register.
         #
         # @param [Register, ImmediateOperand, Integer] value
         #   The new value for the register.
@@ -358,7 +358,7 @@ module Ronin
         # Generic method for saving a register.
         #
         # @param [Symbol] name
-        #   The name of the reigster.
+        #   The name of the register.
         #
         # @abstract
         #
@@ -369,7 +369,7 @@ module Ronin
         # Generic method for loading a register.
         #
         # @param [Symbol] name
-        #   The name of the reigster.
+        #   The name of the register.
         #
         # @abstract
         #

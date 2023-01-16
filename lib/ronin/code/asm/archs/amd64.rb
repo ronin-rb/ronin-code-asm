@@ -25,7 +25,7 @@ module Ronin
     module ASM
       module Archs
         #
-        # Contains AMD64 Archtecture information.
+        # Contains AMD64 Architecture information.
         #
         module AMD64
           include X86

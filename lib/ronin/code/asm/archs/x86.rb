@@ -25,7 +25,7 @@ module Ronin
     module ASM
       module Archs
         #
-        # Contains X86 Archtecture information.
+        # Contains X86 Architecture information.
         #
         module X86
           # Default word size
