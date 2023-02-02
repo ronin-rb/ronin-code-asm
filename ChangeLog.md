@@ -1,4 +1,4 @@
-### 1.0.0 / 2023-XX-XX
+### 1.0.0 / 2023-02-01
 
 * Require `ruby` >= 3.0.0.
 * Renamed the gem to `ronin-code-asm`.
