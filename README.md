@@ -139,14 +139,52 @@ end
 
 ## Install
 
-```shell
-$ gem install ronin-code-asm
-```
-
 ### Gemfile
 
 ```ruby
 gem 'ronin-code-asm', '~> 1.0'
+```
+
+### Ubuntu
+
+```shell
+sudo apt install -y yasm
+gem install ronin-code-asm
+```
+
+### Fedora
+
+```shell
+sudo dnf install -y yasm
+gem install ronin-code-asm
+```
+
+### OpenSUSE
+
+```shell
+sudo zypper -n in -l yasm
+gem install ronin-code-asm
+```
+
+### Arch
+
+```shell
+sudo pacman -Sy yasm
+gem install ronin-code-asm
+```
+
+### macOS
+
+```shell
+brew install yasm
+gem install ronin-code-asm
+```
+
+### FreeBSD
+
+```shell
+sudo pkg install -y yasm
+gem install ronin-code-asm
 ```
 
 ## License
