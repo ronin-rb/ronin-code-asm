@@ -120,7 +120,7 @@ end
 
 ### Syscalls
 
-If the `:os` option is specified, then syscall numbers can be looked up via the 
+If the `:os` option is specified, then syscall numbers can be looked up via the
 `syscalls` Hash:
 
 ```ruby
@@ -141,6 +141,12 @@ end
 
 ```shell
 $ gem install ronin-code-asm
+```
+
+### Gemfile
+
+```ruby
+gem 'ronin-code-asm', '~> 1.0'
 ```
 
 ## License
