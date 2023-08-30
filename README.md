@@ -145,6 +145,12 @@ end
 gem 'ronin-code-asm', '~> 1.0'
 ```
 
+### gemspec
+
+```ruby
+gem.add_dependency 'ronin-code-asm', '~> 1.0'
+```
+
 ### Ubuntu
 
 ```shell
