@@ -139,18 +139,6 @@ end
 
 ## Install
 
-### Gemfile
-
-```ruby
-gem 'ronin-code-asm', '~> 1.0'
-```
-
-### gemspec
-
-```ruby
-gem.add_dependency 'ronin-code-asm', '~> 1.0'
-```
-
 ### Ubuntu
 
 ```shell
@@ -191,6 +179,18 @@ gem install ronin-code-asm
 ```shell
 sudo pkg install -y yasm
 gem install ronin-code-asm
+```
+
+### Gemfile
+
+```ruby
+gem 'ronin-code-asm', '~> 1.0'
+```
+
+### gemspec
+
+```ruby
+gem.add_dependency 'ronin-code-asm', '~> 1.0'
 ```
 
 ## Development
