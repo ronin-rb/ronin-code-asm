@@ -193,6 +193,17 @@ sudo pkg install -y yasm
 gem install ronin-code-asm
 ```
 
+## Development
+
+1. [Fork It!](https://github.com/ronin-rb/ronin-code-asm/fork)
+2. Clone It!
+3. `cd ronin-code-asm/`
+4. `bundle install`
+5. `git checkout -b my_feature`
+6. Code It!
+7. `bundle exec rake spec`
+8. `git push origin my_feature`
+
 ## License
 
 ronin-code-asm - A Ruby DSL for crafting Assembly programs and shellcode.
