@@ -207,7 +207,7 @@ gem.add_dependency 'ronin-code-asm', '~> 1.0'
 
 ronin-code-asm - A Ruby DSL for crafting Assembly programs and shellcode.
 
-Copyright (c) 2007-2023 Hal Brodigan (postmodern.mod3 at gmail.com)
+Copyright (c) 2007-2024 Hal Brodigan (postmodern.mod3 at gmail.com)
 
 ronin-code-asm is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published
