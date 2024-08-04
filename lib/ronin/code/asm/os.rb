@@ -18,9 +18,9 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/os/os'
-require 'ronin/code/asm/os/freebsd'
-require 'ronin/code/asm/os/linux'
+require_relative 'os/os'
+require_relative 'os/freebsd'
+require_relative 'os/linux'
 
 module Ronin
   module Code

@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/archs/x86'
+require_relative 'x86'
 
 module Ronin
   module Code

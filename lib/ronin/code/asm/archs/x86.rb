@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/register'
+require_relative '../register'
 
 module Ronin
   module Code
@@ -133,7 +133,7 @@ module Ronin
 
           #
           # Generates the instruction to set a register.
-          # 
+          #
           # @param [Symbol] name
           #   The name of the register.
           #
@@ -146,7 +146,7 @@ module Ronin
 
           #
           # Generates the instruction to save a register.
-          # 
+          #
           # @param [Symbol] name
           #   The name of the register.
           #
@@ -156,7 +156,7 @@ module Ronin
 
           #
           # Generates the instruction to restore a register.
-          # 
+          #
           # @param [Symbol] name
           #   The name of the register.
           #

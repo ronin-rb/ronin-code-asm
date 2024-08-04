@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/memory_operand'
+require_relative 'memory_operand'
 
 module Ronin
   module Code

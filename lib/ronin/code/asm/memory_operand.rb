@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/register'
+require_relative 'register'
 
 module Ronin
   module Code

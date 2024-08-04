@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/immediate_operand'
+require_relative 'immediate_operand'
 
 module Ronin
   module Code

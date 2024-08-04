@@ -18,12 +18,12 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/archs'
-require 'ronin/code/asm/os'
-require 'ronin/code/asm/register'
-require 'ronin/code/asm/instruction'
-require 'ronin/code/asm/immediate_operand'
-require 'ronin/code/asm/syntax'
+require_relative 'archs'
+require_relative 'os'
+require_relative 'register'
+require_relative 'instruction'
+require_relative 'immediate_operand'
+require_relative 'syntax'
 
 require 'tempfile'
 require 'yasm/program'
@@ -198,7 +198,7 @@ module Ronin
         #
         # Creates an operand of size 1 (byte).
         #
-        # @param [MemoryOperand, Integer] op 
+        # @param [MemoryOperand, Integer] op
         #   The value of the operand.
         #
         # @return [MemoryOperand, ImmediateOperand]
