@@ -224,4 +224,4 @@ along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 
 [Ruby]: https://www.ruby-lang.org
 [yasm]: https://yasm.tortall.net/
-[ruby-yasm]: https://github.com/sophsec/ruby-yasm#readme
+[ruby-yasm]: https://github.com/postmodern/ruby-yasm#readme
