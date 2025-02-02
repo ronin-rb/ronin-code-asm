@@ -32,9 +32,10 @@ describe Ronin::Code::ASM::Shellcode do
     end
 
     context "with :output" do
-      let(:output) do
-        Tempfile.new(['ronin-shellcode-custom-path', '.bin']).path
+      let(:tempfile) do
+        Tempfile.new(['ronin-shellcode-custom-path', '.bin'])
       end
+      let(:output) { tempfile.path }
 
       it "must write to the custom path" do
         expect(subject.assemble(output: output)).to eq(shellcode)
