@@ -1,3 +1,8 @@
+### 1.0.1 / 2025-02-14
+
+* Use `require_relative` to improve load times.
+* Documentation improvements.
+
 ### 1.0.0 / 2023-02-01
 
 * Require `ruby` >= 3.0.0.
@@ -17,7 +22,7 @@
 
       mov eax, 0x41
 
-* `Ronin::ASM::Program#byte`, `Ronin::ASM::Program#word`, 
+* `Ronin::ASM::Program#byte`, `Ronin::ASM::Program#word`,
   `Ronin::ASM::Program#dword` and `Ronin::ASM::Program#qword` methods can now
   accept `Ronin::ASM::MemoryOperand`s.
 
