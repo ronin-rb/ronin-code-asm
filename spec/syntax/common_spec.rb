@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'ronin/code/asm/syntax/common'
+require 'ronin/asm/syntax/common'
 
-describe Ronin::Code::ASM::Syntax::Common do
+describe Ronin::ASM::Syntax::Common do
   subject { described_class }
 
   describe "emit_keyword" do

@@ -6,9 +6,9 @@
 ### 1.0.0 / 2023-02-01
 
 * Require `ruby` >= 3.0.0.
-* Renamed the gem to `ronin-code-asm`.
+* Renamed the gem to `ronin-asm`.
 * Require `ruby-yasm` ~> 0.3.
-* Added {Ronin::Code::ASM::OS.[]}.
+* Added {Ronin::ASM::OS.[]}.
 * Removed the `data_paths` gem dependency.
 
 ### 0.2.0 / 2013-06-17

@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'ronin/code/asm/program'
+require 'ronin/asm/program'
 
-describe Ronin::Code::ASM::Program do
+describe Ronin::ASM::Program do
   describe "#arch" do
     it "must default to :x86" do
       expect(subject.arch).to eq(:x86)
@@ -165,7 +165,7 @@ describe Ronin::Code::ASM::Program do
 
   describe "#register" do
     it "must return a Register" do
-      expect(subject.register(:eax)).to be_kind_of(Ronin::Code::ASM::Register)
+      expect(subject.register(:eax)).to be_kind_of(Ronin::ASM::Register)
     end
 
     it "must allocate the register" do
@@ -185,7 +185,7 @@ describe Ronin::Code::ASM::Program do
 
   describe "#instruction" do
     it "must return an Instruction" do
-      expect(subject.instruction(:hlt)).to be_kind_of(Ronin::Code::ASM::Instruction)
+      expect(subject.instruction(:hlt)).to be_kind_of(Ronin::ASM::Instruction)
     end
 
     it "must append the new Instruction" do
@@ -197,7 +197,7 @@ describe Ronin::Code::ASM::Program do
 
   describe "#byte" do
     it "must return a ImmedateOperand" do
-      expect(subject.byte(1)).to be_kind_of(Ronin::Code::ASM::ImmediateOperand)
+      expect(subject.byte(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
     it "must have width of 1" do
@@ -205,12 +205,12 @@ describe Ronin::Code::ASM::Program do
     end
 
     context "when given a MemoryOperand" do
-      let(:register)       { Ronin::Code::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::Code::ASM::MemoryOperand.new(register) }
+      let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
+      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
       it "must return a MemoryOperand" do
         expect(subject.byte(memory_operand)).to be_kind_of(
-          Ronin::Code::ASM::MemoryOperand
+          Ronin::ASM::MemoryOperand
         )
       end
 
@@ -221,8 +221,8 @@ describe Ronin::Code::ASM::Program do
   end
 
   describe "#word" do
-    it "must return a Ronin::Code::ASM::ImmediateOperand" do
-      expect(subject.word(1)).to be_kind_of(Ronin::Code::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::ImmediateOperand" do
+      expect(subject.word(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
     it "must have width of 2" do
@@ -230,12 +230,12 @@ describe Ronin::Code::ASM::Program do
     end
 
     context "when given a MemoryOperand" do
-      let(:register)       { Ronin::Code::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::Code::ASM::MemoryOperand.new(register) }
+      let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
+      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
       it "must return a MemoryOperand" do
         expect(subject.word(memory_operand)).to be_kind_of(
-          Ronin::Code::ASM::MemoryOperand
+          Ronin::ASM::MemoryOperand
         )
       end
 
@@ -246,8 +246,8 @@ describe Ronin::Code::ASM::Program do
   end
 
   describe "#dword" do
-    it "must return a Ronin::Code::ASM::ImmediateOperand" do
-      expect(subject.dword(1)).to be_kind_of(Ronin::Code::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::ImmediateOperand" do
+      expect(subject.dword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
     it "must have width of 4" do
@@ -255,12 +255,12 @@ describe Ronin::Code::ASM::Program do
     end
 
     context "when given a MemoryOperand" do
-      let(:register)       { Ronin::Code::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::Code::ASM::MemoryOperand.new(register) }
+      let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
+      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
       it "must return a MemoryOperand" do
         expect(subject.dword(memory_operand)).to be_kind_of(
-          Ronin::Code::ASM::MemoryOperand
+          Ronin::ASM::MemoryOperand
         )
       end
 
@@ -271,8 +271,8 @@ describe Ronin::Code::ASM::Program do
   end
 
   describe "#qword" do
-    it "must return a Ronin::Code::ASM::ImmediateOperand" do
-      expect(subject.qword(1)).to be_kind_of(Ronin::Code::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::ImmediateOperand" do
+      expect(subject.qword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
     end
 
     it "must have width of 8" do
@@ -280,12 +280,12 @@ describe Ronin::Code::ASM::Program do
     end
 
     context "when given a MemoryOperand" do
-      let(:register)       { Ronin::Code::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::Code::ASM::MemoryOperand.new(register) }
+      let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
+      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
 
       it "must return a MemoryOperand" do
         expect(subject.qword(memory_operand)).to be_kind_of(
-          Ronin::Code::ASM::MemoryOperand
+          Ronin::ASM::MemoryOperand
         )
       end
 

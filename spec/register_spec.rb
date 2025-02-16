@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-require 'ronin/code/asm/register'
+require 'ronin/asm/register'
 
-describe Ronin::Code::ASM::Register do
+describe Ronin::ASM::Register do
   let(:register) { described_class.new(:eax, 4) }
 
   subject { register }
 
   describe "#+" do
-    context "when given an Ronin::Code::ASM::MemoryOperand" do
+    context "when given an Ronin::ASM::MemoryOperand" do
       let(:operand) do
-        Ronin::Code::ASM::MemoryOperand.new(nil,10,register,2)
+        Ronin::ASM::MemoryOperand.new(nil,10,register,2)
       end
 
       subject { register + operand }
 
-      it { expect(subject).to be_kind_of(Ronin::Code::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "must set the base" do
         expect(subject.base).to eq(register)
@@ -31,7 +31,7 @@ describe Ronin::Code::ASM::Register do
     context "when given a Register" do
       subject { register + register }
 
-      it { expect(subject).to be_kind_of(Ronin::Code::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "must set the base" do
         expect(subject.base).to eq(register)
@@ -49,7 +49,7 @@ describe Ronin::Code::ASM::Register do
 
       subject { register + offset }
 
-      it { expect(subject).to be_kind_of(Ronin::Code::ASM::MemoryOperand) }
+      it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
       it "must set the base" do
         expect(subject.base).to eq(register)
@@ -74,7 +74,7 @@ describe Ronin::Code::ASM::Register do
 
     subject { register - offset }
 
-    it { expect(subject).to be_kind_of(Ronin::Code::ASM::MemoryOperand) }
+    it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it "must set the base" do
       expect(subject.base).to eq(register)
@@ -90,7 +90,7 @@ describe Ronin::Code::ASM::Register do
 
     subject { register * scale }
 
-    it { expect(subject).to be_kind_of(Ronin::Code::ASM::MemoryOperand) }
+    it { expect(subject).to be_kind_of(Ronin::ASM::MemoryOperand) }
 
     it { expect(subject.base).to be_nil }
     it { expect(subject.offset).to eq(0) }

@@ -1,18 +1,18 @@
-# ronin-code-asm
+# ronin-asm
 
-[![CI](https://github.com/ronin-rb/ronin-code-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
-[![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-code-asm.svg)](https://codeclimate.com/github/ronin-rb/ronin-asm)
-[![Gem Version](https://badge.fury.io/rb/ronin-code-asm.svg)](https://badge.fury.io/rb/ronin-code-asm)
+[![CI](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-asm/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-asm.svg)](https://codeclimate.com/github/ronin-rb/ronin-asm)
+[![Gem Version](https://badge.fury.io/rb/ronin-asm.svg)](https://badge.fury.io/rb/ronin-asm)
 
-* [Source](https://github.com/ronin-rb/ronin-code-asm)
-* [Issues](https://github.com/ronin-rb/ronin-code-asm/issues)
-* [Documentation](https://ronin-rb.dev/docs/ronin-code-asm/frames)
+* [Source](https://github.com/ronin-rb/ronin-asm)
+* [Issues](https://github.com/ronin-rb/ronin-asm/issues)
+* [Documentation](https://ronin-rb.dev/docs/ronin-asm/frames)
 * [Discord](https://discord.gg/6WAb3PsVX9) |
   [Mastodon](https://infosec.exchange/@ronin_rb)
 
 ## Description
 
-{Ronin::Code::ASM} is a Ruby DSL for crafting Assembly programs and Shellcode.
+{Ronin::ASM} is a Ruby DSL for crafting Assembly programs and Shellcode.
 
 ## Features
 
@@ -29,7 +29,7 @@
 Create a program:
 
 ```ruby
-asm = Ronin::Code::ASM.new do
+asm = Ronin::ASM.new do
   push ebx
   mov  eax, 0xc0ffee
   pop  ebx
@@ -58,7 +58,7 @@ puts asm.to_asm(:att)
 Create shellcode:
 
 ```ruby
-shellcode = Ronin::Code::ASM::Shellcode.new(arch: :x86) do
+shellcode = Ronin::ASM::Shellcode.new(arch: :x86) do
   xor   eax,  eax
   push  eax
   push  0x68732f2f
@@ -123,7 +123,7 @@ If the `:os` option is specified, then syscall numbers can be looked up via the
 `syscalls` Hash:
 
 ```ruby
-Ronin::Code::ASM.new(os: 'Linux') do
+Ronin::ASM.new(os: 'Linux') do
   # ...
   mov al, syscalls[:execve]
   int 0x80
@@ -142,61 +142,61 @@ end
 
 ```shell
 sudo apt install -y yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### Fedora
 
 ```shell
 sudo dnf install -y yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### OpenSUSE
 
 ```shell
 sudo zypper -n in -l yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### Arch
 
 ```shell
 sudo pacman -Sy yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### macOS
 
 ```shell
 brew install yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### FreeBSD
 
 ```shell
 sudo pkg install -y yasm
-gem install ronin-code-asm
+gem install ronin-asm
 ```
 
 ### Gemfile
 
 ```ruby
-gem 'ronin-code-asm', '~> 1.0'
+gem 'ronin-asm', '~> 1.0'
 ```
 
 ### gemspec
 
 ```ruby
-gem.add_dependency 'ronin-code-asm', '~> 1.0'
+gem.add_dependency 'ronin-asm', '~> 1.0'
 ```
 
 ## Development
 
-1. [Fork It!](https://github.com/ronin-rb/ronin-code-asm/fork)
+1. [Fork It!](https://github.com/ronin-rb/ronin-asm/fork)
 2. Clone It!
-3. `cd ronin-code-asm/`
+3. `cd ronin-asm/`
 4. `bundle install`
 5. `git checkout -b my_feature`
 6. Code It!
@@ -205,22 +205,22 @@ gem.add_dependency 'ronin-code-asm', '~> 1.0'
 
 ## License
 
-ronin-code-asm - A Ruby DSL for crafting Assembly programs and shellcode.
+ronin-asm - A Ruby DSL for crafting Assembly programs and shellcode.
 
 Copyright (c) 2007-2025 Hal Brodigan (postmodern.mod3 at gmail.com)
 
-ronin-code-asm is free software: you can redistribute it and/or modify
+ronin-asm is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-ronin-code-asm is distributed in the hope that it will be useful,
+ronin-asm is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
-along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
+along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 
 [Ruby]: https://www.ruby-lang.org
 [yasm]: https://yasm.tortall.net/

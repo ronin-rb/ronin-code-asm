@@ -1,9 +1,9 @@
 # encoding: US-ASCII
 
 require 'spec_helper'
-require 'ronin/code/asm/shellcode'
+require 'ronin/asm/shellcode'
 
-describe Ronin::Code::ASM::Shellcode do
+describe Ronin::ASM::Shellcode do
   describe "#assemble", integration: true do
     subject do
       described_class.new do

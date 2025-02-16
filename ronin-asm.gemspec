@@ -10,8 +10,8 @@ Gem::Specification.new do |gem|
                   lib_dir = File.join(File.dirname(__FILE__),'lib')
                   $LOAD_PATH << lib_dir unless $LOAD_PATH.include?(lib_dir)
 
-                  require 'ronin/code/asm/version'
-                  Ronin::Code::ASM::VERSION
+                  require 'ronin/asm/version'
+                  Ronin::ASM::VERSION
                 end
 
   gem.summary     = gemspec['summary']

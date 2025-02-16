@@ -1,22 +1,22 @@
-name: ronin-code-asm
+name: ronin-asm
 summary: A Ruby DSL for crafting Assembly programs and Shellcode.
 description:
-  ronin-code-asm is a Ruby DSL for crafting Assembly programs and shellcode.
+  ronin-asm is a Ruby DSL for crafting Assembly programs and shellcode.
 
 license: LGPL-3.0-or-later
 authors: Postmodern
 email: postmodern.mod3@gmail.com
-homepage: https://github.com/ronin-rb/ronin-code-asm#readme
+homepage: https://github.com/ronin-rb/ronin-asm#readme
 has_yard: true
 
 requirements: yasm >= 0.6.0
 required_ruby_version: ">= 3.0.0"
 
 metadata:
-  documentation_uri: https://ronin-rb.dev/docs/ronin-code-asm
-  source_code_uri:   https://github.com/ronin-rb/ronin-code-asm
-  bug_tracker_uri:   https://github.com/ronin-rb/ronin-code-asm/issues
-  changelog_uri:     https://github.com/ronin-rb/ronin-code-asm/blob/main/ChangeLog.md
+  documentation_uri: https://ronin-rb.dev/docs/ronin-asm
+  source_code_uri:   https://github.com/ronin-rb/ronin-asm
+  bug_tracker_uri:   https://github.com/ronin-rb/ronin-asm/issues
+  changelog_uri:     https://github.com/ronin-rb/ronin-asm/blob/main/ChangeLog.md
   rubygems_mfa_required: 'true'
 
 dependencies:

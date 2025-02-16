@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-require 'ronin/code/asm/syntax/att'
-require 'ronin/code/asm/register'
-require 'ronin/code/asm/immediate_operand'
-require 'ronin/code/asm/memory_operand'
-require 'ronin/code/asm/instruction'
-require 'ronin/code/asm/program'
+require 'ronin/asm/syntax/att'
+require 'ronin/asm/register'
+require 'ronin/asm/immediate_operand'
+require 'ronin/asm/memory_operand'
+require 'ronin/asm/instruction'
+require 'ronin/asm/program'
 
-describe Ronin::Code::ASM::Syntax::ATT do
+describe Ronin::ASM::Syntax::ATT do
   subject { described_class }
 
   describe "emit_register" do
-    let(:register) { Ronin::Code::ASM::Register.new(:eax, 4) }
+    let(:register) { Ronin::ASM::Register.new(:eax, 4) }
 
     it "must prepend a '%' to the register name" do
       expect(subject.emit_register(register)).to eq("%eax")
@@ -19,7 +19,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
   end
 
   describe "emit_immediate_operand" do
-    let(:operand) { Ronin::Code::ASM::ImmediateOperand.new(255, 1) }
+    let(:operand) { Ronin::ASM::ImmediateOperand.new(255, 1) }
 
     it "must prepend a '$' to the immediate" do
       expect(subject.emit_immediate_operand(operand)).to eq("$0xff")
@@ -27,8 +27,8 @@ describe Ronin::Code::ASM::Syntax::ATT do
   end
 
   describe "emit_memory_operand" do
-    let(:register) { Ronin::Code::ASM::Register.new(:eax, 4)   }
-    let(:operand)  { Ronin::Code::ASM::MemoryOperand.new(register) }
+    let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
+    let(:operand)  { Ronin::ASM::MemoryOperand.new(register) }
 
     it "must enclose the memory in parenthesis" do
       expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
@@ -36,14 +36,14 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
     context "with an offset" do
       let(:offset)  { 255 }
-      let(:operand) { Ronin::Code::ASM::MemoryOperand.new(register,offset) }
+      let(:operand) { Ronin::ASM::MemoryOperand.new(register,offset) }
 
       it "must prepend the offset as an integer" do
         expect(subject.emit_memory_operand(operand)).to eq("0xff(%eax)")
       end
 
       context "when 0" do
-        let(:operand) { Ronin::Code::ASM::MemoryOperand.new(register,0) }
+        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0) }
 
         it "must omit the offset" do
           expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
@@ -52,8 +52,8 @@ describe Ronin::Code::ASM::Syntax::ATT do
     end
 
     context "with an index" do
-      let(:index)   { Ronin::Code::ASM::Register.new(:esi, 4) }
-      let(:operand) { Ronin::Code::ASM::MemoryOperand.new(register,0,index) }
+      let(:index)   { Ronin::ASM::Register.new(:esi, 4) }
+      let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index) }
 
       it "must include the index argument" do
         expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi)")
@@ -61,7 +61,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
       context "with a scale" do
         let(:scale)   { 4 }
-        let(:operand) { Ronin::Code::ASM::MemoryOperand.new(register,0,index,scale) }
+        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index,scale) }
 
         it "must prepend the scale argument as a decimal" do
           expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi,#{scale})")
@@ -72,7 +72,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
   describe "emit_instruction" do
     context "with no operands" do
-      let(:instruction) { Ronin::Code::ASM::Instruction.new(:ret, []) }
+      let(:instruction) { Ronin::ASM::Instruction.new(:ret, []) }
 
       it "must emit the instruction name" do
         expect(subject.emit_instruction(instruction)).to eq('ret')
@@ -81,8 +81,8 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
     context "with one operand" do
       context "with width of 1" do
-        let(:immediate)   { Ronin::Code::ASM::ImmediateOperand.new(0x80, 1) }
-        let(:instruction) { Ronin::Code::ASM::Instruction.new(:int, [immediate]) }
+        let(:immediate)   { Ronin::ASM::ImmediateOperand.new(0x80, 1) }
+        let(:instruction) { Ronin::ASM::Instruction.new(:int, [immediate]) }
 
         it "must not append a size specifier to the instruction name" do
           expect(subject.emit_instruction(instruction)).to eq("int\t$0x80")
@@ -91,9 +91,9 @@ describe Ronin::Code::ASM::Syntax::ATT do
     end
 
     context "with multiple operands" do
-      let(:register)    { Ronin::Code::ASM::Register.new(:eax, 4) }
-      let(:immediate)   { Ronin::Code::ASM::ImmediateOperand.new(0xff, 1)  }
-      let(:instruction) { Ronin::Code::ASM::Instruction.new(:mov, [register, immediate]) }
+      let(:register)    { Ronin::ASM::Register.new(:eax, 4) }
+      let(:immediate)   { Ronin::ASM::ImmediateOperand.new(0xff, 1)  }
+      let(:instruction) { Ronin::ASM::Instruction.new(:mov, [register, immediate]) }
 
       it "must add a size specifier to the instruction name" do
         expect(subject.emit_instruction(instruction)).to match(/^movl/)
@@ -113,7 +113,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
   describe "emit_program" do
     let(:program) do
-      Ronin::Code::ASM::Program.new do
+      Ronin::ASM::Program.new do
         mov eax, 0xff
         ret
       end
@@ -134,7 +134,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
     context "when emitting labels" do
       let(:program) do
-        Ronin::Code::ASM::Program.new do
+        Ronin::ASM::Program.new do
           mov eax, 0
 
           _loop do
@@ -165,7 +165,7 @@ describe Ronin::Code::ASM::Syntax::ATT do
 
     context "when the program arch is :amd64" do
       let(:program) do
-        Ronin::Code::ASM::Program.new(arch: :amd64) do
+        Ronin::ASM::Program.new(arch: :amd64) do
           push rax
           push rbx
           mov 0xff, rax
