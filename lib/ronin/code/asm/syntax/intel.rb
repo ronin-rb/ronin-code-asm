@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/syntax/common'
+require_relative 'common'
 
 module Ronin
   module Code

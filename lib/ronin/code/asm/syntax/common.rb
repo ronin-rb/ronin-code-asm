@@ -18,9 +18,9 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/register'
-require 'ronin/code/asm/immediate_operand'
-require 'ronin/code/asm/memory_operand'
+require_relative '../register'
+require_relative '../immediate_operand'
+require_relative '../memory_operand'
 
 module Ronin
   module Code

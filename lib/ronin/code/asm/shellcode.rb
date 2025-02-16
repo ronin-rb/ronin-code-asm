@@ -18,7 +18,7 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/program'
+require_relative 'program'
 
 require 'tempfile'
 
@@ -42,7 +42,7 @@ module Ronin
       #       mov   al,   0xb
       #       int   0x80
       #     end
-      # 
+      #
       #
       class Shellcode < Program
 

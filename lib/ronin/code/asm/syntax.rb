@@ -18,5 +18,5 @@
 # along with ronin-code-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/code/asm/syntax/att'
-require 'ronin/code/asm/syntax/intel'
+require_relative 'syntax/att'
+require_relative 'syntax/intel'
