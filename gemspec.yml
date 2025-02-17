@@ -19,8 +19,16 @@ metadata:
   changelog_uri:     https://github.com/ronin-rb/ronin-asm/blob/main/ChangeLog.md
   rubygems_mfa_required: 'true'
 
+generated_files:
+  - data/completions/ronin-asm
+  - man/ronin-asm.1
+  - man/ronin-asm-completion.1
+  - man/ronin-asm-irb.1
+
 dependencies:
   ruby-yasm: ~> 0.3
+  # Ronin dependencies:
+  ronin-core: ~> 0.2
 
 development_dependencies:
   bundler: ~> 2.0

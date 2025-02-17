@@ -37,3 +37,15 @@ task :test => 'spec:integration'
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+require 'kramdown/man/task'
+Kramdown::Man::Task.new
+
+require 'command_kit/completion/task'
+CommandKit::Completion::Task.new(
+  class_file:  'ronin/asm/cli',
+  class_name:  'Ronin::ASM::CLI',
+  output_file: 'data/completions/ronin-asm'
+)
+
+task :setup => %w[man command_kit:completion]

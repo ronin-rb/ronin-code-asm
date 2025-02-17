@@ -24,6 +24,25 @@
 * Has 95% documentation coverage.
 * Has 99% test coverage.
 
+## Synopsis
+
+```
+Usage: ronin-asm [options] [COMMAND [ARGS...]]
+
+Options:
+    -V, --version                    Prints the version and exits
+    -h, --help                       Print help information
+
+Arguments:
+    [COMMAND]                        The command name to run
+    [ARGS ...]                       Additional arguments for the command
+
+Commands:
+    completion
+    help
+    irb
+```
+
 ## Examples
 
 Create a program:
@@ -135,6 +154,7 @@ end
 * [Ruby] >= 3.0.0
 * [yasm] >= 0.6.0
 * [ruby-yasm] ~> 0.3
+* [ronin-core] ~> 0.2
 
 ## Install
 
@@ -225,3 +245,5 @@ along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 [Ruby]: https://www.ruby-lang.org
 [yasm]: https://yasm.tortall.net/
 [ruby-yasm]: https://github.com/postmodern/ruby-yasm#readme
+
+[ronin-core]: https://github.com/ronin-rb/ronin-core#readme

@@ -1,6 +1,8 @@
 /coverage
+/data/completions/ronin-asm
 /doc
 /pkg
+/man/*.[1-9]
 /vendor/cache
 /Gemfile.lock
 /.bundle
