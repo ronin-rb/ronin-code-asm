@@ -126,29 +126,12 @@ module Ronin
       #   end
       #
       def initialize(arch: :x86_64, os: nil, define: {}, &block)
-        @arch = arch
-
-        arch = ARCHES.fetch(arch) do
-          raise(ArgumentError,"unknown architecture: #{arch.inspect}")
-        end
-
-        @word_size = arch::WORD_SIZE
-        @registers = arch::REGISTERS
-
-        extend arch
-
-        @syscalls = {}
+        initialize_arch(arch)
 
         if os
-          @os = os
-
-          os = OSES.fetch(os) do
-            raise(ArgumentError,"unknown OS: #{os.inspect}")
-          end
-
-          @syscalls = os::SYSCALLS
-
-          extend os
+          initialize_os(os)
+        else
+          @syscalls = {}
         end
 
         define.each do |name,value|
@@ -160,6 +143,51 @@ module Ronin
 
         instance_eval(&block) if block
       end
+
+      private
+
+      #
+      # Initializes the architecture metadata for the program.
+      #
+      # @param [:x86, :x86_64, :amd64] arch
+      #   The architecture name.
+      #
+      # @api private
+      #
+      def initialize_arch(arch)
+        @arch = arch
+
+        arch_module = ARCHES.fetch(arch) do
+          raise(ArgumentError,"unknown architecture: #{arch.inspect}")
+        end
+
+        @word_size = arch_module::WORD_SIZE
+        @registers = arch_module::REGISTERS
+
+        extend arch_module
+      end
+
+      #
+      # Initializes the Operating System metadata for the program.
+      #
+      # @param [:linux, :freebsd] os
+      #   The OS name.
+      #
+      # @api private
+      #
+      def initialize_os(os)
+        @os = os
+
+        os_module = OSES.fetch(os) do
+          raise(ArgumentError,"unknown OS: #{os.inspect}")
+        end
+
+        @syscalls = os_module::SYSCALLS
+
+        extend os_module
+      end
+
+      public
 
       #
       # Determines if a register exists.
