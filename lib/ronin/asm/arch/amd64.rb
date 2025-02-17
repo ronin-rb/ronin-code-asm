@@ -22,7 +22,7 @@ require_relative 'x86'
 
 module Ronin
   module ASM
-    module Archs
+    module Arch
       #
       # Contains AMD64 Architecture information.
       #

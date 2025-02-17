@@ -18,7 +18,7 @@
 # along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require_relative 'archs'
+require_relative 'arch'
 require_relative 'os'
 require_relative 'register'
 require_relative 'instruction'
@@ -112,7 +112,7 @@ module Ronin
       def initialize(arch: :x86, os: nil, define: {}, &block)
         @arch = arch
 
-        arch = Archs.const_get(@arch.to_s.upcase)
+        arch = Arch.const_get(@arch.to_s.upcase)
 
         @word_size = arch::WORD_SIZE
         @registers = arch::REGISTERS

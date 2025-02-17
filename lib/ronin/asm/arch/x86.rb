@@ -22,7 +22,7 @@ require_relative '../register'
 
 module Ronin
   module ASM
-    module Archs
+    module Arch
       #
       # Contains X86 Architecture information.
       #
