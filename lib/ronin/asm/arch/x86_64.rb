@@ -24,9 +24,9 @@ module Ronin
   module ASM
     module Arch
       #
-      # Contains AMD64 Architecture information.
+      # Contains x86-64 Architecture information.
       #
-      module AMD64
+      module X86_64
         include X86
 
         # Default word size

@@ -19,4 +19,4 @@
 #
 
 require_relative 'arch/x86'
-require_relative 'arch/amd64'
+require_relative 'arch/x86_64'
