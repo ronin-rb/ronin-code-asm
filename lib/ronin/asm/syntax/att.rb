@@ -153,7 +153,7 @@ module Ronin
         # @since 0.2.0
         #
         def self.emit_prologue(program)
-          ".code#{BITS[program.arch]}"
+          ".code#{program.word_size * 8}"
         end
 
       end
