@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/asm/immediate_operand'
 
 describe Ronin::ASM::ImmediateOperand do
@@ -18,50 +17,50 @@ describe Ronin::ASM::ImmediateOperand do
   end
 
   describe "#width" do
-    describe "default width for" do
-      context "0x100000000 .. 0xffffffffffffffff" do
+    context "when #width is not explicitly set by #initialize" do
+      context "and when between 0x100000000 .. 0xffffffffffffffff" do
         subject { described_class.new(0xffffffffffffffff).width }
 
         it { expect(subject).to be == 8 }
       end
 
-      context "-0x800000000 .. -0x7fffffffffffffff" do
+      context "and when between -0x800000000 .. -0x7fffffffffffffff" do
         subject { described_class.new(-0x7fffffffffffffff).width }
 
         it { expect(subject).to be == 8 }
       end
 
-      context "0x10000 .. 0xffffffff" do
+      context "and when between 0x10000 .. 0xffffffff" do
         subject { described_class.new(0xffffffff).width }
 
         it { expect(subject).to be == 4 }
       end
 
-      context "-0x80000 .. -0x7fffffff" do
+      context "and when between -0x80000 .. -0x7fffffff" do
         subject { described_class.new(-0x7fffffff).width }
 
         it { expect(subject).to be == 4 }
       end
 
-      context "0x100 .. 0xffff" do
+      context "and when between 0x100 .. 0xffff" do
         subject { described_class.new(0xffff).width }
 
         it { expect(subject).to be == 2 }
       end
 
-      context "-0x80 .. -0x7fff" do
+      context "and when between -0x80 .. -0x7fff" do
         subject { described_class.new(-0x7fff).width }
 
         it { expect(subject).to be == 2 }
       end
 
-      context "0x0 .. 0xff" do
+      context "and when between 0x00 .. 0xff" do
         subject { described_class.new(0xff).width }
 
         it { expect(subject).to be == 1 }
       end
 
-      context "0x0 .. -0x7f" do
+      context "and when between 0x00 .. -0x7f" do
         subject { described_class.new(-0x7f).width }
 
         it { expect(subject).to be == 1 }

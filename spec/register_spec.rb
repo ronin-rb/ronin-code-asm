@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/asm/register'
 
 describe Ronin::ASM::Register do

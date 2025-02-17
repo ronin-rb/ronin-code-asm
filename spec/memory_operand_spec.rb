@@ -1,6 +1,6 @@
 require 'spec_helper'
-
 require 'ronin/asm/memory_operand'
+
 require 'ronin/asm/register'
 
 describe Ronin::ASM::MemoryOperand do

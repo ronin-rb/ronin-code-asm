@@ -1,6 +1,6 @@
 require 'spec_helper'
-
 require 'ronin/asm/instruction'
+
 require 'ronin/asm/register'
 require 'ronin/asm/immediate_operand'
 require 'ronin/asm/memory_operand'

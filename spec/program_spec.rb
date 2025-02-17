@@ -3,153 +3,159 @@ require 'ronin/asm/program'
 
 describe Ronin::ASM::Program do
   describe "#arch" do
-    it "must default to :x86" do
+    it "must return the architecture name" do
       expect(subject.arch).to eq(:x86)
     end
   end
 
-  context "when :arch is :x86" do
-    subject { described_class.new(arch: :x86) }
+  describe "#initialize" do
+    it "must default the architecture to :x86" do
+      expect(subject.arch).to eq(:x86)
+    end
 
-    it { expect(subject.word_size).to eq(4) }
+    context "when the arch: keyword argument is :x86" do
+      subject { described_class.new(arch: :x86) }
 
-    describe "#stask_base" do
-      it "must be ebp" do
-        expect(subject.stack_base.name).to eq(:ebp)
+      it { expect(subject.word_size).to eq(4) }
+
+      describe "#stask_base" do
+        it "must be ebp" do
+          expect(subject.stack_base.name).to eq(:ebp)
+        end
+      end
+
+      describe "#stask_pointer" do
+        it "must be esp" do
+          expect(subject.stack_pointer.name).to eq(:esp)
+        end
+      end
+
+      describe "#stack_push" do
+        let(:value) { 0xff }
+
+        before { subject.stack_push(value) }
+
+        it "must add a 'push' instruction with a value" do
+          expect(subject.instructions[-1].name).to eq(:push)
+          expect(subject.instructions[-1].operands[0].value).to eq(value)
+        end
+      end
+
+      describe "#stack_pop" do
+        let(:register) { subject.register(:eax) }
+
+        before { subject.stack_pop(register) }
+
+        it "must add a 'pop' instruction with a register" do
+          expect(subject.instructions[-1].name).to eq(:pop)
+          expect(subject.instructions[-1].operands[0]).to eq(register)
+        end
+      end
+
+      describe "#register_clear" do
+        let(:name) { :eax }
+
+        before { subject.register_clear(name) }
+
+        it "must add a 'xor' instruction with a registers" do
+          expect(subject.instructions[-1].name).to eq(:xor)
+          expect(subject.instructions[-1].operands[0].name).to eq(name)
+          expect(subject.instructions[-1].operands[1].name).to eq(name)
+        end
+      end
+
+      describe "#register_set" do
+        let(:name)  { :eax }
+        let(:value) { 0xff }
+
+        before { subject.register_set(name,value) }
+
+        it "must add a 'xor' instruction with a registers" do
+          expect(subject.instructions[-1].name).to eq(:mov)
+          expect(subject.instructions[-1].operands[0].value).to eq(value)
+          expect(subject.instructions[-1].operands[1].name).to eq(name)
+        end
+      end
+
+      describe "#register_save" do
+        let(:name)  { :eax }
+
+        before { subject.register_save(name) }
+
+        it "must add a 'xor' instruction with a registers" do
+          expect(subject.instructions[-1].name).to eq(:push)
+          expect(subject.instructions[-1].operands[0].name).to eq(name)
+        end
+      end
+
+      describe "#register_save" do
+        let(:name)  { :eax }
+
+        before { subject.register_load(name) }
+
+        it "must add a 'xor' instruction with a registers" do
+          expect(subject.instructions[-1].name).to eq(:pop)
+          expect(subject.instructions[-1].operands[0].name).to eq(name)
+        end
+      end
+
+      describe "#interrupt" do
+        let(:number) { 0x0a }
+
+        before { subject.interrupt(number) }
+
+        it "must add an 'int' instruction with the interrupt number" do
+          expect(subject.instructions[-1].name).to eq(:int)
+          expect(subject.instructions[-1].operands[0].value).to eq(number)
+        end
+      end
+
+      describe "#syscall" do
+        before { subject.syscall }
+
+        it "must add an 'int 0x80' instruction" do
+          expect(subject.instructions[-1].name).to eq(:int)
+          expect(subject.instructions[-1].operands[0].value).to eq(0x80)
+        end
+      end
+
+      context "and when the os: keyword argument is :linux" do
+        subject { described_class.new(arch: :x86, os: :linux) }
+
+        it { expect(subject.syscalls).to_not be_empty }
+      end
+
+      context "and when the os: keyword argument is :freebsd" do
+        subject { described_class.new(arch: :x86, os: :freebsd) }
+
+        it { expect(subject.syscalls).to_not be_empty }
       end
     end
 
-    describe "#stask_pointer" do
-      it "must be esp" do
-        expect(subject.stack_pointer.name).to eq(:esp)
+    context "when the arch: keyword argument is :amd64" do
+      subject { described_class.new(arch: :amd64) }
+
+      it { expect(subject.word_size).to eq(8) }
+
+      describe "#syscall" do
+        before { subject.syscall }
+
+        it "must add a 'syscall' instruction" do
+          expect(subject.instructions[-1].name).to eq(:syscall)
+        end
       end
-    end
 
-    describe "#stack_push" do
-      let(:value) { 0xff }
+      context "and when the os: keyword argument is :linux" do
+        subject { described_class.new(arch: :amd64, os: :linux) }
 
-      before { subject.stack_push(value) }
-
-      it "must add a 'push' instruction with a value" do
-        expect(subject.instructions[-1].name).to eq(:push)
-        expect(subject.instructions[-1].operands[0].value).to eq(value)
+        it { expect(subject.syscalls).to_not be_empty }
       end
-    end
 
-    describe "#stack_pop" do
-      let(:register) { subject.register(:eax) }
+      context "and when the os: keyword argument is :freebsd" do
+        subject { described_class.new(arch: :amd64, os: :freebsd) }
 
-      before { subject.stack_pop(register) }
-
-      it "must add a 'pop' instruction with a register" do
-        expect(subject.instructions[-1].name).to eq(:pop)
-        expect(subject.instructions[-1].operands[0]).to eq(register)
+        it { expect(subject.syscalls).to_not be_empty }
       end
-    end
-
-    describe "#register_clear" do
-      let(:name) { :eax }
-
-      before { subject.register_clear(name) }
-
-      it "must add a 'xor' instruction with a registers" do
-        expect(subject.instructions[-1].name).to eq(:xor)
-        expect(subject.instructions[-1].operands[0].name).to eq(name)
-        expect(subject.instructions[-1].operands[1].name).to eq(name)
-      end
-    end
-
-    describe "#register_set" do
-      let(:name)  { :eax }
-      let(:value) { 0xff }
-
-      before { subject.register_set(name,value) }
-
-      it "must add a 'xor' instruction with a registers" do
-        expect(subject.instructions[-1].name).to eq(:mov)
-        expect(subject.instructions[-1].operands[0].value).to eq(value)
-        expect(subject.instructions[-1].operands[1].name).to eq(name)
-      end
-    end
-
-    describe "#register_save" do
-      let(:name)  { :eax }
-
-      before { subject.register_save(name) }
-
-      it "must add a 'xor' instruction with a registers" do
-        expect(subject.instructions[-1].name).to eq(:push)
-        expect(subject.instructions[-1].operands[0].name).to eq(name)
-      end
-    end
-
-    describe "#register_save" do
-      let(:name)  { :eax }
-
-      before { subject.register_load(name) }
-
-      it "must add a 'xor' instruction with a registers" do
-        expect(subject.instructions[-1].name).to eq(:pop)
-        expect(subject.instructions[-1].operands[0].name).to eq(name)
-      end
-    end
-
-    describe "#interrupt" do
-      let(:number) { 0x0a }
-
-      before { subject.interrupt(number) }
-
-      it "must add an 'int' instruction with the interrupt number" do
-        expect(subject.instructions[-1].name).to eq(:int)
-        expect(subject.instructions[-1].operands[0].value).to eq(number)
-      end
-    end
-
-    describe "#syscall" do
-      before { subject.syscall }
-
-      it "must add an 'int 0x80' instruction" do
-        expect(subject.instructions[-1].name).to eq(:int)
-        expect(subject.instructions[-1].operands[0].value).to eq(0x80)
-      end
-    end
-
-    context "when :os is :linux" do
-      subject { described_class.new(arch: :x86, os: :linux) }
-
-      it { expect(subject.syscalls).to_not be_empty }
-    end
-
-    context "when :os is :freebsd" do
-      subject { described_class.new(arch: :x86, os: :freebsd) }
-
-      it { expect(subject.syscalls).to_not be_empty }
-    end
-  end
-
-  context "when :arch is :amd64" do
-    subject { described_class.new(arch: :amd64) }
-
-    it { expect(subject.word_size).to eq(8) }
-
-    describe "#syscall" do
-      before { subject.syscall }
-
-      it "must add a 'syscall' instruction" do
-        expect(subject.instructions[-1].name).to eq(:syscall)
-      end
-    end
-
-    context "when :os is :linux" do
-      subject { described_class.new(arch: :amd64, os: :linux) }
-
-      it { expect(subject.syscalls).to_not be_empty }
-    end
-
-    context "when :os is :freebsd" do
-      subject { described_class.new(arch: :amd64, os: :freebsd) }
-
-      it { expect(subject.syscalls).to_not be_empty }
     end
   end
 

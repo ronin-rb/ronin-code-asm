@@ -1,6 +1,6 @@
 require 'spec_helper'
-
 require 'ronin/asm/syntax/att'
+
 require 'ronin/asm/register'
 require 'ronin/asm/immediate_operand'
 require 'ronin/asm/memory_operand'
@@ -10,7 +10,7 @@ require 'ronin/asm/program'
 describe Ronin::ASM::Syntax::ATT do
   subject { described_class }
 
-  describe "emit_register" do
+  describe ".emit_register" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4) }
 
     it "must prepend a '%' to the register name" do
@@ -18,7 +18,7 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe "emit_immediate_operand" do
+  describe ".emit_immediate_operand" do
     let(:operand) { Ronin::ASM::ImmediateOperand.new(255, 1) }
 
     it "must prepend a '$' to the immediate" do
@@ -26,7 +26,7 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe "emit_memory_operand" do
+  describe ".emit_memory_operand" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
     let(:operand)  { Ronin::ASM::MemoryOperand.new(register) }
 
@@ -70,7 +70,7 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe "emit_instruction" do
+  describe ".emit_instruction" do
     context "with no operands" do
       let(:instruction) { Ronin::ASM::Instruction.new(:ret, []) }
 
@@ -105,13 +105,13 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe "emit_section" do
+  describe ".emit_section" do
     it "must emit the section name" do
       expect(subject.emit_section(:text)).to eq(".text")
     end
   end
 
-  describe "emit_program" do
+  describe ".emit_program" do
     let(:program) do
       Ronin::ASM::Program.new do
         mov eax, 0xff

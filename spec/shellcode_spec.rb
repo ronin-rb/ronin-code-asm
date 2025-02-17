@@ -1,5 +1,4 @@
 # encoding: US-ASCII
-
 require 'spec_helper'
 require 'ronin/asm/shellcode'
 
