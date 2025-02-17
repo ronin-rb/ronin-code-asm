@@ -42,7 +42,6 @@ module Ronin
     #       int   0x80
     #     end
     #
-    #
     class Shellcode < Program
 
       #

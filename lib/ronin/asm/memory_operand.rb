@@ -64,7 +64,7 @@ module Ronin
       #   The fixed offset to add to the `base`.
       #
       # @param [Register, nil] index
-      #   The variable index to multiple by `scale`, then add to `base.
+      #   The variable index to multiple by `scale`, then add to `base`.
       #
       # @param [Integer] scale
       #   The scale to multiple `index` by.
