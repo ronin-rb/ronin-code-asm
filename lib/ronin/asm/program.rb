@@ -23,6 +23,7 @@ require_relative 'os'
 require_relative 'register'
 require_relative 'instruction'
 require_relative 'immediate_operand'
+require_relative 'label'
 require_relative 'syntax'
 
 require 'tempfile'
@@ -276,15 +277,15 @@ module Ronin
       #   The given block will be evaluated after the label has been
       #   added.
       #
-      # @return [Symbol]
-      #   The label name.
+      # @return [Label]
+      #   The new label.
       #
       def label(name,&block)
-        name = name.to_sym
+        new_label = Label.new(name)
 
-        @instructions << name
+        @instructions << new_label
         instance_eval(&block)
-        return name
+        return new_label
       end
 
       #

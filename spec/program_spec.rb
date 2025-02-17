@@ -298,23 +298,26 @@ describe Ronin::ASM::Program do
   describe "#label" do
     let(:name) { :_start }
 
-    it "must return the label name" do
-      label = subject.label(name) { }
-      
-      expect(label).to eq(name)
+    it "must return the new Label object" do
+      new_label = subject.label(name) { }
+
+      expect(new_label).to be_kind_of(Ronin::ASM::Label)
+      expect(new_label.name).to eq(name)
     end
 
     it "must add the label to the instructions" do
       subject.label(name) { }
 
-      expect(subject.instructions.last).to eq(name)
+      expect(subject.instructions.last).to be_kind_of(Ronin::ASM::Label)
+      expect(subject.instructions.last.name).to eq(name)
     end
 
     it "must accept a block" do
       subject.label(name) { push 2 }
 
+      expect(subject.instructions[-2]).to      be_kind_of(Ronin::ASM::Label)
+      expect(subject.instructions[-2].name).to eq(name)
       expect(subject.instructions[-1].name).to eq(:push)
-      expect(subject.instructions[-2]).to eq(name)
     end
   end
 
@@ -331,7 +334,8 @@ describe Ronin::ASM::Program do
       it "must add a new label" do
         subject._loop { mov eax, ebx }
 
-        expect(subject.instructions[-2]).to      eq(:_loop)
+        expect(subject.instructions[-2]).to      be_kind_of(Ronin::ASM::Label)
+        expect(subject.instructions[-2].name).to eq(:_loop)
         expect(subject.instructions[-1].name).to eq(:mov)
       end
     end

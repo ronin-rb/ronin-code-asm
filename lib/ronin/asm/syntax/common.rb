@@ -153,14 +153,14 @@ module Ronin
         #
         # Emits a label.
         #
-        # @param [Symbol] name
-        #   The name of the label.
+        # @param [Label] label
+        #   The label object.
         #
         # @return [String]
         #   The formatted label.
         #
-        def self.emit_label(name)
-          "#{name}:"
+        def self.emit_label(label)
+          "#{label.name}:"
         end
 
         #
@@ -223,7 +223,7 @@ module Ronin
 
           program.instructions.each do |ins|
             case ins
-            when Symbol      then lines << emit_label(ins)
+            when Label       then lines << emit_label(ins)
             when Instruction then lines << "\t#{emit_instruction(ins)}"
             end
           end
