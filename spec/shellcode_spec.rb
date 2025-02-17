@@ -5,7 +5,7 @@ require 'ronin/asm/shellcode'
 describe Ronin::ASM::Shellcode do
   describe "#assemble", integration: true do
     subject do
-      described_class.new do
+      described_class.new(arch: :x86) do
         xor   eax,  eax
         push  eax
         push  0x68732f2f

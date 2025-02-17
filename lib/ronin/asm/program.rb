@@ -111,7 +111,7 @@ module Ronin
       #   An invalid `arch:` or `os:` keyword argument value was given.
       #
       # @example
-      #   Program.new(arch: :amd64) do
+      #   Program.new(arch: :x86) do
       #     push  rax
       #     push  rbx
       #
@@ -119,7 +119,7 @@ module Ronin
       #     mov   rax[8],  rbx
       #   end
       #
-      def initialize(arch: :x86, os: nil, define: {}, &block)
+      def initialize(arch: :x86_64, os: nil, define: {}, &block)
         @arch = arch
 
         arch = ARCHES.fetch(arch) do

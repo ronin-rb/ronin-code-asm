@@ -28,7 +28,7 @@ module Ronin
     # Represents Shellcode. Shellcode is like an Assembly {Program}, but
     # assembles into raw machine code which can be injected into a process.
     #
-    #     ASM::Shellcode.new do
+    #     ASM::Shellcode.new(arch: :x86) do
     #       xor   eax,  eax
     #       push  eax
     #       push  0x68732f2f

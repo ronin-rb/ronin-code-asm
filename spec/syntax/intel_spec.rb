@@ -109,7 +109,7 @@ describe Ronin::ASM::Syntax::Intel do
 
   describe ".emit_program" do
     let(:program) do
-      Ronin::ASM::Program.new do
+      Ronin::ASM::Program.new(arch: :x86) do
         mov eax, 0xff
         ret
       end
@@ -130,7 +130,7 @@ describe Ronin::ASM::Syntax::Intel do
 
     context "when emitting labels" do
       let(:program) do
-        Ronin::ASM::Program.new do
+        Ronin::ASM::Program.new(arch: :x86) do
           mov eax, 0
 
           _loop do

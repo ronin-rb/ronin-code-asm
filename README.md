@@ -48,7 +48,7 @@ Commands:
 Create a program:
 
 ```ruby
-asm = Ronin::ASM.new do
+asm = Ronin::ASM.new(arch: :x86) do
   push ebx
   mov  eax, 0xc0ffee
   pop  ebx

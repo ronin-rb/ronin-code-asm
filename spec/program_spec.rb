@@ -4,13 +4,13 @@ require 'ronin/asm/program'
 describe Ronin::ASM::Program do
   describe "#arch" do
     it "must return the architecture name" do
-      expect(subject.arch).to eq(:x86)
+      expect(subject.arch).to eq(:x86_64)
     end
   end
 
   describe "#initialize" do
-    it "must default the architecture to :x86" do
-      expect(subject.arch).to eq(:x86)
+    it "must default the architecture to :x86_64" do
+      expect(subject.arch).to eq(:x86_64)
     end
 
     context "when the arch: keyword argument is :x86" do
@@ -359,7 +359,7 @@ describe Ronin::ASM::Program do
 
   describe "#to_asm" do
     subject do
-      described_class.new do
+      described_class.new(arch: :x86) do
         push eax
         push ebx
         push ecx
@@ -414,7 +414,7 @@ describe Ronin::ASM::Program do
 
   describe "#assemble", integration: true do
     subject do
-      described_class.new do
+      described_class.new(arch: :x86) do
         push eax
         push ebx
         push ecx
