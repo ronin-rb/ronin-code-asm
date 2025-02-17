@@ -35,7 +35,10 @@ describe Ronin::ASM::Syntax::Intel do
     end
 
     context "when operand width does not match the base width" do
-      before { operand.width = 2 }
+      let(:width) { 2 }
+      let(:operand) do
+        Ronin::ASM::MemoryOperand.new(register,0,nil,1,width)
+      end
 
       it "must specify the width" do
         expect(subject.emit_memory_operand(operand)).to eq("WORD [eax]")

@@ -27,7 +27,32 @@ module Ronin
     #
     # @see http://asm.sourceforge.net/articles/linasm.html#Memory
     #
-    class MemoryOperand < Struct.new(:base, :offset, :index, :scale, :width)
+    class MemoryOperand
+
+      # The base of the memory operand.
+      #
+      # @return [Register, nil]
+      attr_reader :base
+
+      # The offset of the memory operand.
+      #
+      # @return [Integer]
+      attr_reader :offset
+
+      # the index of the memory operand.
+      #
+      # @return [Register, nil]
+      attr_reader :index
+
+      # The scaling value of the memory operand.
+      #
+      # @return [Integer]
+      attr_reader :scale
+
+      # The width of the memory operand.
+      #
+      # @return [Integer]
+      attr_reader :width
 
       #
       # Creates a new Memory Operand.
@@ -67,11 +92,13 @@ module Ronin
           raise(TypeError,"scale must be an Integer")
         end
 
-        if base
-          width ||= base.width
-        end
-
-        super(base,offset,index,scale,width)
+        @base   = base
+        @offset = offset
+        @index  = index
+        @scale  = scale
+        @width  = width || if base
+                             base.width
+                           end
       end
 
       #
@@ -85,11 +112,11 @@ module Ronin
       #
       def +(offset)
         MemoryOperand.new(
-          self.base,
-          self.offset + offset,
-          self.index,
-          self.scale,
-          self.width
+          @base,
+          @offset + offset,
+          @index,
+          @scale,
+          @width
         )
       end
 
@@ -104,11 +131,11 @@ module Ronin
       #
       def -(offset)
         MemoryOperand.new(
-          self.base,
-          self.offset - offset,
-          self.index,
-          self.scale,
-          self.width
+          @base,
+          @offset - offset,
+          @index,
+          @scale,
+          @width
         )
       end
 

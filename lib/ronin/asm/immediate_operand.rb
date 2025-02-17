@@ -25,7 +25,12 @@ module Ronin
     #
     # @see http://asm.sourceforge.net/articles/linasm.html#Prefixes
     #
-    class ImmediateOperand < Struct.new(:value, :width)
+    class ImmediateOperand
+
+      # The immediate operand's value.
+      #
+      # @return [Integer]
+      attr_reader :value
 
       #
       # Initializes a new Immediate Operand.
@@ -37,7 +42,8 @@ module Ronin
       #   The size in bytes of the value.
       #
       def initialize(value,width=nil)
-        super(value.to_i,width)
+        @value = value.to_i
+        @width = width
       end
 
       #
@@ -47,14 +53,14 @@ module Ronin
       #   The width.
       #
       def width
-        super || case value
-                 when (0x100000000..0xffffffffffffffff),
-                      (-0x7fffffffffffffff..-0x800000000) then 8
-                 when (0x10000..0xffffffff),
-                      (-0x7fffffff..-0x80000)             then 4
-                 when (0x100..0xffff), (-0x7fff..-0x80)   then 2
-                 when (0..0xff), (-0x7f..0)               then 1
-                 end
+        @width || case @value
+                  when (0x100000000..0xffffffffffffffff),
+                       (-0x7fffffffffffffff..-0x800000000) then 8
+                  when (0x10000..0xffffffff),
+                       (-0x7fffffff..-0x80000)             then 4
+                  when (0x100..0xffff), (-0x7fff..-0x80)   then 2
+                  when (0..0xff), (-0x7f..0)               then 1
+                  end
       end
 
       #
@@ -64,7 +70,7 @@ module Ronin
       #   The value.
       #
       def to_i
-        self.value
+        @value
       end
 
       #
@@ -74,7 +80,7 @@ module Ronin
       #   The value in String form.
       #
       def to_s
-        self.value.to_s
+        @value.to_s
       end
 
     end

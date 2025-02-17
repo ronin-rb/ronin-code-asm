@@ -25,7 +25,17 @@ module Ronin
     #
     # Represents an instruction.
     #
-    class Instruction < Struct.new(:name, :operands)
+    class Instruction
+
+      # The instruction mnemonic name.
+      #
+      # @return [Symbol]
+      attr_reader :name
+
+      # The operands of the instruction.
+      #
+      # @return [Array<MemoryOperand, Register, Symbol, Integer>]
+      attr_reader :operands
 
       #
       # Initializes the instruction.
@@ -37,14 +47,13 @@ module Ronin
       #   Operands for the instruction.
       #
       def initialize(name,operands)
-        operands = operands.map do |value|
+        @name     = name
+        @operands = operands.map do |value|
           case value
           when Integer, nil then ImmediateOperand.new(value)
           else                   value
           end
         end
-
-        super(name,operands)
       end
 
       #
@@ -54,7 +63,7 @@ module Ronin
       #   The word size in bytes.
       #
       def width
-        self.operands.map { |op|
+        @operands.map { |op|
           op.width if op.respond_to?(:width)
         }.compact.max
       end

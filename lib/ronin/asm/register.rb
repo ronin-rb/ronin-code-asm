@@ -25,7 +25,17 @@ module Ronin
     #
     # Represents a Register.
     #
-    class Register < Struct.new(:name, :width, :general)
+    class Register
+
+      # The register name.
+      #
+      # @return [Symbol]
+      attr_reader :name
+
+      # The width of the register.
+      #
+      # @return [Integer]
+      attr_reader :width
 
       #
       # Initializes a register.
@@ -40,7 +50,21 @@ module Ronin
       #   Specifies whether the register is a General Purpose Register (GPR).
       #
       def initialize(name,width,general=false)
-        super(name,width,general)
+        @name  = name
+        @width = width
+
+        @general = general
+      end
+
+      #
+      # Specifies whether the register is a general purpose register.
+      #
+      # @return [Boolean]
+      #
+      # @since 1.0.0
+      #
+      def general?
+        @general
       end
 
       #
@@ -101,7 +125,7 @@ module Ronin
       #   The register's name.
       #
       def to_s
-        self.name.to_s
+        @name.to_s
       end
 
     end
