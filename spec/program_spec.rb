@@ -157,6 +157,16 @@ describe Ronin::ASM::Program do
         it { expect(subject.syscalls).to_not be_empty }
       end
     end
+
+    context "when given an unknown arch: keyword argument value" do
+      let(:arch) { :foo }
+
+      it do
+        expect {
+          described_class.new(arch: arch)
+        }.to raise_error(ArgumentError,"unknown architecture: #{arch.inspect}")
+      end
+    end
   end
 
   describe "#register?" do

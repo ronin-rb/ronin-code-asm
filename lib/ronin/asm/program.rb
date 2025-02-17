@@ -42,6 +42,13 @@ module Ronin
         intel: Syntax::Intel
       }
 
+      # Mapping of architecture IDs to modules.
+      ARCHES = {
+        x86:    Arch::X86,
+        x86_64: Arch::X86_64,
+        amd64:  Arch::X86_64
+      }
+
       # The Assembly Parsers
       PARSERS = {
         att:   :gas,
@@ -100,6 +107,9 @@ module Ronin
       # @yield []
       #   The given block will be evaluated within the program.
       #
+      # @raise [ArgumentError]
+      #   An invalid `arch:` or `os:` keyword argument value was given.
+      #
       # @example
       #   Program.new(arch: :amd64) do
       #     push  rax
@@ -112,7 +122,9 @@ module Ronin
       def initialize(arch: :x86, os: nil, define: {}, &block)
         @arch = arch
 
-        arch = Arch.const_get(@arch.to_s.upcase)
+        arch = ARCHES.fetch(arch) do
+          raise(ArgumentError,"unknown architecture: #{arch.inspect}")
+        end
 
         @word_size = arch::WORD_SIZE
         @registers = arch::REGISTERS
