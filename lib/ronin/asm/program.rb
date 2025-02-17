@@ -49,6 +49,12 @@ module Ronin
         amd64:  Arch::X86_64
       }
 
+      # Mapping of Operating System names and modules.
+      OSES = {
+        linux:   OS::Linux,
+        freebsd: OS::FreeBSD
+      }
+
       # The Assembly Parsers
       PARSERS = {
         att:   :gas,
@@ -134,10 +140,15 @@ module Ronin
         @syscalls = {}
 
         if os
-          @os       = os
-          @syscalls = OS::SYSCALLS[@os][@arch]
+          @os = os
 
-          extend OS[@os]
+          os = OSES.fetch(os) do
+            raise(ArgumentError,"unknown OS: #{os.inspect}")
+          end
+
+          @syscalls = os::SYSCALLS
+
+          extend os
         end
 
         define.each do |name,value|
