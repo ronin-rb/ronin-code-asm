@@ -29,13 +29,13 @@ module Ronin
 
       # The label name.
       #
-      # @return [Symbol, String]
+      # @return [String]
       attr_reader :name
 
       #
       # Initializes the label.
       #
-      # @param [Symbol, String] name
+      # @param [String] name
       #   The label's name.
       #
       def initialize(name)

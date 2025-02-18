@@ -14,7 +14,7 @@ describe Ronin::ASM::Label do
 
   describe "#to_s" do
     it "must return the String form of #name" do
-      expect(subject.to_s).to eq(name.to_s)
+      expect(subject.to_s).to eq(name)
     end
   end
 end

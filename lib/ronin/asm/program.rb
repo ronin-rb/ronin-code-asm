@@ -332,7 +332,7 @@ module Ronin
       #   The new label.
       #
       def label(name,&block)
-        new_label = Label.new(name)
+        new_label = Label.new(name.to_s)
 
         @instructions << new_label
         instance_eval(&block)
