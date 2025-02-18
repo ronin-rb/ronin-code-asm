@@ -325,7 +325,7 @@ module Ronin
       #   The name of the label.
       #
       # @yield []
-      #   The given block will be evaluated after the label has been
+      #   If a block is given, it will be evaluated after the label has been
       #   added.
       #
       # @return [Label]
@@ -335,7 +335,7 @@ module Ronin
         new_label = Label.new(name.to_s)
 
         @instructions << new_label
-        instance_eval(&block)
+        instance_eval(&block) if block
         return new_label
       end
 

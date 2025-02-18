@@ -315,7 +315,7 @@ describe Ronin::ASM::Program do
     let(:name) { '_start' }
 
     it "must return the new Label object" do
-      new_label = subject.label(name) { }
+      new_label = subject.label(name)
 
       expect(new_label).to be_kind_of(Ronin::ASM::Label)
       expect(new_label.name).to eq(name)
@@ -323,7 +323,7 @@ describe Ronin::ASM::Program do
 
     context "when a Symbol is given for the name" do
       it "must convert the Symbol to a String" do
-        new_label = subject.label(:_start) { }
+        new_label = subject.label(:_start)
 
         expect(new_label).to be_kind_of(Ronin::ASM::Label)
         expect(new_label.name).to eq('_start')
@@ -331,7 +331,7 @@ describe Ronin::ASM::Program do
     end
 
     it "must add the label to the instructions" do
-      subject.label(name) { }
+      subject.label(name)
 
       expect(subject.instructions.last).to be_kind_of(Ronin::ASM::Label)
       expect(subject.instructions.last.name).to eq(name)
