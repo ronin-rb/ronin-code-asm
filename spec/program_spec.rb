@@ -209,6 +209,16 @@ describe Ronin::ASM::Program do
 
       expect(subject.instructions.last.name).to eq(:push)
     end
+
+    context "when the comment: keyword argument is given" do
+      let(:comment) { 'Foo bar' }
+
+      it "must initialize the Instruction with the comment" do
+        instruction = subject.instruction(:push, 0x41, comment: comment)
+
+        expect(instruction.comment).to eq(comment)
+      end
+    end
   end
 
   describe "#byte" do

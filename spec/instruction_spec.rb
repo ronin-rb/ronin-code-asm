@@ -23,6 +23,10 @@ describe Ronin::ASM::Instruction do
       expect(subject.operands).to eq(operands)
     end
 
+    it "must default #comment to nil" do
+      expect(subject.comment).to be(nil)
+    end
+
     context "when given an Integer operand" do
       let(:integer) { 0xff }
 
@@ -40,6 +44,16 @@ describe Ronin::ASM::Instruction do
       it "must wrap the operand to in a Ronin::ASM::ImmediateOperand" do
         expect(subject.operands[0]).to be_kind_of(Ronin::ASM::ImmediateOperand)
         expect(subject.operands[0].value).to eq(0)
+      end
+    end
+
+    context "when given the comment: keyword argument" do
+      let(:comment) { 'Foo bar' }
+
+      subject { described_class.new(name,operands, comment: comment) }
+
+      it "must set #comment" do
+        expect(subject.comment).to eq(comment)
       end
     end
   end

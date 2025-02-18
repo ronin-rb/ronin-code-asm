@@ -236,11 +236,14 @@ module Ronin
       #
       # @param [Array] operands
       #
+      # @param [String, nil] comment
+      #   Optional comment for the instruction.
+      #
       # @return [Instruction]
       #   The newly created instruction.
       #
-      def instruction(name,*operands)
-        insn = Instruction.new(name.to_sym,operands)
+      def instruction(name,*operands, comment: nil)
+        insn = Instruction.new(name.to_sym,operands, comment: comment)
 
         @instructions << insn
         return insn
