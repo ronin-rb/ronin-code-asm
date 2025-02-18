@@ -543,14 +543,17 @@ module Ronin
       # @param [Array] arguments
       #   Additional operands.
       #
-      def method_missing(name,*arguments,&block)
-        if (block && arguments.empty?)
+      # @param [Hash{Symbol => Object}] kwargs
+      #   Additional keyword arguments.
+      #
+      def method_missing(name,*arguments,**kwargs,&block)
+        if (block && arguments.empty? && kwargs.empty?)
           label(name,&block)
         elsif block.nil?
           if (arguments.empty? && register?(name))
             register(name)
           else
-            instruction(name,*arguments)
+            instruction(name,*arguments,**kwargs)
           end
         else
           super(name,*arguments,&block)
