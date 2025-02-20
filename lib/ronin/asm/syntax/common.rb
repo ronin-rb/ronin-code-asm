@@ -96,7 +96,7 @@ module Ronin
         #
         # @abstract
         #
-        def self.emit_immediate_operand(op)
+        def self.emit_immediate(op)
         end
 
         #
@@ -124,7 +124,7 @@ module Ronin
         #
         def self.emit_operand(op)
           case op
-          when Immediate     then emit_immediate_operand(op)
+          when Immediate     then emit_immediate(op)
           when MemoryOperand then emit_memory_operand(op)
           when Register      then emit_register(op)
           when Symbol        then emit_keyword(op)

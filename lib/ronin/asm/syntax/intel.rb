@@ -55,7 +55,7 @@ module Ronin
         # @return [String]
         #   The formatted immediate operand.
         #
-        def self.emit_immediate_operand(op)
+        def self.emit_immediate(op)
           "#{WIDTHS[op.width]} #{emit_integer(op.value)}"
         end
 

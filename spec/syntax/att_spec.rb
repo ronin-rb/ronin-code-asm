@@ -18,11 +18,11 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe ".emit_immediate_operand" do
+  describe ".emit_immediate" do
     let(:operand) { Ronin::ASM::Immediate.new(255, 1) }
 
     it "must prepend a '$' to the immediate" do
-      expect(subject.emit_immediate_operand(operand)).to eq("$0xff")
+      expect(subject.emit_immediate(operand)).to eq("$0xff")
     end
   end
 
