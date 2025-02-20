@@ -110,7 +110,7 @@ module Ronin
         #
         # @abstract
         #
-        def self.emit_memory_operand(op)
+        def self.emit_memory(op)
         end
 
         #
@@ -125,7 +125,7 @@ module Ronin
         def self.emit_operand(op)
           case op
           when Immediate then emit_immediate(op)
-          when Memory    then emit_memory_operand(op)
+          when Memory    then emit_memory(op)
           when Register  then emit_register(op)
           when Symbol    then emit_keyword(op)
           end

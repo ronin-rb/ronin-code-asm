@@ -26,12 +26,12 @@ describe Ronin::ASM::Syntax::Intel do
     end
   end
 
-  describe ".emit_memory_operand" do
+  describe ".emit_memory" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
     let(:operand)  { Ronin::ASM::Memory.new(register) }
 
     it "must enclose the memory in brackets" do
-      expect(subject.emit_memory_operand(operand)).to eq("[eax]")
+      expect(subject.emit_memory(operand)).to eq("[eax]")
     end
 
     context "when operand width does not match the base width" do
@@ -41,7 +41,7 @@ describe Ronin::ASM::Syntax::Intel do
       end
 
       it "must specify the width" do
-        expect(subject.emit_memory_operand(operand)).to eq("WORD [eax]")
+        expect(subject.emit_memory(operand)).to eq("WORD [eax]")
       end
     end
 
@@ -50,14 +50,14 @@ describe Ronin::ASM::Syntax::Intel do
       let(:operand) { Ronin::ASM::Memory.new(register,offset) }
 
       it "must add the offset to the base" do
-        expect(subject.emit_memory_operand(operand)).to eq("[eax+0xff]")
+        expect(subject.emit_memory(operand)).to eq("[eax+0xff]")
       end
 
       context "when 0" do
         let(:operand) { Ronin::ASM::Memory.new(register,0) }
 
         it "must omit the offset" do
-          expect(subject.emit_memory_operand(operand)).to eq("[eax]")
+          expect(subject.emit_memory(operand)).to eq("[eax]")
         end
       end
     end
@@ -67,7 +67,7 @@ describe Ronin::ASM::Syntax::Intel do
       let(:operand) { Ronin::ASM::Memory.new(register,0,index) }
 
       it "must add the index to the base" do
-        expect(subject.emit_memory_operand(operand)).to eq("[eax+esi]")
+        expect(subject.emit_memory(operand)).to eq("[eax+esi]")
       end
 
       context "with a scale" do
@@ -75,7 +75,7 @@ describe Ronin::ASM::Syntax::Intel do
         let(:operand) { Ronin::ASM::Memory.new(register,0,index,scale) }
 
         it "must multiple the index by the scale" do
-          expect(subject.emit_memory_operand(operand)).to eq("[eax+esi*0x4]")
+          expect(subject.emit_memory(operand)).to eq("[eax+esi*0x4]")
         end
       end
     end

@@ -68,7 +68,7 @@ module Ronin
         # @return [String]
         #   The formatted memory operand.
         #
-        def self.emit_memory_operand(op)
+        def self.emit_memory(op)
           asm = emit_register(op.base)
 
           if op.index

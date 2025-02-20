@@ -26,12 +26,12 @@ describe Ronin::ASM::Syntax::ATT do
     end
   end
 
-  describe ".emit_memory_operand" do
+  describe ".emit_memory" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
     let(:operand)  { Ronin::ASM::Memory.new(register) }
 
     it "must enclose the memory in parenthesis" do
-      expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
+      expect(subject.emit_memory(operand)).to eq("(%eax)")
     end
 
     context "with an offset" do
@@ -39,14 +39,14 @@ describe Ronin::ASM::Syntax::ATT do
       let(:operand) { Ronin::ASM::Memory.new(register,offset) }
 
       it "must prepend the offset as an integer" do
-        expect(subject.emit_memory_operand(operand)).to eq("0xff(%eax)")
+        expect(subject.emit_memory(operand)).to eq("0xff(%eax)")
       end
 
       context "when 0" do
         let(:operand) { Ronin::ASM::Memory.new(register,0) }
 
         it "must omit the offset" do
-          expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
+          expect(subject.emit_memory(operand)).to eq("(%eax)")
         end
       end
     end
@@ -56,7 +56,7 @@ describe Ronin::ASM::Syntax::ATT do
       let(:operand) { Ronin::ASM::Memory.new(register,0,index) }
 
       it "must include the index argument" do
-        expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi)")
+        expect(subject.emit_memory(operand)).to eq("(%eax,%esi)")
       end
 
       context "with a scale" do
@@ -64,7 +64,7 @@ describe Ronin::ASM::Syntax::ATT do
         let(:operand) { Ronin::ASM::Memory.new(register,0,index,scale) }
 
         it "must prepend the scale argument as a decimal" do
-          expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi,#{scale})")
+          expect(subject.emit_memory(operand)).to eq("(%eax,%esi,#{scale})")
         end
       end
     end
