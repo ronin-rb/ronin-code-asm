@@ -40,22 +40,22 @@ module Ronin
       # @param [Integer, nil] value
       #   The value.
       #
-      # @param [nil, 1, 2, 4, 8] width
+      # @param [nil, 1, 2, 4, 8] size
       #   The size in bytes of the value.
       #
-      def initialize(value,width=nil)
+      def initialize(value,size=nil)
         @value = value.to_i
-        @width = width
+        @size = size
       end
 
       #
-      # The width of the immediate operand.
+      # The size of the immediate operand.
       #
       # @return [8, 4, 2, 1]
-      #   The width.
+      #   The size.
       #
-      def width
-        @width || case @value
+      def size
+        @size || case @value
                   when (0x100000000..0xffffffffffffffff),
                        (-0x7fffffffffffffff..-0x800000000) then 8
                   when (0x10000..0xffffffff),

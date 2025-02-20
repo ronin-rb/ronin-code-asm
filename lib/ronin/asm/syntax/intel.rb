@@ -56,7 +56,7 @@ module Ronin
         #   The formatted immediate operand.
         #
         def self.emit_immediate(op)
-          "#{WIDTHS[op.width]} #{emit_integer(op.value)}"
+          "#{WIDTHS[op.size]} #{emit_integer(op.value)}"
         end
 
         #
@@ -86,8 +86,8 @@ module Ronin
 
           asm = "[#{asm}]"
 
-          unless op.width == op.base.width
-            asm = "#{WIDTHS[op.width]} #{asm}"
+          unless op.size == op.base.size
+            asm = "#{WIDTHS[op.size]} #{asm}"
           end
 
           return asm

@@ -72,9 +72,9 @@ module Ronin
       # @return [Integer, nil]
       #   The word size in bytes.
       #
-      def width
+      def size
         @operands.map { |op|
-          op.width if op.respond_to?(:width)
+          op.size if op.respond_to?(:size)
         }.compact.max
       end
 

@@ -4,6 +4,7 @@ require 'ronin/asm/instruction'
 require 'ronin/asm/register'
 require 'ronin/asm/immediate'
 require 'ronin/asm/memory'
+require 'ronin/asm/label'
 
 describe Ronin::ASM::Instruction do
   let(:register)  { Ronin::ASM::Register.new(:eax, 4) }
@@ -58,18 +59,20 @@ describe Ronin::ASM::Instruction do
     end
   end
 
-  describe "#width" do
+  describe "#size" do
     subject { described_class.new(:mov, [immediate, register]) }
 
-    it "must return the maximum width of the operands" do
-      expect(subject.width).to eq(register.width)
+    it "must return the maximum size of the operands" do
+      expect(subject.size).to eq(register.size)
     end
 
-    context "when one of the operands does not define #width" do
-      subject { described_class.new(:mov, [:label, register]) }
+    context "when one of the operands does not define #size" do
+      let(:label) { Ronin::ASM::Label.new(:label) }
+
+      subject { described_class.new(:mov, [label, register]) }
 
       it "must ignore them" do
-        expect(subject.width).to eq(register.width)
+        expect(subject.size).to eq(register.size)
       end
     end
   end

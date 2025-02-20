@@ -34,13 +34,13 @@ describe Ronin::ASM::Syntax::Intel do
       expect(subject.emit_memory(operand)).to eq("[eax]")
     end
 
-    context "when operand width does not match the base width" do
-      let(:width) { 2 }
+    context "when operand size does not match the base size" do
+      let(:size) { 2 }
       let(:operand) do
-        Ronin::ASM::Memory.new(register,0,nil,1,width)
+        Ronin::ASM::Memory.new(register,0,nil,1,size)
       end
 
-      it "must specify the width" do
+      it "must specify the size" do
         expect(subject.emit_memory(operand)).to eq("WORD [eax]")
       end
     end

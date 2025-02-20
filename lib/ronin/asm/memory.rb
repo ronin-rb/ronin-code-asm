@@ -49,10 +49,10 @@ module Ronin
       # @return [Integer]
       attr_reader :scale
 
-      # The width of the memory operand.
+      # The size of the memory operand.
       #
       # @return [Integer]
-      attr_reader :width
+      attr_reader :size
 
       #
       # Creates a new Memory Operand.
@@ -69,13 +69,13 @@ module Ronin
       # @param [Integer] scale
       #   The scale to multiple `index` by.
       #
-      # @param [Integer, nil] width
-      #   The optional width of the memory operand.
+      # @param [Integer, nil] size
+      #   The optional size of the memory operand.
       #
       # @raise [TypeError]
       #   `base` or `index` was not a {Register} or `nil`.
       #
-      def initialize(base=nil,offset=0,index=nil,scale=1,width=nil)
+      def initialize(base=nil,offset=0,index=nil,scale=1,size=nil)
         unless (base.nil? || base.kind_of?(Register))
           raise(TypeError,"base must be a Register or nil")
         end
@@ -96,8 +96,8 @@ module Ronin
         @offset = offset
         @index  = index
         @scale  = scale
-        @width  = width || if base
-                             base.width
+        @size  = size || if base
+                             base.size
                            end
       end
 
@@ -116,7 +116,7 @@ module Ronin
           @offset + offset,
           @index,
           @scale,
-          @width
+          @size
         )
       end
 
@@ -135,7 +135,7 @@ module Ronin
           @offset - offset,
           @index,
           @scale,
-          @width
+          @size
         )
       end
 

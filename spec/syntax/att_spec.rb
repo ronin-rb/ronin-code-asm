@@ -80,7 +80,7 @@ describe Ronin::ASM::Syntax::ATT do
     end
 
     context "with one operand" do
-      context "with width of 1" do
+      context "with size of 1" do
         let(:immediate)   { Ronin::ASM::Immediate.new(0x80, 1) }
         let(:instruction) { Ronin::ASM::Instruction.new(:int, [immediate]) }
 
@@ -140,7 +140,7 @@ describe Ronin::ASM::Syntax::ATT do
           _loop do
             inc eax
             cmp eax, 10
-            jl  :_loop
+            jl  _loop
           end
 
           ret

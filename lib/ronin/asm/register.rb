@@ -32,10 +32,10 @@ module Ronin
       # @return [Symbol]
       attr_reader :name
 
-      # The width of the register.
+      # The size of the register.
       #
       # @return [Integer]
-      attr_reader :width
+      attr_reader :size
 
       #
       # Initializes a register.
@@ -43,15 +43,15 @@ module Ronin
       # @param [Symbol] name
       #   The register name.
       #
-      # @param [Integer] width
-      #   The width of the register.
+      # @param [Integer] size
+      #   The size of the register.
       #
       # @param [Boolean] general
       #   Specifies whether the register is a General Purpose Register (GPR).
       #
-      def initialize(name,width,general=false)
+      def initialize(name,size,general=false)
         @name  = name
-        @width = width
+        @size = size
 
         @general = general
       end

@@ -70,11 +70,11 @@ describe Ronin::ASM::Memory do
     end
   end
 
-  describe "#width" do
+  describe "#size" do
     subject { described_class.new(register,10) }
 
-    it "must return the width of base" do
-      expect(subject.width).to eq(register.width)
+    it "must return the size of base" do
+      expect(subject.size).to eq(register.size)
     end
   end
 end

@@ -226,8 +226,8 @@ describe Ronin::ASM::Program do
       expect(subject.byte(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
-    it "must have width of 1" do
-      expect(subject.byte(1).width).to eq(1)
+    it "must have size of 1" do
+      expect(subject.byte(1).size).to eq(1)
     end
 
     context "when given a Memory" do
@@ -240,8 +240,8 @@ describe Ronin::ASM::Program do
         )
       end
 
-      it "must have a width of 1" do
-        expect(subject.byte(memory_operand).width).to eq(1)
+      it "must have a size of 1" do
+        expect(subject.byte(memory_operand).size).to eq(1)
       end
     end
   end
@@ -251,8 +251,8 @@ describe Ronin::ASM::Program do
       expect(subject.word(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
-    it "must have width of 2" do
-      expect(subject.word(1).width).to eq(2)
+    it "must have size of 2" do
+      expect(subject.word(1).size).to eq(2)
     end
 
     context "when given a Memory" do
@@ -265,8 +265,8 @@ describe Ronin::ASM::Program do
         )
       end
 
-      it "must have a width of 2" do
-        expect(subject.word(memory_operand).width).to eq(2)
+      it "must have a size of 2" do
+        expect(subject.word(memory_operand).size).to eq(2)
       end
     end
   end
@@ -276,8 +276,8 @@ describe Ronin::ASM::Program do
       expect(subject.dword(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
-    it "must have width of 4" do
-      expect(subject.dword(1).width).to eq(4)
+    it "must have size of 4" do
+      expect(subject.dword(1).size).to eq(4)
     end
 
     context "when given a Memory" do
@@ -290,8 +290,8 @@ describe Ronin::ASM::Program do
         )
       end
 
-      it "must have a width of 4" do
-        expect(subject.dword(memory_operand).width).to eq(4)
+      it "must have a size of 4" do
+        expect(subject.dword(memory_operand).size).to eq(4)
       end
     end
   end
@@ -301,8 +301,8 @@ describe Ronin::ASM::Program do
       expect(subject.qword(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
-    it "must have width of 8" do
-      expect(subject.qword(1).width).to eq(8)
+    it "must have size of 8" do
+      expect(subject.qword(1).size).to eq(8)
     end
 
     context "when given a Memory" do
@@ -315,8 +315,8 @@ describe Ronin::ASM::Program do
         )
       end
 
-      it "must have a width of 8" do
-        expect(subject.qword(memory_operand).width).to eq(8)
+      it "must have a size of 8" do
+        expect(subject.qword(memory_operand).size).to eq(8)
       end
     end
   end
