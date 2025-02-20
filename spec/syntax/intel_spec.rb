@@ -3,7 +3,7 @@ require 'ronin/asm/syntax/intel'
 
 require 'ronin/asm/register'
 require 'ronin/asm/immediate'
-require 'ronin/asm/memory_operand'
+require 'ronin/asm/memory'
 require 'ronin/asm/instruction'
 require 'ronin/asm/program'
 
@@ -28,7 +28,7 @@ describe Ronin::ASM::Syntax::Intel do
 
   describe ".emit_memory_operand" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
-    let(:operand)  { Ronin::ASM::MemoryOperand.new(register) }
+    let(:operand)  { Ronin::ASM::Memory.new(register) }
 
     it "must enclose the memory in brackets" do
       expect(subject.emit_memory_operand(operand)).to eq("[eax]")
@@ -37,7 +37,7 @@ describe Ronin::ASM::Syntax::Intel do
     context "when operand width does not match the base width" do
       let(:width) { 2 }
       let(:operand) do
-        Ronin::ASM::MemoryOperand.new(register,0,nil,1,width)
+        Ronin::ASM::Memory.new(register,0,nil,1,width)
       end
 
       it "must specify the width" do
@@ -47,14 +47,14 @@ describe Ronin::ASM::Syntax::Intel do
 
     context "with an offset" do
       let(:offset)  { 255 }
-      let(:operand) { Ronin::ASM::MemoryOperand.new(register,offset) }
+      let(:operand) { Ronin::ASM::Memory.new(register,offset) }
 
       it "must add the offset to the base" do
         expect(subject.emit_memory_operand(operand)).to eq("[eax+0xff]")
       end
 
       context "when 0" do
-        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0) }
+        let(:operand) { Ronin::ASM::Memory.new(register,0) }
 
         it "must omit the offset" do
           expect(subject.emit_memory_operand(operand)).to eq("[eax]")
@@ -64,7 +64,7 @@ describe Ronin::ASM::Syntax::Intel do
 
     context "with an index" do
       let(:index)   { Ronin::ASM::Register.new(:esi, 4) }
-      let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index) }
+      let(:operand) { Ronin::ASM::Memory.new(register,0,index) }
 
       it "must add the index to the base" do
         expect(subject.emit_memory_operand(operand)).to eq("[eax+esi]")
@@ -72,7 +72,7 @@ describe Ronin::ASM::Syntax::Intel do
 
       context "with a scale" do
         let(:scale)   { 4 }
-        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index,scale) }
+        let(:operand) { Ronin::ASM::Memory.new(register,0,index,scale) }
 
         it "must multiple the index by the scale" do
           expect(subject.emit_memory_operand(operand)).to eq("[eax+esi*0x4]")

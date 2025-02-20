@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'ronin/asm/memory_operand'
+require 'ronin/asm/memory'
 
 require 'ronin/asm/register'
 
-describe Ronin::ASM::MemoryOperand do
+describe Ronin::ASM::Memory do
   let(:register) { Ronin::ASM::Register.new(:eax, 4) }
 
   describe "#initialize" do

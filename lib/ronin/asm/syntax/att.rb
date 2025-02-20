@@ -66,7 +66,7 @@ module Ronin
         #
         # Emits a memory operand.
         #
-        # @param [MemoryOperand] op
+        # @param [Memory] op
         #   The operand.
         #
         # @return [String]
@@ -89,7 +89,7 @@ module Ronin
         #
         # Emits multiple operands.
         #
-        # @param [Array<Immediate, MemoryOperand, Register, Symbol>] ops
+        # @param [Array<Immediate, Memory, Register, Symbol>] ops
         #   The Array of operands.
         #
         # @return [String]

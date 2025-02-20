@@ -107,7 +107,7 @@ module Ronin
         #
         # Generates the instruction to push a value onto the Stack.
         #
-        # @param [Immediate, MemoryOperand, Register, Integer, Symbol] op
+        # @param [Immediate, Memory, Register, Integer, Symbol] op
         #   The value.
         #
         def stack_push(op); instruction(:push,op); end
@@ -136,7 +136,7 @@ module Ronin
         # @param [Symbol] name
         #   The name of the register.
         #
-        # @param [Immediate, MemoryOperand, Register, Integer, Symbol] value
+        # @param [Immediate, Memory, Register, Integer, Symbol] value
         #   The value to set.
         #
         def register_set(name,value)

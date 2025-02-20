@@ -3,7 +3,7 @@ require 'ronin/asm/instruction'
 
 require 'ronin/asm/register'
 require 'ronin/asm/immediate'
-require 'ronin/asm/memory_operand'
+require 'ronin/asm/memory'
 
 describe Ronin::ASM::Instruction do
   let(:register)  { Ronin::ASM::Register.new(:eax, 4) }

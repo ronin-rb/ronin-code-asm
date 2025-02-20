@@ -21,7 +21,7 @@
 
 * `Ronin::ASM::Program#byte`, `Ronin::ASM::Program#word`,
   `Ronin::ASM::Program#dword` and `Ronin::ASM::Program#qword` methods can now
-  accept `Ronin::ASM::MemoryOperand`s.
+  accept `Ronin::ASM::Memory`s.
 
       mov bx, word(ebp+8)
 

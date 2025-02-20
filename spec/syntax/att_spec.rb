@@ -3,7 +3,7 @@ require 'ronin/asm/syntax/att'
 
 require 'ronin/asm/register'
 require 'ronin/asm/immediate'
-require 'ronin/asm/memory_operand'
+require 'ronin/asm/memory'
 require 'ronin/asm/instruction'
 require 'ronin/asm/program'
 
@@ -28,7 +28,7 @@ describe Ronin::ASM::Syntax::ATT do
 
   describe ".emit_memory_operand" do
     let(:register) { Ronin::ASM::Register.new(:eax, 4)   }
-    let(:operand)  { Ronin::ASM::MemoryOperand.new(register) }
+    let(:operand)  { Ronin::ASM::Memory.new(register) }
 
     it "must enclose the memory in parenthesis" do
       expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
@@ -36,14 +36,14 @@ describe Ronin::ASM::Syntax::ATT do
 
     context "with an offset" do
       let(:offset)  { 255 }
-      let(:operand) { Ronin::ASM::MemoryOperand.new(register,offset) }
+      let(:operand) { Ronin::ASM::Memory.new(register,offset) }
 
       it "must prepend the offset as an integer" do
         expect(subject.emit_memory_operand(operand)).to eq("0xff(%eax)")
       end
 
       context "when 0" do
-        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0) }
+        let(:operand) { Ronin::ASM::Memory.new(register,0) }
 
         it "must omit the offset" do
           expect(subject.emit_memory_operand(operand)).to eq("(%eax)")
@@ -53,7 +53,7 @@ describe Ronin::ASM::Syntax::ATT do
 
     context "with an index" do
       let(:index)   { Ronin::ASM::Register.new(:esi, 4) }
-      let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index) }
+      let(:operand) { Ronin::ASM::Memory.new(register,0,index) }
 
       it "must include the index argument" do
         expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi)")
@@ -61,7 +61,7 @@ describe Ronin::ASM::Syntax::ATT do
 
       context "with a scale" do
         let(:scale)   { 4 }
-        let(:operand) { Ronin::ASM::MemoryOperand.new(register,0,index,scale) }
+        let(:operand) { Ronin::ASM::Memory.new(register,0,index,scale) }
 
         it "must prepend the scale argument as a decimal" do
           expect(subject.emit_memory_operand(operand)).to eq("(%eax,%esi,#{scale})")

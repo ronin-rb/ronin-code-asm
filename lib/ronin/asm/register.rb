@@ -18,7 +18,7 @@
 # along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require_relative 'memory_operand'
+require_relative 'memory'
 
 module Ronin
   module ASM
@@ -71,25 +71,25 @@ module Ronin
       # Adds an offset to the value within the register and dereferences the
       # address.
       #
-      # @param [MemoryOperand, Register, Integer] offset
+      # @param [Memory, Register, Integer] offset
       #   The offset to add to the value of the register.
       #
-      # @return [MemoryOperand]
+      # @return [Memory]
       #   The new Memory Operand.
       #
       # @raise [TypeError]
-      #   the `offset` was not an {MemoryOperand}, {Register} or Integer.
+      #   the `offset` was not an {Memory}, {Register} or Integer.
       #
       def +(offset)
         case offset
-        when MemoryOperand
-          MemoryOperand.new(self,offset.offset,offset.index,offset.scale)
+        when Memory
+          Memory.new(self,offset.offset,offset.index,offset.scale)
         when Register
-          MemoryOperand.new(self,0,offset)
+          Memory.new(self,0,offset)
         when Integer
-          MemoryOperand.new(self,offset)
+          Memory.new(self,offset)
         else
-          raise(TypeError,"offset was not an MemoryOperand, Register or Integer")
+          raise(TypeError,"offset was not an Memory, Register or Integer")
         end
       end
 
@@ -100,11 +100,11 @@ module Ronin
       # @param [Integer] offset
       #   The value to subtract from the value of the register.
       #
-      # @return [MemoryOperand]
+      # @return [Memory]
       #   The new Memory Operand.
       #
       def -(offset)
-        MemoryOperand.new(self,-offset)
+        Memory.new(self,-offset)
       end
 
       #
@@ -113,11 +113,11 @@ module Ronin
       # @param [Integer] scale
       #   The scale to multiply the value within register by.
       #
-      # @return [MemoryOperand]
+      # @return [Memory]
       #   The new Memory Operand.
       #
       def *(scale)
-        MemoryOperand.new(nil,0,self,scale)
+        Memory.new(nil,0,self,scale)
       end
 
       #

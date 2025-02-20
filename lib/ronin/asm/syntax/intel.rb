@@ -62,7 +62,7 @@ module Ronin
         #
         # Emits a memory operand.
         #
-        # @param [MemoryOperand] op
+        # @param [Memory] op
         #   The operand.
         #
         # @return [String]

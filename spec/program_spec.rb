@@ -230,13 +230,13 @@ describe Ronin::ASM::Program do
       expect(subject.byte(1).width).to eq(1)
     end
 
-    context "when given a MemoryOperand" do
+    context "when given a Memory" do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
+      let(:memory_operand) { Ronin::ASM::Memory.new(register) }
 
-      it "must return a MemoryOperand" do
+      it "must return a Memory" do
         expect(subject.byte(memory_operand)).to be_kind_of(
-          Ronin::ASM::MemoryOperand
+          Ronin::ASM::Memory
         )
       end
 
@@ -255,13 +255,13 @@ describe Ronin::ASM::Program do
       expect(subject.word(1).width).to eq(2)
     end
 
-    context "when given a MemoryOperand" do
+    context "when given a Memory" do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
+      let(:memory_operand) { Ronin::ASM::Memory.new(register) }
 
-      it "must return a MemoryOperand" do
+      it "must return a Memory" do
         expect(subject.word(memory_operand)).to be_kind_of(
-          Ronin::ASM::MemoryOperand
+          Ronin::ASM::Memory
         )
       end
 
@@ -280,13 +280,13 @@ describe Ronin::ASM::Program do
       expect(subject.dword(1).width).to eq(4)
     end
 
-    context "when given a MemoryOperand" do
+    context "when given a Memory" do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
+      let(:memory_operand) { Ronin::ASM::Memory.new(register) }
 
-      it "must return a MemoryOperand" do
+      it "must return a Memory" do
         expect(subject.dword(memory_operand)).to be_kind_of(
-          Ronin::ASM::MemoryOperand
+          Ronin::ASM::Memory
         )
       end
 
@@ -305,13 +305,13 @@ describe Ronin::ASM::Program do
       expect(subject.qword(1).width).to eq(8)
     end
 
-    context "when given a MemoryOperand" do
+    context "when given a Memory" do
       let(:register)       { Ronin::ASM::Register.new(:eax, 4)       }
-      let(:memory_operand) { Ronin::ASM::MemoryOperand.new(register) }
+      let(:memory_operand) { Ronin::ASM::Memory.new(register) }
 
-      it "must return a MemoryOperand" do
+      it "must return a Memory" do
         expect(subject.qword(memory_operand)).to be_kind_of(
-          Ronin::ASM::MemoryOperand
+          Ronin::ASM::Memory
         )
       end
 
