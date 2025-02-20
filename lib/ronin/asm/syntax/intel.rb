@@ -49,7 +49,7 @@ module Ronin
         #
         # Emits an immediate operand.
         #
-        # @param [ImmediateOperand] op
+        # @param [Immediate] op
         #   The operand.
         #
         # @return [String]

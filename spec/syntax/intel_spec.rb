@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ronin/asm/syntax/intel'
 
 require 'ronin/asm/register'
-require 'ronin/asm/immediate_operand'
+require 'ronin/asm/immediate'
 require 'ronin/asm/memory_operand'
 require 'ronin/asm/instruction'
 require 'ronin/asm/program'
@@ -19,7 +19,7 @@ describe Ronin::ASM::Syntax::Intel do
   end
 
   describe ".emit_immediate_operand" do
-    let(:operand) { Ronin::ASM::ImmediateOperand.new(255, 1) }
+    let(:operand) { Ronin::ASM::Immediate.new(255, 1) }
 
     it "must prepend a size specifier" do
       expect(subject.emit_immediate_operand(operand)).to eq("BYTE 0xff")
@@ -92,7 +92,7 @@ describe Ronin::ASM::Syntax::Intel do
 
     context "with multiple operands" do
       let(:register)    { Ronin::ASM::Register.new(:eax, 4) }
-      let(:immediate)   { Ronin::ASM::ImmediateOperand.new(0xff, 1)  }
+      let(:immediate)   { Ronin::ASM::Immediate.new(0xff, 1)  }
       let(:instruction) { Ronin::ASM::Instruction.new(:mov, [register, immediate]) }
 
       it "must emit the operands" do

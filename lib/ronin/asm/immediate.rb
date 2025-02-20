@@ -25,7 +25,9 @@ module Ronin
     #
     # @see http://asm.sourceforge.net/articles/linasm.html#Prefixes
     #
-    class ImmediateOperand
+    # @since 1.0.0
+    #
+    class Immediate
 
       # The immediate operand's value.
       #

@@ -18,7 +18,7 @@
 # along with ronin-asm.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require_relative 'immediate_operand'
+require_relative 'immediate'
 
 module Ronin
   module ASM
@@ -58,7 +58,7 @@ module Ronin
         @name     = name
         @operands = operands.map do |value|
           case value
-          when Integer, nil then ImmediateOperand.new(value)
+          when Integer, nil then Immediate.new(value)
           else                   value
           end
         end

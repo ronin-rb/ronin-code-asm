@@ -2,12 +2,12 @@ require 'spec_helper'
 require 'ronin/asm/instruction'
 
 require 'ronin/asm/register'
-require 'ronin/asm/immediate_operand'
+require 'ronin/asm/immediate'
 require 'ronin/asm/memory_operand'
 
 describe Ronin::ASM::Instruction do
   let(:register)  { Ronin::ASM::Register.new(:eax, 4) }
-  let(:immediate) { Ronin::ASM::ImmediateOperand.new(0xff, 1) }
+  let(:immediate) { Ronin::ASM::Immediate.new(0xff, 1) }
 
   describe "#initialize" do
     let(:name)     { :mov }
@@ -32,8 +32,8 @@ describe Ronin::ASM::Instruction do
 
       subject { described_class.new(name, [integer, register]) }
 
-      it "must wrap the operand to in a Ronin::ASM::ImmediateOperand" do
-        expect(subject.operands[0]).to be_kind_of(Ronin::ASM::ImmediateOperand)
+      it "must wrap the operand to in a Ronin::ASM::Immediate" do
+        expect(subject.operands[0]).to be_kind_of(Ronin::ASM::Immediate)
         expect(subject.operands[0].value).to eq(integer)
       end
     end
@@ -41,8 +41,8 @@ describe Ronin::ASM::Instruction do
     context "when given a nil operand" do
       subject { described_class.new(name, [nil, register]) }
 
-      it "must wrap the operand to in a Ronin::ASM::ImmediateOperand" do
-        expect(subject.operands[0]).to be_kind_of(Ronin::ASM::ImmediateOperand)
+      it "must wrap the operand to in a Ronin::ASM::Immediate" do
+        expect(subject.operands[0]).to be_kind_of(Ronin::ASM::Immediate)
         expect(subject.operands[0].value).to eq(0)
       end
     end

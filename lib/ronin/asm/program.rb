@@ -22,7 +22,7 @@ require_relative 'arch'
 require_relative 'os'
 require_relative 'register'
 require_relative 'instruction'
-require_relative 'immediate_operand'
+require_relative 'immediate'
 require_relative 'label'
 require_relative 'syntax'
 
@@ -255,7 +255,7 @@ module Ronin
       # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [MemoryOperand, ImmediateOperand]
+      # @return [MemoryOperand, Immediate]
       #   The new operand value.
       #
       def byte(op)
@@ -263,7 +263,7 @@ module Ronin
         when MemoryOperand
           MemoryOperand.new(op.base,op.offset,op.index,op.scale,1)
         else
-          ImmediateOperand.new(op,1)
+          Immediate.new(op,1)
         end
       end
 
@@ -273,7 +273,7 @@ module Ronin
       # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [MemoryOperand, ImmediateOperand]
+      # @return [MemoryOperand, Immediate]
       #   The new operand value.
       #
       def word(op)
@@ -281,7 +281,7 @@ module Ronin
         when MemoryOperand
           MemoryOperand.new(op.base,op.offset,op.index,op.scale,2)
         else
-          ImmediateOperand.new(op,2)
+          Immediate.new(op,2)
         end
       end
 
@@ -291,7 +291,7 @@ module Ronin
       # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [ImmediateOperand]
+      # @return [Immediate]
       #   The new operand value.
       #
       def dword(op)
@@ -299,7 +299,7 @@ module Ronin
         when MemoryOperand
           MemoryOperand.new(op.base,op.offset,op.index,op.scale,4)
         else
-          ImmediateOperand.new(op,4)
+          Immediate.new(op,4)
         end
       end
 
@@ -309,7 +309,7 @@ module Ronin
       # @param [MemoryOperand, Integer] op
       #   The value of the operand.
       #
-      # @return [MemoryOperand, ImmediateOperand]
+      # @return [MemoryOperand, Immediate]
       #   The new operand.
       #
       def qword(op)
@@ -317,7 +317,7 @@ module Ronin
         when MemoryOperand
           MemoryOperand.new(op.base,op.offset,op.index,op.scale,8)
         else
-          ImmediateOperand.new(op,8)
+          Immediate.new(op,8)
         end
       end
 
@@ -400,7 +400,7 @@ module Ronin
       # @param [Symbol] name
       #   The name of the register.
       #
-      # @param [Register, ImmediateOperand, Integer] value
+      # @param [Register, Immediate, Integer] value
       #   The new value for the register.
       #
       # @abstract

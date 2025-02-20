@@ -53,7 +53,7 @@ module Ronin
         #
         # Emits an immediate operand.
         #
-        # @param [ImmediateOperand] op
+        # @param [Immediate] op
         #   The operand.
         #
         # @return [String]
@@ -89,7 +89,7 @@ module Ronin
         #
         # Emits multiple operands.
         #
-        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
+        # @param [Array<Immediate, MemoryOperand, Register, Symbol>] ops
         #   The Array of operands.
         #
         # @return [String]

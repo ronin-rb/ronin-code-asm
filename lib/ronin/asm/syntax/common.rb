@@ -19,7 +19,7 @@
 #
 
 require_relative '../register'
-require_relative '../immediate_operand'
+require_relative '../immediate'
 require_relative '../memory_operand'
 
 module Ronin
@@ -88,7 +88,7 @@ module Ronin
         #
         # Emits an immediate operand.
         #
-        # @param [ImmediateOperand] op
+        # @param [Immediate] op
         #   The immediate operand.
         #
         # @return [String]
@@ -116,7 +116,7 @@ module Ronin
         #
         # Emits an operand.
         #
-        # @param [ImmediateOperand, MemoryOperand, Register, Symbol] op
+        # @param [Immediate, MemoryOperand, Register, Symbol] op
         #   The operand.
         #
         # @return [String]
@@ -124,17 +124,17 @@ module Ronin
         #
         def self.emit_operand(op)
           case op
-          when ImmediateOperand then emit_immediate_operand(op)
-          when MemoryOperand    then emit_memory_operand(op)
-          when Register         then emit_register(op)
-          when Symbol           then emit_keyword(op)
+          when Immediate     then emit_immediate_operand(op)
+          when MemoryOperand then emit_memory_operand(op)
+          when Register      then emit_register(op)
+          when Symbol        then emit_keyword(op)
           end
         end
 
         #
         # Emits multiple operands.
         #
-        # @param [Array<ImmediateOperand, MemoryOperand, Register, Symbol>] ops
+        # @param [Array<Immediate, MemoryOperand, Register, Symbol>] ops
         #   The Array of operands.
         #
         # @return [String]

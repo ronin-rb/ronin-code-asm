@@ -223,7 +223,7 @@ describe Ronin::ASM::Program do
 
   describe "#byte" do
     it "must return a ImmedateOperand" do
-      expect(subject.byte(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
+      expect(subject.byte(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
     it "must have width of 1" do
@@ -247,8 +247,8 @@ describe Ronin::ASM::Program do
   end
 
   describe "#word" do
-    it "must return a Ronin::ASM::ImmediateOperand" do
-      expect(subject.word(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::Immediate" do
+      expect(subject.word(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
     it "must have width of 2" do
@@ -272,8 +272,8 @@ describe Ronin::ASM::Program do
   end
 
   describe "#dword" do
-    it "must return a Ronin::ASM::ImmediateOperand" do
-      expect(subject.dword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::Immediate" do
+      expect(subject.dword(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
     it "must have width of 4" do
@@ -297,8 +297,8 @@ describe Ronin::ASM::Program do
   end
 
   describe "#qword" do
-    it "must return a Ronin::ASM::ImmediateOperand" do
-      expect(subject.qword(1)).to be_kind_of(Ronin::ASM::ImmediateOperand)
+    it "must return a Ronin::ASM::Immediate" do
+      expect(subject.qword(1)).to be_kind_of(Ronin::ASM::Immediate)
     end
 
     it "must have width of 8" do
